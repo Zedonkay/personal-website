@@ -1080,6 +1080,22 @@ progress::-moz-progress-bar {
   }
 }
 
+/* Project page link buttons (neutral gray, theme-safe) */
+.project-links {
+  .btn {
+    color: var(--global-text-color-light) !important;
+    border-color: var(--global-text-color-light) !important;
+    background-color: transparent !important;
+  }
+
+  .btn:hover,
+  .btn:focus {
+    color: var(--global-bg-color) !important;
+    background-color: var(--global-text-color-light) !important;
+    border-color: var(--global-text-color-light) !important;
+  }
+}
+
 /* Table of Contents */
 nav[data-toggle="toc"] {
   top: 5rem;

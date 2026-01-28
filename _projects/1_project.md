@@ -1,81 +1,51 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: Robustifying Robot Learning via Adaptive Uncertainty Sets
+description: 16-831 Final Project exploring Robust RL and Adaptive Uncertainty Sets
+img: assets/img/cartpole_cover.jpg
 importance: 1
-category: work
+category: experience
 related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
-
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
-
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
+<div class="project-links d-flex justify-content-center flex-wrap mb-4">
+  <a href="https://github.com/Zedonkay/USPS" target="_blank" rel="noopener" class="btn btn-outline-secondary m-1">
+    <i class="fa-brands fa-github"></i> View code
+  </a>
+  <a href="https://drive.google.com/file/d/1iUQmVxT3T5zffPKwK7S0PveEIJ9G6UpV/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-outline-secondary m-1">
+    <i class="fa-solid fa-file-pdf"></i> Read report (PDF)
+  </a>
+  <a href="https://docs.google.com/presentation/d/1JNTVwLrP13maFzSrtwKe6byPTWaZF-nNuB91YlcTaC8/edit?usp=sharing" target="_blank" rel="noopener" class="btn btn-outline-secondary m-1">
+    <i class="fa-solid fa-display"></i> View slides
+  </a>
 </div>
 
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+## Overview
+
+Modern robot policies often look great in simulation, but fail when the real world deviates from the training distribution (different masses, friction, contacts, or dynamics). This project tackles that gap using **robust reinforcement learning (RRL)**: instead of optimizing a policy for one “best guess” set of dynamics, we optimize it to perform well under a *set* of plausible dynamics, so it is less brittle when conditions shift.
+
+Concretely, we build on an approach that defines an **uncertainty set** around the nominal transition model and trains the policy against the *worst-case* dynamics in that set. The benefit is improved resilience to out-of-distribution changes, but the trade-off is that robustness can become overly conservative: if the uncertainty set is too large, training can slow down or the policy can sacrifice too much nominal performance.
+
+We built on this in two directions. First, we added an **adaptive scaling rule** for the uncertainty-set size (parameterized by \(\alpha\)). Instead of picking a single \(\alpha\) by hand and hoping it works across tasks and training phases, we adjust it over time based on learning progress, aiming to stay robust without “over-regularizing” when the agent is already learning stably.
+
+Second, we extended the evaluation beyond standard benchmarks to a harder **in-hand manipulation** environment, where contact-rich dynamics and compounding errors make robustness and training stability especially important. We reproduced baseline results and ran sensitivity experiments to understand when robustness helps, when it hurts, and how adaptive scaling changes the stability/performance trade-off. If you want the full math, experimental setup, and ablations, the report and slides above contain the complete details.
+
+## What I did
+
+- **Reproduced** robust RL baselines on continuous-control tasks.
+- **Implemented** an adaptive update for the robustness parameter \(\alpha\) (see the full derivation + details in the PDF).
+- **Evaluated** sensitivity to uncertainty-set size and robustness/performance trade-offs.
+
+## Quick visuals
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
+  <div class="col-sm-6 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/fig8_curves.jpg" title="Training curves" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm-6 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/fig5_results.jpg" title="Robustness results" class="img-fluid rounded z-depth-1" %}
+  </div>
 </div>
 <div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+  A couple highlight plots; the full report has all experiments, ablations, and setup details.
 </div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
-
-{% endraw %}
