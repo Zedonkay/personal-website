@@ -1,11 +1,20 @@
----
-layout: cv
+<!-- ---
+layout: page
 permalink: /cv/
-title: cv
+title: CV
 nav: true
 nav_order: 5
-cv_pdf: example_pdf.pdf # you can also use external links here
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
-toc:
-  sidebar: left
 ---
+
+<!--
+  Render the CV PDF directly inside this page.
+
+  1) Put your CV PDF at: assets/pdf/cv.pdf
+     (or change the path below to match your filename)
+  2) Commit + deploy. The PDF will be served by your site and embedded here.
+-->
+<iframe
+  src="{{ '/assets/pdf/cv.pdf' | relative_url }}"
+  style="border: 0; width: 100%; height: 100vh;"
+  title="CV PDF"
+></iframe> -->
