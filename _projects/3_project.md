@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Autonomous Racing: End-to-End RL Control
+title: Autonomous Racing: RL Control
 description: Research at Carnegie Mellon Racing (CMR) condensing the autonomous navigation pipeline using Model-Free RL.
 # img: assets/img/USPS.png
 importance: 1

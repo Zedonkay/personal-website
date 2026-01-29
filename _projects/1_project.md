@@ -30,7 +30,6 @@ We built on this in two directions. First, we added an **adaptive scaling rule**
 
 Second, we extended the evaluation beyond standard benchmarks to a harder **in-hand manipulation** environment, where contact-rich dynamics and compounding errors make robustness and training stability especially important. We reproduced baseline results and ran sensitivity experiments to understand when robustness helps, when it hurts, and how adaptive scaling changes the stability/performance trade-off. If you want the full math, experimental setup, and ablations, the report and slides above contain the complete details.
 
-
 <!-- ## Quick visuals
 
 <div class="row justify-content-sm-center">
