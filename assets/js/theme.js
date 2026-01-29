@@ -272,5 +272,4 @@ let initTheme = () => {
       toggleThemeSetting();
     });
   });
-
 };
