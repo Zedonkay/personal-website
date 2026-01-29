@@ -95,8 +95,14 @@ jobs:
           upload: false
           output: sarif-results
 
+      - name: List SARIF files
+        run: |
+          echo "SARIF files generated:"
+          ls -la sarif-results/ || echo "No sarif-results directory found"
+          find . -name "*.sarif" -type f
+
       - name: Upload SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: sarif-results/${{matrix.language}}.sarif
+          sarif_file: sarif-results
           category: "/language:${{matrix.language}}"
