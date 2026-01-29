@@ -49,4 +49,3 @@ Second, we extended the evaluation beyond standard benchmarks to a harder **in-h
 <div class="caption">
   A couple highlight plots; the full report has all experiments, ablations, and setup details.
 </div> -->
-
