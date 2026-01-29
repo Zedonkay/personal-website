@@ -73,23 +73,13 @@
       "name": "Robotics",
       "level": "Advanced",
       "icon": "fa-solid fa-robot",
-      "keywords": [
-        "Legged Locomotion",
-        "Bio-inspired Control",
-        "Robot Simulation",
-        "Neural Controllers"
-      ]
+      "keywords": ["Legged Locomotion", "Bio-inspired Control", "Robot Simulation", "Neural Controllers"]
     },
     {
       "name": "Machine Learning",
       "level": "Advanced",
       "icon": "fa-solid fa-brain",
-      "keywords": [
-        "Neural Networks",
-        "Reinforcement Learning",
-        "Deep Learning",
-        "Distributed Systems"
-      ]
+      "keywords": ["Neural Networks", "Reinforcement Learning", "Deep Learning", "Distributed Systems"]
     }
   ],
   "languages": [
@@ -103,20 +93,12 @@
     {
       "name": "Robotics & AI",
       "icon": "fa-solid fa-robot",
-      "keywords": [
-        "Bio-inspired Systems",
-        "Neural Locomotion",
-        "Emergent Behaviors",
-        "Distributed Control"
-      ]
+      "keywords": ["Bio-inspired Systems", "Neural Locomotion", "Emergent Behaviors", "Distributed Control"]
     },
     {
       "name": "Film & Cinema",
       "icon": "fa-solid fa-film",
-      "keywords": [
-        "Film Analysis",
-        "Cinematography"
-      ]
+      "keywords": ["Film Analysis", "Cinematography"]
     }
   ],
   "references": [],
