@@ -2,7 +2,7 @@
 layout: page
 title: Robustifying Robot Learning via Adaptive Uncertainty Sets
 description: 16-831 Final Project exploring Robust RL and Adaptive Uncertainty Sets
-img: assets/img/cartpole_cover.jpg
+# img: assets/img/cartpole_cover.jpg
 importance: 1
 category: experience
 related_publications: true
@@ -36,7 +36,7 @@ Second, we extended the evaluation beyond standard benchmarks to a harder **in-h
 - **Implemented** an adaptive update for the robustness parameter \(\alpha\) (see the full derivation + details in the PDF).
 - **Evaluated** sensitivity to uncertainty-set size and robustness/performance trade-offs.
 
-## Quick visuals
+<!-- ## Quick visuals
 
 <div class="row justify-content-sm-center">
   <div class="col-sm-6 mt-3 mt-md-0">
@@ -48,4 +48,5 @@ Second, we extended the evaluation beyond standard benchmarks to a harder **in-h
 </div>
 <div class="caption">
   A couple highlight plots; the full report has all experiments, ablations, and setup details.
-</div>
+</div> -->
+
