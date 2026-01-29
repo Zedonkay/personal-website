@@ -3,7 +3,7 @@ layout: page
 title: "Minimal-Downtime Visual Inspection"
 description: "Bridging CAD and Computer Vision for Smart Manufacturing at Siemens (Summer 2025)"
 img: assets/img/siemens.png
-importance: 1
+importance: 3
 category: experience
 toc: false
 ---
