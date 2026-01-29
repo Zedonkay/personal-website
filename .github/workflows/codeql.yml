@@ -39,7 +39,7 @@ jobs:
       # only required for workflows in private repositories
       actions: read
       contents: read
-    
+
     env:
       CODEQL_ACTION_EXTRA_OPTIONS: '{"database":{"finalize":["--no-run-unnecessary-builds"]}}'
 
@@ -94,3 +94,5 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
