@@ -7,13 +7,10 @@ function determineGiscusTheme() {
     let theme =
       localStorage.getItem("theme") ||
       document.documentElement.getAttribute("data-theme") ||
-      "system";
+      "light";
 
     if (theme === "dark") return "{{ site.giscus.dark_theme }}";
-    if (theme === "light") return "{{ site.giscus.light_theme }}";
-
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return prefersDark ? "{{ site.giscus.dark_theme }}" : "{{ site.giscus.light_theme }}";
+    return "{{ site.giscus.light_theme }}";
   {% else %}
     return "{{ site.giscus.light_theme }}";
   {% endif %}
