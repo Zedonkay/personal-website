@@ -65,6 +65,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
+          checkout-path: ${{ github.workspace }}
           # If you wish to specify custom queries, you can do so here or in a config file.
           # By default, queries listed here will override any specified in a config file.
           # Prefix the list here with "+" to use these queries and those in the config file.
@@ -92,20 +93,4 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{matrix.language}}"
-          upload: false
-          output: sarif-results
-
-      - name: List SARIF files
-        id: list-sarif
-        run: |
-          echo "SARIF files generated:"
-          ls -la sarif-results/ || echo "No sarif-results directory found"
-          SARIF_FILE=$(find sarif-results -name "*.sarif" -type f | head -1)
-          echo "sarif_file=$SARIF_FILE" >> $GITHUB_OUTPUT
-          echo "Found SARIF file: $SARIF_FILE"
-
-      - name: Upload SARIF results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ${{ steps.list-sarif.outputs.sarif_file }}
-          category: "/language:${{matrix.language}}"
+          checkout_path: ${{ github.workspace }}
