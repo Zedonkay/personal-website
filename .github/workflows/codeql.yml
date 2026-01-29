@@ -96,13 +96,16 @@ jobs:
           output: sarif-results
 
       - name: List SARIF files
+        id: list-sarif
         run: |
           echo "SARIF files generated:"
           ls -la sarif-results/ || echo "No sarif-results directory found"
-          find . -name "*.sarif" -type f
+          SARIF_FILE=$(find sarif-results -name "*.sarif" -type f | head -1)
+          echo "sarif_file=$SARIF_FILE" >> $GITHUB_OUTPUT
+          echo "Found SARIF file: $SARIF_FILE"
 
       - name: Upload SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: sarif-results
+          sarif_file: ${{ steps.list-sarif.outputs.sarif_file }}
           category: "/language:${{matrix.language}}"
