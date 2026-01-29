@@ -270,7 +270,7 @@ display_categories: ["external-services"] # these categories will be displayed o
 
 scholar:
   last_name: [Shikhare]
-  first_name: [Ishayu, I.]
+  first_name: [Ishayu, I., Ishayu S., I. S.]
 
   style: apa
   locale: en
