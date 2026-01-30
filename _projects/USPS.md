@@ -22,11 +22,11 @@ related_publications: true
 
 ## Overview
 
-Modern robot policies often look great in simulation, but fail when the real world deviates from the training distribution (different masses, friction, contacts, or dynamics). This project tackles that gap using **robust reinforcement learning (RRL)**: instead of optimizing a policy for one “best guess” set of dynamics, we optimize it to perform well under a _set_ of plausible dynamics, so it is less brittle when conditions shift.
+Modern robot policies often look great in simulation, but fail when the real world deviates from the training distribution (different masses, friction, contacts, or dynamics). This project tackles that gap using **robust reinforcement learning (RRL)**: instead of optimizing a policy for one "best guess" set of dynamics, we optimize it to perform well under a _set_ of plausible dynamics, so it is less brittle when conditions shift.
 
 Concretely, we build on an approach that defines an **uncertainty set** around the nominal transition model and trains the policy against the _worst-case_ dynamics in that set. The benefit is improved resilience to out-of-distribution changes, but the trade-off is that robustness can become overly conservative: if the uncertainty set is too large, training can slow down or the policy can sacrifice too much nominal performance.
 
-We built on this in two directions. First, we added an **adaptive scaling rule** for the uncertainty-set size (parameterized by \(\alpha\)). Instead of picking a single \(\alpha\) by hand and hoping it works across tasks and training phases, we adjust it over time based on learning progress, aiming to stay robust without “over-regularizing” when the agent is already learning stably.
+We built on this in two directions. First, we added an **adaptive scaling rule** for the uncertainty-set size (parameterized by \(\alpha\)). Instead of picking a single \(\alpha\) by hand and hoping it works across tasks and training phases, we adjust it over time based on learning progress, aiming to stay robust without "over-regularizing" when the agent is already learning stably.
 
 Second, we extended the evaluation beyond standard benchmarks to a harder **in-hand manipulation** environment, where contact-rich dynamics and compounding errors make robustness and training stability especially important. We reproduced baseline results and ran sensitivity experiments to understand when robustness helps, when it hurts, and how adaptive scaling changes the stability/performance trade-off. If you want the full math, experimental setup, and ablations, the report and slides above contain the complete details.
 
