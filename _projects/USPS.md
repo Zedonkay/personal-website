@@ -5,7 +5,7 @@ description: 16-831 Final Project exploring Robust RL and Adaptive Uncertainty S
 img: assets/img/USPS.png
 importance: 2
 category: experience
-related_publications: true
+related_publications: false
 ---
 
 <div class="project-links d-flex justify-content-center flex-wrap mb-4">

@@ -5,7 +5,7 @@ description: Research at Carnegie Mellon Racing (CMR) condensing the autonomous 
 img: assets/img/CMR.png
 importance: 1
 category: experience
-related_publications: true
+related_publications: false
 ---
 
 ## Overview
