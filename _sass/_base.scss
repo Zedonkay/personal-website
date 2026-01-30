@@ -593,6 +593,16 @@ footer.sticky-bottom {
 }
 
 .post-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .title-favicon {
+    height: 1.25em;
+    width: auto;
+    vertical-align: middle;
+  }
+
   mjx-container[jax="CHTML"][display="true"] {
     display: unset;
   }

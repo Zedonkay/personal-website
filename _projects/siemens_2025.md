@@ -12,7 +12,7 @@ toc: false
 
 During my Summer 2025 internship at the **Siemens Detroit Experience Center**, I identified a gap in the automated inspection processes of a mock automotive manufacturing line. The center serves as a "living lab" designed to demonstrate how Siemens technologies empower startups and enterprise manufacturers alike.
 
-My focus was an EV component manufacturing line ("The Electric Box") where an existing computer vision setup had been abandoned due to its limited scope as it could only detect specific black screws. I architected and implemented a modern, scalable computer vision pipeline that utilizes **synthetic data generation** to train models without requiring expensive manufacturing downtime.
+The center I was at was focused on an EV component manufacturing line ("The Electric Box") where an existing computer vision setup had been abandoned. I realized it could only detect specific black screws. I architected and implemented a modern, scalable computer vision pipeline that utilizes **synthetic data generation** to train models without requiring expensive manufacturing downtime.
 
 ---
 
@@ -28,7 +28,7 @@ The existing legacy project at the Experience Center was rigid and unable to ada
 
 ## The Solution: A Digital Twin Pipeline
 
-Leveraging Siemens' dominance in the Product Lifecycle Management (PLM) and CAD ecosystem, I developed a pipeline that uses the "Digital Twin" (CAD data) to train the "Physical Twin" (the robot), effectively bypassing the need for initial real-world data collection.
+Leveraging Siemens' dominance in the Product Lifecycle Management (PLM) and CAD ecosystem, I developed a pipeline that uses the "Digital Twin" (CAD data) to train the "Physical Twin" (the robot), reducing the need for real-world data collection.
 
 ### 1. Synthetic Data Generation
 
@@ -56,8 +56,8 @@ To refine the model for the physical world, I combined the synthetic data with a
 
 While the previous iteration of the project was single-use, the pipeline I built was designed for **scalability**.
 
-- **Zero-Downtime Training:** Manufacturers can generate part of the training data for new parts before the physical manufacturing line is even built.
-- **Cross-Center Utility:** This architecture was identified as a standard that could be deployed across other Siemens Experience Centers or utilized when major product updates occur, ensuring the inspection systems update instantly alongside the physical product.
+- **Low-Downtime Training:** Manufacturers can generate part of the training data for new parts before the physical manufacturing line is even built.
+- **Cross-Center Utility:** This architecture was identified as a standard that could be deployed across other Siemens Experience Centers or utilized when major updates occur to an experience center, ensuring the inspection systems update instantly alongside the physical product.
 
 I successfully brought the project from the ideation phase through to the deployment stage, handing off the project as my contract came to an end.
 

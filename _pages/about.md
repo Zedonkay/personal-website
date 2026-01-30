@@ -23,3 +23,9 @@ latest_posts:
 ---
 
 Hi, I'm **Ishayu Shikhare**!
+
+I'm interested in building robots and policies that work reliably in the real world—whether that means racing autonomously, walking robustly, or inspecting parts on a factory floor.
+
+I'm currently at **The AirLab**, building uncertainty and semantics-aware navigation for quadrotors in firefighting domains<!-- , and in **LeCAR Lab**, working on Real2Sim2Real humanoid motion tracking with VAEs and PPO -->. I also lead the RL team at **Carnegie Mellon Racing (CMR)**, where we're developing a DRL controller and Real2Sim2Real dynamics module for our Formula SAE driverless car. I previously worked in the **BioRobotics Lab** on bio-inspired neural locomotion (ICRA 2025) and interned at **Siemens**, where I architected a visual inspection pipeline for industrial edge deployment. Outside the lab, I've developed adaptive robust RL methods and built **RoboDSL**, an open-source DSL that unifies ROS2, CUDA, and ONNX for robotics.
+
+When I'm not working, I enjoy film, cooking, and mountain biking.
