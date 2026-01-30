@@ -12,14 +12,14 @@ related_publications: false
 
 At Carnegie Mellon Racing (CMR), we build a new electric racecar annually to compete in Formula SAE events. While traditional competitions focus on human-driven performance, Formula SAE is transitioning toward driverless competitions—a shift our team has spearheaded for several years.
 
-I joined the team during my sophomore year, initially focusing on optimizing the **Model Predictive Path Integral (MPPI)** control algorithm. I subsequently took on a leadership position, directing a team of 4-6 engineers to develop a reinforcement learning (RL) based controller to overcome the specific constraints of our hardware and competition rules.
+I joined the team during my sophomore year, initially focusing on optimizing the **Model Predictive Path Integral (MPPI)** control algorithm. I subsequently took on a leadership position, directing a team of 4-6 engineers to develop a reinforcement learning (RL) based controller+planner as well as a dynamics module to overcome the specific constraints of our hardware and competition rules.
 
 ## The Challenge: Trackdrive
 
-The core challenge of the driverless event is "Trackdrive." The vehicle must navigate a track defined solely by cones—blue cones on the left, yellow on the right, and orange indicating the start—for 10 laps. The standard strategy involves two phases:
+The core challenge of the driverless event is "Trackdrive." The vehicle must navigate a track defined solely by cones—blue cones on the left, yellow on the right, and orange indicating the start. You get 10 laps, and your fastest lap determines your score. The standard strategy involves two phases:
 
 1.  **Mapping:** Cautiously driving the first few laps to construct a map of the environment (SLAM).
-2.  **Racing:** Utilizing the generated map to drive as aggressively as possible.
+2.  **Racing:** Utilizing the generated map to drive as fast as possible.
 
 However, our specific constraints made the traditional **Perception $\rightarrow$ SLAM $\rightarrow$ Planning $\rightarrow$ Control** pipeline difficult to execute effectively.
 
@@ -33,16 +33,16 @@ However, our specific constraints made the traditional **Perception $\rightarrow
 
 To address these latency and data constraints, I led the initiative to "condense the pipeline" by developing a **Model-Free RL Controller + Planner** supported by a **Real2Sim2Real** dynamics module.
 
-### 1. End-to-End Control Policy
+### 1. Control Policy
 
 Instead of relying on heavy online computation for trajectory optimization (like MPPI), we shift the computational burden to the training phase. Our architecture is designed to sit immediately downstream of the perception module (and potentially SLAM), outputting control actions directly to the vehicle.
 
-- **Architecture:** We utilize custom state and action spaces with a specialized reward function designed for time-optimal racing (details to be released with the codebase).
+- **Architecture:** We utilize a custom state space with a specialized reward function designed for time-optimal racing (details to be released with the codebase).
 - **Validation:** We are currently sanity-checking our implementation on an **F1Tenth** scale vehicle before full-scale deployment.
 
 ### 2. Real2Sim2Real Dynamics Module
 
-Since RL allows for offline training, we can leverage high-fidelity simulations to solve the data scarcity problem.
+Since RL allows for offline training, we can leverage high-fidelity simulations to solve the data scarcity problem. This model can also sacrifice performance for fidelity as we are ok with longer training times for our RL models.
 
 - **Simulation:** We utilize **CarMaker**, which provides a high-fidelity physics engine. We possess models of previous and current vehicles, allowing us to parameterize vehicle dynamics extensively.
 - **Domain Randomization:** By varying physical parameters in simulation, we create a diverse dataset of vehicle behaviors. This enables us to train a robust policy that can adapt to the "real" vehicle despite mechanical variances.
