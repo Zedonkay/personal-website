@@ -21,6 +21,7 @@ Follow these steps to enable code scanning for this repository:
 ## Workflow Configuration
 
 The CodeQL workflow is configured to:
+
 - Analyze JavaScript/TypeScript and Ruby code
 - Run on pushes to the `main` branch
 - Run on pull requests to the `main` branch
@@ -29,6 +30,7 @@ The CodeQL workflow is configured to:
 ## Troubleshooting
 
 If you see an error like:
+
 ```
 Error: Please verify that the necessary features are enabled: Code scanning is not enabled for this repository.
 ```
@@ -36,5 +38,6 @@ Error: Please verify that the necessary features are enabled: Code scanning is n
 This means code scanning has not been enabled yet. Follow the steps above to enable it.
 
 For more information, see:
+
 - [About code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning)
 - [Setting up code scanning for a repository](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/setting-up-code-scanning-for-a-repository)
