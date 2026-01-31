@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Autonomous Racing: RL Control
-description: Research at Carnegie Mellon Racing (CMR) condensing the autonomous navigation pipeline using Model-Free RL.
+title: "Autonomous Racing"
+description: "Research at Carnegie Mellon Racing (CMR) into Model-free RL and Real2Sim2Real dynamics"
 img: assets/img/CMR.png
 importance: 1
 category: experience
