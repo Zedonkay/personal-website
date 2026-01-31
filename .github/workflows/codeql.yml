@@ -9,6 +9,10 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
+# ******** IMPORTANT ********
+# Code scanning must be enabled in the repository settings before this workflow
+# can successfully upload results. See .github/CODE_SCANNING_SETUP.md for details.
+#
 name: "CodeQL Advanced"
 
 on:
@@ -93,4 +97,3 @@ jobs:
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{matrix.language}}"
-          wait-for-processing: false
