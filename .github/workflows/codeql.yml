@@ -94,4 +94,6 @@ jobs:
         with:
           category: "/language:${{matrix.language}}"
           wait-for-processing: false
+          # Set to 'never' since code scanning is not enabled for this repository.
+          # Change to 'always' when code scanning is enabled in repository settings.
           upload: 'never'
