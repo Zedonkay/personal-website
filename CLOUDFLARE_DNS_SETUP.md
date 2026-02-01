@@ -37,7 +37,7 @@ Add a CNAME record to redirect www subdomain:
 
 | Type | Name | Content | Proxy Status | TTL |
 |------|------|---------|--------------|-----|
-| CNAME | www | ishayushikhare.com | DNS only (gray cloud) | Auto |
+| CNAME | www | zedonkay.github.io | DNS only (gray cloud) | Auto |
 
 ### Step 3: Verify GitHub Pages Configuration
 1. Go to your repository: https://github.com/Zedonkay/zedonkay.github.io
