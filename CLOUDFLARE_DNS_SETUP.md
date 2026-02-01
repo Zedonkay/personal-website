@@ -1,17 +1,36 @@
-# Cloudflare DNS Setup for GitHub Pages
+# Cloudflare DNS Setup for GitHub Pages (Production Deployment)
 
-## Issue
-The website at ishayushikhare.com is not accessible because DNS records are not configured in Cloudflare.
+## Current Setup - Staging/Testing Workflow
 
-## Solution
-Configure the following DNS records in your Cloudflare dashboard:
+The repository is currently configured to use **zedonkay.github.io** as a testbench/staging site. This allows you to test changes before deploying to your custom production domain.
 
-### Step 1: Access Cloudflare DNS Settings
+- **Staging Site**: https://zedonkay.github.io (current setup)
+- **Production Site**: https://ishayushikhare.com (to be configured when ready)
+
+## When You're Ready to Deploy to Production
+
+Follow these steps to switch from the staging site to your custom domain:
+
+### Step 1: Re-enable Custom Domain in Repository
+
+1. Create a `CNAME` file in the repository root with the content:
+   ```
+   ishayushikhare.com
+   ```
+
+2. Update `_config.yml` and change the URL:
+   ```yaml
+   url: https://ishayushikhare.com
+   ```
+
+3. Commit and push these changes
+
+### Step 2: Configure Cloudflare DNS Settings
+
 1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
 2. Select your domain: **ishayushikhare.com**
 3. Go to **DNS** → **Records**
 
-### Step 2: Add GitHub Pages A Records
 Add the following **A records** (all pointing to GitHub Pages IP addresses):
 
 | Type | Name | Content | Proxy Status | TTL |
@@ -28,9 +47,9 @@ Add a CNAME record to redirect www subdomain:
 
 | Type | Name | Content | Proxy Status | TTL |
 |------|------|---------|--------------|-----|
-| CNAME | www | zedonkay.github.io | DNS only (gray cloud) | Auto |
+| CNAME | www | ishayushikhare.com | DNS only (gray cloud) | Auto |
 
-### Step 4: Verify GitHub Pages Configuration
+### Step 3: Verify GitHub Pages Configuration
 1. Go to your repository: https://github.com/Zedonkay/zedonkay.github.io
 2. Navigate to **Settings** → **Pages**
 3. Verify that:
@@ -38,13 +57,13 @@ Add a CNAME record to redirect www subdomain:
    - Custom domain is set to **ishayushikhare.com**
    - "Enforce HTTPS" is enabled (after DNS propagates)
 
-### Step 5: Wait for DNS Propagation
+### Step 4: Wait for DNS Propagation
 - Cloudflare typically propagates changes within 5-10 minutes
 - Full global propagation usually takes 30 minutes to 2 hours
 - In rare cases, it may take up to 24 hours (48 hours is extremely rare)
 - You can check propagation status at: https://dnschecker.org/#A/ishayushikhare.com
 
-### Step 6: Enable Cloudflare Proxy (Optional)
+### Step 5: Enable Cloudflare Proxy (Optional)
 After the site is working with "DNS only":
 1. You can optionally enable Cloudflare proxy (orange cloud) for:
    - DDoS protection
