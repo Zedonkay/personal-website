@@ -39,8 +39,9 @@ Add a CNAME record to redirect www subdomain:
    - "Enforce HTTPS" is enabled (after DNS propagates)
 
 ### Step 5: Wait for DNS Propagation
-- DNS changes can take 5 minutes to 48 hours to propagate globally
-- Cloudflare typically propagates within 5-10 minutes
+- Cloudflare typically propagates changes within 5-10 minutes
+- Full global propagation usually takes 30 minutes to 2 hours
+- In rare cases, it may take up to 24 hours (48 hours is extremely rare)
 - You can check propagation status at: https://dnschecker.org/#A/ishayushikhare.com
 
 ### Step 6: Enable Cloudflare Proxy (Optional)
