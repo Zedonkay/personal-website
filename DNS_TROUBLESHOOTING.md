@@ -4,53 +4,67 @@
 
 The domain `ishayushikhare.com` is showing `DNS_PROBE_FINISHED_NXDOMAIN` error, which means the domain cannot be resolved at the DNS level.
 
+## Important Information
+
+**Domain Registration**: This domain was registered through **Cloudflare Registrar**.
+
+When domains are registered through Cloudflare Registrar, nameservers are automatically configured - no manual nameserver updates are needed. The issue is likely one of the scenarios below.
+
 ## Root Cause Analysis
 
-While DNS A records have been added in Cloudflare dashboard, the domain is not resolving. This indicates one of the following issues:
+While DNS A records have been added in Cloudflare dashboard, the domain is not resolving. For domains registered with Cloudflare, this indicates one of the following issues:
 
-### 1. Nameservers Not Updated at Domain Registrar (MOST LIKELY)
+### 1. Domain Registration Still Pending (MOST LIKELY for new domains)
 
-**Problem**: The domain registrar (e.g., GoDaddy, Namecheap, Google Domains, etc.) still has the old nameservers and is not pointing to Cloudflare nameservers.
+**Problem**: Domain was recently registered through Cloudflare and the registration is still being processed or propagated.
 
-**Solution**: Update the nameservers at your domain registrar to point to Cloudflare.
+**Timeline**: New domain registrations can take:
+- **Initial registration**: 15 minutes - 2 hours
+- **Full DNS propagation**: 24-48 hours for global visibility
 
-#### Steps to Fix:
+**Solution**: Check domain registration status:
 
-1. **Find your Cloudflare nameservers:**
+#### Steps to Check:
+
+1. **Check domain status in Cloudflare:**
    - Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Select the domain `ishayushikhare.com`
-   - Go to **DNS** section
-   - Look for "Cloudflare Nameservers" section (usually on the right side or in Overview tab)
-   - You should see 2 nameservers like:
-     ```
-     example.ns.cloudflare.com
-     another.ns.cloudflare.com
-     ```
+   - Go to **Domain Registration** (not just DNS)
+   - Select `ishayushikhare.com`
+   - Look for status indicators:
+     - ✅ "Active" = registration complete
+     - ⏳ "Pending" or "Processing" = wait for completion
+     - ⚠️ Any warnings or errors = follow the instructions shown
 
-2. **Update nameservers at your domain registrar:**
-   - Log in to your domain registrar (where you purchased ishayushikhare.com)
-   - Find the "Nameservers" or "DNS Settings" section
-   - Replace the existing nameservers with the Cloudflare nameservers from step 1
-   - Save the changes
+2. **Verify domain appears in WHOIS:**
+   ```bash
+   whois ishayushikhare.com
+   ```
+   - If WHOIS returns "No match for domain" → registration still processing
+   - If WHOIS shows registration details → registration is active
 
-3. **Wait for propagation:**
-   - Nameserver changes can take 24-48 hours to propagate globally
-   - You can check the status with:
-     ```bash
-     dig NS ishayushikhare.com +short
-     ```
-   - This should return your Cloudflare nameservers once updated
+3. **Check registration email:**
+   - Check the email associated with your Cloudflare account
+   - Look for domain registration confirmation from Cloudflare
+   - Some TLDs (.com, .net, etc.) require email verification
 
-### 2. Domain Not Fully Added to Cloudflare
+4. **Wait for initial propagation:**
+   - If domain was just registered (within last 24 hours), wait 24-48 hours
+   - Check status periodically at: https://dnschecker.org/#A/ishayushikhare.com
 
-**Problem**: The domain might be in a pending state in Cloudflare.
+### 2. DNS Records Configuration Issue
 
-**Solution**: Complete the domain setup in Cloudflare:
+**Problem**: The domain zone might not be properly activated in Cloudflare.
 
-1. Go to Cloudflare Dashboard
-2. Check if there's a banner saying "Complete nameserver setup"
-3. Follow the instructions to complete the setup
-4. Verify the nameservers are correctly shown
+**Solution**: Verify domain zone is active:
+
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. Select `ishayushikhare.com` from your domain list
+3. Check the **Overview** page for:
+   - Zone status should be "Active"
+   - Any error messages or warnings
+4. If zone shows as "Pending" or "Moved":
+   - Click on the domain and follow any setup instructions
+   - Ensure domain registration is complete
 
 ### 3. Incorrect DNS Record Configuration
 
@@ -145,23 +159,30 @@ The repository is already correctly configured:
 
 ## Expected Timeline
 
-1. **Nameserver Update**: 5 minutes - 48 hours (typically 2-8 hours)
-2. **DNS Record Propagation**: 5 minutes - 2 hours after nameservers are active
-3. **SSL Certificate**: GitHub Pages will automatically provision an SSL certificate once DNS is working (can take 1-24 hours)
+**For domains registered with Cloudflare Registrar:**
+
+1. **Initial Domain Registration**: 15 minutes - 2 hours after purchase
+2. **DNS Propagation**: 24-48 hours for global propagation (can work sooner in many locations)
+3. **SSL Certificate**: GitHub Pages will automatically provision an SSL certificate once DNS is working (can take 1-24 hours after DNS is active)
+
+**Note**: Newly registered domains typically take 24-48 hours to be fully accessible worldwide. This is normal and cannot be accelerated.
 
 ## Common Issues and Solutions
 
 ### Issue: "DNS_PROBE_FINISHED_NXDOMAIN" persists after 48 hours
 
-**Possible causes:**
-- Nameservers still not updated at registrar
-- Domain expired or suspended
-- Cloudflare account has issues
+**Possible causes (for Cloudflare Registrar domains):**
+- Domain registration incomplete or payment pending
+- Domain requires email verification (check your email)
+- DNS zone not properly activated
+- Cloudflare account or domain has issues
 
 **Solution:**
-1. Contact your domain registrar support to verify nameservers are updated
-2. Check domain expiration date
-3. Contact Cloudflare support if everything else is correct
+1. Log in to Cloudflare Dashboard → Domain Registration
+2. Check domain status and complete any pending actions
+3. Verify payment was processed
+4. Check email for domain verification requests
+5. Contact Cloudflare support if status shows as "Active" but DNS still not resolving
 
 ### Issue: "This site can't provide a secure connection"
 

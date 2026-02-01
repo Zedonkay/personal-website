@@ -3,6 +3,7 @@
 ## 🔴 Current Status: DNS Not Resolving
 
 **Issue**: Domain shows "DNS_PROBE_FINISHED_NXDOMAIN" error  
+**Domain Registrar**: Cloudflare Registrar  
 **Last Updated**: 2026-02-01
 
 ### What's Working ✅
@@ -21,29 +22,44 @@
 
 ### Root Cause 🔍
 
-**Most Likely Issue**: Domain registrar's nameservers have not been updated to point to Cloudflare nameservers.
+**For Cloudflare Registrar Domains:**
 
-Even though DNS records are configured in Cloudflare, if the domain registrar (where you purchased ishayushikhare.com) still has old nameservers, the Cloudflare DNS records won't be used.
+Since this domain was registered through Cloudflare Registrar (not transferred from another registrar), the nameservers are automatically configured. The most likely causes are:
+
+1. **Domain registration is still processing** (most common for new domains)
+2. **DNS propagation in progress** (24-48 hours after registration)
+3. **Domain requires email verification** (check your email)
+4. **Registration pending or incomplete**
 
 ### Action Required 📋
 
 **To Fix This Issue:**
 
-1. **Find your Cloudflare nameservers**
+1. **Check domain registration status**
    - Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Select domain `ishayushikhare.com`
-   - Look for "Cloudflare Nameservers" (usually in DNS or Overview section)
-   - Note down the nameservers (e.g., `name1.ns.cloudflare.com`, `name2.ns.cloudflare.com`)
+   - Go to **Domain Registration** (not just DNS)
+   - Select `ishayushikhare.com`
+   - Look for status: "Active", "Pending", or any error messages
 
-2. **Update nameservers at your domain registrar**
-   - Log in to your domain registrar (GoDaddy, Namecheap, Google Domains, etc.)
-   - Find the nameserver settings
-   - Replace existing nameservers with the Cloudflare nameservers from step 1
-   - Save changes
+2. **Check your email**
+   - Look for domain registration confirmation from Cloudflare
+   - Some domains require email verification - click any verification links
 
-3. **Wait for propagation**
-   - Nameserver changes take 4-48 hours to propagate (usually 4-8 hours)
-   - Check status at: https://dnschecker.org/#NS/ishayushikhare.com
+3. **Verify domain in WHOIS**
+   ```bash
+   whois ishayushikhare.com
+   ```
+   - If it returns "No match" → registration still processing
+   - If it shows registration details → domain is registered
+
+4. **Check DNS propagation**
+   - Visit: https://dnschecker.org/#A/ishayushikhare.com
+   - If domain was registered recently, wait 24-48 hours for propagation
+
+5. **Verify DNS records in Cloudflare**
+   - Go to Cloudflare Dashboard → DNS
+   - Ensure the 4 A records are present with GitHub Pages IPs
+   - Ensure "Proxy status" is set to "DNS only" (gray cloud)
 
 ### Detailed Instructions 📖
 
@@ -64,19 +80,24 @@ The staging site (deployed from `experimental` branch) uses the default GitHub P
 
 ### Timeline ⏱️
 
-Once nameservers are updated at the registrar:
+**For domains registered with Cloudflare Registrar:**
 
-1. **Nameserver Propagation**: 4-48 hours (typically 4-8 hours)
-2. **DNS Resolution**: Works immediately after nameserver propagation
-3. **SSL Certificate**: GitHub Pages auto-provisions within 24 hours
+1. **Domain Registration**: 15 minutes - 2 hours after purchase
+2. **DNS Propagation**: 24-48 hours (may work sooner in some locations)
+3. **SSL Certificate**: GitHub Pages auto-provisions within 24 hours after DNS works
 4. **Site Live**: https://ishayushikhare.com will be accessible
+
+**Note**: If the domain was just registered, it's normal for it to take 24-48 hours to work worldwide.
 
 ### Verification Commands 🔧
 
-Once fixed, these commands should work:
+Once the domain registration is complete and propagated:
 
 ```bash
-# Check nameservers (should show Cloudflare nameservers)
+# Check if domain is registered
+whois ishayushikhare.com
+
+# Check nameservers (should show Cloudflare nameservers automatically)
 dig NS ishayushikhare.com +short
 
 # Check A records (should show GitHub Pages IPs)
@@ -88,11 +109,11 @@ curl -I http://ishayushikhare.com
 
 ### Need Help? 🆘
 
-1. Check **[DNS_TROUBLESHOOTING.md](DNS_TROUBLESHOOTING.md)** first
-2. Check **[CLOUDFLARE_DNS_SETUP.md](CLOUDFLARE_DNS_SETUP.md)** for Cloudflare-specific instructions
-3. Contact your domain registrar support if nameserver update issues persist
-4. Contact Cloudflare support if DNS records configuration is unclear
+1. Check **[DNS_TROUBLESHOOTING.md](DNS_TROUBLESHOOTING.md)** first (updated for Cloudflare Registrar)
+2. Check **[CLOUDFLARE_DNS_SETUP.md](CLOUDFLARE_DNS_SETUP.md)** for DNS record configuration
+3. Check Cloudflare Dashboard → Domain Registration for domain status
+4. Contact Cloudflare support if domain status is unclear or registration appears stuck
 
 ---
 
-**Note**: No changes to this repository are needed. The issue is external (domain registrar configuration).
+**Note**: Since the domain is registered with Cloudflare, no external registrar configuration is needed. The issue is likely domain registration propagation time.

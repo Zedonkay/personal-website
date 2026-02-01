@@ -1,6 +1,8 @@
 # Cloudflare DNS Setup for GitHub Pages (Production Deployment)
 
-> **⚠️ IMPORTANT**: If you're experiencing "DNS_PROBE_FINISHED_NXDOMAIN" or "This site can't be reached" errors, the DNS records are configured in Cloudflare but your domain registrar's nameservers need to be updated. See **`DNS_TROUBLESHOOTING.md`** for detailed instructions.
+> **⚠️ IMPORTANT**: This domain was registered through **Cloudflare Registrar**. If you're experiencing "DNS_PROBE_FINISHED_NXDOMAIN" errors, this is likely due to normal DNS propagation time (24-48 hours for new domains). See **`DNS_TROUBLESHOOTING.md`** for detailed instructions and status checks.
+>
+> **Note**: Since the domain is registered with Cloudflare, nameservers are automatically configured - no manual nameserver updates are needed.
 
 ## Branch-Based Deployment Strategy
 
@@ -96,12 +98,16 @@ curl -I https://ishayushikhare.com
 - ✅ CNAME file configured for production deployments
 - ✅ GitHub Actions deployment workflow working
 - ✅ DNS A records added in Cloudflare dashboard
-- ❌ Domain not resolving (DNS_PROBE_FINISHED_NXDOMAIN) - **Nameservers need to be updated at domain registrar**
+- ✅ Domain registered with Cloudflare Registrar (nameservers auto-configured)
+- ⏳ Domain not yet resolving - likely DNS propagation in progress (normal for new domains: 24-48 hours)
 
 ## Troubleshooting
 
 If you're seeing "DNS_PROBE_FINISHED_NXDOMAIN" or "This site can't be reached" errors, see the comprehensive troubleshooting guide: **`DNS_TROUBLESHOOTING.md`**
 
-The most common issue is that the domain registrar's nameservers have not been updated to point to Cloudflare. See the troubleshooting guide for detailed steps to fix this.
+**For Cloudflare Registrar domains**: The most common cause is that the domain registration is still propagating (24-48 hours for new domains). Check:
+1. Domain Registration status in Cloudflare Dashboard
+2. Email for any verification requests
+3. DNS propagation at https://dnschecker.org/#A/ishayushikhare.com
 
 See `DEPLOYMENT_WORKFLOW.md` for usage instructions.
