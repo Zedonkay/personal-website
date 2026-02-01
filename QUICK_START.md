@@ -33,6 +33,7 @@ git push origin experimental
 ### 2️⃣ Daily Workflow
 
 #### For Testing/Development:
+
 ```bash
 # Work on experimental
 git checkout experimental
@@ -49,6 +50,7 @@ git push origin experimental
 ```
 
 #### For Production:
+
 ```bash
 # After testing on experimental, promote to production
 git checkout main
@@ -71,12 +73,12 @@ Before promoting to main, ensure:
 
 ## 🔍 Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Experimental not updating | Check Actions tab, wait 1-2 min |
-| Production not updating | Verify DNS, check Actions tab |
-| 404 errors | Wait for GitHub Pages to rebuild |
-| Wrong domain | Check which branch you pushed to |
+| Issue                     | Solution                         |
+| ------------------------- | -------------------------------- |
+| Experimental not updating | Check Actions tab, wait 1-2 min  |
+| Production not updating   | Verify DNS, check Actions tab    |
+| 404 errors                | Wait for GitHub Pages to rebuild |
+| Wrong domain              | Check which branch you pushed to |
 
 ## 📚 Documentation
 

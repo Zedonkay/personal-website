@@ -5,12 +5,14 @@ This repository uses a branch-based deployment strategy for staging and producti
 ## Deployment Strategy
 
 ### 🧪 Experimental Branch → zedonkay.github.io (Staging)
+
 - **Branch**: `experimental`
 - **URL**: https://zedonkay.github.io
 - **Purpose**: Testing and development
 - **Custom Domain**: None (uses default GitHub Pages URL)
 
 ### 🚀 Main Branch → ishayushikhare.com (Production)
+
 - **Branch**: `main` (or `master`)
 - **URL**: https://ishayushikhare.com
 - **Purpose**: Production site
@@ -19,7 +21,9 @@ This repository uses a branch-based deployment strategy for staging and producti
 ## Workflow
 
 ### 1. Development and Testing
+
 1. Create a feature branch from `experimental`:
+
    ```bash
    git checkout experimental
    git pull origin experimental
@@ -27,15 +31,18 @@ This repository uses a branch-based deployment strategy for staging and producti
    ```
 
 2. Make your changes and commit:
+
    ```bash
    git add .
    git commit -m "Add new feature"
    ```
 
 3. Push and create a PR to `experimental`:
+
    ```bash
    git push origin feature/my-new-feature
    ```
+
    Then create a pull request targeting the `experimental` branch.
 
 4. Once merged to `experimental`, the site automatically deploys to **zedonkay.github.io**
@@ -43,9 +50,11 @@ This repository uses a branch-based deployment strategy for staging and producti
 5. Test your changes at https://zedonkay.github.io
 
 ### 2. Promoting to Production
+
 Once you've tested and verified changes on the experimental branch:
 
 1. Create a PR from `experimental` to `main`:
+
    ```bash
    git checkout experimental
    git pull origin experimental
@@ -54,6 +63,7 @@ Once you've tested and verified changes on the experimental branch:
    git merge experimental
    git push origin main
    ```
+
    Or create a pull request from `experimental` to `main` on GitHub.
 
 2. Once merged to `main`, the site automatically deploys to **ishayushikhare.com**
@@ -63,11 +73,13 @@ Once you've tested and verified changes on the experimental branch:
 The `.github/workflows/deploy.yml` workflow handles deployments differently based on the branch:
 
 ### For `experimental` branch:
+
 - Sets `url` in `_config.yml` to `https://zedonkay.github.io`
 - Removes the `CNAME` file so GitHub Pages uses the default domain
 - Deploys to `gh-pages` branch
 
 ### For `main`/`master` branch:
+
 - Uses `url` in `_config.yml` as `https://ishayushikhare.com`
 - Keeps the `CNAME` file to enable custom domain
 - Deploys to `gh-pages` branch
@@ -77,6 +89,7 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 ### Initial Setup
 
 1. **Create the experimental branch** (if it doesn't exist):
+
    ```bash
    git checkout -b experimental
    git push origin experimental
@@ -101,24 +114,27 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 
 ## Branch Configuration Summary
 
-| Branch | Domain | CNAME File | Purpose |
-|--------|--------|-----------|---------|
-| `experimental` | zedonkay.github.io | ❌ Removed during build | Staging/Testing |
-| `main`/`master` | ishayushikhare.com | ✅ Present | Production |
+| Branch          | Domain             | CNAME File              | Purpose         |
+| --------------- | ------------------ | ----------------------- | --------------- |
+| `experimental`  | zedonkay.github.io | ❌ Removed during build | Staging/Testing |
+| `main`/`master` | ishayushikhare.com | ✅ Present              | Production      |
 
 ## Troubleshooting
 
 ### Experimental site not updating
+
 - Check that your changes were pushed to the `experimental` branch
 - View the Actions tab to see if the deployment succeeded
 - Wait 1-2 minutes for GitHub Pages to update
 
 ### Production site not updating
+
 - Verify changes are merged to `main` branch
 - Check that Cloudflare DNS is properly configured
 - Clear browser cache or try incognito mode
 
 ### Custom domain issues
+
 - Ensure DNS records are configured in Cloudflare (see `CLOUDFLARE_DNS_SETUP.md`)
 - Wait for DNS propagation (typically 5-10 minutes)
 - Verify CNAME file exists in the repository root
@@ -147,4 +163,4 @@ git branch
 ✅ **Easy Rollback**: Keep production stable while experimenting  
 ✅ **Clear Separation**: Different URLs for different purposes  
 ✅ **Automated Deployment**: Push and deploy automatically  
-✅ **No Manual Configuration**: Workflow handles environment differences  
+✅ **No Manual Configuration**: Workflow handles environment differences

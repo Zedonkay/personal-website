@@ -23,23 +23,25 @@ The `experimental` branch automatically uses zedonkay.github.io and does not req
 
 Add the following **A records** (all pointing to GitHub Pages IP addresses):
 
-| Type | Name | Content | Proxy Status | TTL |
-|------|------|---------|--------------|-----|
-| A | @ | 185.199.108.153 | DNS only (gray cloud) | Auto |
-| A | @ | 185.199.109.153 | DNS only (gray cloud) | Auto |
-| A | @ | 185.199.110.153 | DNS only (gray cloud) | Auto |
-| A | @ | 185.199.111.153 | DNS only (gray cloud) | Auto |
+| Type | Name | Content         | Proxy Status          | TTL  |
+| ---- | ---- | --------------- | --------------------- | ---- |
+| A    | @    | 185.199.108.153 | DNS only (gray cloud) | Auto |
+| A    | @    | 185.199.109.153 | DNS only (gray cloud) | Auto |
+| A    | @    | 185.199.110.153 | DNS only (gray cloud) | Auto |
+| A    | @    | 185.199.111.153 | DNS only (gray cloud) | Auto |
 
 **Important:** Set Proxy Status to "DNS only" (gray cloud icon), NOT "Proxied" (orange cloud), at least initially.
 
 ### Step 2: Add WWW CNAME Record (Optional but Recommended)
+
 Add a CNAME record to redirect www subdomain:
 
-| Type | Name | Content | Proxy Status | TTL |
-|------|------|---------|--------------|-----|
-| CNAME | www | zedonkay.github.io | DNS only (gray cloud) | Auto |
+| Type  | Name | Content            | Proxy Status          | TTL  |
+| ----- | ---- | ------------------ | --------------------- | ---- |
+| CNAME | www  | zedonkay.github.io | DNS only (gray cloud) | Auto |
 
 ### Step 3: Verify GitHub Pages Configuration
+
 1. Go to your repository: https://github.com/Zedonkay/zedonkay.github.io
 2. Navigate to **Settings** → **Pages**
 3. Verify that:
@@ -48,13 +50,16 @@ Add a CNAME record to redirect www subdomain:
    - "Enforce HTTPS" is enabled (after DNS propagates)
 
 ### Step 4: Wait for DNS Propagation
+
 - Cloudflare typically propagates changes within 5-10 minutes
 - Full global propagation usually takes 30 minutes to 2 hours
 - In rare cases, it may take up to 24 hours (48 hours is extremely rare)
 - You can check propagation status at: https://dnschecker.org/#A/ishayushikhare.com
 
 ### Step 5: Enable Cloudflare Proxy (Optional)
+
 After the site is working with "DNS only":
+
 1. You can optionally enable Cloudflare proxy (orange cloud) for:
    - DDoS protection
    - CDN caching
@@ -62,6 +67,7 @@ After the site is working with "DNS only":
 2. Change the A records from "DNS only" to "Proxied"
 
 ## Verification Commands
+
 After DNS propagation, verify the setup:
 
 ```bash
@@ -76,10 +82,12 @@ curl -I https://ishayushikhare.com
 ```
 
 ## References
+
 - [GitHub Pages Custom Domain Documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
 - [Cloudflare DNS Setup](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/)
 
 ## Current Status
+
 - ✅ Branch-based deployment workflow configured
 - ✅ Experimental branch → zedonkay.github.io (staging)
 - ✅ Main branch → ishayushikhare.com (production)
