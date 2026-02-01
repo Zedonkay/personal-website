@@ -1,5 +1,7 @@
 # Cloudflare DNS Setup for GitHub Pages (Production Deployment)
 
+> **⚠️ IMPORTANT**: If you're experiencing "DNS_PROBE_FINISHED_NXDOMAIN" or "This site can't be reached" errors, the DNS records are configured in Cloudflare but your domain registrar's nameservers need to be updated. See **`DNS_TROUBLESHOOTING.md`** for detailed instructions.
+
 ## Branch-Based Deployment Strategy
 
 This repository uses a **branch-based deployment workflow**:
@@ -93,6 +95,13 @@ curl -I https://ishayushikhare.com
 - ✅ Main branch → ishayushikhare.com (production)
 - ✅ CNAME file configured for production deployments
 - ✅ GitHub Actions deployment workflow working
-- ❌ DNS records need to be added in Cloudflare for production domain (ACTION REQUIRED)
+- ✅ DNS A records added in Cloudflare dashboard
+- ❌ Domain not resolving (DNS_PROBE_FINISHED_NXDOMAIN) - **Nameservers need to be updated at domain registrar**
+
+## Troubleshooting
+
+If you're seeing "DNS_PROBE_FINISHED_NXDOMAIN" or "This site can't be reached" errors, see the comprehensive troubleshooting guide: **`DNS_TROUBLESHOOTING.md`**
+
+The most common issue is that the domain registrar's nameservers have not been updated to point to Cloudflare. See the troubleshooting guide for detailed steps to fix this.
 
 See `DEPLOYMENT_WORKFLOW.md` for usage instructions.
