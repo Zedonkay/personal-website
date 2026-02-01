@@ -108,7 +108,7 @@ Proxy Status: DNS only (gray cloud)
 
 ## Verification Steps
 
-Once you've updated the nameservers and waited for propagation:
+Once the domain registration is complete and DNS has propagated:
 
 ### 1. Check Nameservers
 ```bash
@@ -208,14 +208,17 @@ The repository is already correctly configured:
 
 ## Quick Action Checklist
 
-Use this checklist to resolve the DNS issue:
+Use this checklist to resolve the DNS issue for Cloudflare Registrar domains:
 
-- [ ] Log in to domain registrar (where you bought ishayushikhare.com)
-- [ ] Find the Cloudflare nameservers for your domain
-- [ ] Update nameservers at the registrar to Cloudflare nameservers
-- [ ] Wait 4-8 hours for nameserver propagation
-- [ ] Verify nameservers with `dig NS ishayushikhare.com +short`
-- [ ] Verify A records with `dig ishayushikhare.com A +short`
+- [ ] Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+- [ ] Go to **Domain Registration** and check status of ishayushikhare.com
+- [ ] Verify domain status shows "Active" (not "Pending" or "Processing")
+- [ ] Check email for any domain verification requests from Cloudflare
+- [ ] Verify DNS A records are configured correctly (4 GitHub Pages IPs)
+- [ ] Run `whois ishayushikhare.com` to confirm domain is registered
+- [ ] Wait 24-48 hours for DNS propagation if domain was recently registered
+- [ ] Check DNS propagation at https://dnschecker.org/#A/ishayushikhare.com
+- [ ] Once DNS works, verify A records with `dig ishayushikhare.com A +short`
 - [ ] Test site access with browser (might need to wait for SSL)
 - [ ] Enable "Enforce HTTPS" in GitHub Pages settings once SSL is ready
 
@@ -240,6 +243,6 @@ If you've followed all steps and the issue persists after 48 hours:
 ✅ **CNAME File**: Present and correct (`ishayushikhare.com`)  
 ✅ **Deployment Workflow**: Working  
 ✅ **gh-pages Branch**: Contains correct CNAME file  
-❌ **DNS Resolution**: Not working - **ACTION REQUIRED: Update nameservers at domain registrar**
+⏳ **DNS Resolution**: Not working - **Domain registered with Cloudflare - waiting for DNS propagation (24-48 hours for new domains)**
 
-Once the nameservers are updated and propagated, the site should work automatically without any changes to the repository.
+Once the domain registration is complete and DNS has propagated, the site should work automatically without any changes to the repository.
