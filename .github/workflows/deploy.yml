@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+      - experimental
     paths:
       - "assets/**"
       - "_sass/**"
@@ -34,6 +35,7 @@ on:
     branches:
       - master
       - main
+      - experimental
     paths:
       - "assets/**"
       - "_sass/**"
@@ -88,6 +90,34 @@ jobs:
           valueFile: "_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
+      - name: Configure URL for branch 🔧
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/experimental" ]; then
+            echo "Configuring for experimental branch (zedonkay.github.io)"
+            sed -i 's|^url:.*|url: https://zedonkay.github.io|g' _config.yml
+            # Verify the change was successful
+            if grep -q "url: https://zedonkay.github.io" _config.yml; then
+              echo "✅ URL successfully updated to zedonkay.github.io"
+            else
+              echo "❌ Failed to update URL"
+              exit 1
+            fi
+          else
+            echo "Configuring for main/master branch (ishayushikhare.com)"
+            # Verify production URL is set
+            if grep -q "url: https://ishayushikhare.com" _config.yml; then
+              echo "✅ Production URL verified: ishayushikhare.com"
+            else
+              echo "⚠️ Warning: Production URL may not be set correctly"
+            fi
+          fi
+      - name: Remove CNAME for experimental branch 🗑️
+        if: github.ref == 'refs/heads/experimental'
+        run: |
+          if [ -f "CNAME" ]; then
+            echo "Removing CNAME file for experimental branch deployment"
+            rm CNAME
+          fi
       - name: Install and Build 🔧
         run: |
           sudo apt-get update && sudo apt-get install -y imagemagick
