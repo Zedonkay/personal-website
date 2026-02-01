@@ -76,41 +76,61 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 
 - Sets `url` in `_config.yml` to `https://zedonkay.github.io`
 - Removes the `CNAME` file so GitHub Pages uses the default domain
-- Deploys to `gh-pages` branch
+- Deploys to the **Zedonkay/zedonkay.github.io** repository (separate site)
 
 ### For `main`/`master` branch:
 
 - Uses `url` in `_config.yml` as `https://ishayushikhare.com`
 - Keeps the `CNAME` file to enable custom domain
-- Deploys to `gh-pages` branch
+- Deploys to this repo's `gh-pages` branch
 
 ## Setup Instructions
 
 ### Initial Setup
 
-1. **Create the experimental branch** (if it doesn't exist):
+1. **Create the Zedonkay/zedonkay.github.io repository** (for experimental/staging):
+
+   - Create a new repository named `zedonkay.github.io` under the Zedonkay account
+   - This serves as your user/org GitHub Pages site at https://zedonkay.github.io
+   - Go to Settings → Pages and ensure it's configured to deploy from the `main` branch (or adjust `branch` in deploy.yml to match)
+
+2. **Create a Personal Access Token (PAT) for cross-repo deployment**:
+
+   - Go to GitHub → Settings → Developer settings → Personal access tokens
+   - Generate a token with `repo` scope (or at minimum `public_repo` if both repos are public)
+   - Add it as a secret in **personal-website** repo: Settings → Secrets → Actions
+   - Name the secret `DEPLOY_TOKEN`
+
+3. **Create the experimental branch** (if it doesn't exist):
 
    ```bash
    git checkout -b experimental
    git push origin experimental
    ```
 
-2. **Configure branch protection** (recommended):
+4. **Configure branch protection** (recommended):
    - Go to Settings → Branches in your repository
    - Add branch protection rules for both `main` and `experimental`
    - Require pull request reviews before merging
 
-3. **Set up Cloudflare DNS** (for production domain):
+5. **Set up Cloudflare DNS** (for production domain):
    - Follow the instructions in `CLOUDFLARE_DNS_SETUP.md`
    - This only affects the `main` branch deployment
 
 ### GitHub Pages Settings
 
-1. Go to **Settings → Pages** in your repository
-2. Set:
-   - **Source**: Deploy from branch
-   - **Branch**: `gh-pages` / `root`
-3. The custom domain will be automatically configured by the workflow
+**personal-website** (production at ishayushikhare.com):
+
+1. Go to **Settings → Pages**
+2. Source: Deploy from branch
+3. Branch: `gh-pages` / root
+4. Custom domain is configured via CNAME (deployed by workflow)
+
+**zedonkay.github.io** (staging at zedonkay.github.io):
+
+1. Go to **Settings → Pages** in the zedonkay.github.io repository
+2. Source: Deploy from branch
+3. Branch: `main` (or match whatever is in deploy.yml)
 
 ## Branch Configuration Summary
 

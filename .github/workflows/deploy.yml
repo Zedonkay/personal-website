@@ -68,11 +68,14 @@ permissions:
 
 jobs:
   deploy:
-    # available images: https://github.com/actions/runner-images#available-images
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+        with:
+          # Required for cross-repo deploy to avoid credential conflicts
+          persist-credentials: ${{ github.ref != 'refs/heads/experimental' }}
       - name: Setup Ruby 💎
         uses: ruby/setup-ruby@v1
         with:
@@ -128,8 +131,19 @@ jobs:
         run: |
           npm install -g purgecss
           purgecss -c purgecss.config.js
-      - name: Deploy 🚀
-        if: github.event_name != 'pull_request'
+      # Deploy main/master to this repo's gh-pages → ishayushikhare.com
+      - name: Deploy to production (main) 🚀
+        if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+
+      # Deploy experimental to zedonkay.github.io repo → staging site
+      - name: Deploy to staging (experimental) 🚀
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/experimental'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: _site
+          repository-name: Zedonkay/zedonkay.github.io
+          branch: main
+          token: ${{ secrets.DEPLOY_TOKEN }}
