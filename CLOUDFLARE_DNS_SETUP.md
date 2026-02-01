@@ -1,31 +1,21 @@
 # Cloudflare DNS Setup for GitHub Pages (Production Deployment)
 
-## Current Setup - Staging/Testing Workflow
+## Branch-Based Deployment Strategy
 
-The repository is currently configured to use **zedonkay.github.io** as a testbench/staging site. This allows you to test changes before deploying to your custom production domain.
+This repository uses a **branch-based deployment workflow**:
 
-- **Staging Site**: https://zedonkay.github.io (current setup)
-- **Production Site**: https://ishayushikhare.com (to be configured when ready)
+- **experimental branch** → https://zedonkay.github.io (staging/testbench)
+- **main branch** → https://ishayushikhare.com (production with custom domain)
 
-## When You're Ready to Deploy to Production
+See `DEPLOYMENT_WORKFLOW.md` for complete details on how to use this workflow.
 
-Follow these steps to switch from the staging site to your custom domain:
+## Production Domain Setup
 
-### Step 1: Re-enable Custom Domain in Repository
+The following instructions are for configuring the **production** custom domain (ishayushikhare.com) which is used by the `main` branch.
 
-1. Create a `CNAME` file in the repository root with the content:
-   ```
-   ishayushikhare.com
-   ```
+The `experimental` branch automatically uses zedonkay.github.io and does not require any DNS configuration.
 
-2. Update `_config.yml` and change the URL:
-   ```yaml
-   url: https://ishayushikhare.com
-   ```
-
-3. Commit and push these changes
-
-### Step 2: Configure Cloudflare DNS Settings
+### Step 1: Configure DNS A Records
 
 1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
 2. Select your domain: **ishayushikhare.com**
@@ -42,7 +32,7 @@ Add the following **A records** (all pointing to GitHub Pages IP addresses):
 
 **Important:** Set Proxy Status to "DNS only" (gray cloud icon), NOT "Proxied" (orange cloud), at least initially.
 
-### Step 3: Add WWW CNAME Record (Optional but Recommended)
+### Step 2: Add WWW CNAME Record (Optional but Recommended)
 Add a CNAME record to redirect www subdomain:
 
 | Type | Name | Content | Proxy Status | TTL |
@@ -90,6 +80,11 @@ curl -I https://ishayushikhare.com
 - [Cloudflare DNS Setup](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/)
 
 ## Current Status
-- ✅ CNAME file is correctly configured in the repository
-- ✅ GitHub Actions deployment workflow is working
-- ❌ DNS records need to be added in Cloudflare (ACTION REQUIRED)
+- ✅ Branch-based deployment workflow configured
+- ✅ Experimental branch → zedonkay.github.io (staging)
+- ✅ Main branch → ishayushikhare.com (production)
+- ✅ CNAME file configured for production deployments
+- ✅ GitHub Actions deployment workflow working
+- ❌ DNS records need to be added in Cloudflare for production domain (ACTION REQUIRED)
+
+See `DEPLOYMENT_WORKFLOW.md` for usage instructions.
