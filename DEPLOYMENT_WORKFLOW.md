@@ -89,13 +89,11 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 ### Initial Setup
 
 1. **Create the Zedonkay/zedonkay.github.io repository** (for experimental/staging):
-
    - Create a new repository named `zedonkay.github.io` under the Zedonkay account
    - This serves as your user/org GitHub Pages site at https://zedonkay.github.io
    - Go to Settings → Pages and ensure it's configured to deploy from the `main` branch (or adjust `branch` in deploy.yml to match)
 
 2. **Create a Personal Access Token (PAT) for cross-repo deployment**:
-
    - Go to GitHub → Settings → Developer settings → Personal access tokens
    - Generate a token with `repo` scope (or at minimum `public_repo` if both repos are public)
    - Add it as a secret in **personal-website** repo: Settings → Secrets → Actions
