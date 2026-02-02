@@ -6,6 +6,7 @@ Repo for [my personal website](https://ishayushikhare.com), based on [al-folio](
 
 - **Live site:** [ishayushikhare.com](https://ishayushikhare.com)
 - **Theme:** [al-folio](https://github.com/alshedivat/al-folio) (Jekyll theme for academics)
+
 ## Tech
 
 - [Jekyll](https://jekyllrb.com/) static site
