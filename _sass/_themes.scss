@@ -26,6 +26,12 @@
   --global-newsletter-bg-color: #fef8ec;
   --global-newsletter-text-color: #005661;
 
+  /* Project link buttons: main text color (#005661) but lighter, then full text color on hover */
+  --project-link-color: #5a8289;
+  --project-link-border: #6b9299;
+  --project-link-hover-bg: #dce8e9;
+  --project-link-hover-color: #005661;
+
   --global-tip-block: #009456;
   --global-tip-block-bg: #e2f5ec;
   --global-tip-block-text: #215d42;
@@ -92,6 +98,12 @@ html[data-theme="dark"] {
   --global-back-to-top-text-color: #{$black-color};
   --global-newsletter-bg-color: #{$grey-color-light};
   --global-newsletter-text-color: #{$grey-color-dark};
+
+  /* Project link buttons: keep current look for dark theme */
+  --project-link-color: #{$grey-color};
+  --project-link-border: #{$grey-color};
+  --project-link-hover-bg: #{$grey-color};
+  --project-link-hover-color: var(--global-bg-color);
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #215d42;

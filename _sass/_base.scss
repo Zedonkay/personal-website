@@ -1142,19 +1142,19 @@ progress::-moz-progress-bar {
   }
 }
 
-/* Project page link buttons (neutral gray, theme-safe) */
+/* Project page link buttons (theme-dependent: muted grey in light, current in dark) */
 .project-links {
   .btn {
-    color: var(--global-text-color-light) !important;
-    border-color: var(--global-text-color-light) !important;
+    color: var(--project-link-color) !important;
+    border-color: var(--project-link-border) !important;
     background-color: transparent !important;
   }
 
   .btn:hover,
   .btn:focus {
-    color: var(--global-bg-color) !important;
-    background-color: var(--global-text-color-light) !important;
-    border-color: var(--global-text-color-light) !important;
+    color: var(--project-link-hover-color) !important;
+    background-color: var(--project-link-hover-bg) !important;
+    border-color: var(--project-link-hover-bg) !important;
   }
 }
 
