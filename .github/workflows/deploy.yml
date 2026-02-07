@@ -131,6 +131,10 @@ jobs:
         run: |
           npm install -g purgecss
           purgecss -c purgecss.config.js
+      - name: Add .nojekyll file 📄
+        run: |
+          touch _site/.nojekyll
+          echo "✅ .nojekyll file created"
       # Deploy main/master to this repo's gh-pages → ishayushikhare.com
       - name: Deploy to production (main) 🚀
         if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
