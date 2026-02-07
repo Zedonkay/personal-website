@@ -735,6 +735,9 @@ footer.sticky-bottom {
         object-fit: none;
         object-position: center;
       }
+      img[src*="eigenbot"] {
+        transform: scale(1.35);
+      }
     }
 
     .card-title {
