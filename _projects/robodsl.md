@@ -2,6 +2,7 @@
 layout: page
 title: RoboDSL
 description: A Domain-Specific Language for GPU-accelerated robotics applications with ROS2 and CUDA
+img: assets/img/Robodsl.png
 importance: 3
 category: personal
 related_publications: false
