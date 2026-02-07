@@ -63,13 +63,12 @@ The repository uses a branch-based deployment strategy:
 - **main branch**: Source code for production site
   - Triggers `deploy.yml` workflow on push
   - Builds Jekyll site to `_site` directory
-  - Deploys `_site` contents to `gh-pages` branch
-  - GitHub Pages serves from `gh-pages` branch
-  - Custom domain: ishayushikhare.com
+  - Deploys `_site` contents to `gh-pages` branch of this repository
+  - GitHub Pages serves from `gh-pages` branch at https://ishayushikhare.com
 
 - **experimental branch**: Source code for staging site
-  - Deploys to separate repository: zedonkay.github.io
-  - Custom domain: zedonkay.github.io (no DNS setup needed)
+  - Deploys to the `Zedonkay/zedonkay.github.io` repository (a separate GitHub Pages user site)
+  - Accessible at: https://zedonkay.github.io (no DNS setup needed)
 
 ## Troubleshooting
 

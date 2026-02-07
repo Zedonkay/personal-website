@@ -66,9 +66,31 @@ jobs:
           
           echo "Checking DNS for ishayushikhare.com..."
           if command -v dig &> /dev/null; then
-            dig ishayushikhare.com A +short | head -4 || echo "No A records found"
+            A_RECORDS=$(dig ishayushikhare.com A +short | grep -E '^[0-9.]+$')
+            if [ -z "$A_RECORDS" ]; then
+              echo "⚠️  No A records found"
+            else
+              echo "Found A records:"
+              echo "$A_RECORDS"
+              
+              # Check for expected GitHub Pages IPs
+              EXPECTED_IPS="185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153"
+              MISSING_IPS=""
+              for ip in $EXPECTED_IPS; do
+                if ! echo "$A_RECORDS" | grep -q "$ip"; then
+                  MISSING_IPS="$MISSING_IPS $ip"
+                fi
+              done
+              
+              if [ -n "$MISSING_IPS" ]; then
+                echo "⚠️  Missing GitHub Pages IPs:$MISSING_IPS"
+                echo "   See CLOUDFLARE_DNS_SETUP.md for correct configuration"
+              else
+                echo "✅ All GitHub Pages IPs configured correctly"
+              fi
+            fi
           else
-            echo "dig command not available, skipping DNS check"
+            echo "⚠️  dig command not available, skipping DNS check"
           fi
 
       - name: Display configuration instructions
