@@ -1,0 +1,128 @@
+name: Check GitHub Pages Status
+
+# This workflow checks if GitHub Pages is properly configured
+# Run this to diagnose issues with the site deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check gh-pages branch
+        run: |
+          echo "=================================="
+          echo "GitHub Pages Configuration Check"
+          echo "=================================="
+          echo ""
+          
+          # Check if gh-pages branch exists
+          if git ls-remote --heads origin | grep -q "refs/heads/gh-pages"; then
+            echo "✅ gh-pages branch exists"
+          else
+            echo "❌ gh-pages branch does not exist"
+            echo "   Action needed: Push to main branch to trigger build and deployment"
+            exit 1
+          fi
+          
+          # Check gh-pages content
+          echo ""
+          echo "Checking gh-pages branch content..."
+          git fetch origin gh-pages
+          
+          if git show origin/gh-pages:index.html &>/dev/null; then
+            echo "✅ index.html exists in gh-pages"
+          else
+            echo "❌ index.html not found in gh-pages"
+            exit 1
+          fi
+          
+          if git show origin/gh-pages:CNAME &>/dev/null; then
+            CNAME_CONTENT=$(git show origin/gh-pages:CNAME 2>/dev/null | tr -d '\n')
+            echo "✅ CNAME file exists: $CNAME_CONTENT"
+          else
+            echo "⚠️  CNAME file not found"
+          fi
+          
+          if git show origin/gh-pages:.nojekyll &>/dev/null; then
+            echo "✅ .nojekyll file exists"
+          else
+            echo "⚠️  .nojekyll file missing (will be added on next deploy)"
+          fi
+
+      - name: Check DNS configuration
+        run: |
+          echo ""
+          echo "=================================="
+          echo "DNS Configuration Check"
+          echo "=================================="
+          echo ""
+          
+          echo "Checking DNS for ishayushikhare.com..."
+          if command -v dig &> /dev/null; then
+            A_RECORDS=$(dig ishayushikhare.com A +short | grep -E '^[0-9.]+$')
+            if [ -z "$A_RECORDS" ]; then
+              echo "⚠️  No A records found"
+            else
+              echo "Found A records:"
+              echo "$A_RECORDS"
+              
+              # Check for expected GitHub Pages IPs
+              EXPECTED_IPS="185.199.108.153 185.199.109.153 185.199.110.153 185.199.111.153"
+              MISSING_IPS=""
+              for ip in $EXPECTED_IPS; do
+                if ! echo "$A_RECORDS" | grep -q "$ip"; then
+                  MISSING_IPS="$MISSING_IPS $ip"
+                fi
+              done
+              
+              if [ -n "$MISSING_IPS" ]; then
+                echo "⚠️  Missing GitHub Pages IPs:$MISSING_IPS"
+                echo "   See CLOUDFLARE_DNS_SETUP.md for correct configuration"
+              else
+                echo "✅ All GitHub Pages IPs configured correctly"
+              fi
+            fi
+          else
+            echo "⚠️  dig command not available, skipping DNS check"
+          fi
+
+      - name: Display configuration instructions
+        run: |
+          echo ""
+          echo "=================================="
+          echo "Next Steps"
+          echo "=================================="
+          echo ""
+          echo "To fix 'There isn't a GitHub Pages site here' error:"
+          echo ""
+          echo "1️⃣  Enable GitHub Pages:"
+          echo "   • Go to: https://github.com/${{ github.repository }}/settings/pages"
+          echo "   • Under 'Source', select:"
+          echo "     - Branch: gh-pages"
+          echo "     - Folder: / (root)"
+          echo "   • Click 'Save'"
+          echo ""
+          echo "2️⃣  Configure custom domain:"
+          echo "   • In the same Pages settings"
+          echo "   • Under 'Custom domain', enter: ishayushikhare.com"
+          echo "   • Click 'Save'"
+          echo "   • Wait for DNS check to complete"
+          echo ""
+          echo "3️⃣  Enable HTTPS:"
+          echo "   • After DNS is verified"
+          echo "   • Check 'Enforce HTTPS'"
+          echo ""
+          echo "4️⃣  Verify DNS configuration:"
+          echo "   • Follow instructions in: CLOUDFLARE_DNS_SETUP.md"
+          echo "   • Check propagation: https://dnschecker.org/#A/ishayushikhare.com"
+          echo ""
+          echo "📖 For detailed instructions, see: GITHUB_PAGES_SETUP.md"
+          echo ""
+          echo "=================================="
