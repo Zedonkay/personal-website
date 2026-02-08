@@ -35,6 +35,7 @@ After enabling Pages:
 Make sure your DNS is configured correctly (see `CLOUDFLARE_DNS_SETUP.md` for detailed instructions):
 
 **Required A Records for ishayushikhare.com:**
+
 ```
 185.199.108.153
 185.199.109.153
@@ -43,6 +44,7 @@ Make sure your DNS is configured correctly (see `CLOUDFLARE_DNS_SETUP.md` for de
 ```
 
 You can check if DNS is configured correctly:
+
 ```bash
 dig ishayushikhare.com +short
 ```
@@ -89,6 +91,7 @@ The repository uses a branch-based deployment strategy:
 **Cause**: Deployment may have failed or is still in progress.
 
 **Solution**:
+
 1. Check the **Actions** tab for failed workflows
 2. Clear your browser cache
 3. Try visiting in incognito/private mode
@@ -99,6 +102,7 @@ The repository uses a branch-based deployment strategy:
 **Cause**: HTTPS enforcement is enabled before DNS has fully propagated.
 
 **Solution**:
+
 1. Wait for DNS to fully propagate (use https://dnschecker.org)
 2. Temporarily disable "Enforce HTTPS" if needed
 3. Re-enable after DNS is verified globally
