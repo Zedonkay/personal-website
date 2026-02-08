@@ -21,7 +21,7 @@ jobs:
           echo "GitHub Pages Configuration Check"
           echo "=================================="
           echo ""
-          
+
           # Check if gh-pages branch exists
           if git ls-remote --heads origin | grep -q "refs/heads/gh-pages"; then
             echo "✅ gh-pages branch exists"
@@ -30,26 +30,26 @@ jobs:
             echo "   Action needed: Push to main branch to trigger build and deployment"
             exit 1
           fi
-          
+
           # Check gh-pages content
           echo ""
           echo "Checking gh-pages branch content..."
           git fetch origin gh-pages
-          
+
           if git show origin/gh-pages:index.html &>/dev/null; then
             echo "✅ index.html exists in gh-pages"
           else
             echo "❌ index.html not found in gh-pages"
             exit 1
           fi
-          
+
           if git show origin/gh-pages:CNAME &>/dev/null; then
             CNAME_CONTENT=$(git show origin/gh-pages:CNAME 2>/dev/null | tr -d '\n')
             echo "✅ CNAME file exists: $CNAME_CONTENT"
           else
             echo "⚠️  CNAME file not found"
           fi
-          
+
           if git show origin/gh-pages:.nojekyll &>/dev/null; then
             echo "✅ .nojekyll file exists"
           else
@@ -63,7 +63,7 @@ jobs:
           echo "DNS Configuration Check"
           echo "=================================="
           echo ""
-          
+
           echo "Checking DNS for ishayushikhare.com..."
           if command -v dig &> /dev/null; then
             A_RECORDS=$(dig ishayushikhare.com A +short | grep -E '^[0-9.]+$')
