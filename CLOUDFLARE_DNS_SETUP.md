@@ -42,7 +42,7 @@ Add a CNAME record to redirect www subdomain:
 
 ### Step 3: Verify GitHub Pages Configuration
 
-1. Go to your repository: https://github.com/Zedonkay/zedonkay.github.io
+1. Go to your repository: https://github.com/Zedonkay/personal-website
 2. Navigate to **Settings** → **Pages**
 3. Verify that:
    - Source is set to deploy from **gh-pages** branch
