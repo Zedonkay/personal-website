@@ -1,7 +1,7 @@
 ---
 layout: post
-title: My Love Letter to Food
-date: 2026-01-28 14:00:38
+title: An obsession with order
+date: 2026-02-09 14:55:27
 description: My journey through cooking
 categories: life
 ---

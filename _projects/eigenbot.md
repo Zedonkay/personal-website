@@ -12,8 +12,11 @@ related_publications: true
   <a href="https://eigenbot-dnlc.github.io" target="_blank" rel="noopener" class="btn btn-outline-secondary m-1">
     <i class="fa-solid fa-globe"></i> Project Website
   </a>
+  <a href="https://drive.google.com/file/d/1OzQ4HGFyejPgjJfGF4eOEWI0iTaIVyjM/view" target="_blank" rel="noopener" class="btn btn-outline-secondary m-1">
+    <i class="fa-solid fa-file-lines"></i> Paper
+  </a>
 </div>
-
+ 
 ## Early Research: MedSnake
 
 My first exposure to research was at the **Biorobotics Laboratory**. When I first joined, I was put onto the **MedSnake** project, where the goal was to develop a robotic snake for cardiovascular surgery. The basic idea was that the snake could articulate itself into unique positions; when a surgical implement or tool was passed through the snake, it could utilize all of the snake's degrees of freedom (DOF) to operate on the patient from complex angles.

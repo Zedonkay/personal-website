@@ -301,6 +301,14 @@ ul.task-list input[type="checkbox"] {
     color: var(--global-text-color);
   }
 
+  .navbar-brand .navbar-favicon {
+    height: 1.5rem;
+    width: auto;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
   .navbar-nav .nav-item .nav-link {
     color: var(--global-text-color);
 
@@ -719,9 +727,10 @@ footer.sticky-bottom {
         object-position: center;
       }
 
-      // CMR / eigenbot: scale to full width, crop only top/bottom, centered horizontally and vertically
+      // CMR / eigenbot / Robodsl: scale to full width, crop only top/bottom, centered horizontally and vertically
       &:has(img[src*="CMR"]) picture,
-      &:has(img[src*="eigenbot"]) picture {
+      &:has(img[src*="eigenbot"]) picture,
+      &:has(img[src*="Robodsl"]) picture {
         height: 100%;
         width: 100%;
         display: flex;
@@ -729,7 +738,8 @@ footer.sticky-bottom {
         justify-content: center;
       }
       img[src*="CMR"],
-      img[src*="eigenbot"] {
+      img[src*="eigenbot"],
+      img[src*="Robodsl"] {
         width: 100%;
         height: auto;
         object-fit: none;

@@ -19,6 +19,13 @@
           {% else %}
             {{- site.title -}}
           {% endif %}
+          {% if site.icon %}
+            <img
+              src="{{ site.icon | relative_url }}"
+              alt="{{ site.first_name }} {{ site.last_name }} favicon"
+              class="navbar-favicon"
+            >
+          {% endif %}
         </a>
       {% elsif site.enable_navbar_social %}
         <!-- Social Icons -->
