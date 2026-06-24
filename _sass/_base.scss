@@ -20,6 +20,12 @@ h4,
 h5,
 h6 {
   color: var(--global-title-color);
+
+  span,
+  strong,
+  em {
+    color: inherit;
+  }
 }
 
 hr {
@@ -587,7 +593,7 @@ footer.sticky-bottom {
   padding-bottom: 3rem;
 
   h1 {
-    color: var(--global-text-color);
+    color: var(--global-title-color);
     font-size: 5rem;
     font-weight: bold;
   }
@@ -829,7 +835,7 @@ footer.sticky-bottom {
   }
 
   h2.category {
-    color: var(--global-text-color-light);
+    color: var(--global-title-color);
     font-size: 1.5rem;
     border-bottom: 1px solid var(--global-divider-color);
     padding-top: 0.5rem;
@@ -1068,12 +1074,18 @@ code {
   word-wrap: break-word;
 }
 
-// Transitioning Themes
+// Transitioning Themes — color/surface only; avoid animating layout (font-size, width, etc.)
 html.transition,
 html.transition *,
 html.transition *:before,
 html.transition *:after {
-  transition: all 750ms !important;
+  transition:
+    background-color 400ms ease,
+    color 400ms ease,
+    border-color 400ms ease,
+    fill 400ms ease,
+    stroke 400ms ease,
+    box-shadow 400ms ease !important;
   transition-delay: 0 !important;
 }
 

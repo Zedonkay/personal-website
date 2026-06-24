@@ -18,8 +18,15 @@ let setThemeSetting = (themeSetting) => {
 // Apply the computed dark or light theme to the website.
 let applyTheme = () => {
   let theme = determineComputedTheme();
+  const previousTheme = document.documentElement.getAttribute("data-theme");
+  const themeChanged = previousTheme !== null && previousTheme !== theme;
 
-  transTheme();
+  document.documentElement.setAttribute("data-theme", theme);
+
+  if (themeChanged) {
+    transTheme();
+  }
+
   setHighlight(theme);
   setGiscusTheme(theme);
   setSearchTheme(theme);
@@ -48,8 +55,6 @@ let applyTheme = () => {
   if (typeof vegaEmbed !== "undefined") {
     setVegaLiteTheme(theme);
   }
-
-  document.documentElement.setAttribute("data-theme", theme);
 
   // Add class to tables.
   let tables = document.getElementsByTagName("table");
@@ -242,7 +247,7 @@ let transTheme = () => {
   document.documentElement.classList.add("transition");
   window.setTimeout(() => {
     document.documentElement.classList.remove("transition");
-  }, 500);
+  }, 400);
 };
 
 // Determine the theme setting: "light" or "dark". Default is "light".

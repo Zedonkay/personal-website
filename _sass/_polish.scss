@@ -142,10 +142,6 @@ body.fixed-top-nav {
   color: inherit;
 }
 
-.projects h2.category {
-  color: var(--global-text-color-light);
-}
-
 .publications,
 .projects {
   margin-top: 1.25rem;
@@ -374,7 +370,7 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography li .title a.publication-title-link:hover {
-  color: var(--global-theme-color);
+  color: var(--global-title-color);
   text-decoration: none;
 }
 
@@ -387,7 +383,7 @@ body.fixed-top-nav {
 }
 
 .projects ul.bibliography > li:hover .title {
-  color: var(--global-theme-color);
+  color: var(--global-title-color);
 }
 
 .publications ol.bibliography li .author,
@@ -523,18 +519,15 @@ body.fixed-top-nav {
   text-decoration: none;
 }
 
-// Accent color for main page hero titles only (about name, projects, publications, blog)
-.post:has(.profile) .post-header .post-title,
-.post:has(.profile) .post-header .post-title span,
-.post:has(.projects) .post-header .post-title,
-.post:has(> article .publications) .post-header .post-title,
-.header-bar h1 {
-  color: var(--global-theme-color);
-}
 
 .navbar.navbar-light .navbar-brand.title,
 .navbar.navbar-light .navbar-brand.title span {
   color: var(--global-title-color);
+
+  &:hover {
+    color: var(--global-title-color);
+    text-decoration: none;
+  }
 }
 
 @media (max-width: 767.98px) {
