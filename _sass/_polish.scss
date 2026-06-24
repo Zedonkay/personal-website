@@ -523,13 +523,13 @@ body.fixed-top-nav {
   text-decoration: none;
 }
 
-// Title color for main page hero titles (about, projects, publications, blog)
+// Accent color for main page hero titles only (about name, projects, publications, blog)
 .post:has(.profile) .post-header .post-title,
 .post:has(.profile) .post-header .post-title span,
 .post:has(.projects) .post-header .post-title,
 .post:has(> article .publications) .post-header .post-title,
 .header-bar h1 {
-  color: var(--global-title-color);
+  color: var(--global-theme-color);
 }
 
 .navbar.navbar-light .navbar-brand.title,

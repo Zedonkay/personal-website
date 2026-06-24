@@ -2,8 +2,6 @@
  * Themes
  ******************************************************************************/
 
-@use "sass:color";
-
 /* Light theme — five-color palette only */
 :root {
   color-scheme: light;
@@ -82,53 +80,58 @@
   }
 }
 
+/* Dark theme — seven-color palette only */
 html[data-theme="dark"] {
   color-scheme: dark;
-  // Claude-style warm dark palette — terracotta accent on near-black warm bg
-  --global-bg-color: #262624;
-  --global-code-bg-color: #30302e;
-  --global-text-color: #f5f5f0;
-  --global-text-color-light: #a8a59a;
-  --global-theme-color: #d97757;
-  --global-hover-color: #e08c70;
-  --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #1f1e1c;
-  --global-footer-text-color: #a8a59a;
-  --global-footer-link-color: #d97757;
-  --global-distill-app-color: #{$grey-color-light};
-  --global-divider-color: #3a3a37;
-  --global-card-bg-color: #30302e;
-  --global-highlight-color: #d97757;
-  --global-muted-bg-color: #2c2c2a;
-  --global-soft-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-  --global-back-to-top-bg-color: rgba(
-    #{color.channel($white-color, "red", $space: rgb)},
-    #{color.channel($white-color, "green", $space: rgb)},
-    #{color.channel($white-color, "blue", $space: rgb)},
-    0.5
-  );
-  --global-back-to-top-text-color: #{$black-color};
-  --global-newsletter-bg-color: #{$grey-color-light};
-  --global-newsletter-text-color: #{$grey-color-dark};
 
-  /* Project link buttons: keep current look for dark theme */
-  --project-link-color: #{$grey-color};
-  --project-link-border: #{$grey-color};
-  --project-link-hover-bg: #{$grey-color};
-  --project-link-hover-color: var(--global-bg-color);
+  /* Core palette */
+  --color-bg: #262624;
+  --color-deep: #1f1e1c;
+  --color-text: #f5f5f0;
+  --color-title: #dcdcd6;
+  --color-secondary: #a8a59a;
+  --color-accent: #d97757;
+  --color-accent-light: #e08c70;
 
-  --global-tip-block: #42b983;
-  --global-tip-block-bg: #e2f5ec;
-  --global-tip-block-text: #215d42;
-  --global-tip-block-title: #359469;
-  --global-warning-block: #e7c000;
-  --global-warning-block-bg: #fff8d8;
-  --global-warning-block-text: #6b5900;
-  --global-warning-block-title: #b29400;
-  --global-danger-block: #c00;
-  --global-danger-block-bg: #ffe0e0;
-  --global-danger-block-text: #600;
-  --global-danger-block-title: #c00;
+  --global-bg-color: var(--color-bg);
+  --global-title-color: var(--color-title);
+  --global-text-color: var(--color-text);
+  --global-text-color-light: var(--color-secondary);
+  --global-theme-color: var(--color-accent);
+  --global-hover-color: var(--color-accent-light);
+  --global-hover-text-color: var(--color-bg);
+  --global-code-bg-color: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
+  --global-footer-bg-color: var(--color-deep);
+  --global-footer-text-color: var(--color-secondary);
+  --global-footer-link-color: var(--color-accent);
+  --global-distill-app-color: var(--color-secondary);
+  --global-divider-color: color-mix(in srgb, var(--color-secondary) 28%, var(--color-bg));
+  --global-card-bg-color: color-mix(in srgb, var(--color-text) 5%, var(--color-bg));
+  --global-highlight-color: var(--color-accent);
+  --global-muted-bg-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  --global-soft-shadow: 0 16px 36px color-mix(in srgb, var(--color-deep) 85%, transparent);
+  --global-back-to-top-bg-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  --global-back-to-top-text-color: var(--color-bg);
+  --global-newsletter-bg-color: var(--color-deep);
+  --global-newsletter-text-color: var(--color-text);
+
+  --project-link-color: var(--color-secondary);
+  --project-link-border: color-mix(in srgb, var(--color-secondary) 55%, var(--color-bg));
+  --project-link-hover-bg: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg));
+  --project-link-hover-color: var(--color-accent);
+
+  --global-tip-block: var(--color-accent);
+  --global-tip-block-bg: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  --global-tip-block-text: var(--color-text);
+  --global-tip-block-title: var(--color-title);
+  --global-warning-block: var(--color-title);
+  --global-warning-block-bg: color-mix(in srgb, var(--color-title) 8%, var(--color-bg));
+  --global-warning-block-text: var(--color-text);
+  --global-warning-block-title: var(--color-title);
+  --global-danger-block: var(--color-accent);
+  --global-danger-block-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg));
+  --global-danger-block-text: var(--color-text);
+  --global-danger-block-title: var(--color-accent);
 
   .only-light {
     display: none;
