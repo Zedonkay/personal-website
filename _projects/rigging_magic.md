@@ -2,7 +2,7 @@
 layout: page
 title: Rigging Magic
 description: 15-418 Final Project exploring GPU-accelerated SPH fluid simulation with rigid-body coupling
-img: assets/video/midpoint_demo.mp4
+img: assets/video/midpoint_demo.webm
 importance: 2
 category: experience
 github: https://github.com/Zedonkay/8-ball-sim
@@ -26,9 +26,9 @@ related_publications: false
   </a>
 </div>
 
-<div class="text-center mb-4">
-  <video class="rounded z-depth-1" controls playsinline preload="metadata" width="100%">
-    <source src="{{ '/assets/video/midpoint_demo.mp4' | relative_url }}" type="video/mp4">
+<div class="text-center mb-4 project-demo-video">
+  <video class="preview" controls playsinline preload="metadata" width="100%">
+    <source src="{{ '/assets/video/midpoint_demo.webm' | relative_url }}" type="video/webm">
   </video>
 </div>
 

@@ -4,15 +4,17 @@
       {% if project.img %}
         {% assign preview_ext = project.img | split: '.' | last | downcase %}
         {% if preview_ext == 'mp4' or preview_ext == 'webm' or preview_ext == 'mov' %}
-          <video
-            class="preview z-depth-1 rounded"
-            src="{{ project.img | relative_url | bust_file_cache }}"
-            autoplay
-            loop
-            muted
-            playsinline
-            width="100%"
-          ></video>
+          <div class="publication-preview-link">
+            <video
+              class="preview z-depth-1 rounded"
+              src="{{ project.img | relative_url | bust_file_cache }}"
+              autoplay
+              loop
+              muted
+              playsinline
+              width="100%"
+            ></video>
+          </div>
         {% else %}
           {%
             include figure.liquid

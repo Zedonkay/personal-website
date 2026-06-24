@@ -224,7 +224,8 @@ body.fixed-top-nav {
 
 .projects ul.bibliography li .abbr figure:has(img[src*="CMR"]),
 .projects ul.bibliography li .abbr figure:has(img[src*="systems_figure"]),
-.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]) {
+.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]),
+.projects ul.bibliography li .abbr .publication-preview-link:has(video[src*="midpoint_demo"]) {
   margin: 0;
   display: block;
   width: 100%;
@@ -301,12 +302,13 @@ body.fixed-top-nav {
 
 .projects ul.bibliography li video.preview {
   display: block;
-  background-color: var(--global-card-bg-color);
+  background-color: transparent;
 }
 
 .projects ul.bibliography li .preview[src*="CMR"],
 .projects ul.bibliography li .preview[src*="systems_figure"],
-.projects ul.bibliography li .preview[src*="Robodsl"] {
+.projects ul.bibliography li .preview[src*="Robodsl"],
+.projects ul.bibliography li .preview[src*="midpoint_demo"] {
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -320,7 +322,8 @@ body.fixed-top-nav {
 
 .projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]),
 .projects ul.bibliography li .publication-preview-link:has(img[src*="systems_figure"]),
-.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]) {
+.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]),
+.projects ul.bibliography li .publication-preview-link:has(video[src*="midpoint_demo"]) {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -339,6 +342,17 @@ body.fixed-top-nav {
   width: 100%;
   height: auto;
   margin: 0;
+}
+
+.project-demo-video video.preview {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: unset;
+  object-fit: contain;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .publications ol.bibliography li .publication-preview-link,
