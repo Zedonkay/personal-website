@@ -30,12 +30,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "books-the-godfather",
-          title: 'The Godfather',
-          description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/books/the_godfather/";
-            },},{id: "projects-autonomous-racing",
+        },{id: "projects-autonomous-racing",
           title: 'Autonomous Racing',
           description: "Research at Carnegie Mellon Racing (CMR) into Model-free RL and Real2Sim2Real dynamics",
           section: "Projects",handler: () => {
