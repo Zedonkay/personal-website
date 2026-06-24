@@ -9,6 +9,7 @@
 # - `github_username`
 # - `linkedin_username`
 # - `scholar_userid`
+# - `letterboxd_username`
 # - `rss_icon`
 # - `custom_social` with `logo`, `title`, `url`
 #
@@ -45,6 +46,10 @@ module Jekyll
         when "scholar_userid"
           next if value.to_s.strip.empty?
           parts << link(icon("ai ai-google-scholar"), "https://scholar.google.com/citations?user=#{value}", "Google Scholar")
+
+        when "letterboxd_username"
+          next if value.to_s.strip.empty?
+          parts << link(icon("ti ti-brand-letterboxd"), "https://letterboxd.com/#{value}/", "Letterboxd")
 
         when "rss_icon"
           next unless truthy?(value)

@@ -25,6 +25,7 @@ github_username: Zedonkay # your GitHub user name
 # lastfm_id: # your lastfm id
 # lattes_id: # your ID on Lattes (Brazilian Lattes CV)
 # leetcode_id: # your LeetCode id
+letterboxd_username: Zedonkay # your Letterboxd user name
 linkedin_username: ishikhar # your LinkedIn user name
 # mastodon_username: # your mastodon instance+username in the format instance.tld/@username
 # medium_username: # your Medium username
@@ -51,7 +52,3 @@ scholar_userid: gWnKO6kAAAAJ # your Google Scholar ID
 # x_username: # your X handle
 # youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 # zotero_username: # your zotero username
-custom_social: # can be any name here other than the ones already defined above
-  logo: letterboxd.png # can be png, svg, jpg
-  title: Letterboxd
-  url: https://letterboxd.com/Zedonkay/
