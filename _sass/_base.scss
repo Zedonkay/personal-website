@@ -719,11 +719,13 @@ footer.sticky-bottom {
     border-radius: 0.5rem;
     overflow: hidden;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr;
 
     figure {
-      flex: 1 1 0;
+      grid-row: 1;
       min-height: 0;
       margin: 0;
       overflow: hidden;
@@ -732,58 +734,79 @@ footer.sticky-bottom {
       justify-content: center;
       background-color: var(--global-card-bg-color);
 
-      picture,
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
-
-      // CMR / eigenbot / Robodsl: scale to full width, crop only top/bottom, centered horizontally and vertically
-      &:has(img[src*="CMR"]) picture,
-      &:has(img[src*="eigenbot"]) picture,
-      &:has(img[src*="Robodsl"]) picture {
+      picture {
         height: 100%;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      img[src*="CMR"],
-      img[src*="eigenbot"],
-      img[src*="Robodsl"] {
-        width: 100%;
-        height: auto;
-        object-fit: none;
+
+      img,
+      img.card-img-top {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        object-fit: contain;
         object-position: center;
       }
-      img[src*="eigenbot"] {
-        transform: scale(1.35);
+
+      &:has(img[src*="CMR"]) {
+        picture {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        img[src*="CMR"] {
+          width: 100%;
+          height: auto;
+          max-height: 100%;
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+    }
+
+    .card-body {
+      grid-row: 2;
+      flex: none !important;
+      flex-shrink: 0;
+      align-self: end;
+      padding: 0.3rem 0.7rem 0.45rem;
+      margin: 0;
+
+      .row {
+        margin: 0 !important;
+        min-height: 0;
+      }
+
+      .github-icon {
+        margin-top: 0.15rem;
+        font-size: 0.85rem;
       }
     }
 
     .card-title {
-      font-size: clamp(1.125rem, 2.5vw, 1.75rem);
-      margin-bottom: 0.25rem;
+      font-size: clamp(1.2rem, 2.1vw, 1.45rem);
+      margin-bottom: 0.1rem;
+      line-height: 1.15;
     }
 
     .card-text {
-      font-size: clamp(0.8rem, 1.5vw, 1rem);
+      font-size: clamp(0.65rem, 1vw, 0.78rem);
       margin-bottom: 0;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
-    }
-
-    .card-body {
-      flex-shrink: 0;
-      padding: 0.75rem 1rem 1rem;
+      line-height: 1.25;
     }
 
     img {
-      width: 100%;
+      width: auto;
     }
   }
 
@@ -794,7 +817,8 @@ footer.sticky-bottom {
   }
 
   h2.category {
-    color: var(--global-divider-color);
+    color: var(--global-text-color-light);
+    font-size: 1.5rem;
     border-bottom: 1px solid var(--global-divider-color);
     padding-top: 0.5rem;
     margin-top: 2rem;

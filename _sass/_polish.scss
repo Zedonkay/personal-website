@@ -1,0 +1,336 @@
+/*******************************************************************************
+ * Personal site polish
+ ******************************************************************************/
+
+$font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-display: $font-serif;
+$font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+body {
+  font-family: $font-serif;
+  font-optical-sizing: auto;
+  font-feature-settings: "kern", "liga", "onum" 1;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.post-header h1,
+.publications h2.year,
+.profile + article > .clearfix h1,
+.profile + article > .clearfix h2,
+.profile + article > .clearfix h3 {
+  font-family: $font-display;
+  font-optical-sizing: auto;
+  letter-spacing: -0.005em;
+  font-weight: 600;
+}
+
+.publications .abbr abbr,
+.publications .periodical,
+.publications .links a.btn,
+.publications h2.year,
+.navbar .nav-link {
+  font-family: $font-mono;
+}
+
+.publications .abbr abbr {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.publications .links a.btn {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.publications .periodical {
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+}
+
+.navbar .nav-link {
+  font-size: 0.85rem !important;
+  letter-spacing: 0.02em;
+}
+
+body.fixed-top-nav {
+  padding-top: 72px;
+}
+
+.navbar {
+  min-height: 60px;
+  border-bottom: none;
+  background-color: color-mix(in srgb, var(--global-bg-color) 88%, transparent);
+  backdrop-filter: blur(18px);
+  opacity: 1;
+}
+
+.navbar .navbar-brand,
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+}
+
+.navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
+  color: var(--global-theme-color);
+  background-color: var(--global-muted-bg-color);
+  font-weight: 650;
+}
+
+.post {
+  margin-top: 1.25rem;
+}
+
+.post-header {
+  margin-bottom: 2.25rem;
+}
+
+.post-header .post-title {
+  font-size: clamp(2.4rem, 6vw, 4.3rem);
+  font-weight: 760;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+
+.post-header .desc,
+.post-description {
+  color: var(--global-text-color-light);
+}
+
+.post article {
+  font-size: 1.03rem;
+}
+
+.post article > h2,
+.publications h2.bibliography {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  color: var(--global-text-color);
+  font-size: 1.35rem;
+  font-weight: 720;
+  text-align: left;
+}
+
+.post article > h2 a {
+  color: inherit;
+}
+
+.publications {
+  margin-top: 1.25rem;
+}
+
+.publications ol.bibliography > li {
+  margin-bottom: 1.1rem;
+  padding: 1rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+  background: var(--global-card-bg-color);
+  box-shadow: 0 10px 26px rgba(31, 41, 51, 0.04);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.publications ol.bibliography > li:hover {
+  border-color: color-mix(in srgb, var(--global-theme-color) 38%, var(--global-divider-color));
+  box-shadow: var(--global-soft-shadow);
+  transform: translateY(-1px);
+}
+
+.publications ol.bibliography li .row {
+  align-items: flex-start;
+}
+
+.publications ol.bibliography li .abbr {
+  padding-right: 1rem;
+}
+
+.publications ol.bibliography li .abbr abbr {
+  border-radius: 999px;
+  background-color: var(--global-muted-bg-color);
+  color: var(--global-theme-color) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.publications ol.bibliography li .preview {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px !important;
+  object-fit: cover;
+  box-shadow: none !important;
+}
+
+.publications ol.bibliography li .publication-preview-link {
+  display: block;
+  text-decoration: none;
+}
+
+.publications ol.bibliography li .title {
+  color: var(--global-text-color);
+  font-size: 1.04rem;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+.publications ol.bibliography li .title a.publication-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.publications ol.bibliography li .title a.publication-title-link:hover {
+  color: var(--global-theme-color);
+  text-decoration: none;
+}
+
+.publications ol.bibliography li .author,
+.publications ol.bibliography li .periodical {
+  color: var(--global-text-color-light);
+  font-size: 0.91rem;
+}
+
+.publications ol.bibliography li .author {
+  line-height: 1.5;
+}
+
+.publications ol.bibliography li .author a.author-homepage-link {
+  position: relative;
+  border-bottom: none;
+  color: var(--global-text-color);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.publications ol.bibliography li .author a.author-homepage-link::after {
+  content: "homepage";
+  position: absolute;
+  bottom: calc(100% + 0.2rem);
+  left: 50%;
+  z-index: 3;
+  padding: 0.08rem 0.32rem;
+  border-radius: 999px;
+  background: var(--global-text-color);
+  color: var(--global-bg-color);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.15rem);
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+  white-space: nowrap;
+}
+
+.publications ol.bibliography li .author a.author-homepage-link:hover,
+.publications ol.bibliography li .author a.author-homepage-link:focus {
+  color: var(--global-theme-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.publications ol.bibliography li .author a.author-homepage-link:hover::after,
+.publications ol.bibliography li .author a.author-homepage-link:focus::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.publications ol.bibliography li .author em.author-self {
+  border-bottom: none;
+  color: var(--global-text-color);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.publications ol.bibliography li .author .more-authors {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px dashed var(--global-text-color-light);
+  background: transparent;
+  color: var(--global-text-color-light);
+  cursor: pointer;
+  font: inherit;
+}
+
+.publications ol.bibliography li .author .more-authors:hover,
+.publications ol.bibliography li .author .more-authors:focus {
+  border-bottom-color: var(--global-theme-color);
+  color: var(--global-theme-color);
+}
+
+.publications ol.bibliography li .periodical + .periodical {
+  color: var(--global-theme-color);
+  font-weight: 650;
+}
+
+.publications ol.bibliography li .links {
+  margin-top: 0.55rem;
+}
+
+.publications ol.bibliography li .links a.btn {
+  margin-top: 0.25rem;
+  margin-right: 0.35rem;
+  border-color: var(--global-divider-color);
+  border-radius: 999px;
+  color: var(--global-text-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.publications ol.bibliography li .links a.btn:hover {
+  border-color: var(--global-theme-color);
+  background-color: var(--global-muted-bg-color);
+  color: var(--global-theme-color);
+  text-decoration: none;
+}
+
+// Accent color only for main page hero titles (about, projects, publications, blog)
+.post:has(.profile) .post-header .post-title,
+.post:has(.profile) .post-header .post-title span,
+.post:has(.projects) .post-header .post-title,
+.post:has(> article .publications) .post-header .post-title,
+.header-bar h1 {
+  color: var(--global-theme-color);
+}
+
+.navbar.navbar-light .navbar-brand.title,
+.navbar.navbar-light .navbar-brand.title span {
+  color: var(--global-theme-color);
+}
+
+@media (max-width: 767.98px) {
+  body.fixed-top-nav {
+    padding-top: 62px;
+  }
+
+  .post-header .post-title {
+    font-size: 2.45rem;
+  }
+
+  .publications ol.bibliography > li {
+    padding: 0.9rem;
+  }
+
+  .publications ol.bibliography li .abbr {
+    padding-right: 15px;
+  }
+}
