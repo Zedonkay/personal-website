@@ -9,12 +9,20 @@ $font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Conso
 body {
   font-family: $font-serif;
   font-optical-sizing: auto;
-  font-feature-settings: "kern", "liga", "onum" 1;
+  font-feature-settings:
+    "kern",
+    "liga",
+    "onum" 1;
   -webkit-font-smoothing: antialiased;
   line-height: 1.65;
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .post-title,
 .post-header h1,
 .publications h2.year,

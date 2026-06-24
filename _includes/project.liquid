@@ -28,28 +28,30 @@
     {% endif %}
 
     {% if project.github or project.code or project.website or project.pdf or project.slides %}
-    <div class="links">
-      {% if project.github or project.code %}
-        <a href="{% if project.code %}{{ project.code }}{% else %}{{ project.github }}{% endif %}" class="btn btn-sm z-depth-0" role="button">Code</a>
-      {% endif %}
-      {% if project.website %}
-        <a href="{{ project.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
-      {% endif %}
-      {% if project.pdf %}
-        {% if project.pdf contains '://' %}
-          <a href="{{ project.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-        {% else %}
-          <a href="{{ project.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+      <div class="links">
+        {% if project.github or project.code %}
+          <a href="{% if project.code %}{{ project.code }}{% else %}{{ project.github }}{% endif %}" class="btn btn-sm z-depth-0" role="button"
+            >Code</a
+          >
         {% endif %}
-      {% endif %}
-      {% if project.slides %}
-        {% if project.slides contains '://' %}
-          <a href="{{ project.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-        {% else %}
-          <a href="{{ project.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+        {% if project.website %}
+          <a href="{{ project.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
         {% endif %}
-      {% endif %}
-    </div>
+        {% if project.pdf %}
+          {% if project.pdf contains '://' %}
+            <a href="{{ project.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+          {% else %}
+            <a href="{{ project.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+          {% endif %}
+        {% endif %}
+        {% if project.slides %}
+          {% if project.slides contains '://' %}
+            <a href="{{ project.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+          {% else %}
+            <a href="{{ project.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+          {% endif %}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </div>
