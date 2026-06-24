@@ -134,13 +134,23 @@ body.fixed-top-nav {
   color: inherit;
 }
 
+.projects h2.category {
+  color: var(--global-text-color-light);
+}
+
 .publications,
 .projects {
   margin-top: 1.25rem;
+
+  ul.bibliography {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+  }
 }
 
 .publications ol.bibliography > li,
-.projects ol.bibliography > li {
+.projects ul.bibliography > li {
   margin-bottom: 1.1rem;
   padding: 1rem;
   border: 1px solid var(--global-divider-color);
@@ -154,37 +164,84 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography > li:hover,
-.projects ol.bibliography > li:hover {
+.projects ul.bibliography > li:hover {
   border-color: color-mix(in srgb, var(--global-theme-color) 38%, var(--global-divider-color));
   box-shadow: var(--global-soft-shadow);
   transform: translateY(-1px);
 }
 
-.projects ol.bibliography > li {
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 0.7rem;
+.projects ul.bibliography > li {
+  position: relative;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.15rem;
 }
 
-.projects ol.bibliography li .row,
+.projects ul.bibliography > li .project-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.projects ul.bibliography > li .links a.btn,
+.projects ul.bibliography > li .abbr abbr a {
+  position: relative;
+  z-index: 2;
+}
+
 .publications ol.bibliography li .row {
   align-items: flex-start;
 }
 
-.projects ol.bibliography li .abbr figure {
+.projects ul.bibliography li .row {
+  align-items: center;
+  gap: 0.35rem 0;
+}
+
+// Bibliography cards should hug content; _base.scss forces .projects .col to 1:1.
+.projects ul.bibliography li .col {
+  aspect-ratio: auto;
+  height: auto;
+  padding-bottom: 0;
+}
+
+.projects ul.bibliography li .abbr figure picture,
+.projects ul.bibliography li .abbr figure img {
+  display: block;
+}
+
+.projects ul.bibliography li .abbr figure {
   margin: 0;
 }
 
-.projects ol.bibliography li .abbr .publication-preview-link {
-  margin-top: 0.35rem;
+.projects ul.bibliography li .abbr figure:has(img[src*="CMR"]),
+.projects ul.bibliography li .abbr figure:has(img[src*="systems_figure"]),
+.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]) {
+  margin: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.projects ul.bibliography li .abbr .publication-preview-link {
+  margin-top: 0.5rem;
 }
 
 .publications ol.bibliography li .abbr,
-.projects ol.bibliography li .abbr {
+.projects ul.bibliography li .abbr {
   padding-right: 1rem;
+  min-width: 0;
+}
+
+.projects ul.bibliography li .abbr {
+  padding-right: 1.35rem;
 }
 
 .publications ol.bibliography li .abbr abbr,
-.projects ol.bibliography li .abbr abbr {
+.projects ul.bibliography li .abbr abbr {
   border-radius: 999px;
   background-color: var(--global-muted-bg-color);
   color: var(--global-theme-color) !important;
@@ -193,8 +250,7 @@ body.fixed-top-nav {
   letter-spacing: 0;
 }
 
-.publications ol.bibliography li .preview,
-.projects ol.bibliography li .preview {
+.publications ol.bibliography li .preview {
   width: 100%;
   aspect-ratio: 3 / 2;
   border: 1px solid var(--global-divider-color);
@@ -203,9 +259,44 @@ body.fixed-top-nav {
   box-shadow: none !important;
 }
 
-.projects ol.bibliography li .preview[src*="CMR"] {
+.publications ol.bibliography li .preview-video-embed {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: none !important;
+  background-color: var(--global-card-bg-color);
+}
+
+.publications ol.bibliography li .preview-video-embed figure {
+  margin: 0;
   width: 100%;
   height: 100%;
+}
+
+.publications ol.bibliography li .preview-video-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+.projects ul.bibliography li .preview {
+  width: 100%;
+  aspect-ratio: 3 / 1.3;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px !important;
+  object-fit: cover;
+  box-shadow: none !important;
+}
+
+.projects ul.bibliography li .preview[src*="CMR"],
+.projects ul.bibliography li .preview[src*="systems_figure"],
+.projects ul.bibliography li .preview[src*="Robodsl"] {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   aspect-ratio: unset;
   object-fit: contain;
   object-position: center;
@@ -214,26 +305,31 @@ body.fixed-top-nav {
   background-color: transparent;
 }
 
-.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) {
-  aspect-ratio: 3 / 2;
+.projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]),
+.projects ul.bibliography li .publication-preview-link:has(img[src*="systems_figure"]),
+.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]) {
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
   border-radius: 8px;
 }
 
-.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) figure,
-.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) picture {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]) figure,
+.projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]) picture,
+.projects ul.bibliography li .publication-preview-link:has(img[src*="systems_figure"]) figure,
+.projects ul.bibliography li .publication-preview-link:has(img[src*="systems_figure"]) picture,
+.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]) figure,
+.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]) picture {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0;
 }
 
 .publications ol.bibliography li .publication-preview-link,
-.projects ol.bibliography li .publication-preview-link {
+.projects ul.bibliography li .publication-preview-link {
   display: block;
   text-decoration: none;
 }
@@ -245,23 +341,26 @@ body.fixed-top-nav {
   line-height: 1.35;
 }
 
-.projects ol.bibliography li .title {
-  color: var(--global-text-color);
-  font-size: 0.96rem;
-  font-weight: 720;
-  line-height: 1.25;
-}
-
-.publications ol.bibliography li .title a.publication-title-link,
-.projects ol.bibliography li .title a.publication-title-link {
+.publications ol.bibliography li .title a.publication-title-link {
   color: inherit;
   text-decoration: none;
 }
 
-.publications ol.bibliography li .title a.publication-title-link:hover,
-.projects ol.bibliography li .title a.publication-title-link:hover {
+.publications ol.bibliography li .title a.publication-title-link:hover {
   color: var(--global-theme-color);
   text-decoration: none;
+}
+
+.projects ul.bibliography li .title {
+  color: var(--global-text-color);
+  font-size: 1.55rem;
+  font-weight: 720;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.projects ul.bibliography > li:hover .title {
+  color: var(--global-theme-color);
 }
 
 .publications ol.bibliography li .author,
@@ -270,10 +369,11 @@ body.fixed-top-nav {
   font-size: 0.91rem;
 }
 
-.projects ol.bibliography li .periodical {
+.projects ul.bibliography li .periodical {
   color: var(--global-text-color-light);
-  font-size: 0.84rem;
-  line-height: 1.35;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  margin-top: 0.2rem;
 }
 
 .publications ol.bibliography li .author {
@@ -350,17 +450,21 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography li .periodical + .periodical,
-.projects ol.bibliography li .periodical + .periodical {
+.projects ul.bibliography li .periodical + .periodical {
   color: var(--global-theme-color);
   font-weight: 650;
+}
+
+.projects ul.bibliography li .periodical + .periodical {
+  margin-top: 0.35rem;
 }
 
 .publications ol.bibliography li .links {
   margin-top: 0.55rem;
 }
 
-.projects ol.bibliography li .links {
-  margin-top: 0.3rem;
+.projects ul.bibliography li .links {
+  margin-top: 0.7rem;
 }
 
 .publications ol.bibliography li .links a.btn {
@@ -373,10 +477,10 @@ body.fixed-top-nav {
   font-weight: 600;
 }
 
-.projects ol.bibliography li .links a.btn {
-  margin-top: 0.15rem;
-  margin-right: 0.3rem;
-  padding: 0.15rem 0.55rem;
+.projects ul.bibliography li .links a.btn {
+  margin-top: 0.25rem;
+  margin-right: 0.4rem;
+  padding: 0.25rem 0.7rem;
   border-color: var(--global-divider-color);
   border-radius: 999px;
   color: var(--global-text-color);
@@ -385,7 +489,7 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography li .links a.btn:hover,
-.projects ol.bibliography li .links a.btn:hover {
+.projects ul.bibliography li .links a.btn:hover {
   border-color: var(--global-theme-color);
   background-color: var(--global-muted-bg-color);
   color: var(--global-theme-color);
@@ -416,16 +520,16 @@ body.fixed-top-nav {
   }
 
   .publications ol.bibliography > li,
-  .projects ol.bibliography > li {
+  .projects ul.bibliography > li {
     padding: 0.9rem;
   }
 
-  .projects ol.bibliography > li {
-    padding: 0.6rem 0.75rem;
+  .projects ul.bibliography > li {
+    padding: 1rem 1.1rem;
   }
 
   .publications ol.bibliography li .abbr,
-  .projects ol.bibliography li .abbr {
+  .projects ul.bibliography li .abbr {
     padding-right: 15px;
   }
 }

@@ -15,22 +15,24 @@ display_categories: [research, experience, personal]
     <h2 class="category" id="{{ category }}">{{ category }}</h2>
     {% assign categorized_projects = site.projects | where: "category", category %}
     {% assign sorted_projects = categorized_projects | sort: "importance" %}
-    <ol class="bibliography">
+    <ul class="bibliography">
       {% for project in sorted_projects %}
         <li>
+          <a class="project-card-link" href="{{ project.url | relative_url }}" aria-label="{{ project.title | strip_html | escape }}"></a>
           {% include project.liquid %}
         </li>
       {% endfor %}
-    </ol>
+    </ul>
   {% endfor %}
 {% else %}
   {% assign sorted_projects = site.projects | sort: "importance" %}
-  <ol class="bibliography">
+  <ul class="bibliography">
     {% for project in sorted_projects %}
       <li>
+        <a class="project-card-link" href="{{ project.url | relative_url }}" aria-label="{{ project.title | strip_html | escape }}"></a>
         {% include project.liquid %}
       </li>
     {% endfor %}
-  </ol>
+  </ul>
 {% endif %}
 </div>

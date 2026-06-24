@@ -25,7 +25,6 @@ github_username: Zedonkay # your GitHub user name
 # lastfm_id: # your lastfm id
 # lattes_id: # your ID on Lattes (Brazilian Lattes CV)
 # leetcode_id: # your LeetCode id
-letterboxd_username: Zedonkay # your Letterboxd user name
 linkedin_username: ishikhar # your LinkedIn user name
 # mastodon_username: # your mastodon instance+username in the format instance.tld/@username
 # medium_username: # your Medium username
@@ -37,6 +36,7 @@ linkedin_username: ishikhar # your LinkedIn user name
 # research_gate_profile: # your profile on ResearchGate
 # rss_icon: true # comment this line to hide the RSS icon
 scholar_userid: gWnKO6kAAAAJ # your Google Scholar ID
+letterboxd_username: Zedonkay # your Letterboxd user name
 # scopus_id: # your profile on Scopus
 # semanticscholar_id: # your Semantic Scholar ID
 # spotify_id: # your spotify id

@@ -38,9 +38,23 @@
         {% if entry_primary_url %}
           {% assign preview_zoomable = false %}
         {% endif %}
+        {% assign preview_is_embed = false %}
+        {% if entry.preview contains 'youtube.com' or entry.preview contains 'youtu.be' %}
+          {% assign preview_is_embed = true %}
+        {% endif %}
         {% assign preview_ext = entry.preview | split: '.' | last | downcase %}
         {% capture publication_preview %}
-          {% if preview_ext == 'mp4' or preview_ext == 'webm' or preview_ext == 'mov' %}
+          {% if preview_is_embed %}
+            <div class="preview preview-video-embed z-depth-1 rounded">
+              {%
+                include video.liquid
+                path=entry.preview
+                class="preview-iframe"
+                width="100%"
+                title=entry.title
+              %}
+            </div>
+          {% elsif preview_ext == 'mp4' or preview_ext == 'webm' or preview_ext == 'mov' %}
             {% if entry.preview contains '://' %}
               {% assign preview_video_src = entry.preview %}
             {% else %}
@@ -62,7 +76,7 @@
             %}
           {% endif %}
         {% endcapture %}
-        {% if entry_primary_url %}
+        {% if entry_primary_url and preview_is_embed == false %}
           <a class="publication-preview-link" href="{{ entry_primary_url }}" aria-label="{{ entry.title | strip_html | escape }}">
             {{ publication_preview }}
           </a>
