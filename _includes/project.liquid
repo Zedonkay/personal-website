@@ -2,16 +2,29 @@
   {% if site.enable_project_thumbnails %}
     <div class="col col-sm-4 abbr">
       {% if project.img %}
-        {%
-          include figure.liquid
-          loading="eager"
-          path=project.img
-          sizes="400px"
-          class="preview z-depth-1 rounded"
-          zoomable=false
-          alt=project.title
-          cache_bust=true
-        %}
+        {% assign preview_ext = project.img | split: '.' | last | downcase %}
+        {% if preview_ext == 'mp4' or preview_ext == 'webm' or preview_ext == 'mov' %}
+          <video
+            class="preview z-depth-1 rounded"
+            src="{{ project.img | relative_url | bust_file_cache }}"
+            autoplay
+            loop
+            muted
+            playsinline
+            width="100%"
+          ></video>
+        {% else %}
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes="400px"
+            class="preview z-depth-1 rounded"
+            zoomable=false
+            alt=project.title
+            cache_bust=true
+          %}
+        {% endif %}
       {% endif %}
     </div>
   {% endif %}

@@ -420,6 +420,10 @@ ul.task-list input[type="checkbox"] {
 #light-toggle .nav-link {
   display: inline-flex;
   align-items: center;
+
+  i {
+    transform: translateY(5px);
+  }
 }
 
 // Social (bottom)

@@ -299,6 +299,11 @@ body.fixed-top-nav {
   box-shadow: none !important;
 }
 
+.projects ul.bibliography li video.preview {
+  display: block;
+  background-color: var(--global-card-bg-color);
+}
+
 .projects ul.bibliography li .preview[src*="CMR"],
 .projects ul.bibliography li .preview[src*="systems_figure"],
 .projects ul.bibliography li .preview[src*="Robodsl"] {
