@@ -417,6 +417,11 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
+#light-toggle .nav-link {
+  display: inline-flex;
+  align-items: center;
+}
+
 // Social (bottom)
 
 .social {
