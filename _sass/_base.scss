@@ -5,18 +5,21 @@
 // Typography
 
 p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 em,
 div,
 li,
 span,
 strong {
   color: var(--global-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--global-title-color);
 }
 
 hr {
@@ -37,10 +40,10 @@ table {
 
 a,
 table.table a {
-  color: var(--global-theme-color);
+  color: var(--global-text-color);
 
   &:hover {
-    color: var(--global-theme-color);
+    color: var(--global-hover-color);
     text-decoration: underline;
   }
 
@@ -238,7 +241,7 @@ ul.task-list input[type="checkbox"] {
     color: inherit;
 
     &:hover {
-      color: var(--global-theme-color);
+      color: var(--global-hover-color);
       text-decoration: none;
     }
   }
@@ -320,7 +323,7 @@ ul.task-list input[type="checkbox"] {
   .navbar-nav .nav-item.active > .nav-link {
     background-color: inherit;
     font-weight: bolder;
-    color: var(--global-theme-color);
+    color: var(--global-title-color);
 
     &:hover {
       color: var(--global-hover-color);
@@ -842,7 +845,7 @@ footer.sticky-bottom {
   margin-top: 2rem;
 
   h1 {
-    color: var(--global-theme-color);
+    color: var(--global-title-color);
     font-size: 2rem;
     text-align: center;
     margin-top: 1em;

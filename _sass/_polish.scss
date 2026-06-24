@@ -96,7 +96,7 @@ body.fixed-top-nav {
 }
 
 .navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
-  color: var(--global-theme-color);
+  color: var(--global-title-color);
   background-color: var(--global-muted-bg-color);
   font-weight: 650;
 }
@@ -132,7 +132,7 @@ body.fixed-top-nav {
   margin-bottom: 1rem;
   padding-bottom: 0.55rem;
   border-bottom: 1px solid var(--global-divider-color);
-  color: var(--global-text-color);
+  color: var(--global-title-color);
   font-size: 1.35rem;
   font-weight: 720;
   text-align: left;
@@ -164,7 +164,7 @@ body.fixed-top-nav {
   border: 1px solid var(--global-divider-color);
   border-radius: 8px;
   background: var(--global-card-bg-color);
-  box-shadow: 0 10px 26px rgba(31, 41, 51, 0.04);
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--global-text-color) 4%, transparent);
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -362,7 +362,7 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography li .title {
-  color: var(--global-text-color);
+  color: var(--global-title-color);
   font-size: 1.04rem;
   font-weight: 720;
   line-height: 1.35;
@@ -379,7 +379,7 @@ body.fixed-top-nav {
 }
 
 .projects ul.bibliography li .title {
-  color: var(--global-text-color);
+  color: var(--global-title-color);
   font-size: 1.55rem;
   font-weight: 720;
   line-height: 1.3;
@@ -523,18 +523,18 @@ body.fixed-top-nav {
   text-decoration: none;
 }
 
-// Accent color only for main page hero titles (about, projects, publications, blog)
+// Title color for main page hero titles (about, projects, publications, blog)
 .post:has(.profile) .post-header .post-title,
 .post:has(.profile) .post-header .post-title span,
 .post:has(.projects) .post-header .post-title,
 .post:has(> article .publications) .post-header .post-title,
 .header-bar h1 {
-  color: var(--global-theme-color);
+  color: var(--global-title-color);
 }
 
 .navbar.navbar-light .navbar-brand.title,
 .navbar.navbar-light .navbar-brand.title span {
-  color: var(--global-theme-color);
+  color: var(--global-title-color);
 }
 
 @media (max-width: 767.98px) {

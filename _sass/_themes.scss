@@ -4,48 +4,56 @@
 
 @use "sass:color";
 
-/* Noctis Lux–inspired light theme */
+/* Light theme — five-color palette only */
 :root {
   color-scheme: light;
-  --global-bg-color: #fef8ec;
-  --global-code-bg-color: #f9f1e1;
-  --global-text-color: #005661;
-  --global-text-color-light: #888477;
-  --global-theme-color: #0099ad;
-  --global-hover-color: #0099ad;
-  --global-hover-text-color: #fef8ec;
-  --global-footer-bg-color: #f0e9d6;
-  --global-footer-text-color: #005661;
-  --global-footer-link-color: #0099ad;
-  --global-distill-app-color: #888477;
-  --global-divider-color: #e6d7b2;
-  --global-card-bg-color: #f9f1e1;
-  --global-highlight-color: #e94981;
-  --global-muted-bg-color: #e8f0f1;
-  --global-soft-shadow: 0 14px 34px rgba(0, 86, 97, 0.08);
-  --global-back-to-top-bg-color: rgba(0, 153, 173, 0.85);
-  --global-back-to-top-text-color: #fef8ec;
-  --global-newsletter-bg-color: #fef8ec;
-  --global-newsletter-text-color: #005661;
 
-  /* Project link buttons: main text color (#005661) but lighter, then full text color on hover */
-  --project-link-color: #5a8289;
-  --project-link-border: #6b9299;
-  --project-link-hover-bg: #dce8e9;
-  --project-link-hover-color: #005661;
+  /* Core palette */
+  --color-title: #556b5d;
+  --color-bg: #efe3d5;
+  --color-text: #3d5245;
+  --color-secondary: #7a877e;
+  --color-accent: #b58a80;
 
-  --global-tip-block: #009456;
-  --global-tip-block-bg: #e2f5ec;
-  --global-tip-block-text: #215d42;
-  --global-tip-block-title: #009456;
-  --global-warning-block: #e69533;
-  --global-warning-block-bg: #f2edde;
-  --global-warning-block-text: #6b5900;
-  --global-warning-block-title: #e69533;
-  --global-danger-block: #ff4000;
-  --global-danger-block-bg: #ffe0e0;
-  --global-danger-block-text: #600;
-  --global-danger-block-title: #ff4000;
+  --global-bg-color: var(--color-bg);
+  --global-title-color: var(--color-title);
+  --global-text-color: var(--color-text);
+  --global-text-color-light: var(--color-secondary);
+  --global-theme-color: var(--color-accent);
+  --global-hover-color: var(--color-accent);
+  --global-hover-text-color: var(--color-bg);
+  --global-code-bg-color: color-mix(in srgb, var(--color-text) 6%, var(--color-bg));
+  --global-footer-bg-color: color-mix(in srgb, var(--color-text) 4%, var(--color-bg));
+  --global-footer-text-color: var(--color-secondary);
+  --global-footer-link-color: var(--color-accent);
+  --global-distill-app-color: var(--color-secondary);
+  --global-divider-color: color-mix(in srgb, var(--color-secondary) 28%, var(--color-bg));
+  --global-card-bg-color: color-mix(in srgb, var(--color-text) 5%, var(--color-bg));
+  --global-highlight-color: var(--color-accent);
+  --global-muted-bg-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  --global-soft-shadow: 0 14px 34px color-mix(in srgb, var(--color-text) 8%, transparent);
+  --global-back-to-top-bg-color: color-mix(in srgb, var(--color-accent) 85%, transparent);
+  --global-back-to-top-text-color: var(--color-bg);
+  --global-newsletter-bg-color: var(--color-bg);
+  --global-newsletter-text-color: var(--color-text);
+
+  --project-link-color: var(--color-secondary);
+  --project-link-border: color-mix(in srgb, var(--color-secondary) 55%, var(--color-bg));
+  --project-link-hover-bg: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg));
+  --project-link-hover-color: var(--color-accent);
+
+  --global-tip-block: var(--color-accent);
+  --global-tip-block-bg: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  --global-tip-block-text: var(--color-text);
+  --global-tip-block-title: var(--color-title);
+  --global-warning-block: var(--color-title);
+  --global-warning-block-bg: color-mix(in srgb, var(--color-title) 8%, var(--color-bg));
+  --global-warning-block-text: var(--color-text);
+  --global-warning-block-title: var(--color-title);
+  --global-danger-block: var(--color-accent);
+  --global-danger-block-bg: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg));
+  --global-danger-block-text: var(--color-text);
+  --global-danger-block-title: var(--color-accent);
 
   #light-toggle-dark {
     display: none;
