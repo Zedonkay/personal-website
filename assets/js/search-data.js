@@ -30,7 +30,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "books-the-godfather",
+        },{id: "post-launching-my-personal-website",
+        
+          title: "Launching My Personal Website",
+        
+        description: "Building a digital home for research and hobbies",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/personal-website/";
+          
+        },
+      },{id: "post-the-human-bug-why-2001-a-space-odyssey-is-a-chronicle-of-masks",
+        
+          title: "The Human Bug: Why 2001: A Space Odyssey is a Chronicle of Masks...",
+        
+        description: "An analysis of Kubrick&#39;s masterpiece as a tragedy of human dishonesty.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/2001/";
+          
+        },
+      },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
           section: "Books",handler: () => {
@@ -75,6 +97,13 @@ ninja.data = [{
           window.open("https://github.com/Zedonkay", "_blank");
         },
       },{
+        id: 'social-letterboxd_username',
+        title: 'Letterboxd_username',
+        section: 'Socials',
+        handler: () => {
+          window.open("", "_blank");
+        },
+      },{
         id: 'social-linkedin',
         title: 'LinkedIn',
         section: 'Socials',
@@ -87,13 +116,6 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("https://scholar.google.com/citations?user=gWnKO6kAAAAJ", "_blank");
-        },
-      },{
-        id: 'social-custom_social',
-        title: 'Custom_social',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://letterboxd.com/Zedonkay/", "_blank");
         },
       },{
       id: 'light-theme',
