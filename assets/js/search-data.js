@@ -45,6 +45,11 @@ ninja.data = [{
           description: "Research with biorobotics laboratory",
           section: "Projects",handler: () => {
               window.location.href = "/projects/eigenbot/";
+            },},{id: "projects-rigging-magic",
+          title: 'Rigging Magic',
+          description: "15-418 Final Project exploring GPU-accelerated SPH fluid simulation with rigid-body coupling",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/rigging_magic/";
             },},{id: "projects-robodsl",
           title: 'RoboDSL',
           description: "A Domain-Specific Language for GPU-accelerated robotics applications with ROS2 and CUDA",
