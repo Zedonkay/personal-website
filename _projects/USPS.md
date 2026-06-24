@@ -5,6 +5,9 @@ description: 16-831 Final Project exploring Robust RL and Adaptive Uncertainty S
 img: assets/img/USPS.png
 importance: 2
 category: experience
+github: https://github.com/Zedonkay/USPS
+pdf: https://drive.google.com/file/d/1iUQmVxT3T5zffPKwK7S0PveEIJ9G6UpV/view?usp=drive_link
+slides: https://docs.google.com/presentation/d/1JNTVwLrP13maFzSrtwKe6byPTWaZF-nNuB91YlcTaC8/edit?usp=sharing
 related_publications: false
 ---
 

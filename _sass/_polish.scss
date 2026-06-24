@@ -31,24 +31,30 @@ h1, h2, h3, h4, h5, h6,
 .publications .periodical,
 .publications .links a.btn,
 .publications h2.year,
+.projects .abbr abbr,
+.projects .periodical,
+.projects .links a.btn,
 .navbar .nav-link {
   font-family: $font-mono;
 }
 
-.publications .abbr abbr {
+.publications .abbr abbr,
+.projects .abbr abbr {
   font-weight: 500;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   font-size: 0.78rem;
 }
 
-.publications .links a.btn {
+.publications .links a.btn,
+.projects .links a.btn {
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.publications .periodical {
+.publications .periodical,
+.projects .periodical {
   font-size: 0.85rem;
   letter-spacing: 0.01em;
 }
@@ -112,7 +118,8 @@ body.fixed-top-nav {
 }
 
 .post article > h2,
-.publications h2.bibliography {
+.publications h2.bibliography,
+.projects h2.category {
   margin-top: 3rem;
   margin-bottom: 1rem;
   padding-bottom: 0.55rem;
@@ -127,11 +134,13 @@ body.fixed-top-nav {
   color: inherit;
 }
 
-.publications {
+.publications,
+.projects {
   margin-top: 1.25rem;
 }
 
-.publications ol.bibliography > li {
+.publications ol.bibliography > li,
+.projects ol.bibliography > li {
   margin-bottom: 1.1rem;
   padding: 1rem;
   border: 1px solid var(--global-divider-color);
@@ -144,21 +153,38 @@ body.fixed-top-nav {
     border-color 160ms ease;
 }
 
-.publications ol.bibliography > li:hover {
+.publications ol.bibliography > li:hover,
+.projects ol.bibliography > li:hover {
   border-color: color-mix(in srgb, var(--global-theme-color) 38%, var(--global-divider-color));
   box-shadow: var(--global-soft-shadow);
   transform: translateY(-1px);
 }
 
+.projects ol.bibliography > li {
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.projects ol.bibliography li .row,
 .publications ol.bibliography li .row {
   align-items: flex-start;
 }
 
-.publications ol.bibliography li .abbr {
+.projects ol.bibliography li .abbr figure {
+  margin: 0;
+}
+
+.projects ol.bibliography li .abbr .publication-preview-link {
+  margin-top: 0.35rem;
+}
+
+.publications ol.bibliography li .abbr,
+.projects ol.bibliography li .abbr {
   padding-right: 1rem;
 }
 
-.publications ol.bibliography li .abbr abbr {
+.publications ol.bibliography li .abbr abbr,
+.projects ol.bibliography li .abbr abbr {
   border-radius: 999px;
   background-color: var(--global-muted-bg-color);
   color: var(--global-theme-color) !important;
@@ -167,7 +193,8 @@ body.fixed-top-nav {
   letter-spacing: 0;
 }
 
-.publications ol.bibliography li .preview {
+.publications ol.bibliography li .preview,
+.projects ol.bibliography li .preview {
   width: 100%;
   aspect-ratio: 3 / 2;
   border: 1px solid var(--global-divider-color);
@@ -176,7 +203,37 @@ body.fixed-top-nav {
   box-shadow: none !important;
 }
 
-.publications ol.bibliography li .publication-preview-link {
+.projects ol.bibliography li .preview[src*="CMR"] {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+  object-fit: contain;
+  object-position: center;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: transparent;
+}
+
+.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+}
+
+.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) figure,
+.projects ol.bibliography li .publication-preview-link:has(img[src*="CMR"]) picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.publications ol.bibliography li .publication-preview-link,
+.projects ol.bibliography li .publication-preview-link {
   display: block;
   text-decoration: none;
 }
@@ -188,12 +245,21 @@ body.fixed-top-nav {
   line-height: 1.35;
 }
 
-.publications ol.bibliography li .title a.publication-title-link {
+.projects ol.bibliography li .title {
+  color: var(--global-text-color);
+  font-size: 0.96rem;
+  font-weight: 720;
+  line-height: 1.25;
+}
+
+.publications ol.bibliography li .title a.publication-title-link,
+.projects ol.bibliography li .title a.publication-title-link {
   color: inherit;
   text-decoration: none;
 }
 
-.publications ol.bibliography li .title a.publication-title-link:hover {
+.publications ol.bibliography li .title a.publication-title-link:hover,
+.projects ol.bibliography li .title a.publication-title-link:hover {
   color: var(--global-theme-color);
   text-decoration: none;
 }
@@ -202,6 +268,12 @@ body.fixed-top-nav {
 .publications ol.bibliography li .periodical {
   color: var(--global-text-color-light);
   font-size: 0.91rem;
+}
+
+.projects ol.bibliography li .periodical {
+  color: var(--global-text-color-light);
+  font-size: 0.84rem;
+  line-height: 1.35;
 }
 
 .publications ol.bibliography li .author {
@@ -277,13 +349,18 @@ body.fixed-top-nav {
   color: var(--global-theme-color);
 }
 
-.publications ol.bibliography li .periodical + .periodical {
+.publications ol.bibliography li .periodical + .periodical,
+.projects ol.bibliography li .periodical + .periodical {
   color: var(--global-theme-color);
   font-weight: 650;
 }
 
 .publications ol.bibliography li .links {
   margin-top: 0.55rem;
+}
+
+.projects ol.bibliography li .links {
+  margin-top: 0.3rem;
 }
 
 .publications ol.bibliography li .links a.btn {
@@ -296,7 +373,19 @@ body.fixed-top-nav {
   font-weight: 600;
 }
 
-.publications ol.bibliography li .links a.btn:hover {
+.projects ol.bibliography li .links a.btn {
+  margin-top: 0.15rem;
+  margin-right: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-color: var(--global-divider-color);
+  border-radius: 999px;
+  color: var(--global-text-color);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.publications ol.bibliography li .links a.btn:hover,
+.projects ol.bibliography li .links a.btn:hover {
   border-color: var(--global-theme-color);
   background-color: var(--global-muted-bg-color);
   color: var(--global-theme-color);
@@ -326,11 +415,17 @@ body.fixed-top-nav {
     font-size: 2.45rem;
   }
 
-  .publications ol.bibliography > li {
+  .publications ol.bibliography > li,
+  .projects ol.bibliography > li {
     padding: 0.9rem;
   }
 
-  .publications ol.bibliography li .abbr {
+  .projects ol.bibliography > li {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .publications ol.bibliography li .abbr,
+  .projects ol.bibliography li .abbr {
     padding-right: 15px;
   }
 }

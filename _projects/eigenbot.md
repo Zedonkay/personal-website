@@ -5,6 +5,8 @@ description: Research with biorobotics laboratory
 img: assets/img/eigenbot.png
 importance: 3
 category: research
+website: https://eigenbot-dnlc.github.io
+pdf: https://drive.google.com/file/d/1OzQ4HGFyejPgjJfGF4eOEWI0iTaIVyjM/view
 related_publications: true
 ---
 

@@ -1,0 +1,108 @@
+{% assign project_primary_url = null %}
+{% if project.redirect %}
+  {% assign project_primary_url = project.redirect %}
+{% elsif project.website %}
+  {% assign project_primary_url = project.website %}
+{% else %}
+  {% assign project_primary_url = project.url | relative_url %}
+{% endif %}
+
+<div class="row">
+  {% if site.enable_project_thumbnails %}
+    <div class="col col-sm-4 abbr">
+      {%- if project.category -%}
+        {%- if site.data.project_categories[project.category] -%}
+          {% assign category_style = null %}
+          {% if site.data.project_categories[project.category].color != blank %}
+            {% assign category_style = site.data.project_categories[project.category].color | prepend: 'style="background-color:' | append: '"' %}
+          {%- endif -%}
+          <abbr
+            class="badge rounded w-100"
+            {% if category_style %}
+              {{ category_style }}
+            {% endif -%}
+          >
+            {% if site.data.project_categories[project.category].url %}
+              <a href="{{ site.data.project_categories[project.category].url }}">{{ project.category }}</a>
+            {% else %}
+              <div>{{- project.category -}}</div>
+            {% endif %}
+          </abbr>
+        {% else %}
+          <abbr class="badge rounded w-100">{{ project.category }}</abbr>
+        {% endif %}
+      {% endif %}
+      {% if project.img %}
+        {% assign preview_zoomable = true %}
+        {% if project_primary_url %}
+          {% assign preview_zoomable = false %}
+        {% endif %}
+        {% capture project_preview %}
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes="400px"
+            class="preview z-depth-1 rounded"
+            zoomable=preview_zoomable
+            alt=project.title
+            cache_bust=true
+          %}
+        {% endcapture %}
+        {% if project_primary_url %}
+          <a class="publication-preview-link" href="{{ project_primary_url }}" aria-label="{{ project.title | strip_html | escape }}">
+            {{ project_preview }}
+          </a>
+        {% else %}
+          {{ project_preview }}
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div id="{{ project.title | slugify }}" class="{% if site.enable_project_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}">
+    <div class="title">
+      {% if project_primary_url %}
+        <a class="publication-title-link" href="{{ project_primary_url }}">{{ project.title }}</a>
+      {% else %}
+        {{ project.title }}
+      {% endif %}
+    </div>
+
+    {% if project.description %}
+      <div class="periodical">{{ project.description }}</div>
+    {% endif %}
+
+    {% if project.note %}
+      <div class="periodical">{{ project.note | strip }}</div>
+    {% endif %}
+
+    {% if project.github or project.code or project.website or project.pdf or project.slides or project.redirect %}
+    <div class="links">
+      {% if project.github or project.code %}
+        <a href="{% if project.code %}{{ project.code }}{% else %}{{ project.github }}{% endif %}" class="btn btn-sm z-depth-0" role="button">Code</a>
+      {% endif %}
+      {% if project.website %}
+        <a href="{{ project.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
+      {% endif %}
+      {% if project.pdf %}
+        {% if project.pdf contains '://' %}
+          <a href="{{ project.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+        {% else %}
+          <a href="{{ project.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+        {% endif %}
+      {% endif %}
+      {% if project.slides %}
+        {% if project.slides contains '://' %}
+          <a href="{{ project.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+        {% else %}
+          <a href="{{ project.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
+        {% endif %}
+      {% endif %}
+      {% if project.redirect or project.website %}
+        <a href="{{ project.url | relative_url }}" class="btn btn-sm z-depth-0" role="button">Details</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>

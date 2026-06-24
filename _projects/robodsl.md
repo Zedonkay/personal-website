@@ -5,6 +5,7 @@ description: A Domain-Specific Language for GPU-accelerated robotics application
 img: assets/img/Robodsl.png
 importance: 3
 category: personal
+github: https://github.com/Zedonkay/robodsl
 related_publications: false
 ---
 
