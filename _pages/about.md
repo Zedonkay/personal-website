@@ -28,4 +28,4 @@ I'm interested in developing autonomous robots and policies that work robustly i
 
 Currently at the **LeCAR Lab**, I work on sim2real adaptation for world models. My previous research at **The AirLab** focused on uncertainty and semantics-aware navigation for quadrotors in firefighting domains. Alongside my research, I lead the RL team at **Carnegie Mellon Racing (CMR)**, where I lead development of a DRL controller and a Real2Sim2Real dynamics module for our Formula SAE driverless vehicle. I also worked on bio-inspired neural locomotion at the **BioRobotics Lab** (ICRA 2025) and a visual inspection pipeline for industrial edge deployment at **Siemens**. Outside the lab, I've developed adaptive robust RL methods and built **RoboDSL**, an open-source DSL that unifies ROS2, CUDA, and ONNX for robotics.
 
-When I'm not working, I enjoy film, cooking, and mountain biking.
+Outside of work, I enjoy cooking, listening to records, watching films, and mountain biking.

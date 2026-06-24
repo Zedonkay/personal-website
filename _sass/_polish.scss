@@ -370,7 +370,7 @@ body.fixed-top-nav {
 }
 
 .publications ol.bibliography li .title a.publication-title-link:hover {
-  color: var(--global-title-color);
+  color: var(--global-hover-color);
   text-decoration: none;
 }
 
@@ -382,8 +382,13 @@ body.fixed-top-nav {
   margin-bottom: 0.4rem;
 }
 
+.publications ol.bibliography > li:hover .title,
 .projects ul.bibliography > li:hover .title {
-  color: var(--global-title-color);
+  color: var(--global-hover-color);
+}
+
+.publications ol.bibliography > li:hover .title a.publication-title-link {
+  color: var(--global-hover-color);
 }
 
 .publications ol.bibliography li .author,
