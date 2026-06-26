@@ -6,6 +6,9 @@ name: Check GitHub Pages Status
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check-pages:
     runs-on: ubuntu-latest
