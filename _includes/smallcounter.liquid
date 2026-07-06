@@ -1,0 +1,39 @@
+{% if site.smallcounter_id %}
+  {% unless include.display_only %}
+    {% if site.enable_smallcounter_tracking %}
+      <!-- SmallCounter: hidden visit + geo tracking (stats: https://smallcounter.com/cc_stats/{{ site.smallcounter_id }}/) -->
+      <img
+        src="https://smallcounter.com/online/ccc.php?id={{ site.smallcounter_id }}"
+        width="1"
+        height="1"
+        alt=""
+        style="position: absolute; left: -9999px; visibility: hidden"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
+    {% endif %}
+  {% endunless %}
+
+  {% unless include.tracking_only %}
+    {% if site.enable_smallcounter_display %}
+      <div class="smallcounter-widget text-center mt-3">
+        {% if site.smallcounter_display_type == 'map' %}
+          <a title="visitor map" href="https://smallcounter.com/vmap/{{ site.smallcounter_id }}/">
+            <img
+              title="visitor map"
+              src="https://smallcounter.com/map/view.php?type=180&id={{ site.smallcounter_id }}"
+              alt="visitor map"
+            >
+          </a>
+        {% elsif site.smallcounter_display_type == 'flag' %}
+          <a href="https://smallcounter.com/conline/{{ site.smallcounter_id }}/">
+            <img alt="visitors by country" src="https://smallcounter.com/online/fcc.php?id={{ site.smallcounter_id }}">
+          </a>
+        {% else %}
+          <a href="https://smallcounter.com/cc_stats/{{ site.smallcounter_id }}/">
+            <img alt="visitor counter" src="https://smallcounter.com/online/ccc.php?id={{ site.smallcounter_id }}">
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endunless %}
+{% endif %}

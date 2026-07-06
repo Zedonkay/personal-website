@@ -25,6 +25,9 @@
 
     <div class="container">
       {{ footer_contents }}
+      {% if site.enable_smallcounter_display %}
+        {% include smallcounter.liquid display_only=true %}
+      {% endif %}
     </div>
   </footer>
 {% endif %}
