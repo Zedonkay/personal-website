@@ -148,7 +148,7 @@ Perhaps no hobby reflects this philosophy more than cinema.
 
 I've become increasingly interested in films that reward repeated viewing rather than immediate gratification.
 
-Many of my favorite films, whether *2001: A Space Odyssey*, *Stalker*, *Yi Yi*, *Persona*, or *La Jetée*, reveal themselves gradually over time. They're films that ask something from the viewer.
+Many of my favorite films, whether _2001: A Space Odyssey_, _Stalker_, _Yi Yi_, _Persona_, or _La Jetée_, reveal themselves gradually over time. They're films that ask something from the viewer.
 
 I've noticed that the movies I return to most often are rarely the easiest to watch.
 
