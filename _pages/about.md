@@ -22,10 +22,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Hi, I'm **Ishayu Shikhare**!
+I'm **Ishayu Shikhare**, an undergraduate studying Electrical and Computer Engineering at Carnegie Mellon University.
 
-I'm interested in developing autonomous robots and policies that work robustly in dynamically complex scenarios.
+I develop robust, adaptive robotic control policies for dynamic and out-of-distribution environments.
 
-Currently at the **[LeCAR Lab](https://lecar-lab.github.io/index.html)**, advised by [Prof. Guanya Shi](https://www.gshi.me), I work on sim2real adaptation for world models. My most recent project at LeCAR was [**FADA**](https://lecar-lab.github.io/FADA-humanoid/), where I helped develop few-shot domain adaptation for humanoid locomotion and whole-body tracking (WBT). My previous research at **[The AirLab](https://theairlab.org)**, under [Prof. Sebastian Scherer](https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/), focused on uncertainty and semantics-aware navigation for quadrotors in firefighting domains. Alongside my research, I lead the RL team at **[Carnegie Mellon Racing (CMR)](https://www.carnegiemellonracing.org)**, where I lead development of a DRL controller and a Real2Sim2Real dynamics module for our Formula SAE driverless vehicle. I also worked on bio-inspired neural locomotion at the **[BioRobotics Lab](https://biorobotics.org)**, under [Prof. Howie Choset](https://www.cs.cmu.edu/~choset/) (ICRA 2025), and a visual inspection pipeline for industrial edge deployment at **Siemens**. Outside the lab, I've developed [adaptive robust RL methods](/projects/USPS/) and built **[RoboDSL](/projects/robodsl/)**, an open-source DSL that unifies ROS2, CUDA, and ONNX for robotics.
+Currently, I'm a researcher in the **[LeCAR Lab](https://lecar-lab.github.io/index.html)**, advised by [Prof. Guanya Shi](https://www.gshi.me), where I work on sim-to-real adaptation for world models. My previous project at LeCAR was [**FADA**](https://lecar-lab.github.io/FADA-humanoid/), where I helped develop few-shot domain adaptation for humanoid locomotion and whole-body tracking. Before joining LeCAR, I conducted research in **[The AirLab](https://theairlab.org)** under [Prof. Sebastian Scherer](https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/) on uncertainty and semantics-aware navigation for quadrotors operating in wildfire environments.
 
-Outside of work, I enjoy cooking, listening to records, watching films, drinking tea, and mountain biking.
+Outside of LeCAR, I lead the reinforcement learning team at **[Carnegie Mellon Racing](/projects/CMR/)**, where I work on learning-based control and Real2Sim2Real dynamics modeling for our Formula SAE driverless race car. I've also worked on bio-inspired locomotion in the **[BioRobotics Lab](https://biorobotics.org)** (ICRA 2025) and developed computer vision systems for industrial edge deployment during my internship at **Siemens**.
+
+In my spare time, I enjoy cooking, listening to records, watching films, drinking tea, mountain biking, and occasionally building side projects like **[RoboDSL](/projects/robodsl/)**.
