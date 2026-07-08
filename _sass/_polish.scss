@@ -565,7 +565,18 @@ body.fixed-top-nav {
 // Light mode: colored like the name (title color); dark mode: link/accent color.
 .profile ~ .clearfix a {
   color: var(--global-title-color);
-  font-weight: 800;
+  font-weight: 650;
+
+  // Links may wrap inline markup (e.g. [**FADA**](...) -> <a><strong>);
+  // force nested elements to take the link color instead of the text color.
+  strong,
+  em,
+  span,
+  b,
+  i {
+    color: inherit;
+    font-weight: inherit;
+  }
 
   &:hover {
     color: var(--global-hover-color);
