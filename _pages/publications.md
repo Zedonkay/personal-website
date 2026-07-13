@@ -13,7 +13,7 @@ nav_order: 2
 
 {% include bib_search.liquid %}
 
-<p><em>* indicates equal contribution.</em></p>
+<p><em><sup>*</sup> indicates equal contribution.</em></p>
 
 <div class="publications">
 
