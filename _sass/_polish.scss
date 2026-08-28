@@ -184,8 +184,15 @@ body.fixed-top-nav {
 .library-outline {
   position: absolute;
   overflow: visible;
-  color: color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
   pointer-events: auto;
+}
+
+.library-outlines-svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
 }
 
 .library-outline-hit {
@@ -199,6 +206,7 @@ body.fixed-top-nav {
   stroke-width: 1.5;
   stroke-linecap: butt;
   stroke-linejoin: round;
+  shape-rendering: geometricPrecision;
 }
 
 .library-label-highlight {

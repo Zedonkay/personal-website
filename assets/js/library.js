@@ -57,96 +57,168 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const SVG = "http://www.w3.org/2000/svg";
   const outlineRadius = () => 1.15 * rem();
-  const outlineStroke = 1.5;
+  const dashLength = 3;
+  const dashGap = 2.25;
+  const dashPeriod = dashLength + dashGap;
 
-  const roundedRectPath = (w, h, r, gapLeft, gapRight) => {
-    r = Math.min(r, w / 2, h / 2);
-    const n = (value) => Number(value.toFixed(3));
-    const arc = (x, y) => `A ${n(r)} ${n(r)} 0 0 1 ${n(x)} ${n(y)}`;
-    const closed = [
-      `M ${n(r)} 0`,
-      `L ${n(w - r)} 0`,
-      arc(w, r),
-      `L ${n(w)} ${n(h - r)}`,
-      arc(w - r, h),
-      `L ${n(r)} ${n(h)}`,
-      arc(0, h - r),
-      `L 0 ${n(r)}`,
-      arc(r, 0),
-      "Z",
-    ].join(" ");
-    const minX = r + 0.5;
-    const maxX = w - r - 0.5;
-    if (!(gapRight > gapLeft + 6) || minX >= maxX) return { d: closed, open: false };
-    const start = Math.min(Math.max(gapRight, minX), maxX);
-    const end = Math.min(Math.max(gapLeft, minX), maxX);
-    if (start - end < 6) return { d: closed, open: false };
-    return {
-      d: [
-        `M ${n(start)} 0`,
-        `L ${n(w - r)} 0`,
-        arc(w, r),
-        `L ${n(w)} ${n(h - r)}`,
-        arc(w - r, h),
-        `L ${n(r)} ${n(h)}`,
-        arc(0, h - r),
-        `L 0 ${n(r)}`,
-        arc(r, 0),
-        `L ${n(end)} 0`,
-      ].join(" "),
-      open: true,
-    };
+  const snap = (value) => Math.round(value * 2) / 2;
+
+  const periodOffset = (start) => {
+    const offset = start % dashPeriod;
+    return offset < 0 ? offset + dashPeriod : offset;
   };
 
-  const fitDashes = (length, open) => {
-    const targetDash = 3;
-    const targetGap = 2.25;
-    const period = targetDash + targetGap;
-    if (length < 2) return { dash: length, gap: 0 };
-    if (open) {
-      const minPattern = targetDash * 2 + targetGap;
-      if (length < minPattern) return { dash: length, gap: 0 };
-      let gaps = Math.max(1, Math.round((length - targetDash) / period));
-      let dash = (length - gaps * targetGap) / (gaps + 1);
-      if (dash < targetDash * 0.55) {
-        gaps = Math.max(1, gaps - 1);
-        dash = (length - gaps * targetGap) / (gaps + 1);
-      } else if (dash > targetDash * 1.65) {
-        gaps += 1;
-        dash = (length - gaps * targetGap) / (gaps + 1);
+  const alignSharedEdges = (boxes) => {
+    const tol = 2.5;
+    for (let i = 0; i < boxes.length; i += 1) {
+      for (let j = i + 1; j < boxes.length; j += 1) {
+        const a = boxes[i];
+        const b = boxes[j];
+        const yOverlap = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+        const xOverlap = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+        if (yOverlap > 8) {
+          if (Math.abs(a.x + a.w - b.x) <= tol) {
+            const mid = (a.x + a.w + b.x) / 2;
+            a.w = mid - a.x;
+            b.w += b.x - mid;
+            b.x = mid;
+          } else if (Math.abs(b.x + b.w - a.x) <= tol) {
+            const mid = (b.x + b.w + a.x) / 2;
+            b.w = mid - b.x;
+            a.w += a.x - mid;
+            a.x = mid;
+          }
+        }
+        if (xOverlap > 8) {
+          if (Math.abs(a.y + a.h - b.y) <= tol) {
+            const mid = (a.y + a.h + b.y) / 2;
+            a.h = mid - a.y;
+            b.h += b.y - mid;
+            b.y = mid;
+          } else if (Math.abs(b.y + b.h - a.y) <= tol) {
+            const mid = (b.y + b.h + a.y) / 2;
+            b.h = mid - b.y;
+            a.h += a.y - mid;
+            a.y = mid;
+          }
+        }
       }
-      return { dash, gap: targetGap };
     }
-    const cycles = Math.max(2, Math.round(length / period));
-    const sized = length / cycles;
-    return { dash: sized * (targetDash / period), gap: sized * (targetGap / period) };
   };
 
-  const paintSvgOutline = (x, y, w, h, gapLeft, gapRight) => {
-    const inset = outlineStroke / 2;
-    const innerW = Math.max(0, w - outlineStroke);
-    const innerH = Math.max(0, h - outlineStroke);
-    const radius = Math.max(0, outlineRadius() - inset);
-    const { d, open } = roundedRectPath(innerW, innerH, radius, gapLeft - inset, gapRight - inset);
+  const unionRanges = (ranges) => {
+    const sorted = ranges
+      .map(([start, end]) => [Math.min(start, end), Math.max(start, end)])
+      .filter(([start, end]) => end - start > 0.75)
+      .sort((left, right) => left[0] - right[0]);
+    const merged = [];
+    sorted.forEach(([start, end]) => {
+      const last = merged[merged.length - 1];
+      if (!last || start > last[1] + 0.75) merged.push([start, end]);
+      else last[1] = Math.max(last[1], end);
+    });
+    return merged;
+  };
+
+  const collectAxis = (lines, vertical) => {
+    const groups = [];
+    lines.forEach((line) => {
+      const aligned = vertical ? Math.abs(line.x1 - line.x2) <= 0.51 : Math.abs(line.y1 - line.y2) <= 0.51;
+      if (!aligned) return;
+      const pos = snap(vertical ? (line.x1 + line.x2) / 2 : (line.y1 + line.y2) / 2);
+      const a = vertical ? line.y1 : line.x1;
+      const b = vertical ? line.y2 : line.x2;
+      const group = groups.find((entry) => Math.abs(entry.pos - pos) <= 0.6);
+      if (group) group.ranges.push([a, b]);
+      else groups.push({ pos, ranges: [[a, b]] });
+    });
+    return groups;
+  };
+
+  const paintStrokeSvg = (lines, arcs) => {
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("class", "library-outlines-svg");
+    svg.setAttribute("overflow", "visible");
+
+    const addPath = (d, offset) => {
+      const path = document.createElementNS(SVG, "path");
+      path.setAttribute("class", "library-outline-path");
+      path.setAttribute("d", d);
+      path.setAttribute("stroke-dasharray", `${dashLength} ${dashGap}`);
+      path.setAttribute("stroke-dashoffset", String(periodOffset(offset)));
+      svg.appendChild(path);
+    };
+
+    collectAxis(lines, true).forEach(({ pos, ranges }) => {
+      unionRanges(ranges).forEach(([y1, y2]) => {
+        addPath(`M ${pos} ${snap(y1)} L ${pos} ${snap(y2)}`, y1);
+      });
+    });
+    collectAxis(lines, false).forEach(({ pos, ranges }) => {
+      unionRanges(ranges).forEach(([x1, x2]) => {
+        addPath(`M ${snap(x1)} ${pos} L ${snap(x2)} ${pos}`, x1);
+      });
+    });
+    arcs.forEach((arc) => {
+      addPath(
+        `M ${snap(arc.sx)} ${snap(arc.sy)} A ${snap(arc.r)} ${snap(arc.r)} 0 0 1 ${snap(arc.ex)} ${snap(arc.ey)}`,
+        arc.offset
+      );
+    });
+
+    outlines.appendChild(svg);
+  };
+
+  const emitBoxGeometry = (box, lines, arcs) => {
+    const radius = Math.min(outlineRadius(), box.w / 2, box.h / 2);
+    if (radius < 1 || box.w < 4 || box.h < 4) return;
+    const x0 = box.x;
+    const y0 = box.y;
+    const x1 = box.x + box.w;
+    const y1 = box.y + box.h;
+
+    const pushH = (from, to, y) => {
+      const left = Math.min(from, to);
+      const right = Math.max(from, to);
+      if (right - left > 0.75) lines.push({ x1: left, y1: y, x2: right, y2: y });
+    };
+    const pushV = (x, from, to) => {
+      const top = Math.min(from, to);
+      const bottom = Math.max(from, to);
+      if (bottom - top > 0.75) lines.push({ x1: x, y1: top, x2: x, y2: bottom });
+    };
+
+    const topL = x0 + radius;
+    const topR = x1 - radius;
+    if (box.gapTo > box.gapFrom + 6) {
+      pushH(topL, Math.min(box.gapFrom, topR), y0);
+      pushH(Math.max(box.gapTo, topL), topR, y0);
+    } else {
+      pushH(topL, topR, y0);
+    }
+    pushV(x1, y0 + radius, y1 - radius);
+    pushH(topL, topR, y1);
+    pushV(x0, y0 + radius, y1 - radius);
+
+    arcs.push({ sx: x1 - radius, sy: y0, ex: x1, ey: y0 + radius, r: radius, offset: x1 - radius });
+    arcs.push({ sx: x1, sy: y1 - radius, ex: x1 - radius, ey: y1, r: radius, offset: y1 - radius });
+    arcs.push({ sx: x0 + radius, sy: y1, ex: x0, ey: y1 - radius, r: radius, offset: x0 + radius });
+    arcs.push({ sx: x0, sy: y0 + radius, ex: x0 + radius, ey: y0, r: radius, offset: y0 + radius });
+  };
+
+  const paintHit = (box) => {
     const svg = document.createElementNS(SVG, "svg");
     svg.setAttribute("class", "library-outline");
-    svg.setAttribute("width", String(w));
-    svg.setAttribute("height", String(h));
-    svg.style.left = `${x}px`;
-    svg.style.top = `${y}px`;
+    svg.setAttribute("width", String(box.w));
+    svg.setAttribute("height", String(box.h));
+    svg.style.left = `${box.x}px`;
+    svg.style.top = `${box.y}px`;
     const hit = document.createElementNS(SVG, "rect");
     hit.setAttribute("class", "library-outline-hit");
-    hit.setAttribute("width", String(w));
-    hit.setAttribute("height", String(h));
-    const path = document.createElementNS(SVG, "path");
-    path.setAttribute("class", "library-outline-path");
-    path.setAttribute("d", d);
-    path.setAttribute("transform", `translate(${inset} ${inset})`);
-    svg.append(hit, path);
+    hit.setAttribute("width", String(box.w));
+    hit.setAttribute("height", String(box.h));
+    svg.appendChild(hit);
     outlines.appendChild(svg);
-    const length = path.getTotalLength();
-    const { dash, gap } = fitDashes(length, open);
-    path.setAttribute("stroke-dasharray", gap > 0.01 ? `${dash} ${gap}` : `${Math.max(length, 0.01)}`);
   };
 
   const paintOutlines = () => {
@@ -157,9 +229,14 @@ document.addEventListener("DOMContentLoaded", () => {
     library.classList.add("has-outlines");
 
     const origin = blobsRoot.getBoundingClientRect();
-    const pad = 10;
+    const gridStyles = grid ? getComputedStyle(grid) : null;
+    const gapX = parseFloat(gridStyles && gridStyles.columnGap);
+    const gapY = parseFloat(gridStyles && gridStyles.rowGap);
+    const padX = (Number.isFinite(gapX) ? gapX : 18) / 2;
+    const padY = (Number.isFinite(gapY) ? gapY : padX * 2) / 2;
     const filtered = library.classList.contains("is-filtered");
-    const xPad = pad + 0.85 * rem();
+    const titleInset = padX + 0.85 * rem();
+    const boxes = [];
 
     blobs.forEach((blob) => {
       const shown = Array.from(blob.querySelectorAll(".library-card")).filter((card) => {
@@ -182,40 +259,55 @@ document.addEventListener("DOMContentLoaded", () => {
         const right = Math.max(...row.rects.map((rect) => rect.right));
         const top = Math.min(...row.rects.map((rect) => rect.top));
         const bottom = Math.max(...row.rects.map((rect) => rect.bottom));
-        const x = left - origin.left - pad;
-        const y = top - origin.top - pad;
-        const w = right - left + pad * 2;
-        const h = bottom - top + pad * 2;
-        let gapLeft = 0;
-        let gapRight = 0;
-
-        if (index === 0 && titles && highlights) {
-          const label = blob.id || blob.dataset.group || "";
-          const titleLeft = x + xPad;
-          const title = document.createElement("span");
-          title.className = "library-label-title";
-          title.textContent = label;
-          title.style.left = `${titleLeft}px`;
-          title.style.top = `${y}px`;
-          titles.appendChild(title);
-
-          const titleRect = title.getBoundingClientRect();
-          const highlight = document.createElement("span");
-          highlight.className = "library-label-highlight";
-          highlight.style.left = `${titleRect.left - origin.left - 6}px`;
-          highlight.style.top = `${y}px`;
-          highlight.style.width = `${titleRect.width + 12}px`;
-          highlight.style.height = `${Math.max(titleRect.height, 1)}px`;
-          highlights.appendChild(highlight);
-
-          const punch = highlight.getBoundingClientRect();
-          gapLeft = punch.left - (origin.left + x);
-          gapRight = punch.right - (origin.left + x);
-        }
-
-        paintSvgOutline(x, y, w, h, gapLeft, gapRight);
+        boxes.push({
+          x: left - origin.left - padX,
+          y: top - origin.top - padY,
+          w: right - left + padX * 2,
+          h: bottom - top + padY * 2,
+          gapFrom: 0,
+          gapTo: 0,
+          label: index === 0 ? blob.id || blob.dataset.group || "" : "",
+        });
       });
     });
+
+    alignSharedEdges(boxes);
+    boxes.forEach((box) => {
+      const right = snap(box.x + box.w);
+      const bottom = snap(box.y + box.h);
+      box.x = snap(box.x);
+      box.y = snap(box.y);
+      box.w = right - box.x;
+      box.h = bottom - box.y;
+      paintHit(box);
+
+      if (!(box.label && titles && highlights)) return;
+
+      const title = document.createElement("span");
+      title.className = "library-label-title";
+      title.textContent = box.label;
+      title.style.left = `${box.x + titleInset}px`;
+      title.style.top = `${box.y}px`;
+      titles.appendChild(title);
+
+      const titleRect = title.getBoundingClientRect();
+      const highlight = document.createElement("span");
+      highlight.className = "library-label-highlight";
+      highlight.style.left = `${titleRect.left - origin.left - 6}px`;
+      highlight.style.top = `${box.y}px`;
+      highlight.style.width = `${titleRect.width + 12}px`;
+      highlight.style.height = `${Math.max(titleRect.height, 1)}px`;
+      highlights.appendChild(highlight);
+
+      const punch = highlight.getBoundingClientRect();
+      box.gapFrom = snap(punch.left - origin.left);
+      box.gapTo = snap(punch.right - origin.left);
+    });
+
+    const lines = [];
+    const arcs = [];
+    boxes.forEach((box) => emitBoxGeometry(box, lines, arcs));
+    paintStrokeSvg(lines, arcs);
   };
 
   const layout = () => {
