@@ -7,13 +7,12 @@ nav: true
 nav_order: 4
 ---
 
+<div class="library">
 {% assign library_items = site.data.library.items %}
 {% if library_items == nil %}
   {% assign library_items = "" | split: "" %}
 {% endif %}
-
 {% assign type_order = "article,video,podcast" | split: "," %}
-
 {% if library_items.size > 0 %}
   <div class="tag-category-list library-filters">
     <ul class="p-0 m-0">
@@ -44,7 +43,6 @@ nav_order: 4
       {% endfor %}
     </ul>
   </div>
-
   {% for type in type_order %}
     {% assign typed_items = library_items | where: "type", type | sort: "date" | reverse %}
     {% if typed_items.size > 0 %}
@@ -69,14 +67,10 @@ nav_order: 4
             {% endif %}
             <p class="post-meta">
               {% if item.creator %}{{ item.creator }}{% endif %}
-              {% if item.creator and item.source %}
-                &nbsp;&middot;&nbsp;
-              {% endif %}
+              {% if item.creator and item.source %}&nbsp;&middot;&nbsp;{% endif %}
               {% if item.source %}{{ item.source }}{% endif %}
               {% if item.date %}
-                {% if item.creator or item.source %}
-                  &nbsp;&middot;&nbsp;
-                {% endif %}
+                {% if item.creator or item.source %}&nbsp;&middot;&nbsp;{% endif %}
                 {{ item.date | date: "%B %d, %Y" }}
               {% endif %}
             </p>
@@ -88,3 +82,4 @@ nav_order: 4
 {% else %}
   <p class="library-empty">Nothing here yet. This is where I'll keep writing, talks, and conversations worth returning to.</p>
 {% endif %}
+</div>
