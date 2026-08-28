@@ -163,9 +163,15 @@ body.fixed-top-nav {
 
   h3 {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: 0.45rem;
   }
+}
+
+.library-cofeature {
+  color: var(--global-text-color-light);
+  font-weight: 400;
 }
 
 .library-external {

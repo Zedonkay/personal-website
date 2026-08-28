@@ -82,6 +82,9 @@ ninja.data = [
     {%- for item in site.data.library.items -%}
       {
         {%- assign title = item.title | escape | strip -%}
+        {%- if item.companion.title -%}
+          {%- assign title = title | append: " / " | append: item.companion.title -%}
+        {%- endif -%}
         id: "library-{{ title | slugify }}",
         title: "{{ title | truncatewords: 13 }}",
         description: "{{ item.note | default: item.creator | strip_html | strip_newlines | escape | strip }}",
