@@ -1,5 +1,5 @@
-# Books, articles, videos, and podcasts worth keeping.
-# type: book | article | video | podcast
+# Books, films, articles, videos, and podcasts worth keeping.
+# type: book | film | article | video | podcast
 #
 # Example:
 # items:
@@ -31,6 +31,22 @@ items:
       it puts forth about the way the world works, and I love the direction
       Tolkien took with it.
 
+  - title: "Top 25"
+    source: Letterboxd
+    url: https://letterboxd.com/zedonkay/list/top-25/
+    type: film
+    date: 2026-08-11
+    note: >
+      The films that are most meaningful to me, ranked.
+
+  - title: "Honorable Mentions"
+    source: Letterboxd
+    url: https://letterboxd.com/zedonkay/list/honorable-mentions/
+    type: film
+    date: 2026-08-23
+    note: >
+      Films I couldn't fit into the top 25, but that still deserve a mention.
+
   - title: "The 'Busy' Trap"
     creator: Tim Kreider
     source: The New York Times
@@ -53,11 +69,16 @@ items:
   - title: "Still Standing"
     source: Business Insider
     url: https://www.businessinsider.com/show/still-standing
+    companion:
+      title: "So Expensive"
+      url: https://www.businessinsider.com/show/so-expensive
     type: video
     date: 2020-09-12
     note: >
       Gives incredible people, artists, craftsmen, and artisans a platform in
-      a world that so often shuns or neglects creative pursuits.
+      a world that so often shuns or neglects creative pursuits. So Expensive
+      is a companion, though that applies more to the handmade expensive
+      things.
 
   - title: "Great Big Story"
     source: YouTube
