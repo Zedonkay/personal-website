@@ -97,12 +97,11 @@ nav_order: 4
                 {% endif %}
                 <div class="library-card-body">
                   <h3>
-                    <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}<i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i></a>
                     {% if item.companion.title and item.companion.url %}
                       <span class="library-cofeature" aria-hidden="true">/</span>
-                      <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}</a>
+                      <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}<i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i></a>
                     {% endif %}
-                    <i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i>
                   </h3>
                   {% if item.note %}
                     <div class="library-note">{{ item.note | markdownify }}</div>
