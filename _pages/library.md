@@ -55,6 +55,8 @@ nav_order: 4
     </ul>
   </div>
   <div class="library-blobs">
+    <div class="library-outlines" aria-hidden="true"></div>
+    <div class="library-grid">
     {% for type in type_order %}
       {% assign typed_items = library_items | where: "type", type %}
       {% unless type == "film" or type == "show" or type == "video" %}
@@ -75,11 +77,13 @@ nav_order: 4
           {% when "podcast" %}
             {% assign type_label = "podcasts" %}
         {% endcase %}
-        <section class="library-blob{% if typed_items.size >= 4 %} library-blob--wide{% endif %}" id="{{ type_label }}" data-count="{{ typed_items.size }}">
-          <h2 class="library-blob-label">{{ type_label }}</h2>
+        <section class="library-blob" id="{{ type_label }}" data-group="{{ type_label }}" data-count="{{ typed_items.size }}">
           <ul class="library-gallery">
             {% for item in typed_items %}
-              <li class="library-card">
+              <li class="library-card{% if forloop.first %} library-card--lead{% endif %}" data-group="{{ type_label }}">
+                {% if forloop.first %}
+                  <h2 class="library-blob-label">{{ type_label }}</h2>
+                {% endif %}
                 {% if item.image %}
                   <a class="library-card-thumb{% if item.image_fit == 'contain' %} library-card-thumb--contain{% endif %}{% if item.image_ink %} library-card-thumb--ink{% endif %}" href="{{ item.url }}" target="_blank" rel="noopener">
                     {%
@@ -87,7 +91,7 @@ nav_order: 4
                       path=item.image
                       alt=item.title
                       class="library-card-image"
-                      sizes="96px"
+                      sizes="(min-width: 768px) 22vw, 40vw"
                     %}
                   </a>
                 {% endif %}
@@ -119,6 +123,7 @@ nav_order: 4
         </section>
       {% endif %}
     {% endfor %}
+    </div>
   </div>
 {% else %}
   <p class="library-empty">Nothing here yet. This is where I'll keep books, films, shows, articles, videos, and conversations worth returning to.</p>
