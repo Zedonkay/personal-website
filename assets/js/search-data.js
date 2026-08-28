@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-library",
           title: "library",
-          description: "Articles, videos, and podcasts I keep returning to.",
+          description: "Books, films, articles, videos, and podcasts I keep returning to.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/library/";
@@ -69,6 +69,90 @@ ninja.data = [{
           
             window.location.href = "/blog/2026/food/";
           
+        },
+      },{id: "library-slaughterhouse-five",
+        title: "Slaughterhouse-Five",
+        description: "An intriguing exploration of concepts I care a lot about.",
+        section: "Library",
+        handler: () => {
+          window.open("https://en.wikipedia.org/wiki/Slaughterhouse-Five", "_blank");
+        },
+      },{id: "library-the-silmarillion",
+        title: "The Silmarillion",
+        description: "I&#39;ve always loved myth, and the idea of writing a book that lets you develop your own myth system is so cool. I really appreciate the ideas it puts forth about the way the world works, and I love the direction Tolkien took with it.",
+        section: "Library",
+        handler: () => {
+          window.open("https://en.wikipedia.org/wiki/The_Silmarillion", "_blank");
+        },
+      },{id: "library-top-25",
+        title: "Top 25",
+        description: "The films that are most meaningful to me, ranked.",
+        section: "Library",
+        handler: () => {
+          window.open("https://letterboxd.com/zedonkay/list/top-25/", "_blank");
+        },
+      },{id: "library-honorable-mentions",
+        title: "Honorable Mentions",
+        description: "Films I couldn&#39;t fit into the top 25, but that still deserve a mention.",
+        section: "Library",
+        handler: () => {
+          window.open("https://letterboxd.com/zedonkay/list/honorable-mentions/", "_blank");
+        },
+      },{id: "library-the-39-busy-39-trap",
+        title: "The &#39;Busy&#39; Trap",
+        description: "Something I really resonated with.",
+        section: "Library",
+        handler: () => {
+          window.open("https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1", "_blank");
+        },
+      },{id: "library-gen-z-feels-weird-talking-about-drinking-and-it-39-s-forcing-bars-to-change",
+        title: "Gen Z feels weird talking about drinking — and it&#39;s forcing bars to...",
+        description: "I&#39;ve gotten into making drinks but don&#39;t drink, so the rise of craft zero-proof cocktails is something I appreciate.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.businessinsider.com/gen-z-unusual-approach-alcohol-forcing-bars-change-menu-strategy-2025-12", "_blank");
+        },
+      },{id: "library-still-standing-so-expensive",
+        title: "Still Standing / So Expensive",
+        description: "Gives incredible people, artists, craftsmen, and artisans a platform in a world that so often shuns or neglects creative pursuits. So Expensive is a companion, though that applies more to the handmade expensive things.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.businessinsider.com/show/still-standing", "_blank");
+        },
+      },{id: "library-great-big-story",
+        title: "Great Big Story",
+        description: "Gives a platform to the little people doing big things.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.youtube.com/@GreatBigStory", "_blank");
+        },
+      },{id: "library-james-hoffmann",
+        title: "James Hoffmann",
+        description: "Informative, and makes &quot;fine&quot; things unpretentious while remaining honest to the fanciness.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.youtube.com/@jameshoffmann", "_blank");
+        },
+      },{id: "library-making-stuff",
+        title: "Making Stuff",
+        description: "A truly moving series that really shaped my early youth.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.pbs.org/wgbh/nova/series/making-stuff/", "_blank");
+        },
+      },{id: "library-hunting-the-elements",
+        title: "Hunting the Elements",
+        description: "This is what developed my interest in chemistry, which I believed for 10+ years would be my future.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.pbs.org/wgbh/nova/physics/hunting-elements.html", "_blank");
+        },
+      },{id: "library-stuff-made-here",
+        title: "Stuff Made Here",
+        description: "Awesome, enjoyable, and well-made engineering projects.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.youtube.com/@StuffMadeHere", "_blank");
         },
       },{id: "projects-autonomous-racing",
           title: 'Autonomous Racing',
