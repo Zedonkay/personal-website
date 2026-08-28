@@ -142,6 +142,51 @@ body.fixed-top-nav {
   color: inherit;
 }
 
+.library-filters {
+  margin-bottom: 0.5rem;
+}
+
+.library-section-title {
+  margin-top: 3rem;
+  margin-bottom: 0;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--global-divider-color);
+  color: var(--global-title-color);
+  font-size: 1.35rem;
+  font-weight: 720;
+  text-align: left;
+  scroll-margin-top: 5.5rem;
+}
+
+.library-list {
+  margin-bottom: 0.5rem;
+
+  h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+}
+
+.library-external {
+  color: var(--global-text-color-light);
+  flex-shrink: 0;
+}
+
+.library-note {
+  color: var(--global-text-color);
+  font-size: 1.03rem;
+
+  p {
+    margin-bottom: 0.35rem;
+  }
+}
+
+.library-empty {
+  margin-top: 2rem;
+  color: var(--global-text-color-light);
+}
+
 .food-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

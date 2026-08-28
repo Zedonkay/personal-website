@@ -1,0 +1,14 @@
+# Articles, videos, and podcasts worth keeping.
+# type: article | video | podcast
+#
+# Example:
+# items:
+#   - title: "Title of the piece"
+#     creator: Author or host
+#     source: Publication, show, or channel
+#     url: https://example.com
+#     type: article
+#     date: 2026-08-28
+#     note: Why it stayed with you.
+
+items: []

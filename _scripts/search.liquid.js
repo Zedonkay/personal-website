@@ -78,6 +78,20 @@ ninja.data = [
       },
     {%- endfor -%}
   {%- endif -%}
+  {%- if site.data.library.items -%}
+    {%- for item in site.data.library.items -%}
+      {
+        {%- assign title = item.title | escape | strip -%}
+        id: "library-{{ title | slugify }}",
+        title: "{{ title | truncatewords: 13 }}",
+        description: "{{ item.note | default: item.creator | strip_html | strip_newlines | escape | strip }}",
+        section: "Library",
+        handler: () => {
+          window.open("{{ item.url }}", "_blank");
+        },
+      },
+    {%- endfor -%}
+  {%- endif -%}
   {%- for collection in site.collections -%}
     {%- if collection.label != 'posts' -%}
       {%- for item in collection.docs -%}
