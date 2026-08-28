@@ -1,5 +1,5 @@
-# Books, films, articles, videos, and podcasts worth keeping.
-# type: book | film | article | video | podcast
+# Books, films, shows, articles, videos, and podcasts worth keeping.
+# type: book | film | show | article | video | podcast
 #
 # Example:
 # items:
@@ -37,7 +37,7 @@ items:
     type: film
     date: 2026-08-11
     note: >
-      The films that are most meaningful to me, ranked.
+      My top 25, ranked.
 
   - title: "Honorable Mentions"
     source: Letterboxd
@@ -45,7 +45,30 @@ items:
     type: film
     date: 2026-08-23
     note: >
-      Films I couldn't fit into the top 25, but that still deserve a mention.
+      Films I couldn't fit into the top 25, but that still deserve a mention, unranked.
+
+  - title: "BoJack Horseman"
+    creator: Raphael Bob-Waksberg
+    source: Netflix
+    url: https://en.wikipedia.org/wiki/BoJack_Horseman
+    type: show
+    date: 2014-08-22
+    note: >
+      It's become a TV show I reference regularly. I think it does satire
+      incredibly well, making good nuanced commentary about our society
+      while balancing it with incredible humor and not being afraid to
+      punch hard.
+
+  - title: "The Bear"
+    creator: Christopher Storer
+    source: FX
+    url: https://en.wikipedia.org/wiki/The_Bear_(TV_series)
+    type: show
+    date: 2022-06-23
+    note: >
+      I just started it, but so far it's been a really incredible character
+      study with amazing acting, cinematography, and direction. I like the
+      culinary aspects too.
 
   - title: "The 'Busy' Trap"
     creator: Tim Kreider

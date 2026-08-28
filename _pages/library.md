@@ -2,7 +2,7 @@
 layout: page
 permalink: /library/
 title: library
-description: Books, films, articles, videos, and podcasts I keep returning to.
+description: Books, films, shows, articles, videos, and podcasts I keep returning to.
 nav: true
 nav_order: 4
 ---
@@ -12,7 +12,7 @@ nav_order: 4
 {% if library_items == nil %}
   {% assign library_items = "" | split: "" %}
 {% endif %}
-{% assign type_order = "book,film,article,video,podcast" | split: "," %}
+{% assign type_order = "book,film,show,article,video,podcast" | split: "," %}
 {% if library_items.size > 0 %}
   <div class="tag-category-list library-filters">
     <ul class="p-0 m-0">
@@ -27,6 +27,9 @@ nav_order: 4
             {% when "film" %}
               {% assign type_label = "films" %}
               {% assign type_icon = "fa-clapperboard" %}
+            {% when "show" %}
+              {% assign type_label = "shows" %}
+              {% assign type_icon = "fa-tv" %}
             {% when "article" %}
               {% assign type_label = "articles" %}
               {% assign type_icon = "fa-newspaper" %}
@@ -51,7 +54,7 @@ nav_order: 4
   </div>
   {% for type in type_order %}
     {% assign typed_items = library_items | where: "type", type %}
-    {% unless type == "film" %}
+    {% unless type == "film" or type == "show" %}
       {% assign typed_items = typed_items | sort: "date" | reverse %}
     {% endunless %}
     {% if typed_items.size > 0 %}
@@ -60,6 +63,8 @@ nav_order: 4
           {% assign type_label = "books" %}
         {% when "film" %}
           {% assign type_label = "films" %}
+        {% when "show" %}
+          {% assign type_label = "shows" %}
         {% when "article" %}
           {% assign type_label = "articles" %}
         {% when "video" %}
@@ -97,6 +102,6 @@ nav_order: 4
     {% endif %}
   {% endfor %}
 {% else %}
-  <p class="library-empty">Nothing here yet. This is where I'll keep books, films, articles, videos, and conversations worth returning to.</p>
+  <p class="library-empty">Nothing here yet. This is where I'll keep books, films, shows, articles, videos, and conversations worth returning to.</p>
 {% endif %}
 </div>
