@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-library",
           title: "library",
-          description: "Books, films, articles, videos, and podcasts I keep returning to.",
+          description: "Books, films, shows, articles, videos, and podcasts I keep returning to.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/library/";
@@ -86,17 +86,31 @@ ninja.data = [{
         },
       },{id: "library-top-25",
         title: "Top 25",
-        description: "The films that are most meaningful to me, ranked.",
+        description: "My top 25, ranked.",
         section: "Library",
         handler: () => {
           window.open("https://letterboxd.com/zedonkay/list/top-25/", "_blank");
         },
       },{id: "library-honorable-mentions",
         title: "Honorable Mentions",
-        description: "Films I couldn&#39;t fit into the top 25, but that still deserve a mention.",
+        description: "Films I couldn&#39;t fit into the top 25, but that still deserve a mention, unranked.",
         section: "Library",
         handler: () => {
           window.open("https://letterboxd.com/zedonkay/list/honorable-mentions/", "_blank");
+        },
+      },{id: "library-bojack-horseman",
+        title: "BoJack Horseman",
+        description: "It&#39;s become a TV show I reference regularly. I think it does satire incredibly well, making good nuanced commentary about our society while balancing it with incredible humor and not being afraid to punch hard.",
+        section: "Library",
+        handler: () => {
+          window.open("https://en.wikipedia.org/wiki/BoJack_Horseman", "_blank");
+        },
+      },{id: "library-the-bear",
+        title: "The Bear",
+        description: "I just started it, but so far it&#39;s been a really incredible character study with amazing acting, cinematography, and direction. I like the culinary aspects too.",
+        section: "Library",
+        handler: () => {
+          window.open("https://en.wikipedia.org/wiki/The_Bear_(TV_series)", "_blank");
         },
       },{id: "library-the-39-busy-39-trap",
         title: "The &#39;Busy&#39; Trap",
