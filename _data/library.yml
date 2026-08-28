@@ -94,7 +94,9 @@ items:
     url: https://www.businessinsider.com/gen-z-unusual-approach-alcohol-forcing-bars-change-menu-strategy-2025-12
     type: article
     date: 2025-12-17
-    image: /assets/img/library/gen-z-drinking.jpg
+    image: /assets/img/library/gen-z-drinking.png
+    image_fit: contain
+    image_ink: true
     note: >
       I've gotten into making drinks but don't drink, so the rise of craft
       zero-proof cocktails is something I appreciate.
