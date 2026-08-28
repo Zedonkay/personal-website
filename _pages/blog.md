@@ -31,14 +31,14 @@ pagination:
 
 {% assign shown_filters = 0 %}
 {% for tag in site.display_tags %}
-  {% if site.tags[tag] and site.tags[tag].size > 0 %}
-    {% assign shown_filters = shown_filters | plus: 1 %}
-  {% endif %}
+{% if site.tags[tag] and site.tags[tag].size > 0 %}
+{% assign shown_filters = shown_filters | plus: 1 %}
+{% endif %}
 {% endfor %}
 {% for category in site.display_categories %}
-  {% if site.categories[category] and site.categories[category].size > 0 %}
-    {% assign shown_filters = shown_filters | plus: 1 %}
-  {% endif %}
+{% if site.categories[category] and site.categories[category].size > 0 %}
+{% assign shown_filters = shown_filters | plus: 1 %}
+{% endif %}
 {% endfor %}
 
 {% if shown_filters > 0 %}
