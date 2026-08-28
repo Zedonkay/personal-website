@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const blobsRoot = library.querySelector(".library-blobs");
   const grid = library.querySelector(".library-grid");
   const outlines = library.querySelector(".library-outlines");
+  const highlights = library.querySelector(".library-label-highlights");
+  const titles = library.querySelector(".library-label-titles");
   const blobs = Array.from(library.querySelectorAll(".library-blob"));
   const cards = Array.from(library.querySelectorAll(".library-card"));
   const filters = Array.from(library.querySelectorAll("[data-library-filter]"));
@@ -56,9 +58,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const paintOutlines = () => {
     if (!outlines || !blobsRoot) return;
     outlines.replaceChildren();
+    if (highlights) highlights.replaceChildren();
+    if (titles) titles.replaceChildren();
+    library.classList.add("has-outlines");
+
     const origin = blobsRoot.getBoundingClientRect();
     const pad = 10;
     const filtered = library.classList.contains("is-filtered");
+    const xPad = 14;
 
     blobs.forEach((blob) => {
       const shown = Array.from(blob.querySelectorAll(".library-card")).filter((card) => {
@@ -76,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else rows.push({ top: rect.top, rects: [rect] });
       });
 
-      rows.forEach((row) => {
+      rows.forEach((row, index) => {
         const left = Math.min(...row.rects.map((rect) => rect.left));
         const right = Math.max(...row.rects.map((rect) => rect.right));
         const top = Math.min(...row.rects.map((rect) => rect.top));
@@ -88,6 +95,27 @@ document.addEventListener("DOMContentLoaded", () => {
         box.style.width = `${right - left + pad * 2}px`;
         box.style.height = `${bottom - top + pad * 2}px`;
         outlines.appendChild(box);
+
+        if (index !== 0 || !titles || !highlights) return;
+
+        const label = blob.id || blob.dataset.group || "";
+        const titleLeft = left - origin.left - pad + xPad;
+        const titleTop = top - origin.top - pad;
+        const title = document.createElement("span");
+        title.className = "library-label-title";
+        title.textContent = label;
+        title.style.left = `${titleLeft}px`;
+        title.style.top = `${titleTop}px`;
+        titles.appendChild(title);
+
+        const titleRect = title.getBoundingClientRect();
+        const highlight = document.createElement("span");
+        highlight.className = "library-label-highlight";
+        highlight.style.left = `${titleRect.left - origin.left - 6}px`;
+        highlight.style.top = `${titleTop}px`;
+        highlight.style.width = `${titleRect.width + 12}px`;
+        highlight.style.height = `${Math.max(titleRect.height, 1)}px`;
+        highlights.appendChild(highlight);
       });
     });
   };

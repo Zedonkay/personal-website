@@ -56,6 +56,8 @@ nav_order: 4
   </div>
   <div class="library-blobs">
     <div class="library-outlines" aria-hidden="true"></div>
+    <div class="library-label-highlights" aria-hidden="true"></div>
+    <div class="library-label-titles" aria-hidden="true"></div>
     <div class="library-grid">
     {% for type in type_order %}
       {% assign typed_items = library_items | where: "type", type %}

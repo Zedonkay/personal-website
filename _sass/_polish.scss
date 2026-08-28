@@ -161,11 +161,24 @@ body.fixed-top-nav {
   padding-top: 0.7rem;
 }
 
-.library-outlines {
+.library-outlines,
+.library-label-highlights,
+.library-label-titles {
   position: absolute;
   inset: 0;
-  z-index: 0;
   pointer-events: none;
+}
+
+.library-outlines {
+  z-index: 0;
+}
+
+.library-label-highlights {
+  z-index: 1;
+}
+
+.library-label-titles {
+  z-index: 2;
 }
 
 .library-outline {
@@ -173,11 +186,36 @@ body.fixed-top-nav {
   box-sizing: border-box;
   border: 1.5px dashed color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
   border-radius: 1.15rem;
-  background-color: color-mix(in srgb, var(--global-card-bg-color) 35%, transparent);
+  background-color: transparent;
   pointer-events: auto;
 }
 
+.library-label-highlight {
+  position: absolute;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  border-radius: 3px;
+  background-color: var(--global-bg-color);
+}
+
+.library-label-title {
+  position: absolute;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--global-title-color);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
 .library-grid {
+  position: relative;
+  z-index: 3;
   display: grid;
   width: 100%;
   grid-template-columns: minmax(0, 1fr);
@@ -209,7 +247,6 @@ body.fixed-top-nav {
   position: absolute;
   top: -10px;
   left: 0.85rem;
-  z-index: 2;
   transform: translateY(-50%);
   margin: 0;
   padding: 0 0.42rem;
@@ -222,6 +259,18 @@ body.fixed-top-nav {
   line-height: 1.2;
   text-align: left;
   white-space: nowrap;
+}
+
+.library.has-outlines .library-card .library-blob-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .library-card {
