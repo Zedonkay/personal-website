@@ -55,7 +55,7 @@ nav_order: 4
   <div class="library-blobs">
     {% for type in type_order %}
       {% assign typed_items = library_items | where: "type", type %}
-      {% unless type == "film" or type == "show" %}
+      {% unless type == "film" or type == "show" or type == "video" %}
         {% assign typed_items = typed_items | sort: "date" | reverse %}
       {% endunless %}
       {% if typed_items.size > 0 %}
@@ -79,7 +79,7 @@ nav_order: 4
             {% for item in typed_items %}
               <li class="library-card">
                 {% if item.image %}
-                  <a class="library-card-thumb{% if item.image_fit == 'contain' %} library-card-thumb--contain{% endif %}" href="{{ item.url }}" target="_blank" rel="noopener">
+                  <a class="library-card-thumb{% if item.image_fit == 'contain' %} library-card-thumb--contain{% endif %}{% if item.image_ink %} library-card-thumb--ink{% endif %}" href="{{ item.url }}" target="_blank" rel="noopener">
                     {%
                       include figure.liquid
                       path=item.image

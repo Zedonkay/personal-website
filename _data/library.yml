@@ -11,6 +11,7 @@
 #     date: 2026-08-28
 #     image: /assets/img/library/example.jpg
 #     image_fit: contain  # optional; use for logos that should not crop
+#     image_ink: true     # optional; invert dark logos in dark mode
 #     note: Why it stayed with you.
 
 items:
@@ -113,6 +114,16 @@ items:
       is a companion, though that applies more to the handmade expensive
       things.
 
+  - title: "Making Stuff"
+    creator: David Pogue
+    source: NOVA
+    url: https://www.pbs.org/wgbh/nova/series/making-stuff/
+    type: video
+    date: 2011-01-19
+    image: /assets/img/library/making-stuff.jpg
+    note: >
+      An entertaining introduction to science that helped cultivate my interest.
+
   - title: "Great Big Story"
     source: YouTube
     url: https://www.youtube.com/@GreatBigStory
@@ -122,6 +133,18 @@ items:
     image_fit: contain
     note: >
       Gives a platform to the little people doing big things.
+
+  - title: "Stuff Made Here"
+    creator: Shane Wighton
+    source: YouTube
+    url: https://www.youtube.com/@StuffMadeHere
+    type: video
+    date: 2020-03-01
+    image: /assets/img/library/stuff-made-here.png
+    image_fit: contain
+    image_ink: true
+    note: >
+      Awesome, enjoyable, and well-made engineering projects.
 
   - title: "James Hoffmann"
     creator: James Hoffmann
@@ -134,16 +157,6 @@ items:
       Informative, and makes "fine" things unpretentious while remaining
       honest to the fanciness.
 
-  - title: "Making Stuff"
-    creator: David Pogue
-    source: NOVA
-    url: https://www.pbs.org/wgbh/nova/series/making-stuff/
-    type: video
-    date: 2011-01-19
-    image: /assets/img/library/making-stuff.jpg
-    note: >
-      A truly moving series that really shaped my early youth.
-
   - title: "Hunting the Elements"
     creator: David Pogue
     source: NOVA
@@ -154,13 +167,3 @@ items:
     note: >
       This is what developed my interest in chemistry, which I believed for
       10+ years would be my future.
-
-  - title: "Stuff Made Here"
-    creator: Shane Wighton
-    source: YouTube
-    url: https://www.youtube.com/@StuffMadeHere
-    type: video
-    date: 2020-03-01
-    image: /assets/img/library/stuff-made-here.jpg
-    note: >
-      Awesome, enjoyable, and well-made engineering projects.

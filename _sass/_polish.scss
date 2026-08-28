@@ -142,24 +142,34 @@ body.fixed-top-nav {
   color: inherit;
 }
 
+.library {
+  --library-cols: 2;
+  --library-thumb: 5.75rem;
+  --library-card-h: calc(var(--library-thumb) * 3 / 2);
+  --library-gap: 0.65rem;
+}
+
 .library-filters {
   margin-bottom: 0.25rem;
 }
 
 .library-blobs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20.5rem), 1fr));
-  gap: 1.85rem 1.4rem;
-  align-items: start;
+  grid-template-columns: repeat(var(--library-cols), minmax(0, 1fr));
+  gap: 1.7rem 1.2rem;
+  align-items: stretch;
   margin-top: 2.1rem;
 }
 
 .library-blob {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  height: 100%;
   padding: 1.15rem 0.7rem 0.65rem;
   border: 1.5px dashed color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
-  border-radius: 1.35rem 0.85rem 1.5rem 1.05rem;
+  border-radius: 1.15rem;
   background-color: color-mix(in srgb, var(--global-card-bg-color) 45%, transparent);
   scroll-margin-top: 5.5rem;
 }
@@ -190,15 +200,18 @@ body.fixed-top-nav {
 .library-gallery {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.7rem;
-  justify-content: start;
+  grid-auto-rows: var(--library-card-h);
+  gap: var(--library-gap);
+  flex: 1;
+  align-content: start;
+  justify-content: stretch;
   list-style: none;
   padding: 0;
   margin: 0.15rem 0 0;
 }
 
 .library-blob--wide .library-gallery {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  grid-template-columns: repeat(var(--library-cols), minmax(0, 1fr));
 }
 
 .library-card {
@@ -206,7 +219,9 @@ body.fixed-top-nav {
   flex-direction: row;
   align-items: stretch;
   width: 100%;
+  height: 100%;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
@@ -225,10 +240,9 @@ body.fixed-top-nav {
 
 .library-card-thumb {
   display: block;
-  flex: 0 0 5.75rem;
-  width: 5.75rem;
-  aspect-ratio: 2 / 3;
-  align-self: flex-start;
+  flex: 0 0 var(--library-thumb);
+  width: var(--library-thumb);
+  height: 100%;
   overflow: hidden;
   background-color: color-mix(in srgb, var(--global-text-color) 8%, var(--global-bg-color));
 
@@ -266,20 +280,29 @@ body.fixed-top-nav {
   }
 }
 
+html[data-theme="dark"] .library-card-thumb--ink img,
+html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
+  filter: invert(1);
+}
+
 .library-card-body {
   display: flex;
   flex-direction: column;
-  gap: 0.32rem;
+  gap: 0.28rem;
   flex: 1;
   min-width: 0;
-  padding: 0.65rem 0.8rem 0.7rem;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.55rem 0.75rem 0.55rem;
 
   h3 {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.35rem;
+    gap: 0.3rem;
     margin: 0;
+    max-height: 2.55em;
+    overflow: hidden;
     font-size: 1.02rem;
     line-height: 1.25;
   }
@@ -296,7 +319,10 @@ body.fixed-top-nav {
 
   .post-meta {
     margin-top: auto;
-    padding-top: 0.1rem;
+    padding-top: 0.05rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -312,11 +338,18 @@ body.fixed-top-nav {
 
 .library-note {
   color: var(--global-text-color);
-  font-size: 0.97rem;
-  line-height: 1.5;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  font-size: 0.92rem;
+  line-height: 1.4;
 
   p {
     margin-bottom: 0.35rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
   }
 
   p:last-child {
@@ -801,23 +834,18 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
     grid-template-columns: 1fr;
   }
 
+  .library {
+    --library-cols: 1;
+    --library-thumb: 4.85rem;
+  }
+
   .library-blobs {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
     margin-top: 1.75rem;
-  }
-
-  .library-blob--wide .library-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .library-card-thumb {
-    flex-basis: 4.85rem;
-    width: 4.85rem;
+    gap: 1.6rem;
   }
 
   .library-card-body {
-    padding: 0.55rem 0.7rem 0.6rem;
+    padding: 0.5rem 0.65rem 0.5rem;
 
     h3 {
       font-size: 0.96rem;
