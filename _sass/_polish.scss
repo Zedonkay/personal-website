@@ -237,7 +237,8 @@ body.fixed-top-nav {
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
   border-radius: 9px;
-  --library-thumb: 5.75rem;
+  --library-thumb: 5.5rem;
+  --library-thumb-inset: 0.8rem;
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;
@@ -253,13 +254,31 @@ body.fixed-top-nav {
 }
 
 .library-card-thumb {
+  position: relative;
   display: block;
+  box-sizing: border-box;
   flex: 0 0 var(--library-thumb);
   width: var(--library-thumb);
   aspect-ratio: 2 / 3;
-  align-self: flex-start;
+  align-self: center;
+  margin: var(--library-thumb-inset) 0 var(--library-thumb-inset) var(--library-thumb-inset);
   overflow: hidden;
-  background-color: color-mix(in srgb, var(--global-text-color) 8%, var(--global-bg-color));
+  border-radius: 11px;
+  background-color: color-mix(in srgb, var(--global-text-color) 6%, var(--global-card-bg-color));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--global-text-color) 10%, transparent),
+    0 3px 10px color-mix(in srgb, var(--global-text-color) 9%, transparent);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: color-mix(in srgb, var(--global-bg-color) 26%, transparent);
+    mix-blend-mode: multiply;
+  }
 
   figure,
   picture {
@@ -284,9 +303,13 @@ body.fixed-top-nav {
 }
 
 .library-card-thumb--contain {
-  box-sizing: border-box;
-  padding: 0.45rem 0.4rem;
-  background-color: var(--global-card-bg-color);
+  padding: 0.42rem 0.38rem;
+  background-color: color-mix(in srgb, var(--global-text-color) 3%, var(--global-card-bg-color));
+  box-shadow: 0 0 0 1px var(--global-divider-color);
+
+  &::after {
+    content: none;
+  }
 
   img,
   .library-card-image {
@@ -306,7 +329,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   gap: 0.4rem;
   flex: 1;
   min-width: 0;
-  padding: 0.85rem 1rem 0.9rem;
+  padding: 0.75rem 1rem 0.75rem 0.85rem;
   overflow-wrap: break-word;
 
   h3 {
