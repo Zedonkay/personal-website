@@ -18,24 +18,39 @@ document.addEventListener("DOMContentLoaded", () => {
     history.replaceState(null, "", id ? url : url.pathname + url.search);
   };
 
+  const visibleCards = () =>
+    cards.filter((card) => {
+      if (library.classList.contains("is-filtered") && !card.classList.contains("is-active")) return false;
+      return true;
+    });
+
   const fitGrid = () => {
-    if (!grid) return;
+    if (!grid) return 1;
     const styles = getComputedStyle(library);
     const min = parseFloat(styles.getPropertyValue("--library-cell-min")) * rem();
     const max = parseFloat(styles.getPropertyValue("--library-cell-max")) * rem();
     const gap = parseFloat(getComputedStyle(grid).columnGap) || 18;
     const width = grid.clientWidth;
-    if (!width || !min) return;
+    cards.forEach((card) => {
+      card.style.gridColumn = "";
+    });
+    if (!width || !min) return 1;
 
-    let cols = Math.floor((width + gap) / (min + gap));
-    cols = Math.max(1, cols);
+    const cellWidth = (count) => (width - gap * Math.max(0, count - 1)) / count;
 
-    const cellWidth = (count) => (width - gap * (count - 1)) / count;
-
+    let cols = Math.max(1, Math.floor((width + gap) / (min + gap)));
     while (cols > 1 && cellWidth(cols) < min) cols -= 1;
     while (cellWidth(cols) > max && cellWidth(cols + 1) >= min) cols += 1;
 
-    grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, min(100%, ${Math.round(max)}px)))`;
+    grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+
+    const shown = visibleCards();
+    const leftover = shown.length % cols;
+    if (cols > 1 && leftover === 1) {
+      shown[shown.length - 1].style.gridColumn = "1 / -1";
+    }
+
+    return cols;
   };
 
   const paintOutlines = () => {
