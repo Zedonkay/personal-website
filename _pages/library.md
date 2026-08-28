@@ -73,29 +73,42 @@ nav_order: 4
           {% assign type_label = "podcasts" %}
       {% endcase %}
       <h2 class="library-section-title" id="{{ type_label }}">{{ type_label }}</h2>
-      <ul class="post-list library-list">
+      <ul class="library-gallery">
         {% for item in typed_items %}
-          <li>
-            <h3>
-              <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
-              {% if item.companion.title and item.companion.url %}
-                <span class="library-cofeature" aria-hidden="true">/</span>
-                <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}</a>
-              {% endif %}
-              <i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i>
-            </h3>
-            {% if item.note %}
-              <div class="library-note">{{ item.note | markdownify }}</div>
+          <li class="library-card">
+            {% if item.image %}
+              <a class="library-card-thumb" href="{{ item.url }}" target="_blank" rel="noopener">
+                {%
+                  include figure.liquid
+                  path=item.image
+                  alt=item.title
+                  class="library-card-image"
+                  sizes="(min-width: 768px) 30vw, 90vw"
+                %}
+              </a>
             {% endif %}
-            <p class="post-meta">
-              {% if item.creator %}{{ item.creator }}{% endif %}
-              {% if item.creator and item.source %}&nbsp;&middot;&nbsp;{% endif %}
-              {% if item.source %}{{ item.source }}{% endif %}
-              {% if item.date %}
-                {% if item.creator or item.source %}&nbsp;&middot;&nbsp;{% endif %}
-                {{ item.date | date: "%B %d, %Y" }}
+            <div class="library-card-body">
+              <h3>
+                <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                {% if item.companion.title and item.companion.url %}
+                  <span class="library-cofeature" aria-hidden="true">/</span>
+                  <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}</a>
+                {% endif %}
+                <i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i>
+              </h3>
+              {% if item.note %}
+                <div class="library-note">{{ item.note | markdownify }}</div>
               {% endif %}
-            </p>
+              <p class="post-meta">
+                {% if item.creator %}{{ item.creator }}{% endif %}
+                {% if item.creator and item.source %}&nbsp;&middot;&nbsp;{% endif %}
+                {% if item.source %}{{ item.source }}{% endif %}
+                {% if item.date %}
+                  {% if item.creator or item.source %}&nbsp;&middot;&nbsp;{% endif %}
+                  {{ item.date | date: "%B %d, %Y" }}
+                {% endif %}
+              </p>
+            </div>
           </li>
         {% endfor %}
       </ul>

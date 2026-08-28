@@ -9,6 +9,7 @@
 #     url: https://example.com
 #     type: article
 #     date: 2026-08-28
+#     image: /assets/img/library/example.jpg
 #     note: Why it stayed with you.
 
 items:
@@ -17,6 +18,7 @@ items:
     url: https://en.wikipedia.org/wiki/Slaughterhouse-Five
     type: book
     date: 1969-03-31
+    image: /assets/img/library/slaughterhouse-five.jpg
     note: >
       An intriguing exploration of concepts I care a lot about.
 
@@ -25,6 +27,7 @@ items:
     url: https://en.wikipedia.org/wiki/The_Silmarillion
     type: book
     date: 1977-09-15
+    image: /assets/img/library/silmarillion.jpg
     note: >
       I've always loved myth, and the idea of writing a book that lets you
       develop your own myth system is so cool. I really appreciate the ideas
@@ -36,6 +39,7 @@ items:
     url: https://letterboxd.com/zedonkay/list/top-25/
     type: film
     date: 2026-08-11
+    image: /assets/img/library/letterboxd-top-25.jpg
     note: >
       My top 25, ranked.
 
@@ -44,6 +48,7 @@ items:
     url: https://letterboxd.com/zedonkay/list/honorable-mentions/
     type: film
     date: 2026-08-23
+    image: /assets/img/library/letterboxd-honorable-mentions.jpg
     note: >
       Films I couldn't fit into the top 25, but that still deserve a mention, unranked.
 
@@ -53,6 +58,7 @@ items:
     url: https://en.wikipedia.org/wiki/BoJack_Horseman
     type: show
     date: 2014-08-22
+    image: /assets/img/library/bojack-horseman.jpg
     note: >
       It's become a TV show I reference regularly. I think it does satire
       incredibly well, making good nuanced commentary about our society
@@ -65,6 +71,7 @@ items:
     url: https://en.wikipedia.org/wiki/The_Bear_(TV_series)
     type: show
     date: 2022-06-23
+    image: /assets/img/library/the-bear.jpg
     note: >
       I just started it, but so far it's been a really incredible character
       study with amazing acting, cinematography, and direction. I like the
@@ -76,6 +83,7 @@ items:
     url: https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1
     type: article
     date: 2012-06-30
+    image: /assets/img/library/busy-trap.jpg
     note: >
       Something I really resonated with.
 
@@ -85,6 +93,7 @@ items:
     url: https://www.businessinsider.com/gen-z-unusual-approach-alcohol-forcing-bars-change-menu-strategy-2025-12
     type: article
     date: 2025-12-17
+    image: /assets/img/library/gen-z-drinking.jpg
     note: >
       I've gotten into making drinks but don't drink, so the rise of craft
       zero-proof cocktails is something I appreciate.
@@ -97,6 +106,7 @@ items:
       url: https://www.businessinsider.com/show/so-expensive
     type: video
     date: 2020-09-12
+    image: /assets/img/library/still-standing.jpg
     note: >
       Gives incredible people, artists, craftsmen, and artisans a platform in
       a world that so often shuns or neglects creative pursuits. So Expensive
@@ -108,6 +118,7 @@ items:
     url: https://www.youtube.com/@GreatBigStory
     type: video
     date: 2015-10-01
+    image: /assets/img/library/great-big-story.jpg
     note: >
       Gives a platform to the little people doing big things.
 
@@ -117,6 +128,7 @@ items:
     url: https://www.youtube.com/@jameshoffmann
     type: video
     date: 2016-01-01
+    image: /assets/img/library/james-hoffmann.jpg
     note: >
       Informative, and makes "fine" things unpretentious while remaining
       honest to the fanciness.
@@ -127,6 +139,7 @@ items:
     url: https://www.pbs.org/wgbh/nova/series/making-stuff/
     type: video
     date: 2011-01-19
+    image: /assets/img/library/making-stuff.jpg
     note: >
       A truly moving series that really shaped my early youth.
 
@@ -136,6 +149,7 @@ items:
     url: https://www.pbs.org/wgbh/nova/physics/hunting-elements.html
     type: video
     date: 2012-04-04
+    image: /assets/img/library/hunting-the-elements.jpg
     note: >
       This is what developed my interest in chemistry, which I believed for
       10+ years would be my future.
@@ -146,5 +160,6 @@ items:
     url: https://www.youtube.com/@StuffMadeHere
     type: video
     date: 2020-03-01
+    image: /assets/img/library/stuff-made-here.jpg
     note: >
       Awesome, enjoyable, and well-made engineering projects.
