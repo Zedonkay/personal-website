@@ -114,7 +114,7 @@ ninja.data = [{
         },
       },{id: "library-the-39-busy-39-trap",
         title: "The &#39;Busy&#39; Trap",
-        description: "Something I really resonated with.",
+        description: "Like what the author has to say.",
         section: "Library",
         handler: () => {
           window.open("https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1", "_blank");
