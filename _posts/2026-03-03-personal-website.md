@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Launching My Personal Website
-date: 2026-03-03 15:00:38
+date: 2026-02-03 15:00:38
 description: Building a digital home for research and hobbies
 categories: life
 ---
