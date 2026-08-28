@@ -79,7 +79,7 @@ ninja.data = [{
         },
       },{id: "library-the-silmarillion",
         title: "The Silmarillion",
-        description: "I&#39;ve always loved myth, and the idea of writing a book that lets you develop your own myth system is so cool. I really appreciate the ideas it puts forth about the way the world works, and I love the direction Tolkien took with it.",
+        description: "I&#39;ve always loved myth, and the idea of writing a book that lets you develop your own myth system is so cool. I really appreciate the ideas it puts forth (I&#39;ll let you discover it for yourself).",
         section: "Library",
         handler: () => {
           window.open("https://en.wikipedia.org/wiki/The_Silmarillion", "_blank");
@@ -100,7 +100,7 @@ ninja.data = [{
         },
       },{id: "library-bojack-horseman",
         title: "BoJack Horseman",
-        description: "It&#39;s become a TV show I reference regularly. I think it does satire incredibly well, making good nuanced commentary about our society while balancing it with incredible humor and not being afraid to punch hard.",
+        description: "It&#39;s become a TV show I reference regularly. I think it does satire incredibly well, making good nuanced commentary about our society while balancing it with incredible humor and not being afraid make  you sit in your sadness.",
         section: "Library",
         handler: () => {
           window.open("https://en.wikipedia.org/wiki/BoJack_Horseman", "_blank");
@@ -133,12 +133,26 @@ ninja.data = [{
         handler: () => {
           window.open("https://www.businessinsider.com/show/still-standing", "_blank");
         },
+      },{id: "library-making-stuff",
+        title: "Making Stuff",
+        description: "An entertaining introduction to science that helped cultivate my interest.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.pbs.org/wgbh/nova/series/making-stuff/", "_blank");
+        },
       },{id: "library-great-big-story",
         title: "Great Big Story",
         description: "Gives a platform to the little people doing big things.",
         section: "Library",
         handler: () => {
           window.open("https://www.youtube.com/@GreatBigStory", "_blank");
+        },
+      },{id: "library-stuff-made-here",
+        title: "Stuff Made Here",
+        description: "Awesome, enjoyable, and well-made engineering projects.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.youtube.com/@StuffMadeHere", "_blank");
         },
       },{id: "library-james-hoffmann",
         title: "James Hoffmann",
@@ -147,26 +161,12 @@ ninja.data = [{
         handler: () => {
           window.open("https://www.youtube.com/@jameshoffmann", "_blank");
         },
-      },{id: "library-making-stuff",
-        title: "Making Stuff",
-        description: "A truly moving series that really shaped my early youth.",
-        section: "Library",
-        handler: () => {
-          window.open("https://www.pbs.org/wgbh/nova/series/making-stuff/", "_blank");
-        },
       },{id: "library-hunting-the-elements",
         title: "Hunting the Elements",
         description: "This is what developed my interest in chemistry, which I believed for 10+ years would be my future.",
         section: "Library",
         handler: () => {
           window.open("https://www.pbs.org/wgbh/nova/physics/hunting-elements.html", "_blank");
-        },
-      },{id: "library-stuff-made-here",
-        title: "Stuff Made Here",
-        description: "Awesome, enjoyable, and well-made engineering projects.",
-        section: "Library",
-        handler: () => {
-          window.open("https://www.youtube.com/@StuffMadeHere", "_blank");
         },
       },{id: "projects-autonomous-racing",
           title: 'Autonomous Racing',
