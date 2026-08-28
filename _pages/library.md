@@ -52,68 +52,72 @@ nav_order: 4
       {% endfor %}
     </ul>
   </div>
-  {% for type in type_order %}
-    {% assign typed_items = library_items | where: "type", type %}
-    {% unless type == "film" or type == "show" %}
-      {% assign typed_items = typed_items | sort: "date" | reverse %}
-    {% endunless %}
-    {% if typed_items.size > 0 %}
-      {% case type %}
-        {% when "book" %}
-          {% assign type_label = "books" %}
-        {% when "film" %}
-          {% assign type_label = "films" %}
-        {% when "show" %}
-          {% assign type_label = "shows" %}
-        {% when "article" %}
-          {% assign type_label = "articles" %}
-        {% when "video" %}
-          {% assign type_label = "videos" %}
-        {% when "podcast" %}
-          {% assign type_label = "podcasts" %}
-      {% endcase %}
-      <h2 class="library-section-title" id="{{ type_label }}">{{ type_label }}</h2>
-      <ul class="library-gallery">
-        {% for item in typed_items %}
-          <li class="library-card">
-            {% if item.image %}
-              <a class="library-card-thumb" href="{{ item.url }}" target="_blank" rel="noopener">
-                {%
-                  include figure.liquid
-                  path=item.image
-                  alt=item.title
-                  class="library-card-image"
-                  sizes="(min-width: 768px) 30vw, 90vw"
-                %}
-              </a>
-            {% endif %}
-            <div class="library-card-body">
-              <h3>
-                <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
-                {% if item.companion.title and item.companion.url %}
-                  <span class="library-cofeature" aria-hidden="true">/</span>
-                  <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}</a>
+  <div class="library-blobs">
+    {% for type in type_order %}
+      {% assign typed_items = library_items | where: "type", type %}
+      {% unless type == "film" or type == "show" %}
+        {% assign typed_items = typed_items | sort: "date" | reverse %}
+      {% endunless %}
+      {% if typed_items.size > 0 %}
+        {% case type %}
+          {% when "book" %}
+            {% assign type_label = "books" %}
+          {% when "film" %}
+            {% assign type_label = "films" %}
+          {% when "show" %}
+            {% assign type_label = "shows" %}
+          {% when "article" %}
+            {% assign type_label = "articles" %}
+          {% when "video" %}
+            {% assign type_label = "videos" %}
+          {% when "podcast" %}
+            {% assign type_label = "podcasts" %}
+        {% endcase %}
+        <section class="library-blob{% if typed_items.size >= 4 %} library-blob--wide{% endif %}" id="{{ type_label }}" data-count="{{ typed_items.size }}">
+          <h2 class="library-blob-label">{{ type_label }}</h2>
+          <ul class="library-gallery">
+            {% for item in typed_items %}
+              <li class="library-card">
+                {% if item.image %}
+                  <a class="library-card-thumb{% if item.image_fit == 'contain' %} library-card-thumb--contain{% endif %}" href="{{ item.url }}" target="_blank" rel="noopener">
+                    {%
+                      include figure.liquid
+                      path=item.image
+                      alt=item.title
+                      class="library-card-image"
+                      sizes="96px"
+                    %}
+                  </a>
                 {% endif %}
-                <i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i>
-              </h3>
-              {% if item.note %}
-                <div class="library-note">{{ item.note | markdownify }}</div>
-              {% endif %}
-              <p class="post-meta">
-                {% if item.creator %}{{ item.creator }}{% endif %}
-                {% if item.creator and item.source %}&nbsp;&middot;&nbsp;{% endif %}
-                {% if item.source %}{{ item.source }}{% endif %}
-                {% if item.date %}
-                  {% if item.creator or item.source %}&nbsp;&middot;&nbsp;{% endif %}
-                  {{ item.date | date: "%B %d, %Y" }}
-                {% endif %}
-              </p>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endfor %}
+                <div class="library-card-body">
+                  <h3>
+                    <a class="post-title" href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                    {% if item.companion.title and item.companion.url %}
+                      <span class="library-cofeature" aria-hidden="true">/</span>
+                      <a class="post-title" href="{{ item.companion.url }}" target="_blank" rel="noopener">{{ item.companion.title }}</a>
+                    {% endif %}
+                    <i class="fa-solid fa-arrow-up-right-from-square fa-xs library-external" aria-hidden="true"></i>
+                  </h3>
+                  {% if item.note %}
+                    <div class="library-note">{{ item.note | markdownify }}</div>
+                  {% endif %}
+                  <p class="post-meta">
+                    {% if item.creator %}{{ item.creator }}{% endif %}
+                    {% if item.creator and item.source %}&nbsp;&middot;&nbsp;{% endif %}
+                    {% if item.source %}{{ item.source }}{% endif %}
+                    {% if item.date %}
+                      {% if item.creator or item.source %}&nbsp;&middot;&nbsp;{% endif %}
+                      {{ item.date | date: "%B %d, %Y" }}
+                    {% endif %}
+                  </p>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% else %}
   <p class="library-empty">Nothing here yet. This is where I'll keep books, films, shows, articles, videos, and conversations worth returning to.</p>
 {% endif %}

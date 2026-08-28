@@ -10,6 +10,7 @@
 #     type: article
 #     date: 2026-08-28
 #     image: /assets/img/library/example.jpg
+#     image_fit: contain  # optional; use for logos that should not crop
 #     note: Why it stayed with you.
 
 items:
@@ -31,8 +32,7 @@ items:
     note: >
       I've always loved myth, and the idea of writing a book that lets you
       develop your own myth system is so cool. I really appreciate the ideas
-      it puts forth about the way the world works, and I love the direction
-      Tolkien took with it.
+      it puts forth (I'll let you discover it for yourself).
 
   - title: "Top 25"
     source: Letterboxd
@@ -62,8 +62,8 @@ items:
     note: >
       It's become a TV show I reference regularly. I think it does satire
       incredibly well, making good nuanced commentary about our society
-      while balancing it with incredible humor and not being afraid to
-      punch hard.
+      while balancing it with incredible humor and not being afraid make 
+      you sit in your sadness.
 
   - title: "The Bear"
     creator: Christopher Storer
@@ -118,7 +118,8 @@ items:
     url: https://www.youtube.com/@GreatBigStory
     type: video
     date: 2015-10-01
-    image: /assets/img/library/great-big-story.jpg
+    image: /assets/img/library/great-big-story.png
+    image_fit: contain
     note: >
       Gives a platform to the little people doing big things.
 
