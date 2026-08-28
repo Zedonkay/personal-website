@@ -183,11 +183,22 @@ body.fixed-top-nav {
 
 .library-outline {
   position: absolute;
-  box-sizing: border-box;
-  border: 1.5px dashed color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
-  border-radius: 1.15rem;
-  background-color: transparent;
+  overflow: visible;
+  color: color-mix(in srgb, var(--global-theme-color) 32%, var(--global-divider-color));
   pointer-events: auto;
+}
+
+.library-outline-hit {
+  fill: transparent;
+  stroke: none;
+}
+
+.library-outline-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
 }
 
 .library-label-highlight {
