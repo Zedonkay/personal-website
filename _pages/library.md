@@ -2,7 +2,7 @@
 layout: page
 permalink: /library/
 title: library
-description: Articles, videos, and podcasts I keep returning to.
+description: Books, articles, videos, and podcasts I keep returning to.
 nav: true
 nav_order: 4
 ---
@@ -12,7 +12,7 @@ nav_order: 4
 {% if library_items == nil %}
   {% assign library_items = "" | split: "" %}
 {% endif %}
-{% assign type_order = "article,video,podcast" | split: "," %}
+{% assign type_order = "book,article,video,podcast" | split: "," %}
 {% if library_items.size > 0 %}
   <div class="tag-category-list library-filters">
     <ul class="p-0 m-0">
@@ -21,6 +21,9 @@ nav_order: 4
         {% assign typed_items = library_items | where: "type", type %}
         {% if typed_items.size > 0 %}
           {% case type %}
+            {% when "book" %}
+              {% assign type_label = "books" %}
+              {% assign type_icon = "fa-book" %}
             {% when "article" %}
               {% assign type_label = "articles" %}
               {% assign type_icon = "fa-newspaper" %}
@@ -47,6 +50,8 @@ nav_order: 4
     {% assign typed_items = library_items | where: "type", type | sort: "date" | reverse %}
     {% if typed_items.size > 0 %}
       {% case type %}
+        {% when "book" %}
+          {% assign type_label = "books" %}
         {% when "article" %}
           {% assign type_label = "articles" %}
         {% when "video" %}
@@ -80,6 +85,6 @@ nav_order: 4
     {% endif %}
   {% endfor %}
 {% else %}
-  <p class="library-empty">Nothing here yet. This is where I'll keep writing, talks, and conversations worth returning to.</p>
+  <p class="library-empty">Nothing here yet. This is where I'll keep books, articles, videos, and conversations worth returning to.</p>
 {% endif %}
 </div>

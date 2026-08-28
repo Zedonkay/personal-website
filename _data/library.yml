@@ -1,5 +1,5 @@
-# Articles, videos, and podcasts worth keeping.
-# type: article | video | podcast
+# Books, articles, videos, and podcasts worth keeping.
+# type: book | article | video | podcast
 #
 # Example:
 # items:
@@ -11,4 +11,96 @@
 #     date: 2026-08-28
 #     note: Why it stayed with you.
 
-items: []
+items:
+  - title: "Slaughterhouse-Five"
+    creator: Kurt Vonnegut
+    url: https://en.wikipedia.org/wiki/Slaughterhouse-Five
+    type: book
+    date: 1969-03-31
+    note: >
+      An intriguing exploration of concepts I care a lot about.
+
+  - title: "The Silmarillion"
+    creator: J.R.R. Tolkien
+    url: https://en.wikipedia.org/wiki/The_Silmarillion
+    type: book
+    date: 1977-09-15
+    note: >
+      I've always loved myth, and the idea of writing a book that lets you
+      develop your own myth system is so cool. I really appreciate the ideas
+      it puts forth about the way the world works, and I love the direction
+      Tolkien took with it.
+
+  - title: "The 'Busy' Trap"
+    creator: Tim Kreider
+    source: The New York Times
+    url: https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1
+    type: article
+    date: 2012-06-30
+    note: >
+      Something I really resonated with.
+
+  - title: "Gen Z feels weird talking about drinking — and it's forcing bars to change"
+    creator: Katherine Ortiz
+    source: Business Insider
+    url: https://www.businessinsider.com/gen-z-unusual-approach-alcohol-forcing-bars-change-menu-strategy-2025-12
+    type: article
+    date: 2025-12-17
+    note: >
+      I've gotten into making drinks but don't drink, so the rise of craft
+      zero-proof cocktails is something I appreciate.
+
+  - title: "Still Standing"
+    source: Business Insider
+    url: https://www.businessinsider.com/show/still-standing
+    type: video
+    date: 2020-09-12
+    note: >
+      Gives incredible people, artists, craftsmen, and artisans a platform in
+      a world that so often shuns or neglects creative pursuits.
+
+  - title: "Great Big Story"
+    source: YouTube
+    url: https://www.youtube.com/@GreatBigStory
+    type: video
+    date: 2015-10-01
+    note: >
+      Gives a platform to the little people doing big things.
+
+  - title: "James Hoffmann"
+    creator: James Hoffmann
+    source: YouTube
+    url: https://www.youtube.com/@jameshoffmann
+    type: video
+    date: 2016-01-01
+    note: >
+      Informative, and makes "fine" things unpretentious while remaining
+      honest to the fanciness.
+
+  - title: "Making Stuff"
+    creator: David Pogue
+    source: NOVA
+    url: https://www.pbs.org/wgbh/nova/series/making-stuff/
+    type: video
+    date: 2011-01-19
+    note: >
+      A truly moving series that really shaped my early youth.
+
+  - title: "Hunting the Elements"
+    creator: David Pogue
+    source: NOVA
+    url: https://www.pbs.org/wgbh/nova/physics/hunting-elements.html
+    type: video
+    date: 2012-04-04
+    note: >
+      This is what developed my interest in chemistry, which I believed for
+      10+ years would be my future.
+
+  - title: "Stuff Made Here"
+    creator: Shane Wighton
+    source: YouTube
+    url: https://www.youtube.com/@StuffMadeHere
+    type: video
+    date: 2020-03-01
+    note: >
+      Awesome, enjoyable, and well-made engineering projects.
