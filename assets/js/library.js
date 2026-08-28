@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const origin = blobsRoot.getBoundingClientRect();
     const pad = 10;
     const filtered = library.classList.contains("is-filtered");
-    const xPad = 14;
+    const xPad = pad + 0.85 * rem();
 
     blobs.forEach((blob) => {
       const shown = Array.from(blob.querySelectorAll(".library-card")).filter((card) => {
