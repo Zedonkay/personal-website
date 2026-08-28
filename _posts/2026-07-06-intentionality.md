@@ -4,6 +4,7 @@ title: Hobbies
 date: 2026-07-06 14:30:00
 description: Slowing down and smelling the roses
 categories: life
+tags: [hobbies]
 ---
 
 For most of my life, I've been someone who defines myself through hobbies. I've always been fascinated by the small rituals that surround everyday life and make ordinary moments beautiful. However, somewhere along the way I begun to lose that.
