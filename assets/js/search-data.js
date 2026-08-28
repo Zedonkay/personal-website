@@ -93,7 +93,7 @@ ninja.data = [{
         },
       },{id: "library-honorable-mentions",
         title: "Honorable Mentions",
-        description: "Films I couldn&#39;t fit into the top 25, but that still deserve a mention, unranked.",
+        description: "Films I couldn&#39;t fit into the top 25, but still deserve a mention, unranked.",
         section: "Library",
         handler: () => {
           window.open("https://letterboxd.com/zedonkay/list/honorable-mentions/", "_blank");
