@@ -30,7 +30,40 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
-        },{id: "projects-autonomous-racing",
+        },{id: "post-hobbies",
+        
+          title: "Hobbies",
+        
+        description: "Slowing down and smelling the roses",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/intentionality/";
+          
+        },
+      },{id: "post-launching-my-personal-website",
+        
+          title: "Launching My Personal Website",
+        
+        description: "Building a digital home for research and hobbies",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/personal-website/";
+          
+        },
+      },{id: "post-food",
+        
+          title: "Food",
+        
+        description: "My journey through cooking",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/food/";
+          
+        },
+      },{id: "projects-autonomous-racing",
           title: 'Autonomous Racing',
           description: "Research at Carnegie Mellon Racing (CMR) into Model-free RL and Real2Sim2Real dynamics",
           section: "Projects",handler: () => {
