@@ -151,6 +151,44 @@ body.fixed-top-nav {
 
 .library-filters {
   margin-bottom: 0.25rem;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+
+    i {
+      margin-right: 0.15rem;
+    }
+
+    &:hover {
+      color: var(--global-title-color);
+      text-decoration: none;
+    }
+
+    &.is-active {
+      color: var(--global-title-color);
+      background-color: var(--global-muted-bg-color);
+      font-weight: 650;
+    }
+  }
+}
+
+.library.is-filtered .library-blob {
+  display: none;
+}
+
+.library.is-filtered .library-blob.is-active {
+  display: flex;
+  grid-column: 1 / -1;
+}
+
+.library.is-filtered .library-blob.is-active .library-gallery {
+  grid-template-columns: repeat(var(--library-cols), minmax(0, 1fr));
 }
 
 .library-blobs {

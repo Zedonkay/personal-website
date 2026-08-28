@@ -44,8 +44,10 @@ nav_order: 4
             <p>&bull;</p>
           {% endif %}
           <li>
-            <i class="fa-solid {{ type_icon }} fa-sm"></i>
-            <a href="#{{ type_label }}">{{ type_label }}</a>
+            <a href="#{{ type_label }}" data-library-filter="{{ type_label }}">
+              <i class="fa-solid {{ type_icon }} fa-sm"></i>
+              {{ type_label }}
+            </a>
           </li>
           {% assign filter_index = filter_index | plus: 1 %}
         {% endif %}
