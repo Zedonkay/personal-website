@@ -186,6 +186,9 @@
 {% if page.permalink == '/library/' %}
   <script defer src="{{ '/assets/js/library.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
+{% if page.permalink == '/blog/' %}
+  <script defer src="{{ '/assets/js/blog.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}
 
 <!-- Jupyter Open External Links New Tab -->
 <script defer src="{{ '/assets/js/jupyter_new_tab.js' | relative_url | bust_file_cache }}"></script>

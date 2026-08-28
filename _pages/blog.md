@@ -5,7 +5,7 @@ title: blog
 nav: true
 nav_order: 3
 pagination:
-  enabled: true
+  enabled: false
   collection: posts
   permalink: /page/:num/
   per_page: 5
@@ -16,7 +16,7 @@ pagination:
     after: 3 # The number of links after the current page
 ---
 
-<div class="post">
+<div class="post blog-index">
 
 {% assign blog_name_size = site.blog_name | size %}
 {% assign blog_description_size = site.blog_description | size %}
@@ -43,7 +43,7 @@ pagination:
 
 {% if shown_filters > 0 %}
 
-  <div class="tag-category-list">
+  <div class="tag-category-list blog-filters">
     <ul class="p-0 m-0">
       {% assign filter_index = 0 %}
       {% for tag in site.display_tags %}
@@ -52,7 +52,9 @@ pagination:
           <p>&bull;</p>
         {% endif %}
         <li>
-          <i class="fa-solid fa-hashtag fa-sm"></i> <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
+          <a href="#tag-{{ tag | slugify }}" data-blog-filter="tag-{{ tag | slugify }}">
+            <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}
+          </a>
         </li>
         {% assign filter_index = filter_index | plus: 1 %}
         {% endif %}
@@ -63,7 +65,9 @@ pagination:
           <p>&bull;</p>
         {% endif %}
         <li>
-          <i class="fa-solid fa-tag fa-sm"></i> <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
+          <a href="#category-{{ category | slugify }}" data-blog-filter="category-{{ category | slugify }}">
+            <i class="fa-solid fa-tag fa-sm"></i> {{ category }}
+          </a>
         </li>
         {% assign filter_index = filter_index | plus: 1 %}
         {% endif %}
@@ -101,8 +105,7 @@ pagination:
 
                     <p class="post-meta">
                       {{ read_time }} min read &nbsp; &middot; &nbsp;
-                      <a href="{{ year | prepend: '/blog/' | relative_url }}">
-                        <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
+                      <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
                     </p>
                   </div>
                 </div>
@@ -119,11 +122,7 @@ pagination:
 
   <ul class="post-list">
 
-    {% if page.pagination.enabled %}
-      {% assign postlist = paginator.posts %}
-    {% else %}
-      {% assign postlist = site.posts %}
-    {% endif %}
+    {% assign postlist = site.posts %}
 
     {% for post in postlist %}
 
@@ -136,7 +135,11 @@ pagination:
     {% assign tags = post.tags | join: "" %}
     {% assign categories = post.categories | join: "" %}
 
-    <li>
+    <li
+      data-blog-tags="{% for tag in post.tags %}{{ tag | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
+      data-blog-categories="{% for category in post.categories %}{{ category | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
+      data-blog-year="{{ year }}"
+    >
 
 {% if post.thumbnail %}
 
@@ -164,13 +167,13 @@ pagination:
         {% endif %}
       </p>
       <p class="post-tags">
-        <a href="{{ year | prepend: '/blog/' | relative_url }}">
+        <a href="#year-{{ year }}" data-blog-filter="year-{{ year }}">
           <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
 
           {% if tags != "" %}
           &nbsp; &middot; &nbsp;
             {% for tag in post.tags %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">
+            <a href="#tag-{{ tag | slugify }}" data-blog-filter="tag-{{ tag | slugify }}">
               <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
               {% unless forloop.last %}
                 &nbsp;
@@ -181,7 +184,7 @@ pagination:
           {% if categories != "" %}
           &nbsp; &middot; &nbsp;
             {% for category in post.categories %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">
+            <a href="#category-{{ category | slugify }}" data-blog-filter="category-{{ category | slugify }}">
               <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a>
               {% unless forloop.last %}
                 &nbsp;
@@ -205,8 +208,6 @@ pagination:
 
   </ul>
 
-{% if page.pagination.enabled %}
-{% include pagination.liquid %}
-{% endif %}
+  <p class="blog-filter-empty" hidden>No posts match this filter.</p>
 
 </div>

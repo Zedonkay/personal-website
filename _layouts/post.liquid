@@ -24,7 +24,7 @@ layout: default
     </p>
     <p class="post-tags">
       {% if url_beginning == '/blog/' %}
-        <a href="{{ year | prepend: '/blog/' | relative_url }}"> <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
+        <a href="{{ '/blog/' | relative_url }}#year-{{ year }}"> <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
       {% else %}
         <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
       {% endif %}
@@ -32,7 +32,7 @@ layout: default
         &nbsp; &middot; &nbsp;
         {% for tag in page.tags %}
           {% if url_beginning == '/blog/' %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}"> <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
+            <a href="{{ '/blog/' | relative_url }}#tag-{{ tag | slugify }}"> <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
           {% else %}
             <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}
           {% endif %}
@@ -46,7 +46,7 @@ layout: default
         &nbsp; &middot; &nbsp;
         {% for category in page.categories %}
           {% if url_beginning == '/blog/' %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}"> <i class="fa-solid fa-tag fa-sm"></i> {{ category -}}</a>
+            <a href="{{ '/blog/' | relative_url }}#category-{{ category | slugify }}"> <i class="fa-solid fa-tag fa-sm"></i> {{ category -}}</a>
           {% else %}
             <i class="fa-solid fa-tag fa-sm"></i> {{ category }}
           {% endif %}
