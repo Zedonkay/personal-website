@@ -99,8 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const fitDashes = (length, open) => {
-    const targetDash = 6;
-    const targetGap = 4;
+    const targetDash = 3;
+    const targetGap = 2.25;
     const period = targetDash + targetGap;
     if (length < 2) return { dash: length, gap: 0 };
     if (open) {
