@@ -56,12 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const SVG = "http://www.w3.org/2000/svg";
-  const outlineRadius = () => 1.15 * rem();
   const dashLength = 3;
   const dashGap = 2.25;
   const dashPeriod = dashLength + dashGap;
 
   const snap = (value) => Math.round(value * 2) / 2;
+
+  const cardRadiusPx = () => {
+    const card = cards.find((entry) => entry.getBoundingClientRect().width > 0) || cards[0];
+    if (!card) return 9;
+    const value = parseFloat(getComputedStyle(card).borderTopLeftRadius);
+    return Number.isFinite(value) ? value : 9;
+  };
 
   const periodOffset = (start) => {
     const offset = start % dashPeriod;
@@ -161,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     arcs.forEach((arc) => {
       addPath(
-        `M ${snap(arc.sx)} ${snap(arc.sy)} A ${snap(arc.r)} ${snap(arc.r)} 0 0 1 ${snap(arc.ex)} ${snap(arc.ey)}`,
+        `M ${snap(arc.sx)} ${snap(arc.sy)} A ${snap(arc.rx)} ${snap(arc.ry)} 0 0 1 ${snap(arc.ex)} ${snap(arc.ey)}`,
         arc.offset
       );
     });
@@ -169,13 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
     outlines.appendChild(svg);
   };
 
-  const emitBoxGeometry = (box, lines, arcs) => {
-    const radius = Math.min(outlineRadius(), box.w / 2, box.h / 2);
-    if (radius < 1 || box.w < 4 || box.h < 4) return;
+  const emitBoxGeometry = (box, lines, arcs, rx, ry) => {
+    rx = Math.min(Math.max(rx, 0), box.w / 2);
+    ry = Math.min(Math.max(ry, 0), box.h / 2);
+    if (box.w < 4 || box.h < 4) return;
     const x0 = box.x;
     const y0 = box.y;
     const x1 = box.x + box.w;
     const y1 = box.y + box.h;
+    const round = rx >= 1 && ry >= 1;
 
     const pushH = (from, to, y) => {
       const left = Math.min(from, to);
@@ -188,22 +196,24 @@ document.addEventListener("DOMContentLoaded", () => {
       if (bottom - top > 0.75) lines.push({ x1: x, y1: top, x2: x, y2: bottom });
     };
 
-    const topL = x0 + radius;
-    const topR = x1 - radius;
+    const topL = round ? x0 + rx : x0;
+    const topR = round ? x1 - rx : x1;
     if (box.gapTo > box.gapFrom + 6) {
       pushH(topL, Math.min(box.gapFrom, topR), y0);
       pushH(Math.max(box.gapTo, topL), topR, y0);
     } else {
       pushH(topL, topR, y0);
     }
-    pushV(x1, y0 + radius, y1 - radius);
+    pushV(x1, round ? y0 + ry : y0, round ? y1 - ry : y1);
     pushH(topL, topR, y1);
-    pushV(x0, y0 + radius, y1 - radius);
+    pushV(x0, round ? y0 + ry : y0, round ? y1 - ry : y1);
 
-    arcs.push({ sx: x1 - radius, sy: y0, ex: x1, ey: y0 + radius, r: radius, offset: x1 - radius });
-    arcs.push({ sx: x1, sy: y1 - radius, ex: x1 - radius, ey: y1, r: radius, offset: y1 - radius });
-    arcs.push({ sx: x0 + radius, sy: y1, ex: x0, ey: y1 - radius, r: radius, offset: x0 + radius });
-    arcs.push({ sx: x0, sy: y0 + radius, ex: x0 + radius, ey: y0, r: radius, offset: y0 + radius });
+    if (!round) return;
+
+    arcs.push({ sx: x1 - rx, sy: y0, ex: x1, ey: y0 + ry, rx, ry, offset: x1 - rx });
+    arcs.push({ sx: x1, sy: y1 - ry, ex: x1 - rx, ey: y1, rx, ry, offset: y1 - ry });
+    arcs.push({ sx: x0 + rx, sy: y1, ex: x0, ey: y1 - ry, rx, ry, offset: x0 + rx });
+    arcs.push({ sx: x0, sy: y0 + ry, ex: x0 + rx, ey: y0, rx, ry, offset: y0 + ry });
   };
 
   const paintHit = (box) => {
@@ -306,7 +316,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const lines = [];
     const arcs = [];
-    boxes.forEach((box) => emitBoxGeometry(box, lines, arcs));
+    const cardR = cardRadiusPx();
+    const rx = cardR + padX;
+    const ry = cardR + padY;
+    boxes.forEach((box) => emitBoxGeometry(box, lines, arcs, rx, ry));
     paintStrokeSvg(lines, arcs);
   };
 

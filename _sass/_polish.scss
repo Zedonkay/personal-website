@@ -147,6 +147,9 @@ body.fixed-top-nav {
   --library-cell-max: 40rem;
   --library-row-min: 9.5rem;
   --library-gap: 1.15rem;
+  --library-thumb-inset: 0.8rem;
+  --library-thumb-radius: 6px;
+  --library-card-radius: calc(var(--library-thumb-radius) + 1px + var(--library-thumb-inset));
   container-type: inline-size;
   container-name: library;
 }
@@ -305,9 +308,8 @@ body.fixed-top-nav {
   overflow: visible;
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
-  border-radius: 9px;
+  border-radius: var(--library-card-radius);
   --library-thumb: 5.5rem;
-  --library-thumb-inset: 0.8rem;
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;
@@ -332,7 +334,7 @@ body.fixed-top-nav {
   align-self: center;
   margin: var(--library-thumb-inset) 0 var(--library-thumb-inset) var(--library-thumb-inset);
   overflow: hidden;
-  border-radius: 11px;
+  border-radius: var(--library-thumb-radius);
   background-color: color-mix(in srgb, var(--global-text-color) 6%, var(--global-card-bg-color));
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--global-text-color) 10%, transparent),
@@ -384,6 +386,7 @@ body.fixed-top-nav {
   .library-card-image {
     object-fit: contain;
     object-position: center;
+    border-radius: max(0px, calc(var(--library-thumb-radius) - 0.42rem));
   }
 }
 
