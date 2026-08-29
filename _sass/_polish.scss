@@ -148,7 +148,7 @@ body.fixed-top-nav {
   --library-row-min: 9.5rem;
   --library-gap: 1.15rem;
   --library-thumb-inset: 0.8rem;
-  --library-thumb-radius: 6px;
+  --library-thumb-radius: var(--radius-media);
   --library-card-radius: calc(var(--library-thumb-radius) + 1px + var(--library-thumb-inset));
   container-type: inline-size;
   container-name: library;
@@ -535,7 +535,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
+    border-radius: var(--radius-media);
     border: 1px solid var(--global-divider-color);
   }
 
@@ -561,10 +561,13 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .publications ol.bibliography > li,
 .projects ul.bibliography > li {
+  --card-pad: 1rem;
+  --nested-radius: var(--radius-media);
+  --card-radius: calc(var(--nested-radius) + 1px + var(--card-pad));
   margin-bottom: 1.1rem;
-  padding: 1rem;
+  padding: var(--card-pad);
   border: 1px solid var(--global-divider-color);
-  border-radius: 8px;
+  border-radius: var(--card-radius);
   background: var(--global-card-bg-color);
   box-shadow: 0 10px 26px color-mix(in srgb, var(--global-text-color) 4%, transparent);
   transition:
@@ -581,8 +584,12 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 }
 
 .projects ul.bibliography > li {
+  --card-pad-y: 1.15rem;
+  --card-pad-x: 1.35rem;
+  --card-radius: calc(var(--nested-radius) + 1px + var(--card-pad-x)) /
+    calc(var(--nested-radius) + 1px + var(--card-pad-y));
   position: relative;
-  padding: 1.15rem 1.35rem;
+  padding: var(--card-pad-y) var(--card-pad-x);
   margin-bottom: 1.15rem;
 }
 
@@ -590,7 +597,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border-radius: 8px;
+  border-radius: inherit;
 }
 
 .projects ul.bibliography > li .links a.btn,
@@ -632,9 +639,10 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   display: block;
   width: 100%;
   height: auto;
-  border: none;
-  background: transparent;
-  overflow: visible;
+  overflow: hidden;
+  background-color: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: var(--nested-radius);
 }
 
 .projects ul.bibliography li .abbr .publication-preview-link {
@@ -665,7 +673,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   width: 100%;
   aspect-ratio: 3 / 2;
   border: 1px solid var(--global-divider-color);
-  border-radius: 8px !important;
+  border-radius: var(--nested-radius) !important;
   object-fit: cover;
   box-shadow: none !important;
 }
@@ -673,7 +681,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 .publications ol.bibliography li .preview-video-embed {
   aspect-ratio: 16 / 9;
   border: 1px solid var(--global-divider-color);
-  border-radius: 8px !important;
+  border-radius: var(--nested-radius) !important;
   overflow: hidden;
   box-shadow: none !important;
   background-color: var(--global-card-bg-color);
@@ -697,7 +705,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   width: 100%;
   aspect-ratio: 3 / 1.3;
   border: 1px solid var(--global-divider-color);
-  border-radius: 8px !important;
+  border-radius: var(--nested-radius) !important;
   object-fit: cover;
   box-shadow: none !important;
 }
@@ -731,7 +739,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   overflow: hidden;
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
-  border-radius: 8px;
+  border-radius: var(--nested-radius);
 }
 
 .projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]) figure,
@@ -1007,11 +1015,14 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 
   .publications ol.bibliography > li,
   .projects ul.bibliography > li {
-    padding: 0.9rem;
+    --card-pad: 0.9rem;
+    padding: var(--card-pad);
   }
 
   .projects ul.bibliography > li {
-    padding: 1rem 1.1rem;
+    --card-pad-y: 1rem;
+    --card-pad-x: 1.1rem;
+    padding: var(--card-pad-y) var(--card-pad-x);
   }
 
   .publications ol.bibliography li .abbr,
