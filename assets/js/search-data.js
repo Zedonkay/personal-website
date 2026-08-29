@@ -32,7 +32,7 @@ ninja.data = [{
           },
         },{id: "nav-library",
           title: "library",
-          description: "Books, films, shows, articles, videos, and podcasts I keep returning to.",
+          description: "Books, films, shows, articles, videos, and podcasts I&#39;ve consumed or reconsumed recently I&#39;d like to mention",
           section: "Navigation",
           handler: () => {
             window.location.href = "/library/";
