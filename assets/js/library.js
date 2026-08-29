@@ -227,8 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    const findNext = (x, y) =>
-      unused.find((edge) => !edge.used && Math.abs(edge.x1 - x) < 0.51 && Math.abs(edge.y1 - y) < 0.51);
+    const findNext = (x, y) => unused.find((edge) => !edge.used && Math.abs(edge.x1 - x) < 0.51 && Math.abs(edge.y1 - y) < 0.51);
     const rings = [];
     unused.forEach((start) => {
       if (start.used) return;
@@ -269,9 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const trimIn = Math.min(inH ? rx : ry, inLen * 0.5 - 0.25);
       const trimOut = Math.min(Math.abs(oy) < 0.5 ? rx : ry, outLen * 0.5 - 0.25);
       const convex = ix * oy - iy * ox < -0.5 && trimIn >= 1 && trimOut >= 1;
-      const start = convex
-        ? { x: curr.x - ix * trimIn, y: curr.y - iy * trimIn }
-        : { x: curr.x, y: curr.y };
+      const start = convex ? { x: curr.x - ix * trimIn, y: curr.y - iy * trimIn } : { x: curr.x, y: curr.y };
       corners.push({
         start,
         end: convex ? { x: curr.x + ox * trimOut, y: curr.y + oy * trimOut } : { x: curr.x, y: curr.y },

@@ -586,8 +586,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 .projects ul.bibliography > li {
   --card-pad-y: 1.15rem;
   --card-pad-x: 1.35rem;
-  --card-radius: calc(var(--nested-radius) + 1px + var(--card-pad-x)) /
-    calc(var(--nested-radius) + 1px + var(--card-pad-y));
+  --card-radius: calc(var(--nested-radius) + 1px + var(--card-pad-x)) / calc(var(--nested-radius) + 1px + var(--card-pad-y));
   position: relative;
   padding: var(--card-pad-y) var(--card-pad-x);
   margin-bottom: 1.15rem;
