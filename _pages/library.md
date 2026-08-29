@@ -2,7 +2,7 @@
 layout: page
 permalink: /library/
 title: library
-description: Books, films, shows, articles, videos, and podcasts I keep returning to.
+description: Books, films, shows, articles, videos, and podcasts I've consumed or reconsumed recently I'd like to mention
 nav: true
 nav_order: 4
 ---
