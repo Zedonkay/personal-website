@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     arcs.forEach((arc) => {
       addPath(
-        `M ${snap(arc.sx)} ${snap(arc.sy)} A ${snap(arc.rx)} ${snap(arc.ry)} 0 0 1 ${snap(arc.ex)} ${snap(arc.ey)}`,
+        `M ${snap(arc.sx)} ${snap(arc.sy)} A ${snap(arc.rx)} ${snap(arc.ry)} 0 0 ${arc.sweep ?? 1} ${snap(arc.ex)} ${snap(arc.ey)}`,
         arc.offset
       );
     });
@@ -175,45 +175,145 @@ document.addEventListener("DOMContentLoaded", () => {
     outlines.appendChild(svg);
   };
 
-  const emitBoxGeometry = (box, lines, arcs, rx, ry) => {
-    rx = Math.min(Math.max(rx, 0), box.w / 2);
-    ry = Math.min(Math.max(ry, 0), box.h / 2);
-    if (box.w < 4 || box.h < 4) return;
-    const x0 = box.x;
-    const y0 = box.y;
-    const x1 = box.x + box.w;
-    const y1 = box.y + box.h;
-    const round = rx >= 1 && ry >= 1;
-
-    const pushH = (from, to, y) => {
-      const left = Math.min(from, to);
-      const right = Math.max(from, to);
-      if (right - left > 0.75) lines.push({ x1: left, y1: y, x2: right, y2: y });
-    };
-    const pushV = (x, from, to) => {
-      const top = Math.min(from, to);
-      const bottom = Math.max(from, to);
-      if (bottom - top > 0.75) lines.push({ x1: x, y1: top, x2: x, y2: bottom });
-    };
-
-    const topL = round ? x0 + rx : x0;
-    const topR = round ? x1 - rx : x1;
-    if (box.gapTo > box.gapFrom + 6) {
-      pushH(topL, Math.min(box.gapFrom, topR), y0);
-      pushH(Math.max(box.gapTo, topL), topR, y0);
-    } else {
-      pushH(topL, topR, y0);
+  const simplifyRing = (pts) => {
+    const out = [];
+    const n = pts.length;
+    for (let i = 0; i < n; i += 1) {
+      const prev = pts[(i - 1 + n) % n];
+      const curr = pts[i];
+      const next = pts[(i + 1) % n];
+      const cross = (curr.x - prev.x) * (next.y - curr.y) - (curr.y - prev.y) * (next.x - curr.x);
+      if (Math.abs(cross) > 0.05) out.push(curr);
     }
-    pushV(x1, round ? y0 + ry : y0, round ? y1 - ry : y1);
-    pushH(topL, topR, y1);
-    pushV(x0, round ? y0 + ry : y0, round ? y1 - ry : y1);
+    return out;
+  };
 
-    if (!round) return;
+  const outlineRings = (rects) => {
+    if (!rects.length) return [];
+    const xs = [...new Set(rects.flatMap((rect) => [snap(rect.x), snap(rect.x + rect.w)]))].sort((a, b) => a - b);
+    const ys = [...new Set(rects.flatMap((rect) => [snap(rect.y), snap(rect.y + rect.h)]))].sort((a, b) => a - b);
+    if (xs.length < 2 || ys.length < 2) return [];
+    const cols = xs.length - 1;
+    const rows = ys.length - 1;
+    const occ = Array.from({ length: cols }, () => Array(rows).fill(false));
+    rects.forEach((rect) => {
+      const x0 = snap(rect.x);
+      const x1 = snap(rect.x + rect.w);
+      const y0 = snap(rect.y);
+      const y1 = snap(rect.y + rect.h);
+      for (let i = 0; i < cols; i += 1) {
+        const mx = (xs[i] + xs[i + 1]) / 2;
+        if (mx < x0 || mx > x1) continue;
+        for (let j = 0; j < rows; j += 1) {
+          const my = (ys[j] + ys[j + 1]) / 2;
+          if (my >= y0 && my <= y1) occ[i][j] = true;
+        }
+      }
+    });
 
-    arcs.push({ sx: x1 - rx, sy: y0, ex: x1, ey: y0 + ry, rx, ry, offset: x1 - rx });
-    arcs.push({ sx: x1, sy: y1 - ry, ex: x1 - rx, ey: y1, rx, ry, offset: y1 - ry });
-    arcs.push({ sx: x0 + rx, sy: y1, ex: x0, ey: y1 - ry, rx, ry, offset: x0 + rx });
-    arcs.push({ sx: x0, sy: y0 + ry, ex: x0 + rx, ey: y0, rx, ry, offset: y0 + ry });
+    const unused = [];
+    const add = (x1, y1, x2, y2) => unused.push({ x1, y1, x2, y2, used: false });
+    for (let i = 0; i < cols; i += 1) {
+      for (let j = 0; j < rows; j += 1) {
+        if (!occ[i][j]) continue;
+        const x0 = xs[i];
+        const x1 = xs[i + 1];
+        const y0 = ys[j];
+        const y1 = ys[j + 1];
+        if (j === 0 || !occ[i][j - 1]) add(x1, y0, x0, y0);
+        if (j === rows - 1 || !occ[i][j + 1]) add(x0, y1, x1, y1);
+        if (i === 0 || !occ[i - 1][j]) add(x0, y0, x0, y1);
+        if (i === cols - 1 || !occ[i + 1][j]) add(x1, y1, x1, y0);
+      }
+    }
+
+    const findNext = (x, y) =>
+      unused.find((edge) => !edge.used && Math.abs(edge.x1 - x) < 0.51 && Math.abs(edge.y1 - y) < 0.51);
+    const rings = [];
+    unused.forEach((start) => {
+      if (start.used) return;
+      const pts = [];
+      let edge = start;
+      let guard = 0;
+      while (edge && !edge.used && guard < unused.length + 2) {
+        edge.used = true;
+        pts.push({ x: edge.x1, y: edge.y1 });
+        const next = findNext(edge.x2, edge.y2);
+        if (!next) break;
+        if (next === start || next.used) break;
+        edge = next;
+        guard += 1;
+      }
+      const simple = simplifyRing(pts);
+      if (simple.length >= 4) rings.push(simple);
+    });
+    return rings;
+  };
+
+  const emitRoundedRing = (pts, lines, arcs, rx, ry, gapFrom, gapTo) => {
+    const n = pts.length;
+    if (n < 3) return;
+    const minY = Math.min(...pts.map((pt) => pt.y));
+    const corners = [];
+    for (let i = 0; i < n; i += 1) {
+      const prev = pts[(i - 1 + n) % n];
+      const curr = pts[i];
+      const next = pts[(i + 1) % n];
+      const inLen = Math.hypot(curr.x - prev.x, curr.y - prev.y);
+      const outLen = Math.hypot(next.x - curr.x, next.y - curr.y);
+      const ix = Math.sign(curr.x - prev.x);
+      const iy = Math.sign(curr.y - prev.y);
+      const ox = Math.sign(next.x - curr.x);
+      const oy = Math.sign(next.y - curr.y);
+      const inH = Math.abs(iy) < 0.5;
+      const trimIn = Math.min(inH ? rx : ry, inLen * 0.5 - 0.25);
+      const trimOut = Math.min(Math.abs(oy) < 0.5 ? rx : ry, outLen * 0.5 - 0.25);
+      const convex = ix * oy - iy * ox < -0.5 && trimIn >= 1 && trimOut >= 1;
+      const start = convex
+        ? { x: curr.x - ix * trimIn, y: curr.y - iy * trimIn }
+        : { x: curr.x, y: curr.y };
+      corners.push({
+        start,
+        end: convex ? { x: curr.x + ox * trimOut, y: curr.y + oy * trimOut } : { x: curr.x, y: curr.y },
+        rx: inH ? trimIn : trimOut,
+        ry: inH ? trimOut : trimIn,
+        offset: inH ? start.x : start.y,
+        convex,
+      });
+    }
+
+    const pushSeg = (from, to) => {
+      if (Math.hypot(to.x - from.x, to.y - from.y) < 0.75) return;
+      const horizontal = Math.abs(from.y - to.y) < 0.51;
+      if (horizontal && Math.abs(from.y - minY) <= 0.51 && gapTo > gapFrom + 6) {
+        const y = from.y;
+        const left = Math.min(from.x, to.x);
+        const right = Math.max(from.x, to.x);
+        const cutL = Math.max(left, Math.min(gapFrom, right));
+        const cutR = Math.max(left, Math.min(gapTo, right));
+        if (cutL - left > 0.75) lines.push({ x1: left, y1: y, x2: cutL, y2: y });
+        if (right - cutR > 0.75) lines.push({ x1: cutR, y1: y, x2: right, y2: y });
+        return;
+      }
+      lines.push({ x1: from.x, y1: from.y, x2: to.x, y2: to.y });
+    };
+
+    for (let i = 0; i < n; i += 1) {
+      const corner = corners[i];
+      pushSeg(corner.end, corners[(i + 1) % n].start);
+      if (corner.convex) {
+        arcs.push({
+          sx: corner.start.x,
+          sy: corner.start.y,
+          ex: corner.end.x,
+          ey: corner.end.y,
+          rx: corner.rx,
+          ry: corner.ry,
+          offset: corner.offset,
+          sweep: 0,
+        });
+      }
+    }
   };
 
   const paintHit = (box) => {
@@ -270,6 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const top = Math.min(...row.rects.map((rect) => rect.top));
         const bottom = Math.max(...row.rects.map((rect) => rect.bottom));
         boxes.push({
+          blobId: blob.id || blob.dataset.group || "",
           x: left - origin.left - padX,
           y: top - origin.top - padY,
           w: right - left + padX * 2,
@@ -319,7 +420,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardR = cardRadiusPx();
     const rx = cardR + padX;
     const ry = cardR + padY;
-    boxes.forEach((box) => emitBoxGeometry(box, lines, arcs, rx, ry));
+    const groups = new Map();
+    boxes.forEach((box) => {
+      const id = box.blobId || "";
+      if (!groups.has(id)) groups.set(id, []);
+      groups.get(id).push(box);
+    });
+    groups.forEach((group) => {
+      const rects = group.map((box) => ({ x: box.x, y: box.y, w: box.w, h: box.h }));
+      const labeled = group.find((box) => box.gapTo > box.gapFrom + 6);
+      outlineRings(rects).forEach((pts) => {
+        emitRoundedRing(pts, lines, arcs, rx, ry, labeled ? labeled.gapFrom : 0, labeled ? labeled.gapTo : 0);
+      });
+    });
     paintStrokeSvg(lines, arcs);
   };
 
