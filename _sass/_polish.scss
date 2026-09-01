@@ -559,6 +559,16 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   }
 }
 
+.projects {
+  --project-thumb-radius: var(--radius-media);
+  --project-card-radius: calc(#{$radius-media} + 1px + 0.8rem);
+}
+
+.publications {
+  --publication-thumb-radius: var(--radius-media);
+  --publication-card-radius: calc(#{$radius-media} + 1px + 0.8rem);
+}
+
 .publications ol.bibliography > li,
 .projects ul.bibliography > li {
   --card-pad: 1rem;
@@ -584,9 +594,10 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 }
 
 .projects ul.bibliography > li {
-  --card-pad-y: 1.15rem;
-  --card-pad-x: 1.35rem;
-  --card-radius: calc(#{$radius-media} + 1px + 1.35rem) / calc(#{$radius-media} + 1px + 1.15rem);
+  --card-pad-y: 0.8rem;
+  --card-pad-x: 0.8rem;
+  --nested-radius: var(--project-thumb-radius);
+  --card-radius: var(--project-card-radius);
   position: relative;
   padding: var(--card-pad-y) var(--card-pad-x);
   margin-bottom: 1.15rem;
@@ -632,8 +643,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .projects ul.bibliography li .abbr figure:has(img[src*="CMR"]),
 .projects ul.bibliography li .abbr figure:has(img[src*="systems_figure"]),
-.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]),
-.projects ul.bibliography li .abbr .publication-preview-link:has(video[src*="midpoint_demo"]) {
+.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]) {
   margin: 0;
   display: block;
   width: 100%;
@@ -642,6 +652,18 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   background-color: var(--global-card-bg-color);
   border: 1px solid var(--global-divider-color);
   border-radius: var(--nested-radius);
+}
+
+.projects ul.bibliography li .abbr .publication-preview-link:has(video[src*="midpoint_demo"]) {
+  margin: 0;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .projects ul.bibliography li .abbr .publication-preview-link {
@@ -731,8 +753,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .projects ul.bibliography li .publication-preview-link:has(img[src*="CMR"]),
 .projects ul.bibliography li .publication-preview-link:has(img[src*="systems_figure"]),
-.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]),
-.projects ul.bibliography li .publication-preview-link:has(video[src*="midpoint_demo"]) {
+.projects ul.bibliography li .publication-preview-link:has(img[src*="Robodsl"]) {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -1020,9 +1041,9 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
   }
 
   .projects ul.bibliography > li {
-    --card-pad-y: 1rem;
-    --card-pad-x: 1.1rem;
-    --card-radius: calc(#{$radius-media} + 1px + 1.1rem) / calc(#{$radius-media} + 1px + 1rem);
+    --card-pad-y: 0.8rem;
+    --card-pad-x: 0.8rem;
+    --card-radius: var(--project-card-radius);
     padding: var(--card-pad-y) var(--card-pad-x);
   }
 
