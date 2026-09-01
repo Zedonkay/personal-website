@@ -32,7 +32,7 @@ related_publications: true
 
 ## Overview
 
-At the **[LeCAR Lab](https://lecar-lab.github.io/)**, we asked a simple question about humanoid control: if a robot already knows *what* motion to produce, can a few minutes of its own deployment rollouts teach it *how* to produce that motion under new physics?
+At the **[LeCAR Lab](https://lecar-lab.github.io/)**, we asked a simple question about humanoid control: if a robot already knows _what_ motion to produce, can a few minutes of its own deployment rollouts teach it _how_ to produce that motion under new physics?
 
 **FADA** (Few-Shot Domain Adaptation via Dynamics Alignment) is our answer. It is a Planner–Inverse Dynamics Model controller that specializes to a new domain from roughly **two minutes** of onboard rollouts — no rewards, no mocap, no data labeling, and no simulator refitting. After that update, a Unitree G1 can track a line up a narrow slope, dance with a 3.2 kg front load, and run Kung Fu on soft mats; a Booster T1 can pull a 6 kg laundry basket and circle-walk with an asymmetric arm payload. Zero-shot transfer fails at these tasks.
 
@@ -56,7 +56,7 @@ We wanted the middle: use the robot's own imperfect rollouts, and update only th
 
 ## The Idea
 
-Under a dynamics shift, the *task intent* is often still right. Walking up the ramp still means placing feet on the plank; pulling the basket still means leaning back and driving contact. What changes is the action required to realize that intent.
+Under a dynamics shift, the _task intent_ is often still right. Walking up the ramp still means placing feet on the plank; pulling the basket still means leaning back and driving contact. What changes is the action required to realize that intent.
 
 FADA makes that split explicit. A **planner** maps the command and recent observations to a short-horizon proprioceptive future — the motion the robot should produce. An **inverse dynamics model (IDM)** maps that future, plus recent execution history, to an action chunk. At deployment we freeze the planner and finetune only the IDM, so the robot keeps the same command-to-intent interface and learns a new plan-to-action map.
 
@@ -88,7 +88,7 @@ The pipeline has three stages.
 
 **1. Privileged oracle.** We train a teacher in IsaacSim with task rewards and privileged state (contacts, terrain, actuator parameters, sampled randomization). This policy is not deployable; it exists to label good behavior.
 
-**2. Planner–IDM distillation.** A student that sees only proprioception is trained with DAgger. Two losses matter. The IDM is supervised on the *executed* first action associated with a realized future — including suboptimal student rollouts — so the same objective later applies to imperfect target data. The planner is trained *through* a stop-gradient IDM, so it has to emit futures that actually produce oracle-consistent actions, not futures that merely look like oracle observations.
+**2. Planner–IDM distillation.** A student that sees only proprioception is trained with DAgger. Two losses matter. The IDM is supervised on the _executed_ first action associated with a realized future — including suboptimal student rollouts — so the same objective later applies to imperfect target data. The planner is trained _through_ a stop-gradient IDM, so it has to emit futures that actually produce oracle-consistent actions, not futures that merely look like oracle observations.
 
 **3. Few-shot IDM adaptation.** We roll out the source student in the target domain, freeze the planner and the pretrained IDM, and train LoRA adapters (rank 8) with the same first-action inverse-dynamics loss. Locomotion uses ~2 minutes at 50 Hz (~6000 steps); whole-body tracking uses six repetitions of a ~20 s motion. Full IDM finetuning overfits this budget; LoRA does not.
 
@@ -106,7 +106,7 @@ On hardware, few-shot IDM adaptation improves all five quantitative tasks:
 - **Tracking.** Normalized velocity / MPJPE error drops **27%** versus our own zero-shot student and **16%** versus transformer DAgger, across grocery carrying, Kung Fu on soft mats, and T1 payload circling.
 - The IDM's own action-prediction loss falls on every task, which is the mechanism: the plan-to-action map is closer to the target physics.
 
-The same pattern holds in sim-to-sim. Averaged across five G1/T1 tasks, FADA reduces normalized error **25%** versus zero-shot and **27%** versus transformer DAgger. The largest gain is on T1 Falcon, a force-adaptive locomotion task where a persistent 30 N pull has to be compensated — exactly the setting where a mismatched action map hurts. Finetuning the co-prediction baseline on a future-observation loss *worsens* transfer: better next-state prediction is not the same as a better action generator.
+The same pattern holds in sim-to-sim. Averaged across five G1/T1 tasks, FADA reduces normalized error **25%** versus zero-shot and **27%** versus transformer DAgger. The largest gain is on T1 Falcon, a force-adaptive locomotion task where a persistent 30 N pull has to be compensated — exactly the setting where a mismatched action map hurts. Finetuning the co-prediction baseline on a future-observation loss _worsens_ transfer: better next-state prediction is not the same as a better action generator.
 
 Two ablations we cared about:
 
