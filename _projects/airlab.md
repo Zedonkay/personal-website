@@ -4,6 +4,7 @@ title: Firefighting Drones
 description: A year at AirLab that taught me I don't yet know how to do research
 importance: 1
 category: research
+published: false
 related_publications: false
 ---
 

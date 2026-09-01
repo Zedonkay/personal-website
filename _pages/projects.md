@@ -13,7 +13,7 @@ display_categories: [research, experience, personal]
 {% if site.enable_project_categories and page.display_categories %}
   {% for category in page.display_categories %}
     <h2 class="category" id="{{ category }}">{{ category }}</h2>
-    {% assign categorized_projects = site.projects | where: "category", category %}
+    {% assign categorized_projects = site.projects | where: "category", category | where_exp: "project", "project.published != false" %}
     {% assign sorted_projects = categorized_projects | sort: "importance" %}
     <ul class="bibliography">
       {% for project in sorted_projects %}
@@ -25,7 +25,7 @@ display_categories: [research, experience, personal]
     </ul>
   {% endfor %}
 {% else %}
-  {% assign sorted_projects = site.projects | sort: "importance" %}
+  {% assign sorted_projects = site.projects | where_exp: "project", "project.published != false" | sort: "importance" %}
   <ul class="bibliography">
     {% for project in sorted_projects %}
       <li>
