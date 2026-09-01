@@ -2,6 +2,7 @@
 layout: page
 title: Firefighting Drones
 description: A year at AirLab that taught me I don't know how to do research yet.
+img: assets/img/airlab.jpg
 importance: 3
 category: research
 published: true
