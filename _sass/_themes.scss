@@ -36,7 +36,7 @@
   --global-newsletter-text-color: var(--color-text);
 
   /* Nested rounded rects: inner media radius; shells add their inset. */
-  --radius-media: 6px;
+  --radius-media: #{$radius-media};
 
   --project-link-color: var(--color-secondary);
   --project-link-border: color-mix(in srgb, var(--color-secondary) 55%, var(--color-bg));
