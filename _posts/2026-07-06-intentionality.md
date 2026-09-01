@@ -7,13 +7,13 @@ categories: life
 tags: [hobbies]
 ---
 
-For most of my life, I've been someone who defines myself through hobbies. I've always been fascinated by the small rituals that surround everyday life and make ordinary moments beautiful. However, somewhere along the way I begun to lose that.
+For most of my life, I've been someone who defines myself through hobbies. I've always been fascinated by the small rituals that surround everyday life and make ordinary moments beautiful. However, somewhere along the way I began to lose that.
 
 When I came to college, life became increasingly optimized around work. My days filled with classes, projects, research, internships, recruiting, meetings, and deadlines. Every hour seemed to require a measurable purpose, and before I realized it I slowly optimized away nearly everything that didn't have an obvious return.
 
 My hobbies disappeared. Not all at once, but gradually. I stopped making time for the things that once made me feel grounded because they seemed inefficient. Why listen to an entire album when Spotify can shuffle songs endlessly? Why cook elaborate dinners when meal prep exists?
 
-None of these choices felt significant individually. but together, they fundamentally changed how I experienced my days.
+None of these choices felt significant individually. But together, they fundamentally changed how I experienced my days.
 
 Over the past year I've made a conscious effort to reverse that trend and I've felt more fulfilled than I have in a long time. Rather than searching for a singular defining hobby I've arrived upon a collection of small rituals. I've accumulated a solid set of activities that ask me to slow down, to pay attention, and to enjoy the process rather than rush toward the outcome.
 
