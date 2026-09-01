@@ -178,11 +178,21 @@ ninja.data = [{
           description: "16-831 Final Project exploring Robust RL and Adaptive Uncertainty Sets",
           section: "Projects",handler: () => {
               window.location.href = "/projects/USPS/";
+            },},{id: "projects-firefighting-drones",
+          title: 'Firefighting Drones',
+          description: "A year at AirLab that taught me I don&#39;t know how to do research yet.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/airlab/";
             },},{id: "projects-eigenbot",
           title: 'Eigenbot',
           description: "Research with biorobotics laboratory",
           section: "Projects",handler: () => {
               window.location.href = "/projects/eigenbot/";
+            },},{id: "projects-fada",
+          title: 'FADA',
+          description: "Few-shot domain adaptation for humanoid control via dynamics alignment",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/fada/";
             },},{id: "projects-rigging-magic",
           title: 'Rigging Magic',
           description: "15-418 Final Project exploring GPU-accelerated SPH fluid simulation with rigid-body coupling",
