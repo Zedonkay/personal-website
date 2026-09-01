@@ -1,16 +1,16 @@
 ---
 layout: page
 title: Firefighting Drones
-description: A year at AirLab that taught me I don't yet know how to do research
-importance: 1
+description: A year at AirLab that taught me I don't know how to do research yet.
+importance: 3
 category: research
-published: false
+published: true
 related_publications: false
 ---
 
 I believe that living truthfully has to include the parts of my work that did not go the way I hoped. This page is about my time at **[The AirLab](https://theairlab.org)**, under [Prof. Sebastian Scherer](https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/), working on uncertainty and semantics-aware navigation for quadrotors in wildfire environments. It is also about realizing I had been treating research like something I could just dive into, and that this was a mistake.
 
-I spent about a year on this. I did not leave with a paper, a deployed policy, or a result I would stand behind as finished. What I left with was a much more honest picture of myself as a researcher.
+I spent about a year on this. I did not leave with a paper, a deployed policy, or a result I would stand behind as finished. What I left with was a much more honest picture of myself.
 
 ## The problem I wanted to work on
 

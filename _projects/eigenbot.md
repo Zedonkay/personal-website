@@ -3,7 +3,7 @@ layout: page
 title: Eigenbot
 description: Research with biorobotics laboratory
 img: assets/img/systems_figure_02152025_compressed.png
-importance: 3
+importance: 2
 category: research
 website: https://eigenbot-dnlc.github.io
 pdf: https://drive.google.com/file/d/1OzQ4HGFyejPgjJfGF4eOEWI0iTaIVyjM/view

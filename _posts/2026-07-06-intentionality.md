@@ -25,7 +25,7 @@ I think the clearest example is shaving. Objectively, a wet shave with a double 
 
 However there's something deeply enjoyable about the whole process. Preparing your warm towel for your face, soaking the shaving brush, warming a handmade ceramic scuttle, building a rich lather from an artisan soap, shaving with an aggressive safety razor that demands your attention, and finishing with your post shaving routine.
 
-The process is valuable precisely for its inneficciency. It's valuable because it turns this simple every day activity into something I actively look forward to. It forces me to realize how incredible it is to be so lucky to be able to slow down and enjoy my life.
+The process is valuable precisely for its inefficiency. It's valuable because it turns this simple every day activity into something I actively look forward to. It forces me to realize how incredible it is to be so lucky to be able to slow down and enjoy my life.
 
 The same philosophy extends into skincare. I don't think any singular part of it is incredibly exciting but together it creates a few quiet moments each day where I slow down and just breathe. It also helps that I get to feel like a little kid making potions or playing with dolls.
 
