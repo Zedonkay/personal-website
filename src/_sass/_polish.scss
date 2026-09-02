@@ -1364,8 +1364,9 @@ html[data-theme="dark"] .record-label {
     transform: rotate(var(--record-from, 0deg));
   }
 
+  // PurgeCSS rewrites calc(var(--token)) into invalid CSS; keep the turn in --record-to.
   to {
-    transform: rotate(calc(var(--record-from, 0deg) + 360deg));
+    transform: rotate(var(--record-to, 360deg));
   }
 }
 
@@ -1391,7 +1392,8 @@ html[data-theme="dark"] .record-label {
 
 .watch-gear-crown {
   transform-origin: 80.2px 54.3px;
-  animation: watch-spin calc(var(--watch-spin, 32s) * 10 / 14) linear infinite reverse;
+  // PurgeCSS rewrites calc(var(--token)) into invalid CSS; JS sets --watch-spin-crown.
+  animation: watch-spin var(--watch-spin-crown, 22.857s) linear infinite reverse;
 }
 
 .watch-balance {

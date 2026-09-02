@@ -186,10 +186,13 @@ function stamp(layer, kind, box, rotate) {
     if (rotate > 0) {
       disc.style.animationDirection = "reverse";
       disc.style.setProperty("--record-from", "-90deg");
+      disc.style.setProperty("--record-to", "270deg");
     }
   }
   if (kind === "watch") {
-    node.style.setProperty("--watch-spin", `${26 + Math.abs(Math.round(rotate))}s`);
+    const spin = 26 + Math.abs(Math.round(rotate));
+    node.style.setProperty("--watch-spin", `${spin}s`);
+    node.style.setProperty("--watch-spin-crown", `${(spin * 10) / 14}s`);
     node.style.setProperty("--watch-tick", `${0.42 + Math.abs(rotate) / 180}s`);
   }
   if (kind === "masks") {
