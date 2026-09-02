@@ -1363,7 +1363,9 @@ html[data-theme="dark"] .record-label {
 }
 
 .watch-gear,
-.watch-balance {
+.watch-balance,
+.watch-hand-hour,
+.watch-hand-minute {
   transform-box: view-box;
 }
 
@@ -1380,6 +1382,19 @@ html[data-theme="dark"] .record-label {
 .watch-balance {
   transform-origin: 33px 73.5px;
   animation: watch-tick var(--watch-tick, 0.48s) ease-in-out infinite alternate;
+}
+
+.watch-hand-hour,
+.watch-hand-minute {
+  transform-origin: 50px 50px;
+}
+
+.watch-hand-hour {
+  animation: watch-spin 3600s linear infinite;
+}
+
+.watch-hand-minute {
+  animation: watch-spin 60s linear infinite;
 }
 
 @keyframes watch-spin {
@@ -1457,14 +1472,15 @@ html[data-theme="dark"] .record-label {
     stroke: var(--color-secondary);
     stroke-width: 1.15;
     stroke-linecap: round;
+    opacity: 0.12;
   }
 
   .steam-a {
-    animation: steam-drift 4.6s ease-in-out infinite;
+    animation: steam-drift 4.6s ease-in-out infinite both;
   }
 
   .steam-b {
-    animation: steam-drift 5.4s ease-in-out infinite 0.7s;
+    animation: steam-drift 5.4s ease-in-out infinite 0.7s both;
   }
 }
 
@@ -1813,6 +1829,8 @@ footer.is-deferred {
   .charm-mouth,
   .watch-gear,
   .watch-balance,
+  .watch-hand-hour,
+  .watch-hand-minute,
   .ritual,
   .quote-of-the-day {
     animation: none !important;
