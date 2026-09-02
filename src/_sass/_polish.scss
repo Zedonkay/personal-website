@@ -1217,8 +1217,9 @@ $ritual-h: 4.5rem;
 }
 
 .decor-charm {
+  --charm-gutter: calc((100vw - #{$max-content-width}) / 2);
   position: absolute;
-  opacity: 0.11;
+  opacity: 0.34;
 }
 
 .charm-svg {
@@ -1229,17 +1230,17 @@ $ritual-h: 4.5rem;
 }
 
 .charm-fill {
-  fill: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  stroke: var(--color-secondary);
-  stroke-width: 1.25;
+  fill: color-mix(in srgb, var(--color-accent) 28%, transparent);
+  stroke: var(--color-text);
+  stroke-width: 1.4;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
 .charm-line {
   fill: none;
-  stroke: var(--color-secondary);
-  stroke-width: 1.3;
+  stroke: var(--color-text);
+  stroke-width: 1.4;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
@@ -1276,16 +1277,16 @@ $ritual-h: 4.5rem;
 
 .decor-charm-book {
   top: 11%;
-  left: 0.45rem;
-  width: 2.05rem;
+  left: max(0.4rem, calc(var(--charm-gutter) - 2.55rem));
+  width: 2.15rem;
   transform: rotate(-16deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .decor-charm-kettle {
   top: 27%;
-  left: 0.3rem;
-  width: 3rem;
+  left: max(0.4rem, calc(var(--charm-gutter) - 3.45rem));
+  width: 3.1rem;
   transform: rotate(-14deg);
 
   .charm-steam {
@@ -1296,47 +1297,47 @@ $ritual-h: 4.5rem;
 
 .decor-charm-whisk {
   top: 46%;
-  left: 0.7rem;
-  width: 1.55rem;
+  left: max(0.55rem, calc(var(--charm-gutter) - 2.15rem));
+  width: 1.7rem;
   transform: rotate(18deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .decor-charm-bike {
   top: 64%;
-  left: 0.2rem;
+  left: max(0.35rem, calc(var(--charm-gutter) - 3.85rem));
   width: 3.45rem;
   transform: rotate(-8deg);
 }
 
 .decor-charm-mortar {
   top: 79%;
-  left: 0.55rem;
-  width: 2.15rem;
+  left: max(0.5rem, calc(var(--charm-gutter) - 2.7rem));
+  width: 2.25rem;
   transform: rotate(14deg);
-  opacity: 0.09;
+  opacity: 0.28;
 }
 
 .decor-charm-pin {
   bottom: 5.4rem;
-  left: 0.35rem;
+  left: max(0.4rem, calc(var(--charm-gutter) - 3.5rem));
   width: 3.1rem;
   transform: rotate(-28deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .decor-charm-film {
   top: 10%;
-  right: 0.35rem;
-  width: 1.55rem;
+  right: max(0.45rem, calc(var(--charm-gutter) - 2.15rem));
+  width: 1.7rem;
   transform: rotate(12deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .decor-charm-cup {
   top: 28%;
-  right: 0.3rem;
-  width: 2.35rem;
+  right: max(0.4rem, calc(var(--charm-gutter) - 2.9rem));
+  width: 2.45rem;
   transform: rotate(10deg);
 
   .charm-steam {
@@ -1347,25 +1348,25 @@ $ritual-h: 4.5rem;
 
 .decor-charm-camera {
   top: 46%;
-  right: 0.45rem;
-  width: 2.45rem;
+  right: max(0.45rem, calc(var(--charm-gutter) - 3.05rem));
+  width: 2.55rem;
   transform: rotate(-10deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .decor-charm-drone {
   top: 64%;
-  right: 0.25rem;
-  width: 2.55rem;
+  right: max(0.35rem, calc(var(--charm-gutter) - 3.15rem));
+  width: 2.7rem;
   transform: rotate(14deg);
 }
 
 .decor-charm-car {
   top: 81%;
-  right: 0.3rem;
-  width: 3.05rem;
+  right: max(0.35rem, calc(var(--charm-gutter) - 3.5rem));
+  width: 3.15rem;
   transform: rotate(-6deg);
-  opacity: 0.1;
+  opacity: 0.3;
 }
 
 .identity-moment {
@@ -1641,7 +1642,7 @@ $ritual-h: 4.5rem;
   clip-path: none;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 991.98px) {
   .decor-records,
   .decor-charms {
     display: none;
