@@ -45,6 +45,9 @@
       {% else %}
         {{ content }}
       {% endif %}
+      {% unless page.permalink == '/' or page.permalink == '/404.html' %}
+        <div class="ritual-signoff">{% include ritual.liquid pose="companion" %}</div>
+      {% endunless %}
     </div>
 
     <!-- Footer -->
