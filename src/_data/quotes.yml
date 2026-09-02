@@ -7,198 +7,198 @@
 #     source: "Work"
 #     url: https://example.com
 items:
-  - text: If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.
-    attribution: Thorin Oakenshield
-    source: The Hobbit
-  - text: So many books, so little time.
-    attribution: Frank Zappa
-  - text: Without music, life would be a mistake.
-    attribution: Friedrich Nietzsche
-    source: Twilight of the Idols
-  - text: A day without laughter is a day wasted.
-    attribution: Nicolas Chamfort
-  - text: I have no idea what I'm going to do tomorrow. How exciting.
-    attribution: Larry Daley and Teddy Roosevelt (Robin Williams)
+  - text: "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world."
+    attribution: "Thorin Oakenshield"
+    source: "The Hobbit"
+  - text: "So many books, so little time."
+    attribution: "Frank Zappa"
+  - text: "Without music, life would be a mistake."
+    attribution: "Friedrich Nietzsche"
+    source: "Twilight of the Idols"
+  - text: "A day without laughter is a day wasted."
+    attribution: "Nicolas Chamfort"
+  - text: "\"I have no idea what I'm going to do tomorrow.\" / \"How exciting.\""
+    attribution: "Larry Daley and Teddy Roosevelt (Robin Williams)"
     source: "Night at the Museum: Secret of the Tomb"
-  - text: You can't fly jets if you're color blind.
-    attribution: Frank (Steve Carell)
-    source: Little Miss Sunshine
-  - text: I wish the Ring had never come to me. I wish none of this had happened. So do all who live to see such times, but that is not for them to decide. All we have to decide is what to do with the time that is given to us.
-    attribution: Frodo and Gandalf
-    source: The Lord of the Rings
-  - text: Me? I'm dishonest, and a dishonest man you can always trust to be dishonest. Honestly. It's the honest ones you want to watch out for, because you can never predict when they're going to do something incredibly... stupid.
-    attribution: Captain Jack Sparrow
+  - text: "You can't fly jets if you're color blind."
+    attribution: "Frank (Steve Carell)"
+    source: "Little Miss Sunshine"
+  - text: "\"I wish the Ring had never come to me. I wish none of this had happened.\" / \"So do all who live to see such times, but that is not for them to decide. All we have to decide is what to do with the time that is given to us.\""
+    attribution: "Frodo and Gandalf"
+    source: "The Lord of the Rings"
+  - text: "Me? I'm dishonest, and a dishonest man you can always trust to be dishonest. Honestly. It's the honest ones you want to watch out for, because you can never predict when they're going to do something incredibly... stupid."
+    attribution: "Captain Jack Sparrow"
     source: "Pirates of the Caribbean: The Curse of the Black Pearl"
-  - text: The only true wisdom is in knowing you know nothing.
-    attribution: Socrates
-  - text: Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly.
-    attribution: Langston Hughes
-    source: Dreams
-  - text: You don't understand! I coulda had class. I coulda been a contender. I could've been somebody, instead of a bum, which is what I am.
-    attribution: Terry Malloy (Marlon Brando)
-    source: On the Waterfront
-  - text: Louis, I think this is the beginning of a beautiful friendship.
-    attribution: Rick Blaine (Humphrey Bogart)
-    source: Casablanca
-  - text: I am big! It's the pictures that got small.
-    attribution: Norma Desmond (Gloria Swanson)
-    source: Sunset Boulevard
-  - text: Today, I consider myself the luckiest man on the face of the Earth.
-    attribution: Lou Gehrig
-  - text: Gentlemen, you can't fight in here! This is the War Room!
-    attribution: President Merkin Muffley (Peter Sellers)
-    source: Dr. Strangelove
-  - text: Forget it, Jake, it's Chinatown.
-    attribution: Lawrence Walsh (Joe Mantell)
-    source: Chinatown
-  - text: Surely you can't be serious. I am serious... and don't call me Shirley.
-    attribution: Ted Striker and Dr. Rumack
-    source: Airplane!
-  - text: Carpe diem. Seize the day, boys. Make your lives extraordinary.
-    attribution: John Keating (Robin Williams)
-    source: Dead Poets Society
-  - text: The unexamined life is not worth living.
-    attribution: Socrates
-    source: as recorded by Plato
-  - text: I am a part of all that I have met.
-    attribution: Alfred, Lord Tennyson
-    source: Ulysses
-  - text: There is more to life than increasing its speed.
-    attribution: Often attributed to Gandhi
-  - text: It is no bad thing to celebrate a simple life.
-    attribution: J.R.R. Tolkien
-  - text: For every complex problem there is an answer that is clear, simple, and wrong.
-    attribution: H. L. Mencken
-  - text: A man who does not think for himself does not think at all.
-    attribution: Oscar Wilde
-  - text: We work in order to have leisure.
-    attribution: Aristotle
-    source: Nicomachean Ethics
-  - text: I have no special talents. I am only passionately curious.
-    attribution: Albert Einstein
-  - text: The only journey is the one within.
-    attribution: Rainer Maria Rilke
+  - text: "The only true wisdom is in knowing you know nothing."
+    attribution: "Socrates"
+  - text: "Hold fast to dreams, for if dreams die, life is a broken-winged bird that cannot fly."
+    attribution: "Langston Hughes"
+    source: "Dreams"
+  - text: "You don't understand! I coulda had class. I coulda been a contender. I could've been somebody, instead of a bum, which is what I am."
+    attribution: "Terry Malloy (Marlon Brando)"
+    source: "On the Waterfront"
+  - text: "Louis, I think this is the beginning of a beautiful friendship."
+    attribution: "Rick Blaine (Humphrey Bogart)"
+    source: "Casablanca"
+  - text: "I am big! It's the pictures that got small."
+    attribution: "Norma Desmond (Gloria Swanson)"
+    source: "Sunset Boulevard"
+  - text: "Today, I consider myself the luckiest man on the face of the Earth."
+    attribution: "Lou Gehrig"
+  - text: "Gentlemen, you can't fight in here! This is the War Room!"
+    attribution: "President Merkin Muffley (Peter Sellers)"
+    source: "Dr. Strangelove"
+  - text: "Forget it, Jake, it's Chinatown."
+    attribution: "Lawrence Walsh (Joe Mantell)"
+    source: "Chinatown"
+  - text: "\"Surely you can't be serious.\" / \"I am serious... and don't call me Shirley.\""
+    attribution: "Ted Striker and Dr. Rumack"
+    source: "Airplane!"
+  - text: "Carpe diem. Seize the day, boys. Make your lives extraordinary."
+    attribution: "John Keating (Robin Williams)"
+    source: "Dead Poets Society"
+  - text: "The unexamined life is not worth living."
+    attribution: "Socrates"
+    source: "as recorded by Plato"
+  - text: "I am a part of all that I have met."
+    attribution: "Alfred, Lord Tennyson"
+    source: "Ulysses"
+  - text: "There is more to life than increasing its speed."
+    attribution: "Often attributed to Gandhi"
+  - text: "It is no bad thing to celebrate a simple life."
+    attribution: "J.R.R. Tolkien"
+  - text: "For every complex problem there is an answer that is clear, simple, and wrong."
+    attribution: "H. L. Mencken"
+  - text: "A man who does not think for himself does not think at all."
+    attribution: "Oscar Wilde"
+  - text: "We work in order to have leisure."
+    attribution: "Aristotle"
+    source: "Nicomachean Ethics"
+  - text: "I have no special talents. I am only passionately curious."
+    attribution: "Albert Einstein"
+  - text: "The only journey is the one within."
+    attribution: "Rainer Maria Rilke"
   - text: "It is not enough to be busy. So are the ants. The question is: What are we busy about?"
-    attribution: Henry David Thoreau
-  - text: The chief enemy of creativity is 'good' sense.
-    attribution: Pablo Picasso
-  - text: The important thing is not to stop questioning. Curiosity has its own reason for existing.
-    attribution: Albert Einstein
-  - text: The cure for boredom is curiosity. There is no cure for curiosity.
-    attribution: Commonly attributed to Dorothy Parker
-  - text: One must still have chaos in oneself to be able to give birth to a dancing star.
-    attribution: Friedrich Nietzsche
-    source: Thus Spoke Zarathustra
-  - text: I was born not knowing and have had only a little time to change that here and there.
-    attribution: Richard Feynman
+    attribution: "Henry David Thoreau"
+  - text: "The chief enemy of creativity is 'good' sense."
+    attribution: "Pablo Picasso"
+  - text: "The important thing is not to stop questioning. Curiosity has its own reason for existing."
+    attribution: "Albert Einstein"
+  - text: "The cure for boredom is curiosity. There is no cure for curiosity."
+    attribution: "Commonly attributed to Dorothy Parker"
+  - text: "One must still have chaos in oneself to be able to give birth to a dancing star."
+    attribution: "Friedrich Nietzsche"
+    source: "Thus Spoke Zarathustra"
+  - text: "I was born not knowing and have had only a little time to change that here and there."
+    attribution: "Richard Feynman"
   - text: "Instructions for living a life: Pay attention. Be astonished. Tell about it."
-    attribution: Mary Oliver
-  - text: We should do away with the absolutely specious notion that everybody has to earn a living.
-    attribution: Buckminster Fuller
-  - text: I just wondered how things were put together.
-    attribution: Claude Shannon
-  - text: The best way to predict the future is to invent it.
-    attribution: Alan Kay
-  - text: Have nothing in your houses that you do not know to be useful or believe to be beautiful.
-    attribution: William Morris
-  - text: Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.
-    attribution: Antoine de Saint-Exupéry
-  - text: The world is full of magic things, patiently waiting for our senses to grow sharper.
-    attribution: Often attributed to W. B. Yeats
-  - text: Study hard what interests you the most in the most undisciplined, irreverent and original manner possible.
-    attribution: Richard Feynman
-  - text: It's a magical world, Hobbes, ol' buddy... Let's go exploring!
-    attribution: Calvin
-    source: Calvin and Hobbes
-  - text: We're so busy watching out for what's just ahead of us that we don't take time to enjoy where we are.
-    attribution: Calvin
-    source: Calvin and Hobbes
-  - text: Wisdom comes from experience. Experience is often a result of lack of wisdom.
-    attribution: Terry Pratchett
+    attribution: "Mary Oliver"
+  - text: "We should do away with the absolutely specious notion that everybody has to earn a living."
+    attribution: "Buckminster Fuller"
+  - text: "I just wondered how things were put together."
+    attribution: "Claude Shannon"
+  - text: "The best way to predict the future is to invent it."
+    attribution: "Alan Kay"
+  - text: "Have nothing in your houses that you do not know to be useful or believe to be beautiful."
+    attribution: "William Morris"
+  - text: "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away."
+    attribution: "Antoine de Saint-Exupéry"
+  - text: "The world is full of magic things, patiently waiting for our senses to grow sharper."
+    attribution: "Often attributed to W. B. Yeats"
+  - text: "Study hard what interests you the most in the most undisciplined, irreverent and original manner possible."
+    attribution: "Richard Feynman"
+  - text: "It's a magical world, Hobbes, ol' buddy... Let's go exploring!"
+    attribution: "Calvin"
+    source: "Calvin and Hobbes"
+  - text: "We're so busy watching out for what's just ahead of us that we don't take time to enjoy where we are."
+    attribution: "Calvin"
+    source: "Calvin and Hobbes"
+  - text: "Wisdom comes from experience. Experience is often a result of lack of wisdom."
+    attribution: "Terry Pratchett"
   - text: "Rivers know this: there is no hurry. We shall get there some day."
-    attribution: A.A. Milne
-    source: Winnie-the-Pooh
-  - text: People say nothing is impossible, but I do nothing every day.
-    attribution: Winnie-the-Pooh
-  - text: People who love to eat are always the best people.
-    attribution: Julia Child
-  - text: Life is far too important a thing ever to talk seriously about.
-    attribution: Oscar Wilde
-  - text: Anyone can cook.
-    attribution: Gusteau
-    source: Ratatouille
-  - text: Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should.
-    attribution: Ian Malcolm
-    source: Jurassic Park
-  - text: Open the pod bay doors, HAL.
-    attribution: Dave Bowman
+    attribution: "A.A. Milne"
+    source: "Winnie-the-Pooh"
+  - text: "People say nothing is impossible, but I do nothing every day."
+    attribution: "Winnie-the-Pooh"
+  - text: "People who love to eat are always the best people."
+    attribution: "Julia Child"
+  - text: "Life is far too important a thing ever to talk seriously about."
+    attribution: "Oscar Wilde"
+  - text: "Anyone can cook."
+    attribution: "Gusteau"
+    source: "Ratatouille"
+  - text: "Your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should."
+    attribution: "Ian Malcolm"
+    source: "Jurassic Park"
+  - text: "Open the pod bay doors, HAL."
+    attribution: "Dave Bowman"
     source: "2001: A Space Odyssey"
   - text: "Physics is like sex: sure, it may give some practical results, but that's not why we do it."
-    attribution: Richard Feynman
-  - text: The universe is not only queerer than we suppose, but queerer than we can suppose.
-    attribution: J.B.S. Haldane
-  - text: There are more things in heaven and earth, Horatio, than are dreamt of in your philosophy.
-    attribution: Shakespeare
-    source: Hamlet
-  - text: It's just a flesh wound.
-    attribution: The Black Knight
-    source: Monty Python and the Holy Grail
-  - text: Nobody expects the Spanish Inquisition!
-    attribution: Cardinal Ximénez
-    source: Monty Python's Flying Circus
-  - text: I'd far rather be happy than right any day.
-    attribution: Slartibartfast
-    source: The Hitchhiker's Guide to the Galaxy
-  - text: All models are wrong, but some are useful.
-    attribution: George Box
-  - text: In theory, there is no difference between theory and practice. In practice, there is.
-    attribution: Commonly attributed to Yogi Berra
-  - text: If debugging is the process of removing software bugs, then programming must be the process of putting them in.
-    attribution: Edsger W. Dijkstra
+    attribution: "Richard Feynman"
+  - text: "The universe is not only queerer than we suppose, but queerer than we can suppose."
+    attribution: "J.B.S. Haldane"
+  - text: "There are more things in heaven and earth, Horatio, than are dreamt of in your philosophy."
+    attribution: "Shakespeare"
+    source: "Hamlet"
+  - text: "It's just a flesh wound."
+    attribution: "The Black Knight"
+    source: "Monty Python and the Holy Grail"
+  - text: "Nobody expects the Spanish Inquisition!"
+    attribution: "Cardinal Ximénez"
+    source: "Monty Python's Flying Circus"
+  - text: "I'd far rather be happy than right any day."
+    attribution: "Slartibartfast"
+    source: "The Hitchhiker's Guide to the Galaxy"
+  - text: "All models are wrong, but some are useful."
+    attribution: "George Box"
+  - text: "In theory, there is no difference between theory and practice. In practice, there is."
+    attribution: "Commonly attributed to Yogi Berra"
+  - text: "If debugging is the process of removing software bugs, then programming must be the process of putting them in."
+    attribution: "Edsger W. Dijkstra"
   - text: "There are two ways of constructing a software design: one way is to make it so simple that there are obviously no deficiencies, and the other is to make it so complicated that there are no obvious deficiencies."
-    attribution: C.A.R. Hoare
-  - text: The trouble with having an open mind, of course, is that people will insist on coming along and trying to put things in it.
-    attribution: Terry Pratchett
-  - text: We are what we pretend to be, so we must be careful about what we pretend to be.
-    attribution: Kurt Vonnegut
-    source: Mother Night
-  - text: Of course it is exhausting, having to reason all the time in a universe which wasn't meant to be reasonable.
-    attribution: Kurt Vonnegut
-    source: Breakfast of Champions
-  - text: Never laugh at live dragons.
-    attribution: Bilbo Baggins
-    source: The Hobbit
-  - text: I am looking for someone to share in an adventure that I am arranging, and it's very difficult to find anyone.
-    attribution: Gandalf
-    source: The Hobbit
-  - text: That rug really tied the room together.
-    attribution: The Dude
-    source: The Big Lebowski
-  - text: If good things lasted forever, would we appreciate how precious they are?
-    attribution: Hobbes
-    source: Calvin and Hobbes
-  - text: There's never enough time to do all the nothing you want.
-    attribution: Calvin
-    source: Calvin and Hobbes
-  - text: Curiouser and curiouser!
-    attribution: Alice
-    source: Alice's Adventures in Wonderland
-  - text: We're all mad here.
-    attribution: Cheshire Cat
-    source: Alice's Adventures in Wonderland
+    attribution: "C.A.R. Hoare"
+  - text: "The trouble with having an open mind, of course, is that people will insist on coming along and trying to put things in it."
+    attribution: "Terry Pratchett"
+  - text: "We are what we pretend to be, so we must be careful about what we pretend to be."
+    attribution: "Kurt Vonnegut"
+    source: "Mother Night"
+  - text: "Of course it is exhausting, having to reason all the time in a universe which wasn't meant to be reasonable."
+    attribution: "Kurt Vonnegut"
+    source: "Breakfast of Champions"
+  - text: "Never laugh at live dragons."
+    attribution: "Bilbo Baggins"
+    source: "The Hobbit"
+  - text: "I am looking for someone to share in an adventure that I am arranging, and it's very difficult to find anyone."
+    attribution: "Gandalf"
+    source: "The Hobbit"
+  - text: "That rug really tied the room together."
+    attribution: "The Dude"
+    source: "The Big Lebowski"
+  - text: "If good things lasted forever, would we appreciate how precious they are?"
+    attribution: "Hobbes"
+    source: "Calvin and Hobbes"
+  - text: "There's never enough time to do all the nothing you want."
+    attribution: "Calvin"
+    source: "Calvin and Hobbes"
+  - text: "Curiouser and curiouser!"
+    attribution: "Alice"
+    source: "Alice's Adventures in Wonderland"
+  - text: "We're all mad here."
+    attribution: "Cheshire Cat"
+    source: "Alice's Adventures in Wonderland"
   - text: "Begin at the beginning, and go on till you come to the end: then stop."
-    attribution: The King of Hearts
-    source: Alice's Adventures in Wonderland
-  - text: Not everything that can be counted counts, and not everything that counts can be counted.
-    attribution: William Bruce Cameron
-  - text: An adventure is only an inconvenience rightly considered. An inconvenience is only an adventure wrongly considered.
-    attribution: G.K. Chesterton
-  - text: There are two tragedies in life. One is not to get your heart's desire. The other is to get it.
-    attribution: George Bernard Shaw
-  - text: Why, sometimes I've believed as many as six impossible things before breakfast.
-    attribution: The Queen
-    source: Through the Looking-Glass
-  - text: What is the point of being alive if you don't at least try to do something remarkable?
-    attribution: John Green
-  - text: What a wonderful thought it is that some of the best days of our lives haven't even happened yet.
-    attribution: Often attributed to Anne Frank
+    attribution: "The King of Hearts"
+    source: "Alice's Adventures in Wonderland"
+  - text: "Not everything that can be counted counts, and not everything that counts can be counted."
+    attribution: "William Bruce Cameron"
+  - text: "An adventure is only an inconvenience rightly considered. An inconvenience is only an adventure wrongly considered."
+    attribution: "G.K. Chesterton"
+  - text: "There are two tragedies in life. One is not to get your heart's desire. The other is to get it."
+    attribution: "George Bernard Shaw"
+  - text: "Why, sometimes I've believed as many as six impossible things before breakfast."
+    attribution: "The Queen"
+    source: "Through the Looking-Glass"
+  - text: "What is the point of being alive if you don't at least try to do something remarkable?"
+    attribution: "John Green"
+  - text: "What a wonderful thought it is that some of the best days of our lives haven't even happened yet."
+    attribution: "Often attributed to Anne Frank"
