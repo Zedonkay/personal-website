@@ -17,13 +17,13 @@ items:
     source: "Twilight of the Idols"
   - text: "A day without laughter is a day wasted."
     attribution: "Nicolas Chamfort"
-  - text: "\"I have no idea what I'm going to do tomorrow.\" / \"How exciting.\""
+  - text: '"I have no idea what I''m going to do tomorrow." / "How exciting."'
     attribution: "Larry Daley and Teddy Roosevelt (Robin Williams)"
     source: "Night at the Museum: Secret of the Tomb"
   - text: "You can't fly jets if you're color blind."
     attribution: "Frank (Steve Carell)"
     source: "Little Miss Sunshine"
-  - text: "\"I wish the Ring had never come to me. I wish none of this had happened.\" / \"So do all who live to see such times, but that is not for them to decide. All we have to decide is what to do with the time that is given to us.\""
+  - text: '"I wish the Ring had never come to me. I wish none of this had happened." / "So do all who live to see such times, but that is not for them to decide. All we have to decide is what to do with the time that is given to us."'
     attribution: "Frodo and Gandalf"
     source: "The Lord of the Rings"
   - text: "Me? I'm dishonest, and a dishonest man you can always trust to be dishonest. Honestly. It's the honest ones you want to watch out for, because you can never predict when they're going to do something incredibly... stupid."
@@ -51,7 +51,7 @@ items:
   - text: "Forget it, Jake, it's Chinatown."
     attribution: "Lawrence Walsh (Joe Mantell)"
     source: "Chinatown"
-  - text: "\"Surely you can't be serious.\" / \"I am serious... and don't call me Shirley.\""
+  - text: '"Surely you can''t be serious." / "I am serious... and don''t call me Shirley."'
     attribution: "Ted Striker and Dr. Rumack"
     source: "Airplane!"
   - text: "Carpe diem. Seize the day, boys. Make your lives extraordinary."
