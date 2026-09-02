@@ -1,6 +1,6 @@
 # Customize
 
-> Local copy of the [al-folio](https://github.com/alshedivat/al-folio) theme guide. In this repo, site content lives under `src/`; `_config.yml` stays at the repository root.
+> Local copy of the [al-folio](https://github.com/alshedivat/al-folio) theme guide. In this repo, site content and `_config.yml` live under `src/`. Treat paths like `_config.yml` and `Gemfile` in this guide as `src/_config.yml` and `src/Gemfile`.
 
 Here we will give you some tips on how to customize the website. One important thing to note is that **ALL** the changes you make should be done on the **main** branch of your repository. The `gh-pages` branch is automatically overwritten every time you make a change to the main branch.
 

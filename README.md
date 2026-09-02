@@ -46,12 +46,20 @@ docker compose -f docker/compose.yml up
 
 Then open [http://localhost:8080](http://localhost:8080). Slimmer image: `docker compose -f docker/compose.slim.yml up`.
 
+Jekyll is always run from the repository root:
+
+```bash
+BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml
+```
+
 Formatting:
 
 ```bash
 npm --prefix config install
 npm --prefix config run format:check
 ```
+
+Root-level files that have to stay there: `README.md`, `LICENSE`, `requirements.txt`, plus Git/GitHub/Cursor/devcontainer metadata (`.gitignore`, `.github/`, `.cursor/`, `.husky/`, `.devcontainer/`).
 
 ## Tech
 

@@ -17,10 +17,11 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 - **Tech Stack:** Jekyll 4.x (Ruby-based static site generator), Liquid templating, YAML configuration, SCSS/CSS, JavaScript
 - **Key Dependencies:** jekyll-scholar, jekyll-archives-v2, jekyll-paginate-v2, MathJax, Bootstrap
 - **File Structure:**
-  - `_config.yml` – Main Jekyll configuration file (repository root)
-  - `src/` – Jekyll site source (pages, posts, templates, assets, plugins)
+  - `src/_config.yml` – Main Jekyll configuration file
+  - `src/` – Jekyll site source (pages, posts, templates, assets, plugins, Gemfile)
   - `docs/setup/` – Site-specific setup (GitHub Pages, Cloudflare DNS, deployment)
   - `docs/theme/` – al-folio INSTALL, CUSTOMIZE, and FAQ guides
+  - `config/` – Prettier, npm, PurgeCSS, and other repo tooling
   - `src/_pages/` – Website pages (Markdown with frontmatter)
   - `src/_posts/` – Blog posts
   - `src/_projects/`, `src/_news/`, `src/_books/` – Jekyll collections

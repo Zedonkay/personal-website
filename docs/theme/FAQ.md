@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-> Local copy of the [al-folio](https://github.com/alshedivat/al-folio) theme guide. In this repo, site content lives under `src/`; `_config.yml` stays at the repository root.
+> Local copy of the [al-folio](https://github.com/alshedivat/al-folio) theme guide. In this repo, site content and `_config.yml` live under `src/`. Treat paths like `_config.yml` in this guide as `src/_config.yml`. Formatting: `npm --prefix config run format`.
 
 Here are some frequently asked questions. If you have a different question, please check if it was not already answered in the Q&A section of the [GitHub Discussions](https://github.com/alshedivat/al-folio/discussions/categories/q-a). If not, feel free to ask a new question there.
 
@@ -77,7 +77,7 @@ We implemented support for [Prettier code formatting](https://prettier.io/) in [
 
 - if you are running locally with `Docker` and using [development containers](https://github.com/alshedivat/al-folio/blob/main/INSTALL.md#local-setup-with-development-containers), `Prettier` is already included
 - if you don't use `Docker`, it is simple to integrate it with your preferred IDE using an [extension](https://prettier.io/docs/en/editors)
-- if you want to run it manually, you can follow the first 2 steps in [this tutorial](https://george-gca.github.io/blog/2023/slidev_for_non_web_devs/) (`Installing node version manager (nvm)` and `Installing Node (latest version)`), then, install it using `npm install prettier` inside the project directory, or install it globally on your computer using `npm install -g prettier`. To run `Prettier` on your current directory use `npx prettier . --write`.
+- if you want to run it manually, install dependencies with `npm --prefix config install`, then run `npm --prefix config run format`.
 
 You can also disable it for your repo. For this, just delete the file [.github/workflows/prettier.yml](https://github.com/alshedivat/al-folio/blob/main/.github/workflows/prettier.yml).
 

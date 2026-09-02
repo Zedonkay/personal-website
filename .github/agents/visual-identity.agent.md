@@ -14,7 +14,7 @@ Propose a visual identity that feels like _him_, plus a local quote-of-the-day. 
 ## Already decided
 
 - **Keep al-folio.** Do not rebuild as handwritten HTML. Identity should layer onto `src/_layouts/`, `src/_includes/`, `src/_sass/_polish.scss`, and `_data/`.
-- **Type:** Playfair Display for body and headings, JetBrains Mono for nav/badges/code. Already wired in `_config.yml` (`google_fonts`) and `src/_sass/_polish.scss`. Plan around that pairing.
+- **Type:** Playfair Display for body and headings, JetBrains Mono for nav/badges/code. Already wired in `src/_config.yml` (`google_fonts`) and `src/_sass/_polish.scss`. Plan around that pairing.
 - **Existing seed:** a sloth favicon already sits next to the name on the about page (`src/_layouts/about.liquid`, `assets/favicon/sloth.png`). Ritual may replace it, sit beside it, or leave the sloth as favicon-only — decide in the plan; do not ignore the conflict.
 - **Ritual pet (required ingredient):** `/Users/ishayu/.codex/pets/Ritual`. Read `pet.json`, `pet_request.json`, and inspect `spritesheet.webp` before proposing. Do not invent a different mascot.
 
@@ -73,13 +73,13 @@ Cover:
 - **Placement:** default to the about page (near bio or above socials). Optional: Ritual “holds” or sits beside the quote. Do not add a new nav item.
 - **Empty/small bank:** what happens with 0 or 1 quotes.
 - **Styling:** Playfair italic, quiet — a small editorial moment, not a testimonial carousel.
-- **Config:** `_config.yml` flag to enable/disable.
+- **Config:** `src/_config.yml` flag to enable/disable.
 
 Seed **8–12 starter quotes** he can edit, drawn from his taste (film, food, research culture, intentionality). Mark them as drafts. Do not invent fake citations.
 
 ## Constraints
 
-- Plan for `src/` as the Jekyll source (`source: src` in `_config.yml`).
+- Plan for `src/` as the Jekyll source (`source: src` in `src/_config.yml`).
 - Do not disable dark mode or search to make decoration easier.
 - Do not dump unoptimized JPEG/MOV into the repo root.
 - Do not copy Anushka's CSS, sun icon, or globe.

@@ -19,8 +19,9 @@ You are an expert customization assistant for the al-folio Jekyll academic websi
 - **Tech Stack:** Jekyll 4.x, Liquid templating, Ruby, YAML, Markdown, SCSS/SASS, JavaScript
 - **Build System:** Jekyll with Bundler for dependency management
 - **Deployment:** GitHub Pages (automated via GitHub Actions)
-- **File Structure:** Site content lives in `src/`. Paths below are relative to `src/` unless noted.
-  - `_config.yml` – Main site configuration at the repository root (URL, metadata, theme, features)
+- **File Structure:** Site content lives in `src/`.
+  - `src/_config.yml` – Main site configuration (URL, metadata, theme, features)
+  - `src/Gemfile` – Ruby/Jekyll dependencies
   - `src/_data/` – YAML data files (CV info, social links, repository links, coauthors)
   - `src/_pages/` – Site pages (About, Blog, Projects, Publications, CV, etc.)
   - `src/_posts/` – Blog posts in Markdown (format: `YYYY-MM-DD-title.md`)
@@ -31,6 +32,7 @@ You are an expert customization assistant for the al-folio Jekyll academic websi
   - `src/assets/` – Static assets (images, PDFs, JSON resume, custom CSS/JS)
   - `docs/` – Setup and theme documentation
   - `docker/` – Local Docker environment
+  - `config/` – Prettier, npm, PurgeCSS, and other repo tooling
   - `.github/workflows/` – GitHub Actions for deployment and CI/CD
 
 ## Community Context & Issue/Discussion References
@@ -83,7 +85,7 @@ docker compose -f docker/compose.yml up --build
 # Output automatically served at http://localhost:8080
 
 # Legacy method (requires Ruby, Bundler)
-bundle exec jekyll build
+BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml
 # Output in _site/ directory
 
 # Deploy happens automatically via GitHub Actions on push to main branch
@@ -93,7 +95,7 @@ bundle exec jekyll build
 
 ```bash
 # Format code with Prettier
-npx prettier . --write
+npm --prefix config run format
 ```
 
 ## Common Customization Tasks
@@ -444,7 +446,7 @@ Help users avoid these frequent errors:
 
 - 🚫 **Never do:**
   - Delete `.github/workflows/` files without explicit request
-  - Modify `Gemfile` or `package.json` without understanding implications
+  - Modify `src/Gemfile` or `config/package.json` without understanding implications
   - Add sensitive information (API keys, passwords, personal data)
   - Edit auto-generated files in `_site/` or `gh-pages` branch
   - Make changes that violate the MIT license terms
@@ -457,11 +459,13 @@ Help users avoid these frequent errors:
 - Changes take ~4-5 minutes to deploy via GitHub Actions after pushing to main
 - Local preview with Docker runs on `http://localhost:8080`
 - The site auto-rebuilds locally when files change (may take a few seconds)
-- Always ensure `url` and `baseurl` are correctly set in `_config.yml` for deployment
+- Always ensure `url` and `baseurl` are correctly set in `src/_config.yml` for deployment
 - For personal sites: `url: https://username.github.io` and `baseurl:` (empty)
 - For project sites: `url: https://username.github.io` and `baseurl: /repo-name/`
 
 ## Quick Reference Map
+
+Paths in this table are under `src/` unless noted.
 
 | User wants to...        | Files to modify                             | Key documentation                        |
 | ----------------------- | ------------------------------------------- | ---------------------------------------- |

@@ -74,13 +74,13 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 
 ### For `experimental` branch:
 
-- Sets `url` in `_config.yml` to `https://zedonkay.github.io`
+- Sets `url` in `src/_config.yml` to `https://zedonkay.github.io`
 - Removes the `CNAME` file so GitHub Pages uses the default domain
 - Deploys to the **Zedonkay/zedonkay.github.io** repository (separate site)
 
 ### For `main`/`master` branch:
 
-- Uses `url` in `_config.yml` as `https://ishayushikhare.com`
+- Uses `url` in `src/_config.yml` as `https://ishayushikhare.com`
 - Keeps the `CNAME` file to enable custom domain
 - Deploys to this repo's `gh-pages` branch
 
