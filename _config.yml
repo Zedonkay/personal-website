@@ -163,6 +163,10 @@ collections:
 # Jekyll settings
 # -----------------------------------------------------------------------------
 
+# Site content lives in src/; tooling and docs stay at the repository root.
+source: src
+destination: _site
+
 # Markdown and syntax highlight
 markdown: kramdown
 highlighter: rouge
@@ -176,21 +180,9 @@ kramdown:
       line_numbers: false
       start_line: 1
 
-# Includes & excludes
+# Includes & excludes (paths are relative to source: src)
 include: ["_pages", "_scripts"]
 exclude:
-  - bin/
-  - docs/
-  - Dockerfile
-  - docker-compose.yml
-  - docker-compose-slim.yml
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - package.json
-  - package-lock.json
-  - purgecss.config.js
-  - README.md
   - vendor
 keep_files:
   - CNAME

@@ -11,7 +11,7 @@
 #
 # ******** IMPORTANT ********
 # Code scanning must be enabled in the repository settings before this workflow
-# can successfully upload results. See .github/CODE_SCANNING_SETUP.md for details.
+# can successfully upload results. See docs/setup/code-scanning.md for details.
 #
 name: "CodeQL Advanced"
 

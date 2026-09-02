@@ -2,33 +2,51 @@
 
 Repo for [my personal website](https://ishayushikhare.com), based on [al-folio](https://github.com/alshedivat/al-folio).
 
+## Layout
+
+| Path          | What it is                                                     |
+| ------------- | -------------------------------------------------------------- |
+| `src/`        | Jekyll site: pages, posts, templates, assets, plugins          |
+| `docs/setup/` | How this site is deployed (GitHub Pages, Cloudflare, branches) |
+| `docs/theme/` | al-folio install / customize / FAQ guides                      |
+| `docker/`     | Local Docker environment                                       |
+| `scripts/`    | Build, deploy, and citation helpers                            |
+| `_config.yml` | Jekyll config (stays at the repo root)                         |
+
 ## Links
 
 - **Live site:** [ishayushikhare.com](https://ishayushikhare.com)
-- **Theme:** [al-folio](https://github.com/alshedivat/al-folio) (Jekyll theme for academics)
+- **Theme:** [al-folio](https://github.com/alshedivat/al-folio)
 
 ## Setup
 
 If you see "There isn't a GitHub Pages site here" when visiting the site, follow the setup guide:
 
-📖 **[GitHub Pages Setup Guide](docs/github-pages.md)** — complete instructions to enable and configure GitHub Pages
+📖 **[GitHub Pages setup](docs/setup/github-pages.md)**
 
-Other setup documentation:
+Other setup docs:
 
-- [Quick start](docs/quick-start.md) — daily branch workflow
-- [Deployment workflow](docs/deployment.md) — branch-based deployment strategy
-- [Cloudflare DNS setup](docs/cloudflare-dns.md) — configure custom domain DNS
+- [Quick start](docs/setup/quick-start.md) — daily branch workflow
+- [Deployment workflow](docs/setup/deployment.md) — branch-based deployment
+- [Cloudflare DNS](docs/setup/cloudflare-dns.md) — custom domain DNS
+- [Code scanning](docs/setup/code-scanning.md) — CodeQL
+
+Theme documentation (al-folio):
+
+- [Install](docs/theme/INSTALL.md)
+- [Customize](docs/theme/CUSTOMIZE.md)
+- [FAQ](docs/theme/FAQ.md)
 
 ## Local development
 
 ```bash
-docker compose up
+docker compose -f docker/compose.yml up
 ```
 
-Then open [http://localhost:8080](http://localhost:8080). For other install options, see the [al-folio install guide](https://github.com/alshedivat/al-folio/blob/main/INSTALL.md).
+Then open [http://localhost:8080](http://localhost:8080). Slimmer image: `docker compose -f docker/compose.slim.yml up`.
 
 ## Tech
 
 - [Jekyll](https://jekyllrb.com/) static site
 - [al-folio](https://github.com/alshedivat/al-folio) theme
-- Deployed via GitHub Actions (see [docs/deployment.md](docs/deployment.md))
+- Deployed via GitHub Actions (see [docs/setup/deployment.md](docs/setup/deployment.md))

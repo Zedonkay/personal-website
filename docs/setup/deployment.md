@@ -155,7 +155,7 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 
 - Ensure DNS records are configured in Cloudflare (see [cloudflare-dns.md](cloudflare-dns.md))
 - Wait for DNS propagation (typically 5-10 minutes)
-- Verify CNAME file exists in the repository root
+- Verify CNAME file exists at `src/CNAME`
 
 ## Quick Reference Commands
 

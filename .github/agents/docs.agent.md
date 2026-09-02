@@ -17,16 +17,19 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 - **Tech Stack:** Jekyll 4.x (Ruby-based static site generator), Liquid templating, YAML configuration, SCSS/CSS, JavaScript
 - **Key Dependencies:** jekyll-scholar, jekyll-archives-v2, jekyll-paginate-v2, MathJax, Bootstrap
 - **File Structure:**
-  - `_config.yml` – Main Jekyll configuration file
-  - `README.md` – Project overview
-  - `docs/` – Site setup docs (GitHub Pages, Cloudflare DNS, deployment)
-  - `_pages/` – Website pages (Markdown with frontmatter)
-  - `_posts/` – Blog posts
-  - `_projects/`, `_news/`, `_books/` – Jekyll collections
-  - `_layouts/`, `_includes/` – Liquid templates
-  - `_sass/` – SCSS stylesheets
-  - `_data/` – YAML data files (cv.yml, repositories.yml, socials.yml, etc.)
-  - `_bibliography/` – BibTeX files for publications
+  - `_config.yml` – Main Jekyll configuration file (repository root)
+  - `src/` – Jekyll site source (pages, posts, templates, assets, plugins)
+  - `docs/setup/` – Site-specific setup (GitHub Pages, Cloudflare DNS, deployment)
+  - `docs/theme/` – al-folio INSTALL, CUSTOMIZE, and FAQ guides
+  - `src/_pages/` – Website pages (Markdown with frontmatter)
+  - `src/_posts/` – Blog posts
+  - `src/_projects/`, `src/_news/`, `src/_books/` – Jekyll collections
+  - `src/_layouts/`, `src/_includes/` – Liquid templates
+  - `src/_sass/` – SCSS stylesheets
+  - `src/_data/` – YAML data files (cv.yml, repositories.yml, socials.yml, etc.)
+  - `src/_bibliography/` – BibTeX files for publications
+  - `docker/` – Local Docker environment
+  - `scripts/` – Build, deploy, and citation helpers
   - `.github/workflows/` – GitHub Actions for deployment and CI
 
 ## Documentation standards
@@ -49,7 +52,7 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 **Point users to source code:**
 
 - Reference well-documented configuration files rather than repeating their content
-- Example: "Configure your deployment settings in `_config.yml`. For Docker deployment, see `docker-compose.yml`"
+- Example: "Configure your deployment settings in `_config.yml`. For Docker deployment, see `docker/compose.yml`"
 - When explaining features, point to the implementation: "The CV page uses `_layouts/cv.liquid` with data from either `assets/json/resume.json` (JSON Resume format) or `_data/cv.yml` (YAML format)"
 
 **Avoid UI descriptions:**
@@ -76,8 +79,8 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 ## Documentation file purposes
 
 - `README.md` – Project overview and links
-- `docs/` – Site-specific setup (GitHub Pages, Cloudflare DNS, deployment)
-- Theme guides live upstream: [INSTALL](https://github.com/alshedivat/al-folio/blob/main/INSTALL.md), [CUSTOMIZE](https://github.com/alshedivat/al-folio/blob/main/CUSTOMIZE.md), [FAQ](https://github.com/alshedivat/al-folio/blob/main/FAQ.md)
+- `docs/setup/` – Site-specific setup (GitHub Pages, Cloudflare DNS, deployment)
+- `docs/theme/` – al-folio INSTALL, CUSTOMIZE, and FAQ
 
 ## Writing style
 

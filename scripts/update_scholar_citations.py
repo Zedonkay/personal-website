@@ -9,7 +9,7 @@ from scholarly import scholarly
 
 def load_scholar_user_id() -> str:
     """Load the Google Scholar user ID from the configuration file."""
-    config_file = "_data/socials.yml"
+    config_file = "src/_data/socials.yml"
     if not os.path.exists(config_file):
         print(
             f"Configuration file {config_file} not found. Please ensure the file exists and contains your Google Scholar user ID."
@@ -21,7 +21,7 @@ def load_scholar_user_id() -> str:
         scholar_user_id = config.get("scholar_userid")
         if not scholar_user_id:
             print(
-                "No 'scholar_userid' found in the configuration file. Please add 'scholar_userid' to _data/socials.yml."
+                "No 'scholar_userid' found in the configuration file. Please add 'scholar_userid' to src/_data/socials.yml."
             )
             sys.exit(1)
         return scholar_user_id
@@ -33,7 +33,7 @@ def load_scholar_user_id() -> str:
 
 
 SCHOLAR_USER_ID: str = load_scholar_user_id()
-OUTPUT_FILE: str = "_data/citations.yml"
+OUTPUT_FILE: str = "src/_data/citations.yml"
 
 
 def get_scholar_citations() -> None:

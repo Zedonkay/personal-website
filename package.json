@@ -12,7 +12,8 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "docker compose -f docker/compose.yml up",
+    "build": "bundle exec jekyll build"
   },
   "repository": {
     "type": "git",

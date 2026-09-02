@@ -7,23 +7,11 @@ on:
       - main
       - experimental
     paths:
-      - "assets/**"
-      - "_sass/**"
-      - "_scripts/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
+      - "src/**"
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/deploy-docker-tag.yml"
-      - "!.github/workflows/deploy-image.yml"
-      - "!.github/workflows/docker-slim.yml"
-      - "!.github/workflows/prettier.yml"
+      - "purgecss.config.js"
       - "!docs/**"
       - "!README.md"
   pull_request:
@@ -32,23 +20,11 @@ on:
       - main
       - experimental
     paths:
-      - "assets/**"
-      - "_sass/**"
-      - "_scripts/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
+      - "src/**"
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/deploy-docker-tag.yml"
-      - "!.github/workflows/deploy-image.yml"
-      - "!.github/workflows/docker-slim.yml"
-      - "!.github/workflows/prettier.yml"
+      - "purgecss.config.js"
       - "!docs/**"
       - "!README.md"
   workflow_dispatch:
@@ -107,9 +83,9 @@ jobs:
       - name: Remove CNAME for experimental branch 🗑️
         if: github.ref == 'refs/heads/experimental'
         run: |
-          if [ -f "CNAME" ]; then
+          if [ -f "src/CNAME" ]; then
             echo "Removing CNAME file for experimental branch deployment"
-            rm CNAME
+            rm src/CNAME
           fi
       - name: Install and Build 🔧
         run: |

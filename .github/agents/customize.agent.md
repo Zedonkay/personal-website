@@ -19,16 +19,18 @@ You are an expert customization assistant for the al-folio Jekyll academic websi
 - **Tech Stack:** Jekyll 4.x, Liquid templating, Ruby, YAML, Markdown, SCSS/SASS, JavaScript
 - **Build System:** Jekyll with Bundler for dependency management
 - **Deployment:** GitHub Pages (automated via GitHub Actions)
-- **File Structure:**
-  - `_config.yml` – Main site configuration (URL, metadata, theme colors, enabled features)
-  - `_data/` – YAML data files (CV info, social links, repository links, coauthors)
-  - `_pages/` – Site pages (About, Blog, Projects, Publications, CV, etc.)
-  - `_posts/` – Blog posts in Markdown (format: `YYYY-MM-DD-title.md`)
-  - `_projects/` – Project pages in Markdown
-  - `_news/` – News/announcement items
-  - `_bibliography/papers.bib` – Publications in BibTeX format
-  - `_sass/` – SCSS/SASS stylesheets (colors, themes, layout)
-  - `assets/` – Static assets (images, PDFs, JSON resume, custom CSS/JS)
+- **File Structure:** Site content lives in `src/`. Paths below are relative to `src/` unless noted.
+  - `_config.yml` – Main site configuration at the repository root (URL, metadata, theme, features)
+  - `src/_data/` – YAML data files (CV info, social links, repository links, coauthors)
+  - `src/_pages/` – Site pages (About, Blog, Projects, Publications, CV, etc.)
+  - `src/_posts/` – Blog posts in Markdown (format: `YYYY-MM-DD-title.md`)
+  - `src/_projects/` – Project pages in Markdown
+  - `src/_news/` – News/announcement items
+  - `src/_bibliography/papers.bib` – Publications in BibTeX format
+  - `src/_sass/` – SCSS/SASS stylesheets (colors, themes, layout)
+  - `src/assets/` – Static assets (images, PDFs, JSON resume, custom CSS/JS)
+  - `docs/` – Setup and theme documentation
+  - `docker/` – Local Docker environment
   - `.github/workflows/` – GitHub Actions for deployment and CI/CD
 
 ## Community Context & Issue/Discussion References
@@ -62,8 +64,8 @@ You have access to the complete documentation for al-folio:
 
 ```bash
 # Using Docker (recommended)
-docker compose pull
-docker compose up
+docker compose -f docker/compose.yml pull
+docker compose -f docker/compose.yml up
 # Site available at http://localhost:8080
 
 # Legacy method (requires Ruby, Bundler, Python)
@@ -76,8 +78,8 @@ bundle exec jekyll serve
 
 ```bash
 # Using Docker (recommended)
-docker compose pull
-docker compose up --build
+docker compose -f docker/compose.yml pull
+docker compose -f docker/compose.yml up --build
 # Output automatically served at http://localhost:8080
 
 # Legacy method (requires Ruby, Bundler)
@@ -324,8 +326,8 @@ Always guide users to test changes locally before pushing to GitHub:
 1. **Run locally with Docker** (recommended):
 
    ```bash
-   docker compose pull
-   docker compose up
+   docker compose -f docker/compose.yml pull
+   docker compose -f docker/compose.yml up
    ```
 
    Then open `http://localhost:8080` in your browser

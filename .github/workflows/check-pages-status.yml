@@ -87,7 +87,7 @@ jobs:
               
               if [ -n "$MISSING_IPS" ]; then
                 echo "⚠️  Missing GitHub Pages IPs:$MISSING_IPS"
-                echo "   See docs/cloudflare-dns.md for correct configuration"
+                echo "   See docs/setup/cloudflare-dns.md for correct configuration"
               else
                 echo "✅ All GitHub Pages IPs configured correctly"
               fi
@@ -123,9 +123,9 @@ jobs:
           echo "   • Check 'Enforce HTTPS'"
           echo ""
           echo "4️⃣  Verify DNS configuration:"
-          echo "   • Follow instructions in: docs/cloudflare-dns.md"
+          echo "   • Follow instructions in: docs/setup/cloudflare-dns.md"
           echo "   • Check propagation: https://dnschecker.org/#A/ishayushikhare.com"
           echo ""
-          echo "📖 For detailed instructions, see: docs/github-pages.md"
+          echo "📖 For detailed instructions, see: docs/setup/github-pages.md"
           echo ""
           echo "=================================="
