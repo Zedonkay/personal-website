@@ -7,12 +7,12 @@ if ! echo "$command" | grep -Eq '(^|[[:space:]])git[[:space:]]+push([[:space:]]|
   exit 0
 fi
 
-if ! npx prettier . --check >&2; then
+if ! npm --prefix config run format:check >&2; then
   cat <<'EOF'
 {
   "permission": "deny",
-  "user_message": "Prettier check failed. Run npx prettier . --write, commit the formatting, then push.",
-  "agent_message": "git push was blocked because npx prettier . --check failed. Run npx prettier . --write, commit the formatting changes, then retry the push."
+  "user_message": "Prettier check failed. Run npm --prefix config run format, commit the formatting, then push.",
+  "agent_message": "git push was blocked because Prettier check failed. Run npm --prefix config run format, commit the formatting changes, then retry the push."
 }
 EOF
   exit 0

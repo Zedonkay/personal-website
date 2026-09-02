@@ -8,7 +8,7 @@ on:
       - experimental
     paths:
       - "src/**"
-      - "purgecss.config.js"
+      - "config/purgecss.config.js"
       - "!docs/**"
       - "!README.md"
   pull_request:
@@ -18,7 +18,7 @@ on:
       - experimental
     paths:
       - "src/**"
-      - "purgecss.config.js"
+      - "config/purgecss.config.js"
       - "!docs/**"
       - "!README.md"
   workflow_dispatch:
@@ -93,7 +93,7 @@ jobs:
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss
-          purgecss -c purgecss.config.js
+          purgecss -c config/purgecss.config.js
       - name: Add .nojekyll file 📄
         run: |
           touch _site/.nojekyll

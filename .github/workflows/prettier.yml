@@ -22,17 +22,20 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: config/package-lock.json
       - name: Install dependencies 💾
         run: npm ci
+        working-directory: config
       - name: Prettier Check 🔎
         id: prettier
-        run: npx prettier . --check
+        run: npm run format:check
+        working-directory: config
       - name: Create diff 📝
         # https://docs.github.com/en/actions/learn-github-actions/expressions#failure
         if: ${{ failure() }}
         run: |
-          npx prettier . --write
-          git diff -- . ':(exclude)package-lock.json' ':(exclude)package.json' > diff.txt
+          npm --prefix config run format
+          git diff -- . ':(exclude)config/package-lock.json' ':(exclude)config/package.json' > diff.txt
           npm install -g diff2html-cli
           diff2html -i file -s side -F diff.html -- diff.txt
       - name: Upload html diff ⬆️

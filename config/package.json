@@ -6,14 +6,14 @@
   },
   "name": "personal-website",
   "version": "1.0.0",
-  "description": "<div align=\"center\">",
+  "description": "Formatting and git-hook tooling for the personal website",
   "main": "purgecss.config.js",
   "scripts": {
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
-    "prepare": "husky",
-    "serve": "docker compose -f docker/compose.yml up",
-    "build": "bundle exec jekyll build --config src/_config.yml"
+    "format": "cd .. && prettier --config config/.prettierrc --ignore-path config/.prettierignore . --write",
+    "format:check": "cd .. && prettier --config config/.prettierrc --ignore-path config/.prettierignore . --check",
+    "prepare": "cd .. && husky",
+    "serve": "docker compose -f ../docker/compose.yml up",
+    "build": "cd .. && BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml"
   },
   "repository": {
     "type": "git",

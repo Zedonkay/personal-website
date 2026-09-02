@@ -4,13 +4,14 @@ Repo for [my personal website](https://ishayushikhare.com), based on [al-folio](
 
 ## Layout
 
-| Path             | What it is                                                     |
-| ---------------- | -------------------------------------------------------------- |
-| `src/`           | Jekyll site: config, gems, pages, posts, templates, assets     |
-| `docs/setup/`    | How this site is deployed (GitHub Pages, Cloudflare, branches) |
-| `docs/theme/`    | al-folio install / customize / FAQ guides                      |
-| `docker/`        | Local Docker environment                                       |
-| `scripts/`       | Build, deploy, and citation helpers                            |
+| Path              | What it is                                                     |
+| ----------------- | -------------------------------------------------------------- |
+| `src/`            | Jekyll site: config, gems, pages, posts, templates, assets     |
+| `docs/setup/`     | How this site is deployed (GitHub Pages, Cloudflare, branches) |
+| `docs/theme/`     | al-folio install / customize / FAQ guides                      |
+| `docker/`         | Local Docker environment                                       |
+| `scripts/`        | Build, deploy, and citation helpers                            |
+| `config/`         | Prettier, npm, pre-commit, PurgeCSS, lychee                    |
 | `src/_config.yml` | Jekyll config                                                  |
 
 ## Links
@@ -44,6 +45,13 @@ docker compose -f docker/compose.yml up
 ```
 
 Then open [http://localhost:8080](http://localhost:8080). Slimmer image: `docker compose -f docker/compose.slim.yml up`.
+
+Formatting:
+
+```bash
+npm --prefix config install
+npm --prefix config run format:check
+```
 
 ## Tech
 

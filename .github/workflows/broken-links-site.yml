@@ -41,10 +41,10 @@ jobs:
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss
-          purgecss -c purgecss.config.js
+          purgecss -c config/purgecss.config.js
       - name: Link Checker 🔗
         uses: lycheeverse/lychee-action@v2.0.2
         with:
           fail: true
           # only check local links
-          args: --offline --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
+          args: --offline --exclude-file config/.lycheeignore --remap '_site(/?.*)/assets/(.*) _site/assets/$2' --verbose --no-progress '_site/**/*.html'
