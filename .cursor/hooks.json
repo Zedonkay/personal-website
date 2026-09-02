@@ -3,7 +3,7 @@
   "hooks": {
     "beforeShellExecution": [
       {
-        "command": ".cursor/hooks/prettier-before-push.sh",
+        "command": ".cursor/hooks/before-push.sh",
         "matcher": "git\\s+push",
         "failClosed": true
       }

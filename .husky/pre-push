@@ -1,1 +1,4 @@
+#!/usr/bin/env sh
+set -e
 npm --prefix config run format:check
+npm --prefix config run build

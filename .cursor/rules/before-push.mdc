@@ -1,0 +1,25 @@
+---
+description: Run Prettier and Jekyll before every git push
+alwaysApply: true
+---
+
+# Checks before push
+
+Before any `git push`, run both checks:
+
+1. `npm --prefix config run format:check`
+2. `npm --prefix config run build` (Jekyll via `src/Gemfile`)
+
+If Prettier fails:
+
+1. Run `npm --prefix config run format`
+2. Commit the formatting changes
+3. Re-run `npm --prefix config run format:check`
+
+If Jekyll fails:
+
+1. Run `npm --prefix config run build` and fix the errors
+2. Commit the fix
+3. Re-run `npm --prefix config run build`
+
+Only then push. Do not skip this for "push everything" or similar. GitHub runs the same checks on `main` (`prettier.yml` and `jekyll.yml`).

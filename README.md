@@ -52,11 +52,12 @@ Jekyll is always run from the repository root:
 BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml
 ```
 
-Formatting:
+Formatting and a Jekyll build run on every `git push` (husky + Cursor hook):
 
 ```bash
 npm --prefix config install
 npm --prefix config run format:check
+npm --prefix config run build
 ```
 
 Root-level files that have to stay there: `README.md`, `LICENSE`, `requirements.txt`, plus Git/GitHub/Cursor/devcontainer metadata (`.gitignore`, `.github/`, `.cursor/`, `.husky/`, `.devcontainer/`).
