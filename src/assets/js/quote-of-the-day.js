@@ -15,7 +15,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
   const dayOfYear = Math.floor((now - start) / 86400000);
-  const index = mode === "random" ? Math.floor(Math.random() * items.length) : dayOfYear % items.length;
+  let index;
+  if (mode === "random") {
+    index = Math.floor(Math.random() * items.length);
+    if (items.length > 1) {
+      try {
+        const last = sessionStorage.getItem("quote-index");
+        if (last !== null) {
+          const lastIndex = Number(last);
+          if (Number.isInteger(lastIndex) && lastIndex === index) {
+            index = (index + 1 + Math.floor(Math.random() * (items.length - 1))) % items.length;
+          }
+        }
+        sessionStorage.setItem("quote-index", String(index));
+      } catch (err) {
+        // sessionStorage can throw in private mode; keep the first pick
+      }
+    }
+  } else {
+    index = dayOfYear % items.length;
+  }
   const quote = items[index];
   if (!quote || !quote.text) return;
 

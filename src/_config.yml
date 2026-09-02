@@ -151,7 +151,7 @@ newsletter:
 
 quotes:
   enabled: true
-  selection: daily # daily | random
+  selection: random # daily | random
 
 # -----------------------------------------------------------------------------
 # Collections
