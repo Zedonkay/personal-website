@@ -289,11 +289,69 @@ function attachLiveMotion(ritual, options = {}) {
     scheduleIdleWave();
   };
 
+  const runAcross = () => {
+    if (!options.canDash || ritual.classList.contains("is-running") || ritual.classList.contains("is-still")) {
+      return;
+    }
+    if (!dashPlan(ritual)) return;
+    stopAct();
+    window.clearTimeout(idleTimer);
+    lastAct = "dash";
+    cancelAct = playAct(ritual, "dash", () => {
+      cancelAct = null;
+      restPose(ritual);
+      if (!hovering) scheduleIdleWave();
+    });
+  };
+
+  const greetWhenVisible = () => {
+    const greet = () => {
+      if (hovering || ritual.classList.contains("is-running") || ritual.classList.contains("is-still")) {
+        scheduleIdleWave();
+        return;
+      }
+      stopAct();
+      window.clearTimeout(idleTimer);
+      lastAct = "wave";
+      cancelAct = playAct(ritual, "wave", () => {
+        cancelAct = null;
+        restPose(ritual);
+        scheduleIdleWave();
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            greet();
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.55 }
+      );
+      observer.observe(ritual);
+    } else {
+      greet();
+    }
+  };
+
   const onPointerMove = (event) => {
     if (pointerOnRitual(ritual, event.clientX, event.clientY)) onEnter();
     else onLeave();
   };
 
+  ritual.addEventListener("click", (event) => {
+    if (!options.canDash) return;
+    event.preventDefault();
+    runAcross();
+  });
+  ritual.addEventListener("keydown", (event) => {
+    if (!options.canDash) return;
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    runAcross();
+  });
   ritual.addEventListener("pointerenter", onEnter);
   ritual.addEventListener("pointerleave", onLeave);
   document.addEventListener("pointermove", onPointerMove, { capture: true, passive: true });
@@ -313,7 +371,13 @@ function attachLiveMotion(ritual, options = {}) {
     },
     true
   );
-  scheduleIdleWave();
+
+  if (options.greetWhenVisible) {
+    restPose(ritual);
+    greetWhenVisible();
+  } else {
+    scheduleIdleWave();
+  }
 }
 
 function beginDash(ritual) {
@@ -582,29 +646,11 @@ function setupReveal(ritual) {
 }
 
 function setupCompanion(ritual) {
-  const greet = () => {
-    playAct(ritual, "wave", () => {
-      restPose(ritual);
-      attachLiveMotion(ritual, { canDash: true });
-    });
-  };
-
-  decodeRitualArt(ritual, ["--ritual-run", "--ritual-wait", "--ritual-jump", "--ritual-react"]);
-  decodeRitualArt(ritual, ["--ritual-still", "--ritual-sheet"]).then(() => {
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries, obs) => {
-          if (entries.some((entry) => entry.isIntersecting)) {
-            greet();
-            obs.disconnect();
-          }
-        },
-        { threshold: 0.55 }
-      );
-      observer.observe(ritual);
-    } else {
-      greet();
-    }
+  Promise.all([
+    decodeRitualArt(ritual, ["--ritual-run", "--ritual-wait", "--ritual-jump", "--ritual-react"]),
+    decodeRitualArt(ritual, ["--ritual-still", "--ritual-sheet"]),
+  ]).then(() => {
+    attachLiveMotion(ritual, { canDash: true, greetWhenVisible: true });
   });
 }
 

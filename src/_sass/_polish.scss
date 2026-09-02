@@ -1483,6 +1483,15 @@ footer.is-deferred {
   cursor: pointer;
 }
 
+.ritual--companion:focus {
+  outline: none;
+}
+
+.ritual--companion:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 .ritual--wait {
   flex: 0 0 auto;
 }
