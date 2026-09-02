@@ -27,31 +27,51 @@ const ASPECT = {
 };
 
 const CHARMS_LEFT = [
-  { kind: "teapot", size: 50 },
-  { kind: "cup", size: 40 },
-  { kind: "bike", size: 55 },
-  { kind: "clapper", size: 42 },
-  { kind: "coffee", size: 40 },
-  { kind: "pin", size: 50 },
-  { kind: "whittle", size: 46 },
-  { kind: "hammer", size: 50 },
-  { kind: "masks", size: 42 },
+  { kind: "teapot", size: 54 },
+  { kind: "cup", size: 32 },
+  { kind: "bike", size: 58 },
+  { kind: "clapper", size: 36 },
+  { kind: "coffee", size: 34 },
+  { kind: "pin", size: 48 },
+  { kind: "whittle", size: 42 },
+  { kind: "hammer", size: 46 },
+  { kind: "masks", size: 38 },
+  { kind: "cup", size: 30 },
+  { kind: "driver", size: 16 },
+  { kind: "pin", size: 40 },
+  { kind: "coffee", size: 38 },
+  { kind: "bike", size: 50 },
+  { kind: "clapper", size: 34 },
+  { kind: "whittle", size: 36 },
+  { kind: "hammer", size: 40 },
+  { kind: "masks", size: 34 },
+  { kind: "teapot", size: 42 },
+  { kind: "cup", size: 28 },
 ];
 
 const CHARMS_RIGHT = [
-  { kind: "cup", size: 40 },
-  { kind: "teapot", size: 50 },
-  { kind: "bike", size: 54 },
-  { kind: "clapper", size: 42 },
-  { kind: "coffee", size: 40 },
-  { kind: "hammer", size: 48 },
-  { kind: "driver", size: 16 },
-  { kind: "whittle", size: 44 },
-  { kind: "pin", size: 50 },
-  { kind: "masks", size: 42 },
+  { kind: "bike", size: 56 },
+  { kind: "coffee", size: 36 },
+  { kind: "masks", size: 44 },
+  { kind: "pin", size: 52 },
+  { kind: "teapot", size: 46 },
+  { kind: "hammer", size: 40 },
+  { kind: "cup", size: 34 },
+  { kind: "clapper", size: 40 },
+  { kind: "driver", size: 18 },
+  { kind: "whittle", size: 40 },
+  { kind: "cup", size: 30 },
+  { kind: "pin", size: 38 },
+  { kind: "coffee", size: 32 },
+  { kind: "clapper", size: 32 },
+  { kind: "teapot", size: 40 },
+  { kind: "masks", size: 36 },
+  { kind: "hammer", size: 50 },
+  { kind: "whittle", size: 34 },
+  { kind: "bike", size: 48 },
 ];
 
-const GAP = 20;
+const GAP = 14;
 const TOP = 72;
 
 function rotBox(cx, cy, w, h, deg) {
@@ -70,18 +90,13 @@ function overlaps(a, b, gap) {
 function gutters() {
   const post = document.querySelector(".page-about .post") || document.querySelector(".post");
   const postBox = post ? post.getBoundingClientRect() : { left: 200, right: window.innerWidth - 200 };
-  const height = Math.max(240, window.innerHeight - TOP - 12);
+  const height = Math.max(240, window.innerHeight - TOP - 8);
   const found = {};
-  const leftW = postBox.left - 14;
-  const rightW = window.innerWidth - postBox.right - 14;
-  if (leftW >= 48) found.left = { x: 8, y: TOP, w: leftW, h: height, side: "left" };
-  if (rightW >= 48) found.right = { x: postBox.right + 8, y: TOP, w: rightW, h: height, side: "right" };
+  const leftW = postBox.left - 6;
+  const rightW = window.innerWidth - postBox.right - 6;
+  if (leftW >= 40) found.left = { x: 0, y: TOP, w: leftW, h: height, side: "left" };
+  if (rightW >= 40) found.right = { x: postBox.right + 4, y: TOP, w: rightW, h: height, side: "right" };
   return found;
-}
-
-function quoteBottom() {
-  const moment = document.querySelector(".page-about .identity-moment");
-  return moment ? moment.getBoundingClientRect().bottom : 0;
 }
 
 function avoidRects() {
@@ -123,61 +138,72 @@ function tryStamp(layer, placed, blocked, kind, cx, cy, w, h, rotate, skipBlock)
   return true;
 }
 
-function colX(region, col) {
-  return region.x + region.w * (col === 0 ? 0.3 : 0.7);
+function unit(n) {
+  const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
 }
 
-function evenTs(count, from, to) {
-  if (count <= 1) return [(from + to) / 2];
-  return Array.from({ length: count }, (_, i) => from + ((to - from) * i) / (count - 1));
-}
-
-function vinylBox(region) {
-  const w = Math.min(200, Math.max(128, region.w * 0.92));
-  const cx = region.side === "left" ? region.x + w * 0.48 : region.x + region.w - w * 0.48;
-  return { w, cx };
-}
-
-function placeGutter(layer, region, charms, placed, blocked, belowT) {
-  const vinyl = vinylBox(region);
-  const vinylY = region.y + region.h * 0.13;
-  tryStamp(layer, placed, blocked, "record", vinyl.cx, vinylY, vinyl.w, vinyl.w, region.side === "left" ? -12 : 10, true);
-
-  const nBelow = Math.max(3, Math.round(charms.length * (1 - belowT)));
-  const nAbove = Math.max(1, charms.length - nBelow);
-  const above = charms.slice(0, nAbove);
-  const below = charms.slice(nAbove);
-  const charmStart = 0.13 + vinyl.w / region.h / 2 + 0.04;
-  const aboveTs = evenTs(above.length, Math.min(charmStart, belowT - 0.08), Math.max(charmStart, belowT - 0.05));
-  const belowTs = evenTs(below.length, Math.min(0.97, belowT + 0.04), 0.97);
-
-  above.forEach((charm, i) => {
-    const t = aboveTs[i];
-    const col = region.side === "left" ? 1 - (i % 2) : i % 2;
-    const w = charm.size;
-    const h = w / (ASPECT[charm.kind] || 1);
-    tryStamp(layer, placed, blocked, charm.kind, colX(region, col), region.y + region.h * t, w, h, col === 0 ? -14 : 12, false);
-  });
-
-  below.forEach((charm, i) => {
-    const t = belowTs[i];
-    const col = region.side === "left" ? i % 2 : 1 - (i % 2);
-    const w = charm.size;
-    const h = w / (ASPECT[charm.kind] || 1);
-    tryStamp(layer, placed, blocked, charm.kind, colX(region, col), region.y + region.h * t, w, h, col === 0 ? 10 : -16, false);
-  });
-
-  if (region.side === "right") {
-    const w = Math.min(156, region.w * 0.82);
-    const cx = region.x + region.w - w * 0.48;
-    const cy = region.y + region.h * Math.max(0.86, belowT + 0.08);
-    tryStamp(layer, placed, blocked, "record", cx, cy, w, w, -8, true);
-  } else {
-    const w = Math.min(148, region.w * 0.8);
-    const cx = region.x + w * 0.48;
-    const cy = region.y + region.h * Math.max(0.88, belowT + 0.1);
-    tryStamp(layer, placed, blocked, "record", cx, cy, w, w, 8, true);
+function shuffle(list, seed) {
+  const out = list.slice();
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(unit(seed + i) * (i + 1));
+    const tmp = out[i];
+    out[i] = out[j];
+    out[j] = tmp;
   }
+  return out;
+}
+
+function placeVinyls(layer, placed, found) {
+  const left = found.left;
+  if (left) {
+    const w = Math.min(260, Math.max(170, left.w * 1.55));
+    const hide = 0.64;
+    const cx = w * (0.5 - hide);
+    const cy = window.innerHeight - w * 0.22;
+    tryStamp(layer, placed, [], "record", cx, cy, w, w, -18, true);
+  }
+
+  const right = found.right;
+  if (right) {
+    const w = Math.min(220, Math.max(150, right.w * 1.35));
+    const hide = 0.52;
+    const cx = window.innerWidth + w * (hide - 0.5);
+    const cy = TOP + (window.innerHeight - TOP) * 0.44;
+    tryStamp(layer, placed, [], "record", cx, cy, w, w, 14, true);
+  }
+}
+
+function placeCharms(layer, region, charms, placed, blocked) {
+  const cols = region.side === "left" ? 4 : 3;
+  const rows = 14;
+  const cells = [];
+  for (let row = 0; row < rows; row += 1) {
+    for (let col = 0; col < cols; col += 1) {
+      const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8)) - 0.5) * 0.55;
+      const jitterY = (unit(row * 9 + col + 4) - 0.5) * 0.45;
+      const u = Math.min(0.96, Math.max(0.04, (col + 0.5 + jitterX) / cols));
+      const v = Math.min(0.97, Math.max(0.03, (row + 0.5 + jitterY) / rows));
+      cells.push({
+        cx: region.x + 8 + u * Math.max(12, region.w - 16),
+        cy: region.y + 10 + v * Math.max(24, region.h - 20),
+      });
+    }
+  }
+
+  const bag = shuffle(charms, region.side === "left" ? 2 : 19);
+  const slots = shuffle(cells, region.side === "left" ? 5 : 23);
+  let slot = 0;
+  bag.forEach((charm) => {
+    const w = charm.size;
+    const h = w / (ASPECT[charm.kind] || 1);
+    const rot = Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + slot) - 0.5) * 42);
+    while (slot < slots.length) {
+      const cell = slots[slot];
+      slot += 1;
+      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx, cell.cy, w, h, rot, false)) return;
+    }
+  });
 }
 
 function place(layer) {
@@ -186,12 +212,7 @@ function place(layer) {
   const found = gutters();
   const blocked = avoidRects();
   const placed = [];
-  const quoteY = quoteBottom();
-
-  ["left", "right"].forEach((side) => {
-    const region = found[side];
-    if (!region) return;
-    const belowT = quoteY ? Math.min(0.88, Math.max(0.45, (quoteY + 16 - region.y) / region.h)) : 0.72;
-    placeGutter(layer, region, side === "left" ? CHARMS_LEFT : CHARMS_RIGHT, placed, blocked, belowT);
-  });
+  placeVinyls(layer, placed, found);
+  if (found.left) placeCharms(layer, found.left, CHARMS_LEFT, placed, blocked);
+  if (found.right) placeCharms(layer, found.right, CHARMS_RIGHT, placed, blocked);
 }

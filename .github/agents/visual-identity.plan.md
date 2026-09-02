@@ -7,12 +7,12 @@ This document stays after implementation. Do not treat it as optional flavor.
 ## Decisions (locked)
 
 - Keep al-folio. Layer onto `src/_layouts/`, `src/_includes/`, `src/_sass/_polish.scss`, `src/_data/`, `src/_config.yml`. Do not rebuild as handwritten HTML.
-- **Motif B:** On about, the quote is a full-width band. Ritual runs left-to-right at a constant speed; the quote is clipped to his leading edge so it only appears as he reaches it. He parks just to the right of the last glyph, then waves and idles. Hover poses only last while the pointer is on him; leave snaps back to idle. He also waves on his own now and then. `prefers-reduced-motion: reduce` → static idle frame at the park point, quote fully visible, no sprite loop, no vinyl spin.
+- **Motif B:** On about, the quote is a full-width band. Ritual runs left-to-right at a constant speed; the quote is clipped to his leading edge so it only appears as he reaches it. He parks just past the last glyph — a short line does not send him to the column edge; a wrapping or full line does, because that is where the text ends. Then he waves and idles. Hover poses only last while the pointer is on him; leave snaps back to idle. He also waves on his own now and then. `prefers-reduced-motion: reduce` → static idle frame at the park point, quote fully visible, no sprite loop, no vinyl spin.
 - **No field tags** (not now).
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. Charms are a small composed scatter in the gutters and around the socials (mixed sizes, rotated). Motifs: teapot/cup, coffee, rolling pin, bike, clapper, whittling, theater masks, hammer/screwdriver, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. Charms scatter in the gutters from the viewport edge in toward the text (mixed sizes, rotated, not mirrored left/right). Motifs: teapot/cup, coffee, rolling pin, bike, clapper, whittling, theater masks, hammer/screwdriver, and vinyl. Two vinyls only: one bottom-left, one middle-right, each about 40–80% off the side or corner. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -81,7 +81,7 @@ Do not commit the full 2 MB sheet. Leave running-right/jump/fail/other look fram
 ### About (`src/_layouts/about.liquid`)
 
 1. **Keep** the sloth `<img class="title-favicon">` in the H1. Do not put Ritual there.
-2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts on the left, runs right across the quote (z-index above, quote visible behind the sprite), and parks just past the rightmost glyph. The quote is clipped to his leading edge so it only appears as he reaches it.
+2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts on the left, runs right, and parks just past the last glyph of the quote text (not the 100% quote box). A wrapping or full-width line reaches the column edge; a short line does not. The quote is clipped to his leading edge so it only appears as he reaches it.
 3. If the quote bank is empty or `quotes.enabled` is false: still show Ritual (wave + idle on the left). Omit the quote markup entirely (no empty italic, no “add quotes” placeholder).
 4. Include the decorative field here only (`permalink: /`).
 
@@ -92,7 +92,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Ritual companion (`src/_includes/ritual.liquid` + `src/assets/js/ritual.js`)
 
 - Markup: one element, `role="img"`, `aria-label="Ritual, a small brass-and-walnut fox robot"`. `data-ritual` / `pose`: `reveal` (about), `companion` (inner pages), `wait` (404).
-- **reveal:** `is-running` goes left-to-right and stops just to the right of the quote (constant speed, duration follows distance). Quote clip-path is driven by his leading edge each frame. Ritual’s height covers the full quote block, including multi-line quotes. Then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
+- **reveal:** `is-running` goes left-to-right and stops just past the last glyph (constant speed, duration follows that distance). Quote clip-path is driven by his leading edge each frame. Ritual’s height covers the full quote block, including multi-line quotes. Then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
 - **companion:** same height as about (~4.5rem). Wave once when scrolled into view, then hover + occasional idle waves. One hover pose is a dash across the sign-off band; it keeps going after the pointer leaves and parks on the other side.
 - **wait:** waiting strip loop, same hover + idle waves.
 - Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already parked at the quote’s end.
@@ -109,7 +109,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
 - Footer sits in document flow (not `fixed-bottom`). If the page cannot scroll, show it; otherwise keep it hidden until the visitor reaches the bottom.
-- **Charms:** small composed scatter in the gutters and below the quote, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, clapper, whittling, theater masks, hammer, screwdriver, vinyl discs. No film-reel/wheel. Vinyls are large and sit in the gutters (slight peek). Grooves/edge/label stay darker than the disc fill.
+- **Charms:** scatter in the gutters from the viewport edge in toward the text, mixed sizes, rotated, no collisions, not mirrored. Motifs: teapot/cup, coffee mug, rolling pin, bike, clapper, whittling, theater masks, hammer, screwdriver, vinyl discs. No film-reel/wheel. Two vinyls: bottom-left and middle-right, each about 40–80% off the side or corner. Grooves/edge/label stay darker than the disc fill.
 - **Steam:** optional wisps on the teapot, cup, and coffee mug. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.
