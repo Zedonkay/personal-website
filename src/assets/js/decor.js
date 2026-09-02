@@ -56,8 +56,21 @@ const CHARMS_RIGHT = [
   { kind: "bike", size: 55 },
 ];
 
+const HAMMER_ANGLES = [-78, -54, -22, 16, 41, 68, -86, 82, -36, 57];
 const GAP = 22;
 const TOP = 72;
+
+function pageBox(el) {
+  const box = el.getBoundingClientRect();
+  return {
+    left: box.left + window.scrollX,
+    top: box.top + window.scrollY,
+    right: box.right + window.scrollX,
+    bottom: box.bottom + window.scrollY,
+    width: box.width,
+    height: box.height,
+  };
+}
 
 function rotBox(cx, cy, w, h, deg) {
   const rad = (Math.abs(deg) * Math.PI) / 180;
@@ -72,30 +85,37 @@ function overlaps(a, b, gap) {
   return !(a.x + a.w + gap < b.x || b.x + b.w + gap < a.x || a.y + a.h + gap < b.y || b.y + b.h + gap < a.y);
 }
 
+function floorLine() {
+  const footer = document.querySelector("footer[role='contentinfo']");
+  if (footer && !footer.classList.contains("is-deferred")) {
+    const box = pageBox(footer);
+    if (box.height > 8) return box.top;
+  }
+  const post = document.querySelector(".page-about .post") || document.querySelector(".post");
+  if (post) return pageBox(post).bottom + 10;
+  return document.documentElement.scrollHeight;
+}
+
 function gutters() {
   const post = document.querySelector(".page-about .post") || document.querySelector(".post");
-  const postBox = post ? post.getBoundingClientRect() : { left: 200, right: window.innerWidth - 200 };
+  const postBox = post ? pageBox(post) : { left: 200, right: document.documentElement.clientWidth - 200 };
   const quote = document.querySelector(".page-about .identity-moment");
-  const splitY = quote ? quote.getBoundingClientRect().bottom : TOP + 220;
-  const footer = document.querySelector("footer[role='contentinfo']");
-  let floorY = window.innerHeight;
-  if (footer && !footer.classList.contains("is-deferred")) {
-    const box = footer.getBoundingClientRect();
-    if (box.height > 8) floorY = Math.min(floorY, box.top);
-  }
+  const splitY = quote ? pageBox(quote).bottom : TOP + 220;
+  const floorY = floorLine();
+  const pageW = document.documentElement.clientWidth;
 
   const icons = [...document.querySelectorAll(".page-about .contact-icons a")];
   let innerLeft = postBox.left;
   let innerRight = postBox.right;
   if (icons.length) {
-    const boxes = icons.map((el) => el.getBoundingClientRect());
+    const boxes = icons.map((el) => pageBox(el));
     innerLeft = Math.min(...boxes.map((box) => box.left));
     innerRight = Math.max(...boxes.map((box) => box.right));
   }
 
   const found = {};
   const leftW = postBox.left - 6;
-  const rightW = window.innerWidth - postBox.right - 6;
+  const rightW = pageW - postBox.right - 6;
   const upperH = Math.max(36, splitY - TOP);
   const lowerH = Math.max(36, floorY - splitY - 10);
   if (leftW >= 40) {
@@ -107,12 +127,12 @@ function gutters() {
     found.rightLower = {
       x: innerRight + 14,
       y: splitY + 8,
-      w: Math.max(40, window.innerWidth - innerRight - 14),
+      w: Math.max(40, pageW - innerRight - 14),
       h: lowerH,
       side: "right",
     };
   }
-  return { found, floorY };
+  return { found, floorY, pageW };
 }
 
 function avoidRects(floorY) {
@@ -121,10 +141,10 @@ function avoidRects(floorY) {
   ];
   document.querySelectorAll(".page-about .contact-icons a").forEach((el) => boxes.push(el));
   const mapped = boxes.map((el) => {
-    const box = el.getBoundingClientRect();
+    const box = pageBox(el);
     return { x: box.left, y: box.top, w: box.width, h: box.height };
   });
-  mapped.push({ x: 0, y: floorY, w: window.innerWidth, h: 4000 });
+  mapped.push({ x: 0, y: floorY, w: document.documentElement.clientWidth, h: 4000 });
   return mapped;
 }
 
@@ -178,7 +198,15 @@ function sitAbove(cx, w, rotate, floorY, preferredCy) {
   return cy;
 }
 
-function placeVinyls(layer, placed, found, floorY) {
+function charmTilt(charm, idx, region) {
+  if (charm.kind === "hammer") {
+    const pick = Math.floor(unit(idx * 17 + charm.size + region.x + region.y) * HAMMER_ANGLES.length);
+    return HAMMER_ANGLES[pick];
+  }
+  return Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
+}
+
+function placeVinyls(layer, placed, found, floorY, pageW) {
   const left = found.leftLower || found.leftUpper;
   if (left) {
     const w = Math.min(260, Math.max(170, Math.min(left.w, 220) * 1.15));
@@ -192,7 +220,7 @@ function placeVinyls(layer, placed, found, floorY) {
   if (right) {
     const w = Math.min(220, Math.max(150, right.w * 1.35));
     const hide = 0.52;
-    const cx = window.innerWidth + w * (hide - 0.5);
+    const cx = pageW + w * (hide - 0.5);
     const mid = TOP + (floorY - TOP) * 0.44;
     const cy = sitAbove(cx, w, 14, floorY, Math.min(mid, floorY - 6 - w / 2));
     tryStamp(layer, placed, [], "record", cx, cy, w, w, 14, true);
@@ -217,15 +245,18 @@ function shareByArea(regions, charms) {
 function placeCharms(layer, region, charms, placed, blocked) {
   if (!charms.length) return;
   const aspect = region.w / Math.max(24, region.h);
-  const cols = Math.max(1, Math.round(Math.sqrt(charms.length * aspect * 1.2)));
+  const minCols = region.w >= 64 ? 2 : 1;
+  const cols = Math.max(minCols, Math.round(Math.sqrt(charms.length * aspect * 1.45)));
   const rows = Math.max(1, Math.ceil(charms.length / cols));
+  const jitterScale = region.side === "right" ? 0.72 : 0.4;
   const cells = [];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
-      const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * 0.4;
-      const jitterY = (unit(row * 9 + col + 4 + region.x) - 0.5) * 0.36;
-      const u = Math.min(0.92, Math.max(0.08, (col + 0.5 + jitterX) / cols));
-      const v = Math.min(0.92, Math.max(0.08, (row + 0.5 + jitterY) / rows));
+      const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * jitterScale;
+      const jitterY = (unit(row * 9 + col + 4 + region.x) - 0.5) * (region.side === "right" ? 0.5 : 0.36);
+      const stagger = region.side === "right" && row % 2 ? 0.34 : 0;
+      const u = Math.min(0.94, Math.max(0.06, (col + 0.5 + jitterX + stagger) / cols));
+      const v = Math.min(0.94, Math.max(0.06, (row + 0.5 + jitterY) / rows));
       cells.push({
         cx: region.x + 8 + u * Math.max(12, region.w - 16),
         cy: region.y + 10 + v * Math.max(24, region.h - 20),
@@ -235,34 +266,51 @@ function placeCharms(layer, region, charms, placed, blocked) {
 
   const bag = shuffle(charms, region.side === "left" ? 2 + region.y : 19 + region.y);
   const slots = cells.slice(0, bag.length);
-  const nudges = [
-    [0, 0],
-    [12, -8],
-    [-14, 10],
-    [8, 16],
-    [-16, -6],
-    [0, -18],
-    [18, 4],
-  ];
+  const nudges =
+    region.side === "right"
+      ? [
+          [0, 0],
+          [18, -10],
+          [-22, 12],
+          [10, 20],
+          [-16, -14],
+          [26, 6],
+          [-8, 18],
+        ]
+      : [
+          [0, 0],
+          [12, -8],
+          [-14, 10],
+          [8, 16],
+          [-16, -6],
+          [0, -18],
+          [18, 4],
+        ];
   bag.forEach((charm, idx) => {
     const w = charm.size;
     const h = w / (ASPECT[charm.kind] || 1);
-    const rot = Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
+    const rot = charmTilt(charm, idx, region);
     const cell = slots[idx] || cells[idx % cells.length];
+    const wanderX = region.side === "right" ? (unit(idx * 11 + region.y) - 0.5) * Math.min(38, region.w * 0.4) : 0;
     for (let n = 0; n < nudges.length; n += 1) {
       const [dx, dy] = nudges[n];
-      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx, cell.cy + dy, w, h, rot, false)) return;
+      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false)) return;
     }
   });
 }
 
 function place(layer) {
   layer.replaceChildren();
-  if (window.innerWidth < 992) return;
-  const { found, floorY } = gutters();
+  const field = layer.parentElement;
+  if (window.innerWidth < 992) {
+    if (field) field.style.removeProperty("--decor-h");
+    return;
+  }
+  const { found, floorY, pageW } = gutters();
+  if (field) field.style.setProperty("--decor-h", `${Math.max(0, floorY)}px`);
   const blocked = avoidRects(floorY);
   const placed = [];
-  placeVinyls(layer, placed, found, floorY);
+  placeVinyls(layer, placed, found, floorY, pageW);
   shareByArea([found.leftUpper, found.leftLower], CHARMS_LEFT).forEach((bag) => {
     placeCharms(layer, bag.region, bag.charms, placed, blocked);
   });

@@ -179,6 +179,8 @@ body.fixed-top-nav {
 }
 
 .page-about {
+  position: relative;
+
   .post-header {
     margin-bottom: 1.55rem;
   }
@@ -1168,8 +1170,11 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 $ritual-h: 4.5rem;
 
 .decor-field {
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--decor-h, 100%);
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
