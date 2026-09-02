@@ -16,11 +16,11 @@ const ASPECT = {
   teapot: 120 / 82,
   cup: 70 / 56,
   coffee: 70 / 52,
-  bike: 653 / 379,
+  bike: 76 / 58,
   pin: 120 / 28,
   clapper: 24 / 24,
   masks: 88 / 52,
-  hammer: 156 / 166,
+  hammer: 1,
   record: 1,
 };
 
