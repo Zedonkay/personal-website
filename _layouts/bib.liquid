@@ -12,39 +12,39 @@
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-4 abbr">
       <div class="publication-media{% if entry.preview %} publication-media--preview{% endif %}">
-      {%- if entry.abbr -%}
-        {%- if site.data.venues[entry.abbr] -%}
-          {% assign venue_style = null %}
-          {% if site.data.venues[entry.abbr].color != blank %}
-            {% assign venue_style = site.data.venues[entry.abbr].color | prepend: 'style="background-color:' | append: '"' %}
-          {%- endif -%}
-          <abbr
-            class="badge rounded w-100"
-            {% if venue_style %}
-              {{ venue_style }}
-            {% endif -%}
-          >
-            {% if site.data.venues[entry.abbr].url %}
-              <a href="{{ site.data.venues[entry.abbr].url }}">{{ entry.abbr }}</a>
-            {% else %}
-              <div>{{- entry.abbr -}}</div>
-            {% endif %}
-          </abbr>
-        {% else %}
-          <abbr class="badge rounded w-100">{{ entry.abbr }}</abbr>
+        {%- if entry.abbr -%}
+          {%- if site.data.venues[entry.abbr] -%}
+            {% assign venue_style = null %}
+            {% if site.data.venues[entry.abbr].color != blank %}
+              {% assign venue_style = site.data.venues[entry.abbr].color | prepend: 'style="background-color:' | append: '"' %}
+            {%- endif -%}
+            <abbr
+              class="badge rounded w-100"
+              {% if venue_style %}
+                {{ venue_style }}
+              {% endif -%}
+            >
+              {% if site.data.venues[entry.abbr].url %}
+                <a href="{{ site.data.venues[entry.abbr].url }}">{{ entry.abbr }}</a>
+              {% else %}
+                <div>{{- entry.abbr -}}</div>
+              {% endif %}
+            </abbr>
+          {% else %}
+            <abbr class="badge rounded w-100">{{ entry.abbr }}</abbr>
+          {% endif %}
         {% endif %}
-      {% endif %}
-      {% if entry.preview %}
-        {% assign preview_zoomable = true %}
-        {% if entry_primary_url %}
-          {% assign preview_zoomable = false %}
-        {% endif %}
-        {% assign preview_is_embed = false %}
-        {% if entry.preview contains 'youtube.com' or entry.preview contains 'youtu.be' %}
-          {% assign preview_is_embed = true %}
-        {% endif %}
-        {% assign preview_ext = entry.preview | split: '.' | last | downcase %}
-        {% capture publication_preview %}
+        {% if entry.preview %}
+          {% assign preview_zoomable = true %}
+          {% if entry_primary_url %}
+            {% assign preview_zoomable = false %}
+          {% endif %}
+          {% assign preview_is_embed = false %}
+          {% if entry.preview contains 'youtube.com' or entry.preview contains 'youtu.be' %}
+            {% assign preview_is_embed = true %}
+          {% endif %}
+          {% assign preview_ext = entry.preview | split: '.' | last | downcase %}
+          {% capture publication_preview %}
           {% if preview_is_embed %}
             <div class="preview preview-video-embed z-depth-1 rounded">
               {%
@@ -77,14 +77,14 @@
             %}
           {% endif %}
         {% endcapture %}
-        {% if entry_primary_url and preview_is_embed == false %}
-          <a class="publication-preview-link" href="{{ entry_primary_url }}" aria-label="{{ entry.title | strip_html | escape }}">
+          {% if entry_primary_url and preview_is_embed == false %}
+            <a class="publication-preview-link" href="{{ entry_primary_url }}" aria-label="{{ entry.title | strip_html | escape }}">
+              {{ publication_preview }}
+            </a>
+          {% else %}
             {{ publication_preview }}
-          </a>
-        {% else %}
-          {{ publication_preview }}
+          {% endif %}
         {% endif %}
-      {% endif %}
       </div>
     </div>
   {% endif %}
