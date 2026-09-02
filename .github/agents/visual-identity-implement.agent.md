@@ -20,13 +20,14 @@ You are an implementation agent for Ishayu Shikhare’s personal site (al-folio 
 - Ritual source: `/Users/ishayu/.codex/pets/Ritual/` — copy trimmed frames only. Never git-link `~/.codex`.
 - Font: **Fraunces** (body, headings, quote) + **Newsreader** (nav, badges, attribution) + Material Icons. System UI mono for `code`/`pre` only. Do not load JetBrains Mono, Playfair, Instrument Serif, or Gloock.
 - Quotes: empty `items: []`. You may add a quote locally to test, then revert before commit.
+- Keep the sloth as favicon, navbar icon, and about H1. Two animals on purpose: sloth = chrome, Ritual = companion.
 - Keep al-folio. Do not disable dark mode or search. Do not copy Anushka’s CSS, sun, or globe.
 - Honor `prefers-reduced-motion`. Ritual `aria-label`: `Ritual, a small brass-and-walnut fox robot`. Decor `aria-hidden`.
 - User rules: commit after each logical step (imperative subject, why in the body, HEREDOC, no force-push, no skipping hooks, no secrets). Push only if asked. Run Prettier on files you touch if the repo’s format check would fail.
 
 ## Done when
 
-- About shows Ritual (wave → idle), no sloth in the H1, no quote chrome with an empty bank, margin rings + lamp that do not cover copy.
-- Favicon/navbar use Ritual. `sloth.png` remains on disk, unreferenced.
+- About shows the sloth next to the name **and** Ritual below the bio (wave → idle), no quote chrome with an empty bank, margin rings + lamp that do not cover copy.
+- Favicon and navbar still use `assets/favicon/sloth.png`. Do not add or swap in a Ritual favicon.
 - Fraunces + Newsreader are live. Quote infra is wired and idle.
 - This handoff file is gone. The plan file remains.

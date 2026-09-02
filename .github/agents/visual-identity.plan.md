@@ -11,7 +11,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **No field tags** (not now).
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
-- **Sloth:** Ritual replaces it in favicon, navbar (`site.icon`), and the about H1. Keep `src/assets/favicon/sloth.png` in the tree; stop referencing it.
+- **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion in the identity moment (quote / below the bio). Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon.
 - **Decor:** about/homepage only. Lamp glow + slow-spinning tea-ring / vinyl-groove SVG in the margins. Faint steam near Ritual. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** out of scope for this pass.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
@@ -71,24 +71,21 @@ Source (local only, never a repo dependency): `/Users/ishayu/.codex/pets/Ritual/
 | --- | --- | --- |
 | `src/assets/img/ritual/ritual-idle-wave.webp` | 6×3 strip, cell 192×208. Row 0 = idle 0–5. Row 1 = wave 0–3 (cols 4–5 transparent). Row 2 col 0 = look-090. | ≲ 200 KB |
 | `src/assets/img/ritual/ritual-idle.png` | Idle frame 0, full body, transparent | ≲ 50 KB |
-| `src/assets/favicon/ritual.png` | **Head/shoulders crop** of idle-0 (full body dies at 16px). Square, transparent. | ≲ 30 KB |
 
-Do not commit the full 2 MB sheet. Leave running/jump/fail/wait/other look frames in `~/.codex`.
-
-`site.icon` → `assets/favicon/ritual.png` (same path style as the sloth, so jekyll-imagemagick does not convert it).
+Do not commit the full 2 MB sheet. Leave running/jump/fail/wait/other look frames in `~/.codex`. Do not write `src/assets/favicon/ritual.png`. Leave `site.icon` pointing at `assets/favicon/sloth.png`.
 
 ## Layout and behavior
 
 ### About (`src/_layouts/about.liquid`)
 
-1. Remove the sloth `<img class="title-favicon">` from the H1. The name is the name; Ritual is not a heading emoji.
+1. **Keep** the sloth `<img class="title-favicon">` in the H1. Do not put Ritual there.
 2. After the bio (`clearfix` content), before socials: an **identity moment** — Ritual on the left (~72px / 4.5rem tall), quote block on the right (desktop). Stack on small screens (Ritual above quote).
 3. If the quote bank is empty or `quotes.enabled` is false: still show Ritual. Omit the quote markup entirely (no empty italic, no “add quotes” placeholder).
 4. Include the decorative field here only (`permalink: /`).
 
 ### Navbar (`src/_includes/header.liquid`)
 
-Already renders `site.icon` on inner pages. Changing `site.icon` is enough. Homepage navbar has no brand (name lives in the about H1) — keep that.
+Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navbar has no brand (name + sloth live in the about H1) — keep that.
 
 ### Ritual companion (`src/_includes/ritual.liquid` + `src/assets/js/ritual.js`)
 
@@ -153,13 +150,13 @@ Empty/small bank: 0 → omit block. 1 → that line every day.
 
 ## Files to touch (order)
 
-1. Extract/copy Ritual assets into `src/assets/img/ritual/` and `src/assets/favicon/ritual.png`.
-2. `src/_config.yml` — `icon`, `quotes.*`, Google Fonts URL.
+1. Extract/copy Ritual assets into `src/assets/img/ritual/` only (no favicon).
+2. `src/_config.yml` — `quotes.*`, Google Fonts URL. **Do not change `icon`.**
 3. `src/_data/quotes.yml` — empty `items: []` plus comments.
 4. `src/_includes/quote_of_the_day.liquid` + `src/assets/js/quote-of-the-day.js`
 5. `src/_includes/ritual.liquid` + `src/assets/js/ritual.js`
 6. `src/_includes/decor_field.liquid`
-7. `src/_layouts/about.liquid` — identity moment, drop sloth, include decor.
+7. `src/_layouts/about.liquid` — identity moment + decor. Leave the H1 sloth.
 8. `src/_includes/scripts.liquid` — about-only script tags.
 9. `src/_sass/_polish.scss` — Fraunces + Newsreader, companion, quote, rings, lamp, reduced-motion, light/dark.
 
@@ -173,13 +170,14 @@ Do not edit `src/_sass/_themes.scss` unless a lamp/shadow genuinely cannot be do
 - 404 Ritual
 - Unoptimized JPEG/MOV dumps
 - Copying Anushka’s CSS, sun, or globe
-- Deleting `sloth.png`
+- Replacing or deleting the sloth favicon
+- A Ritual favicon
 
 ## Verify before calling it done
 
-About (`/`): Ritual present; waves then idles if motion is allowed; no sloth in the H1; no quote UI while the bank is empty; lamp + rings (desktop) stay out of the text; Fraunces on the bio, Newsreader on nav.
+About (`/`): sloth still next to the name; Ritual present below the bio (waves then idles if motion is allowed); no quote UI while the bank is empty; lamp + rings (desktop) stay out of the text; Fraunces on the bio, Newsreader on nav.
 
-Inner page (e.g. `/projects/`): Ritual favicon in the navbar; Newsreader on nav/badges; no rings; library/projects/publications layout unchanged.
+Inner page (e.g. `/projects/`): sloth favicon in the tab and navbar; Newsreader on nav/badges; no rings; library/projects/publications layout unchanged.
 
 Light and dark. `prefers-reduced-motion`: static Ritual, frozen rings.
 
