@@ -1,6 +1,12 @@
 <!-- Metadata, OpenGraph and Schema.org -->
 {% include metadata.liquid %}
 
+{% if page.permalink == '/' %}
+  <script>
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  </script>
+{% endif %}
+
 <!-- Bootstrap & MDB -->
 <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | relative_url | bust_file_cache }}">
 <link
