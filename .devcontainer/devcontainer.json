@@ -15,6 +15,10 @@
   // Optionally: run jekyll serve automatically on container entering using the Docker entrypoint
   "postAttachCommand": "./scripts/entry_point.sh",
 
+  "containerEnv": {
+    "BUNDLE_GEMFILE": "src/Gemfile"
+  },
+
   "customizations": {
     "vscode": {
       "extensions": ["esbenp.prettier-vscode", "sissel.shopify-liquid", "yzhang.markdown-all-in-one"],

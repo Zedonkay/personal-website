@@ -24,3 +24,5 @@ services:
       - ..:/srv/jekyll
     environment:
       - JEKYLL_ENV=development
+      - BUNDLE_GEMFILE=/srv/jekyll/src/Gemfile
+    command: ["/srv/jekyll/scripts/entry_point.sh"]

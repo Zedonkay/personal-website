@@ -8,9 +8,6 @@ on:
       - experimental
     paths:
       - "src/**"
-      - "_config.yml"
-      - "Gemfile"
-      - "Gemfile.lock"
       - "purgecss.config.js"
       - "!docs/**"
       - "!README.md"
@@ -21,9 +18,6 @@ on:
       - experimental
     paths:
       - "src/**"
-      - "_config.yml"
-      - "Gemfile"
-      - "Gemfile.lock"
       - "purgecss.config.js"
       - "!docs/**"
       - "!README.md"
@@ -36,6 +30,8 @@ jobs:
   deploy:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: src/Gemfile
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -47,6 +43,7 @@ jobs:
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
+          working-directory: src
       - name: Setup Python 🐍
         uses: actions/setup-python@v5
         with:
@@ -56,16 +53,16 @@ jobs:
         uses: fjogeleit/yaml-update-action@main
         with:
           commitChange: false
-          valueFile: "_config.yml"
+          valueFile: "src/_config.yml"
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
       - name: Configure URL for branch 🔧
         run: |
           if [ "${{ github.ref }}" == "refs/heads/experimental" ]; then
             echo "Configuring for experimental branch (zedonkay.github.io)"
-            sed -i 's|^url:.*|url: https://zedonkay.github.io|g' _config.yml
+            sed -i 's|^url:.*|url: https://zedonkay.github.io|g' src/_config.yml
             # Verify the change was successful
-            if grep -q "url: https://zedonkay.github.io" _config.yml; then
+            if grep -q "url: https://zedonkay.github.io" src/_config.yml; then
               echo "✅ URL successfully updated to zedonkay.github.io"
             else
               echo "❌ Failed to update URL"
@@ -74,7 +71,7 @@ jobs:
           else
             echo "Configuring for main/master branch (ishayushikhare.com)"
             # Verify production URL is set
-            if grep -q "url: https://ishayushikhare.com" _config.yml; then
+            if grep -q "url: https://ishayushikhare.com" src/_config.yml; then
               echo "✅ Production URL verified: ishayushikhare.com"
             else
               echo "⚠️ Warning: Production URL may not be set correctly"
@@ -92,7 +89,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
-          bundle exec jekyll build
+          bundle exec jekyll build --config src/_config.yml
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss

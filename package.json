@@ -13,7 +13,7 @@
     "format:check": "prettier . --check",
     "prepare": "husky",
     "serve": "docker compose -f docker/compose.yml up",
-    "build": "bundle exec jekyll build"
+    "build": "bundle exec jekyll build --config src/_config.yml"
   },
   "repository": {
     "type": "git",

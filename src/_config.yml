@@ -163,7 +163,8 @@ collections:
 # Jekyll settings
 # -----------------------------------------------------------------------------
 
-# Site content lives in src/; tooling and docs stay at the repository root.
+# Paths are relative to the repository root — always run Jekyll from there
+# (e.g. bundle exec jekyll build --config src/_config.yml).
 source: src
 destination: _site
 

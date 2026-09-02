@@ -11,6 +11,8 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     # available images: https://github.com/actions/runner-images#available-images
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: src/Gemfile
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -19,11 +21,12 @@ jobs:
         with:
           ruby-version: "3.2.2"
           bundler-cache: true
+          working-directory: src
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
           commitChange: false
-          valueFile: "_config.yml"
+          valueFile: "src/_config.yml"
           changes: |
             {
               "giscus.repo": "${{ github.repository }}",
@@ -34,7 +37,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
           pip3 install --upgrade jupyter
           export JEKYLL_ENV=production
-          bundle exec jekyll build
+          bundle exec jekyll build --config src/_config.yml
       - name: Purge unused CSS 🧹
         run: |
           npm install -g purgecss

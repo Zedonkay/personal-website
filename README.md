@@ -4,14 +4,14 @@ Repo for [my personal website](https://ishayushikhare.com), based on [al-folio](
 
 ## Layout
 
-| Path          | What it is                                                     |
-| ------------- | -------------------------------------------------------------- |
-| `src/`        | Jekyll site: pages, posts, templates, assets, plugins          |
-| `docs/setup/` | How this site is deployed (GitHub Pages, Cloudflare, branches) |
-| `docs/theme/` | al-folio install / customize / FAQ guides                      |
-| `docker/`     | Local Docker environment                                       |
-| `scripts/`    | Build, deploy, and citation helpers                            |
-| `_config.yml` | Jekyll config (stays at the repo root)                         |
+| Path             | What it is                                                     |
+| ---------------- | -------------------------------------------------------------- |
+| `src/`           | Jekyll site: config, gems, pages, posts, templates, assets     |
+| `docs/setup/`    | How this site is deployed (GitHub Pages, Cloudflare, branches) |
+| `docs/theme/`    | al-folio install / customize / FAQ guides                      |
+| `docker/`        | Local Docker environment                                       |
+| `scripts/`       | Build, deploy, and citation helpers                            |
+| `src/_config.yml` | Jekyll config                                                  |
 
 ## Links
 
