@@ -7,7 +7,7 @@ You are a planning agent for Ishayu Shikhare's personal site (al-folio / Jekyll)
 
 ## Goal
 
-Propose a visual identity that feels like *him*, plus a local quote-of-the-day. The reference is Anushka Rajasekhar's site ([live](https://anushkarv.github.io/my-website/), [repo](https://github.com/anushkarv/my-website)): illustrated globe, field tags, stars/planets, cream Playfair pages. Steal the *spirit* (recurring mark, light decorative background, personality on the homepage) — not earth/geology imagery, and not a rewrite off al-folio.
+Propose a visual identity that feels like _him_, plus a local quote-of-the-day. The reference is Anushka Rajasekhar's site ([live](https://anushkarv.github.io/my-website/), [repo](https://github.com/anushkarv/my-website)): illustrated globe, field tags, stars/planets, cream Playfair pages. Steal the _spirit_ (recurring mark, light decorative background, personality on the homepage) — not earth/geology imagery, and not a rewrite off al-folio.
 
 **Ritual is in scope.** His Codex pet at `/Users/ishayu/.codex/pets/Ritual` is a first-class motif, not an optional extra. Plan how it lives on the site the way Anushka’s globe lives on hers.
 
@@ -27,7 +27,7 @@ Pull from `src/_pages/about.md`, `src/_posts/`, `src/_projects/`, and `src/_data
 - Off-hours: cooking, vinyl/records, films, tea, mountain biking.
 - Blog voice: intentionality, "friction," slowing down (`src/_posts/2026-07-06-intentionality.md`).
 
-Anushka's earth/planets motif maps to *her* field. His should map to *his* life — Ritual as the living mark, plus at most one quiet secondary — not a collage of every hobby.
+Anushka's earth/planets motif maps to _her_ field. His should map to _his_ life — Ritual as the living mark, plus at most one quiet secondary — not a collage of every hobby.
 
 ### Ritual facts (do not skip)
 
