@@ -68,6 +68,7 @@ $(document).ready(function () {
   const reveal = () => {
     footer.classList.remove("is-deferred");
     window.removeEventListener("scroll", onScroll);
+    window.requestAnimationFrame(() => window.dispatchEvent(new Event("resize")));
   };
 
   const onScroll = () => {
@@ -80,5 +81,14 @@ $(document).ready(function () {
     }
   };
 
+  const maybeReveal = () => {
+    if (document.documentElement.scrollHeight <= window.innerHeight + 4) {
+      reveal();
+      return;
+    }
+    onScroll();
+  };
+
   window.addEventListener("scroll", onScroll, { passive: true });
+  maybeReveal();
 })();

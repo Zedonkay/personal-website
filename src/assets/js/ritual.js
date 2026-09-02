@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const RUN_PX_PER_MS = 0.22;
+const RUN_PX_PER_MS = 0.34;
 const HOLD_MS = 1800;
 const ANIM_FALLBACK_MS = {
   "ritual-wave": 1200,
@@ -296,7 +296,16 @@ function quoteEndX(quote) {
   return rects[rects.length - 1].right;
 }
 
+function fitRevealHeight(ritual, moment, quote) {
+  if (!quote || !quote.classList.contains("is-ready")) return;
+  const height = Math.ceil(quote.getBoundingClientRect().height);
+  if (height < 8) return;
+  ritual.style.setProperty("--ritual-h", `${height}px`);
+  moment.style.minHeight = `${height}px`;
+}
+
 function parkReveal(ritual, moment, quote) {
+  fitRevealHeight(ritual, moment, quote);
   const momentBox = moment.getBoundingClientRect();
   const ritualW = ritual.offsetWidth || 48;
   let toPx = 0;
@@ -340,7 +349,7 @@ function setupReveal(ritual) {
       return;
     }
     const toPx = parkReveal(ritual, moment, quote);
-    const duration = Math.max(900, Math.round(toPx / RUN_PX_PER_MS));
+    const duration = Math.max(700, Math.round(toPx / RUN_PX_PER_MS));
     ritual.style.setProperty("--ritual-run-ms", `${duration}ms`);
     moment.style.setProperty("--ritual-run-ms", `${duration}ms`);
     moment.classList.add("is-revealing");
