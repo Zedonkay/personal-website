@@ -1,1 +1,1 @@
-bundle exec jekyll build --config src/_config.yml
+BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml
