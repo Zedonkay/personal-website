@@ -210,9 +210,9 @@ function placeVinyls(layer, placed, found, floorY, pageW) {
   const left = found.leftLower || found.leftUpper;
   if (left) {
     const w = Math.min(260, Math.max(170, Math.min(left.w, 220) * 1.15));
-    const hide = 0.64;
-    const cx = w * (0.5 - hide) + 15;
-    const cy = sitAbove(cx, w, -18, floorY, floorY - 6 - w / 2) + 120;
+    const pull = w * 0.07;
+    const cx = pull;
+    const cy = floorY - pull;
     tryStamp(layer, placed, [], "record", cx, cy, w, w, -18, true);
   }
 
