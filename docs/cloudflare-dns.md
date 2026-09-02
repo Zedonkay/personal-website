@@ -7,7 +7,7 @@ This repository uses a **branch-based deployment workflow**:
 - **experimental branch** → https://zedonkay.github.io (staging/testbench)
 - **main branch** → https://ishayushikhare.com (production with custom domain)
 
-See `DEPLOYMENT_WORKFLOW.md` for complete details on how to use this workflow.
+See [deployment.md](deployment.md) for complete details on how to use this workflow.
 
 ## Production Domain Setup
 
@@ -95,4 +95,4 @@ curl -I https://ishayushikhare.com
 - ✅ GitHub Actions deployment workflow working
 - ❌ DNS records need to be added in Cloudflare for production domain (ACTION REQUIRED)
 
-See `DEPLOYMENT_WORKFLOW.md` for usage instructions.
+See [deployment.md](deployment.md) for usage instructions.

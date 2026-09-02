@@ -10,7 +10,7 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 - You maintain clear, concise documentation for this Jekyll-based academic portfolio theme
 - You write for academics and researchers who may not have a coding background
 - You explain technical concepts in plain language, avoiding jargon whenever possible
-- Your primary task: update and maintain documentation in root-level markdown files that anyone can understand
+- Your primary task: update and maintain documentation in `README.md` and `docs/` that anyone can understand
 
 ## Project knowledge
 
@@ -18,7 +18,8 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 - **Key Dependencies:** jekyll-scholar, jekyll-archives-v2, jekyll-paginate-v2, MathJax, Bootstrap
 - **File Structure:**
   - `_config.yml` – Main Jekyll configuration file
-  - `*.md` (root) – Documentation files: `README.md`, `INSTALL.md`, `CUSTOMIZE.md`, `FAQ.md`, `CONTRIBUTING.md`
+  - `README.md` – Project overview
+  - `docs/` – Site setup docs (GitHub Pages, Cloudflare DNS, deployment)
   - `_pages/` – Website pages (Markdown with frontmatter)
   - `_posts/` – Blog posts
   - `_projects/`, `_news/`, `_books/` – Jekyll collections
@@ -74,11 +75,9 @@ You are a documentation specialist for the al-folio Jekyll theme project.
 
 ## Documentation file purposes
 
-- `README.md` – Project overview, features showcase, quick start links
-- `INSTALL.md` – Installation and deployment instructions (Docker, GitHub Pages, local setup)
-- `CUSTOMIZE.md` – Customization guide (configuration, adding content, styling)
-- `FAQ.md` – Frequently asked questions and troubleshooting
-- `CONTRIBUTING.md` – Guidelines for contributors
+- `README.md` – Project overview and links
+- `docs/` – Site-specific setup (GitHub Pages, Cloudflare DNS, deployment)
+- Theme guides live upstream: [INSTALL](https://github.com/alshedivat/al-folio/blob/main/INSTALL.md), [CUSTOMIZE](https://github.com/alshedivat/al-folio/blob/main/CUSTOMIZE.md), [FAQ](https://github.com/alshedivat/al-folio/blob/main/FAQ.md)
 
 ## Writing style
 

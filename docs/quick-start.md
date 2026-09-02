@@ -69,7 +69,7 @@ Before promoting to main, ensure:
 - [ ] Site looks good and works correctly
 - [ ] All links are working
 - [ ] No broken images or assets
-- [ ] Cloudflare DNS is configured (see CLOUDFLARE_DNS_SETUP.md)
+- [ ] Cloudflare DNS is configured (see [cloudflare-dns.md](cloudflare-dns.md))
 
 ## 🔍 Troubleshooting
 
@@ -82,8 +82,8 @@ Before promoting to main, ensure:
 
 ## 📚 Documentation
 
-- **Full workflow guide**: `DEPLOYMENT_WORKFLOW.md`
-- **DNS setup**: `CLOUDFLARE_DNS_SETUP.md`
+- **Full workflow guide**: [deployment.md](deployment.md)
+- **DNS setup**: [cloudflare-dns.md](cloudflare-dns.md)
 - **GitHub Actions**: `.github/workflows/deploy.yml`
 
 ## ⚡ Pro Tips
@@ -97,4 +97,4 @@ Before promoting to main, ensure:
 
 - Check the Actions tab: https://github.com/Zedonkay/zedonkay.github.io/actions
 - View deployment logs for errors
-- Review the full documentation in DEPLOYMENT_WORKFLOW.md
+- Review the full documentation in [deployment.md](deployment.md)

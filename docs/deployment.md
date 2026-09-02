@@ -112,7 +112,7 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
    - Require pull request reviews before merging
 
 5. **Set up Cloudflare DNS** (for production domain):
-   - Follow the instructions in `CLOUDFLARE_DNS_SETUP.md`
+   - Follow the instructions in [cloudflare-dns.md](cloudflare-dns.md)
    - This only affects the `main` branch deployment
 
 ### GitHub Pages Settings
@@ -153,7 +153,7 @@ The `.github/workflows/deploy.yml` workflow handles deployments differently base
 
 ### Custom domain issues
 
-- Ensure DNS records are configured in Cloudflare (see `CLOUDFLARE_DNS_SETUP.md`)
+- Ensure DNS records are configured in Cloudflare (see [cloudflare-dns.md](cloudflare-dns.md))
 - Wait for DNS propagation (typically 5-10 minutes)
 - Verify CNAME file exists in the repository root
 

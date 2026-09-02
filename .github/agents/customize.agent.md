@@ -52,18 +52,9 @@ Users may reference community discussions, issues, or past questions from the **
 
 You have access to the complete documentation for al-folio:
 
-1. **README.md** – Overview, features, community examples, installation basics
-2. **CUSTOMIZE.md** – Comprehensive customization guide covering:
-   - Configuration in `_config.yml`
-   - CV information (JSON/YAML formats)
-   - Creating pages, blog posts, projects, news items
-   - Publications and BibTeX management
-   - Theme colors and styling
-   - Social media setup
-   - Removing unwanted content
-   - Font and spacing customization
-3. **INSTALL.md** – Installation and deployment instructions
-4. **FAQ.md** – Common issues and solutions
+1. **README.md** – Overview and site-specific setup links
+2. **docs/** – GitHub Pages, Cloudflare DNS, and deployment for this site
+3. Upstream theme guides: [CUSTOMIZE](https://github.com/alshedivat/al-folio/blob/main/CUSTOMIZE.md), [INSTALL](https://github.com/alshedivat/al-folio/blob/main/INSTALL.md), [FAQ](https://github.com/alshedivat/al-folio/blob/main/FAQ.md)
 
 ## Commands You Can Use
 
@@ -470,24 +461,24 @@ Help users avoid these frequent errors:
 
 ## Quick Reference Map
 
-| User wants to...        | Files to modify                             | Key documentation                 |
-| ----------------------- | ------------------------------------------- | --------------------------------- |
-| Change personal info    | `_config.yml`, `_pages/about.md`            | CUSTOMIZE.md § Configuration      |
-| Add profile picture     | `assets/img/prof_pic.jpg`                   | CUSTOMIZE.md § About page         |
-| Update CV               | `assets/json/resume.json` OR `_data/cv.yml` | CUSTOMIZE.md § CV information     |
-| Add publications        | `_bibliography/papers.bib`                  | CUSTOMIZE.md § Publications       |
-| Add blog post           | `_posts/YYYY-MM-DD-title.md`                | CUSTOMIZE.md § Blog posts         |
-| Create project          | `_projects/name.md`                         | CUSTOMIZE.md § Projects           |
-| Add news item           | `_news/announcement.md`                     | CUSTOMIZE.md § News               |
-| Change theme color      | `_sass/_themes.scss`                        | CUSTOMIZE.md § Theme colors       |
-| Add social links        | `_data/socials.yml`                         | CUSTOMIZE.md § Social media       |
-| Enable/disable features | `_config.yml`                               | CUSTOMIZE.md § Configuration      |
-| Remove pages            | Delete from `_pages/`, update nav           | CUSTOMIZE.md § Removing content   |
-| Fix deployment issues   | `_config.yml` (url/baseurl)                 | FAQ.md, INSTALL.md                |
-| Test changes locally    | Docker setup                                | INSTALL.md § Docker               |
-| Debug broken site       | Check GitHub Actions, local preview output  | FAQ.md, Testing Before Deployment |
-| Add custom page         | Create `_pages/name.md`, update nav         | CUSTOMIZE.md § Creating pages     |
-| Customize fonts/spacing | `_sass/_variables.scss`                     | CUSTOMIZE.md § Customization      |
+| User wants to...        | Files to modify                             | Key documentation                        |
+| ----------------------- | ------------------------------------------- | ---------------------------------------- |
+| Change personal info    | `_config.yml`, `_pages/about.md`            | al-folio CUSTOMIZE.md § Configuration    |
+| Add profile picture     | `assets/img/prof_pic.jpg`                   | al-folio CUSTOMIZE.md § About page       |
+| Update CV               | `assets/json/resume.json` OR `_data/cv.yml` | al-folio CUSTOMIZE.md § CV information   |
+| Add publications        | `_bibliography/papers.bib`                  | al-folio CUSTOMIZE.md § Publications     |
+| Add blog post           | `_posts/YYYY-MM-DD-title.md`                | al-folio CUSTOMIZE.md § Blog posts       |
+| Create project          | `_projects/name.md`                         | al-folio CUSTOMIZE.md § Projects         |
+| Add news item           | `_news/announcement.md`                     | al-folio CUSTOMIZE.md § News             |
+| Change theme color      | `_sass/_themes.scss`                        | al-folio CUSTOMIZE.md § Theme colors     |
+| Add social links        | `_data/socials.yml`                         | al-folio CUSTOMIZE.md § Social media     |
+| Enable/disable features | `_config.yml`                               | al-folio CUSTOMIZE.md § Configuration    |
+| Remove pages            | Delete from `_pages/`, update nav           | al-folio CUSTOMIZE.md § Removing content |
+| Fix deployment issues   | `_config.yml` (url/baseurl)                 | docs/, al-folio FAQ.md                   |
+| Test changes locally    | Docker setup                                | README.md, al-folio INSTALL.md           |
+| Debug broken site       | Check GitHub Actions, local preview output  | docs/, al-folio FAQ.md                   |
+| Add custom page         | Create `_pages/name.md`, update nav         | al-folio CUSTOMIZE.md § Creating pages   |
+| Customize fonts/spacing | `_sass/_variables.scss`                     | al-folio CUSTOMIZE.md § Customization    |
 
 ## Using Community Context in Your Responses
 

@@ -32,7 +32,7 @@ After enabling Pages:
 
 ### Step 3: Verify DNS Configuration
 
-Make sure your DNS is configured correctly (see `CLOUDFLARE_DNS_SETUP.md` for detailed instructions):
+Make sure your DNS is configured correctly (see [cloudflare-dns.md](cloudflare-dns.md) for detailed instructions):
 
 **Required A Records for ishayushikhare.com:**
 
@@ -84,7 +84,7 @@ The repository uses a branch-based deployment strategy:
 
 **Cause**: DNS records are not configured correctly.
 
-**Solution**: Follow `CLOUDFLARE_DNS_SETUP.md` to configure DNS records in Cloudflare.
+**Solution**: Follow [cloudflare-dns.md](cloudflare-dns.md) to configure DNS records in Cloudflare.
 
 ### Site shows old content or doesn't update
 
