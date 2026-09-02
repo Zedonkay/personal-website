@@ -183,7 +183,10 @@ function stamp(layer, kind, box, rotate) {
   if (kind === "record") {
     const disc = node.querySelector(".decor-record") || node;
     disc.style.animationDuration = `${80 + Math.abs(Math.round(rotate))}s`;
-    if (rotate > 0) disc.style.animationDirection = "reverse";
+    if (rotate > 0) {
+      disc.style.animationDirection = "reverse";
+      disc.style.setProperty("--record-from", "-90deg");
+    }
   }
   if (kind === "watch") {
     node.style.setProperty("--watch-spin", `${26 + Math.abs(Math.round(rotate))}s`);
@@ -195,10 +198,11 @@ function stamp(layer, kind, box, rotate) {
   layer.appendChild(node);
 }
 
-function tryStamp(layer, placed, blocked, kind, cx, cy, w, h, rotate, skipBlock) {
+function tryStamp(layer, placed, blocked, discs, kind, cx, cy, w, h, rotate, skipBlock) {
   const hit = rotBox(cx, cy, w, h, rotate);
   if (!skipBlock && blocked.some((other) => overlaps(hit, other, 10))) return false;
   if (placed.some((other) => overlaps(hit, other, GAP))) return false;
+  if (hitsDisc(hit, discs, 10)) return false;
   placed.push(hit);
   stamp(layer, kind, { cx, cy, w, h }, rotate);
   return true;
@@ -220,24 +224,52 @@ function shuffle(list, seed) {
   return out;
 }
 
+function sitAbove(cx, w, rotate, floorY, preferredCy) {
+  let cy = preferredCy;
+  const hit = rotBox(cx, cy, w, w, rotate);
+  const overflow = hit.y + hit.h - (floorY - 6);
+  if (overflow > 0) cy -= overflow;
+  return cy;
+}
+
 function charmTilt(charm, idx, region) {
   return Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
 }
 
+function hitsDisc(hit, discs, pad) {
+  return discs.some((disc) => {
+    const nx = Math.max(hit.x, Math.min(disc.cx, hit.x + hit.w));
+    const ny = Math.max(hit.y, Math.min(disc.cy, hit.y + hit.h));
+    const dx = nx - disc.cx;
+    const dy = ny - disc.cy;
+    const lim = disc.r + pad;
+    return dx * dx + dy * dy < lim * lim;
+  });
+}
+
 function placeVinyls(layer, found, floorY, pageW) {
+  const discs = [];
   const left = found.leftLower || found.leftUpper;
   if (left) {
     const w = Math.min(260, Math.max(170, Math.min(left.w, 220) * 1.15));
-    const inset = w * 0.2;
-    stamp(layer, "record", { cx: inset, cy: floorY - inset, w, h: w }, -18);
+    const pull = w * 0.07;
+    const cx = pull;
+    const cy = floorY - pull;
+    stamp(layer, "record", { cx, cy, w, h: w }, -18);
+    discs.push({ cx, cy, r: w / 2 });
   }
 
-  const right = found.rightLower || found.rightUpper;
+  const right = found.rightUpper || found.rightLower;
   if (right) {
-    const w = Math.min(240, Math.max(160, Math.min(right.w, 220) * 1.2));
-    const inset = w * 0.2;
-    stamp(layer, "record", { cx: pageW - inset, cy: floorY - inset, w, h: w }, 16);
+    const w = Math.min(220, Math.max(150, right.w * 1.35));
+    const hide = 0.52;
+    const cx = pageW + w * (hide - 0.5);
+    const mid = TOP + (floorY - TOP) * 0.44;
+    const cy = sitAbove(cx, w, 14, floorY, Math.min(mid, floorY - 6 - w / 2));
+    stamp(layer, "record", { cx, cy, w, h: w }, 14);
+    discs.push({ cx, cy, r: w / 2 });
   }
+  return discs;
 }
 
 function shareByArea(regions, charms) {
@@ -292,7 +324,27 @@ function cornerCells(region) {
   ];
 }
 
-function placeCharms(layer, region, charms, placed, blocked) {
+function vinylCells(region, discs, floorY) {
+  const cells = [];
+  const floor = floorY - 24;
+  discs.forEach((disc) => {
+    const inX = disc.cx + disc.r > region.x - 48 && disc.cx - disc.r < region.x + region.w + 48;
+    const inY = disc.cy + disc.r > region.y - 48 && disc.cy - disc.r < region.y + region.h + 48;
+    if (!inX || !inY) return;
+    const angles = region.side === "left" ? [-1.05, -0.7, -0.35, 0.05, 0.38, 0.7] : [2.5, 2.85, 3.14, 3.45, 3.8, 4.1];
+    angles.forEach((angle, i) => {
+      const dist = disc.r + 30 + (i % 2) * 16;
+      const cx = disc.cx + Math.cos(angle) * dist;
+      const cy = disc.cy + Math.sin(angle) * dist;
+      if (cx < region.x - 8 || cx > region.x + region.w + 16) return;
+      if (cy < region.y - 8 || cy > Math.min(region.y + region.h + 8, floor)) return;
+      cells.push({ cx, cy });
+    });
+  });
+  return cells;
+}
+
+function placeCharms(layer, region, charms, placed, blocked, discs, floorY) {
   if (!charms.length) return;
   const lower = region.band === "lower";
   const aspect = region.w / Math.max(24, region.h);
@@ -300,7 +352,7 @@ function placeCharms(layer, region, charms, placed, blocked) {
   const cols = Math.max(minCols, Math.round(Math.sqrt(charms.length * aspect * 1.45)));
   const rows = Math.max(1, Math.ceil(charms.length / cols));
   const jitterScale = region.side === "right" ? 0.72 : 0.4;
-  const cells = lower ? cornerCells(region) : [];
+  const cells = [...vinylCells(region, discs, floorY), ...(lower ? cornerCells(region) : [])];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * jitterScale;
@@ -350,7 +402,8 @@ function placeCharms(layer, region, charms, placed, blocked) {
       const cell = ordered[s];
       for (let n = 0; n < nudges.length; n += 1) {
         const [dx, dy] = nudges[n];
-        if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false)) return;
+        if (tryStamp(layer, placed, blocked, discs, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false))
+          return;
       }
     }
   });
@@ -367,12 +420,12 @@ function place(layer) {
   if (field) field.style.setProperty("--decor-h", `${Math.max(0, floorY)}px`);
   const blocked = avoidRects(floorY);
   const placed = [];
-  placeVinyls(layer, found, floorY, pageW);
+  const discs = placeVinyls(layer, found, floorY, pageW);
   shareByArea([found.leftUpper, found.leftLower], CHARMS_LEFT).forEach((bag) => {
-    placeCharms(layer, bag.region, bag.charms, placed, blocked);
+    placeCharms(layer, bag.region, bag.charms, placed, blocked, discs, floorY);
   });
   shareByArea([found.rightUpper, found.rightLower], CHARMS_RIGHT).forEach((bag) => {
-    placeCharms(layer, bag.region, bag.charms, placed, blocked);
+    placeCharms(layer, bag.region, bag.charms, placed, blocked, discs, floorY);
   });
 }
 
