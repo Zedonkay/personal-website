@@ -33,7 +33,7 @@ The same philosophy extends into skincare. I don't think any singular part of it
 
 Music became another place where I wanted more friction. I've always been someone that listens to a lot of music. For years I listened to 120k+ minutes on spotify. However the more I listened I felt the less I absorbed.
 
-I think the sort of inflection point here came when my amazing partner bought be a record player. The process of spinning a record forces you to buy into the album. I'm often reminded of certain portions of Tarkovsky's ideology. From my understanding he believed that slow cinema forced the watcher through a threshold of restlessness into a state of deep emotional resonance. The time spent is an emotional investment that makes the payoff incredibly more valuable.
+I think I was able to change this when I got a record player. The process of spinning a record forces you to buy into the album. I'm often reminded of certain portions of Tarkovsky's ideology. From my understanding he believed that slow cinema forced the watcher through a threshold of restlessness into a state of deep emotional resonance. The time spent is an emotional investment that makes the payoff incredibly more valuable.
 
 Similarly, the process of choosing an album, letting it spin and dusting it with a carbon fiber brush, and dropping the needle forces you to invest into the music. It becomes less accessible and so I find I appreciate it more.
 
