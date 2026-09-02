@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const RUN_PX_PER_MS = 0.34;
+const PARK_GAP = 8;
 const HOLD_MS = 1800;
 const ANIM_FALLBACK_MS = {
   "ritual-wave": 1200,
@@ -303,9 +304,7 @@ function glyphRects(el) {
 }
 
 function quoteEndX(quote) {
-  const targets = [".quote-text", ".quote-cite"]
-    .map((selector) => quote.querySelector(selector))
-    .filter(Boolean);
+  const targets = [".quote-text", ".quote-cite"].map((selector) => quote.querySelector(selector)).filter(Boolean);
   const rects = (targets.length ? targets : [quote]).flatMap(glyphRects);
   if (!rects.length) return quote.getBoundingClientRect().right;
   return Math.max(...rects.map((rect) => rect.right));
@@ -319,6 +318,128 @@ function fitRevealHeight(ritual, moment, quote) {
   moment.style.minHeight = `${height}px`;
 }
 
+function quoteLineBoxes(el) {
+  const boxes = [];
+  for (const rect of glyphRects(el)) {
+    const line = boxes.find((item) => Math.abs(item.top - rect.top) < rect.height * 0.45);
+    if (line) {
+      line.left = Math.min(line.left, rect.left);
+      line.right = Math.max(line.right, rect.right);
+      line.top = Math.min(line.top, rect.top);
+      line.bottom = Math.max(line.bottom, rect.bottom);
+    } else {
+      boxes.push({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom });
+    }
+  }
+  boxes.sort((a, b) => a.top - b.top);
+  boxes.forEach((line) => {
+    line.width = line.right - line.left;
+  });
+  return boxes;
+}
+
+function setQuoteText(textEl, original, breakAt) {
+  if (breakAt == null || breakAt <= 0 || breakAt >= original.length) {
+    textEl.replaceChildren(document.createTextNode(original));
+    return;
+  }
+  textEl.replaceChildren(
+    document.createTextNode(original.slice(0, breakAt).replace(/\s+$/, "")),
+    document.createElement("br"),
+    document.createTextNode(original.slice(breakAt).replace(/^\s+/, ""))
+  );
+}
+
+function wordBreaks(text) {
+  const breaks = [];
+  const parts = text.split(/(\s+)/);
+  let cursor = 0;
+  parts.forEach((part) => {
+    cursor += part.length;
+    if (/\S/.test(part)) breaks.push(cursor);
+  });
+  return breaks;
+}
+
+function contentWidth(el) {
+  const box = el.getBoundingClientRect();
+  const style = window.getComputedStyle(el);
+  return Math.max(0, box.width - (parseFloat(style.paddingLeft) || 0) - (parseFloat(style.paddingRight) || 0));
+}
+
+function pullLeftoverOntoNewLine(textEl, original, targetWidth, maxWidth) {
+  const breaks = wordBreaks(original);
+  if (breaks.length < 2) return false;
+
+  let bestAt = null;
+  let bestWidth = -1;
+  for (let i = breaks.length - 2; i >= 0; i -= 1) {
+    setQuoteText(textEl, original, breaks[i]);
+    const lines = quoteLineBoxes(textEl);
+    if (!lines.length) continue;
+    const lastWidth = lines[lines.length - 1].width;
+    if (lastWidth > maxWidth + 1) break;
+    if (lastWidth >= targetWidth) {
+      return true;
+    }
+    if (lastWidth > bestWidth) {
+      bestWidth = lastWidth;
+      bestAt = breaks[i];
+    }
+  }
+
+  if (bestAt == null) {
+    setQuoteText(textEl, original);
+    return false;
+  }
+  setQuoteText(textEl, original, bestAt);
+  return true;
+}
+
+function wrapQuoteForRitual(ritual, moment, quote) {
+  if (!quote || !quote.classList.contains("is-ready")) return;
+  const textEl = quote.querySelector(".quote-text");
+  if (!textEl) return;
+
+  const original = textEl.dataset.quoteOriginal ?? textEl.textContent;
+  textEl.dataset.quoteOriginal = original;
+  setQuoteText(textEl, original);
+  quote.style.paddingRight = "";
+  fitRevealHeight(ritual, moment, quote);
+
+  const ritualW = ritual.offsetWidth || 48;
+  const quoteBox = quote.getBoundingClientRect();
+  const lines = quoteLineBoxes(textEl);
+  const reserve = ritualW + PARK_GAP;
+  quote.style.paddingRight = `${reserve}px`;
+  fitRevealHeight(ritual, moment, quote);
+  if (!lines.length) return;
+
+  const last = lines[lines.length - 1];
+  const fullLines = lines.filter((line) => quoteBox.right - line.right < reserve).length;
+  // Leftover used to be "how far past the column edge," which is ~0 on two
+  // full lines. Measure from Ritual's parked left edge instead, then wrap that
+  // leftover once per full line (two full lines → double it onto the next).
+  const leftover = Math.max(0, last.right - (quoteBox.right - reserve));
+  const wrapPx = leftover * Math.max(1, fullLines);
+  if (wrapPx > leftover + 1) {
+    const width = contentWidth(quote);
+    const after = quoteLineBoxes(textEl);
+    const lastAfter = after[after.length - 1];
+    if (lastAfter && lastAfter.width < wrapPx - 1) {
+      pullLeftoverOntoNewLine(textEl, original, Math.min(width, wrapPx), width);
+    }
+  }
+
+  for (let i = 0; i < 3; i += 1) {
+    fitRevealHeight(ritual, moment, quote);
+    const next = `${(ritual.offsetWidth || ritualW) + PARK_GAP}px`;
+    if (quote.style.paddingRight === next) break;
+    quote.style.paddingRight = next;
+  }
+  fitRevealHeight(ritual, moment, quote);
+}
+
 function clipQuoteToRitual(ritual, quote) {
   if (!quote) return;
   const quoteBox = quote.getBoundingClientRect();
@@ -330,12 +451,13 @@ function clipQuoteToRitual(ritual, quote) {
 }
 
 function parkReveal(ritual, moment, quote) {
+  wrapQuoteForRitual(ritual, moment, quote);
   fitRevealHeight(ritual, moment, quote);
   const momentBox = moment.getBoundingClientRect();
   const ritualW = ritual.offsetWidth || 48;
   let toPx = 0;
   if (quote && quote.classList.contains("is-ready")) {
-    toPx = quoteEndX(quote) - momentBox.left + 8;
+    toPx = quoteEndX(quote) - momentBox.left + PARK_GAP;
   }
   toPx = Math.min(Math.max(0, toPx), Math.max(0, momentBox.width - ritualW));
   ritual.style.setProperty("--ritual-from", "0px");
