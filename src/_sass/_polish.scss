@@ -192,8 +192,8 @@ body.fixed-top-nav {
   .clearfix > .about-lead {
     margin: 0.35rem 0 1rem;
     padding: 0.5rem 0;
-    border-top: 1px solid var(--global-divider-color);
-    border-bottom: 1px solid var(--global-divider-color);
+    border-top: 1px solid color-mix(in srgb, var(--global-title-color) 32%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--global-title-color) 32%, transparent);
     color: var(--global-title-color);
     font-style: italic;
     font-variation-settings:

@@ -2,7 +2,6 @@
 layout: about
 title: about
 permalink: /
-subtitle: I develop robust, adaptive robotic control policies for dynamic and out-of-distribution environments.
 
 profile:
   align: right
@@ -24,6 +23,9 @@ latest_posts:
 ---
 
 I'm **Ishayu Shikhare**, an undergraduate studying Electrical and Computer Engineering at Carnegie Mellon University.
+
+I develop robust, adaptive robotic control policies for dynamic and out-of-distribution environments.
+{: .about-lead}
 
 Currently, I'm at the **[LeCAR Lab](https://lecar-lab.github.io/index.html)**, advised by [Prof. Guanya Shi](https://www.gshi.me), where I work on sim-to-real adaptation for world models. My previous project at LeCAR was [**FADA**](https://lecar-lab.github.io/FADA-humanoid/), where I helped develop few-shot domain adaptation for humanoid locomotion and whole-body tracking. Before joining LeCAR, I was at **[The AirLab](https://theairlab.org)** under [Prof. Sebastian Scherer](https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/) working on uncertainty and semantics-aware navigation for quadrotors in wildfire environments.
 

@@ -18,7 +18,7 @@
     </div>
   </footer>
 {% else %}
-  <footer class="sticky-bottom is-deferred" role="contentinfo">
+  <footer class="sticky-bottom{% unless page.permalink == '/' %} is-deferred{% endunless %}" role="contentinfo">
     {% if site.newsletter.enabled %}
       {% include newsletter.liquid %}
     {% endif %}
