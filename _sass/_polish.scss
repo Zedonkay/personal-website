@@ -17,6 +17,21 @@ body {
   line-height: 1.65;
 }
 
+.rounded:not(.rounded-circle):not(.rounded-pill):not(.badge) {
+  border-radius: var(--radius-media) !important;
+}
+
+.card {
+  border-radius: var(--radius-media);
+}
+
+figure img:not(.rounded-circle),
+figure video,
+.post article img:not(.rounded-circle),
+.post article video {
+  border-radius: var(--radius-media);
+}
+
 h1,
 h2,
 h3,
@@ -147,9 +162,9 @@ body.fixed-top-nav {
   --library-cell-max: 40rem;
   --library-row-min: 9.5rem;
   --library-gap: 1.15rem;
-  --library-thumb-inset: 0.8rem;
+  --library-thumb-inset: #{$radius-shell-inset};
   --library-thumb-radius: var(--radius-media);
-  --library-card-radius: calc(#{$radius-media} + 1px + 0.8rem);
+  --library-card-radius: var(--radius-card);
   container-type: inline-size;
   container-name: library;
 }
@@ -561,19 +576,19 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .projects {
   --project-thumb-radius: var(--radius-media);
-  --project-card-radius: calc(#{$radius-media} + 1px + 0.8rem);
+  --project-card-radius: var(--radius-card);
 }
 
 .publications {
   --publication-thumb-radius: var(--radius-media);
-  --publication-card-radius: calc(#{$radius-media} + 1px + 0.8rem);
+  --publication-card-radius: var(--radius-card);
 }
 
 .publications ol.bibliography > li,
 .projects ul.bibliography > li {
-  --card-pad: 1rem;
+  --card-pad: #{$radius-shell-inset};
   --nested-radius: var(--radius-media);
-  --card-radius: calc(#{$radius-media} + 1px + 1rem);
+  --card-radius: var(--radius-card);
   margin-bottom: 1.1rem;
   padding: var(--card-pad);
   border: 1px solid var(--global-divider-color);
@@ -587,7 +602,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 }
 
 .publications ol.bibliography > li {
-  --card-pad: 0.8rem;
+  --card-pad: #{$radius-shell-inset};
   --nested-radius: var(--publication-thumb-radius);
   --card-radius: var(--publication-card-radius);
 }
@@ -600,8 +615,8 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 }
 
 .projects ul.bibliography > li {
-  --card-pad-y: 0.8rem;
-  --card-pad-x: 0.8rem;
+  --card-pad-y: #{$radius-shell-inset};
+  --card-pad-x: #{$radius-shell-inset};
   --nested-radius: var(--project-thumb-radius);
   --card-radius: var(--project-card-radius);
   position: relative;
@@ -1089,19 +1104,19 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 
   .publications ol.bibliography > li,
   .projects ul.bibliography > li {
-    --card-pad: 0.9rem;
-    --card-radius: calc(#{$radius-media} + 1px + 0.9rem);
+    --card-pad: #{$radius-shell-inset};
+    --card-radius: var(--radius-card);
     padding: var(--card-pad);
   }
 
   .publications ol.bibliography > li {
-    --card-pad: 0.8rem;
+    --card-pad: #{$radius-shell-inset};
     --card-radius: var(--publication-card-radius);
   }
 
   .projects ul.bibliography > li {
-    --card-pad-y: 0.8rem;
-    --card-pad-x: 0.8rem;
+    --card-pad-y: #{$radius-shell-inset};
+    --card-pad-x: #{$radius-shell-inset};
     --card-radius: var(--project-card-radius);
     padding: var(--card-pad-y) var(--card-pad-x);
   }

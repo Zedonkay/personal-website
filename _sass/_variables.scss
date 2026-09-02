@@ -51,6 +51,7 @@ $back-to-top-diameter: 40px;
 $back-to-top-height: $back-to-top-diameter;
 $back-to-top-width: $back-to-top-diameter;
 
-// Inner radius for nested frames. Outer shells add their inset in calc() literals
-// (jekyll-minifier splits `--` inside calc(var(--…)), so do not nest CSS vars there).
+// Shared rounding. Media/thumbs use $radius-media; nested shells add inset + 1px
+// in a literal calc() (jekyll-minifier splits `--` inside calc(var(--…))).
 $radius-media: 6px;
+$radius-shell-inset: 0.8rem;
