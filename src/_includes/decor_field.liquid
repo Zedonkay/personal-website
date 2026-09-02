@@ -1,20 +1,87 @@
 <div class="decor-field" aria-hidden="true">
   <div class="decor-lamp"></div>
-  <div class="decor-rings">
-    <svg class="decor-ring decor-ring-1" viewBox="0 0 240 240" focusable="false">
-      <circle cx="120" cy="120" r="108"></circle>
-    </svg>
-    <svg class="decor-ring decor-ring-2" viewBox="0 0 240 240" focusable="false">
-      <circle cx="120" cy="120" r="100"></circle>
-    </svg>
-    <svg class="decor-ring decor-ring-3" viewBox="0 0 240 240" focusable="false">
-      <circle cx="120" cy="120" r="112"></circle>
-    </svg>
-    <svg class="decor-ring decor-ring-4" viewBox="0 0 240 240" focusable="false">
-      <circle cx="120" cy="120" r="96"></circle>
-    </svg>
-    <svg class="decor-ring decor-ring-5" viewBox="0 0 240 240" focusable="false">
-      <circle cx="120" cy="120" r="88"></circle>
-    </svg>
+
+  <div class="decor-records">
+    {% include decor_record.liquid class="decor-record-1" %}
+    {% include decor_record.liquid class="decor-record-2" %}
+    {% include decor_record.liquid class="decor-record-3" %}
+    {% include decor_record.liquid class="decor-record-4" %}
+  </div>
+
+  <div class="decor-charms">
+    <div class="decor-charm decor-charm-kettle-a">
+      <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
+        <path class="steam-a" d="M10 38c1-7-1-12-2-18s1-10 3-16"></path>
+        <path class="steam-b" d="M18 36c2-7 0-12-1-18s2-10 3-15"></path>
+      </svg>
+      <svg class="charm-kettle" viewBox="0 0 100 88" focusable="false">
+        <path class="kettle-handle" d="M30 44c0-26 28-26 28 0 0-20-28-20-28 0z"></path>
+        <ellipse class="kettle-body" cx="44" cy="56" rx="24" ry="21"></ellipse>
+        <path class="kettle-spout" d="M63 52l5-2 1.5 4-5 3z"></path>
+        <ellipse class="kettle-lid-rim" cx="44" cy="40" rx="14.5" ry="4"></ellipse>
+        <circle class="kettle-knob" cx="44" cy="29" r="2.8"></circle>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-kettle-b">
+      <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
+        <path class="steam-a" d="M10 38c1-7-1-12-2-18s1-10 3-16"></path>
+        <path class="steam-b" d="M18 36c2-7 0-12-1-18s2-10 3-15"></path>
+      </svg>
+      <svg class="charm-kettle" viewBox="0 0 100 88" focusable="false">
+        <path class="kettle-handle" d="M30 44c0-26 28-26 28 0 0-20-28-20-28 0z"></path>
+        <ellipse class="kettle-body" cx="44" cy="56" rx="24" ry="21"></ellipse>
+        <path class="kettle-spout" d="M63 52l5-2 1.5 4-5 3z"></path>
+        <ellipse class="kettle-lid-rim" cx="44" cy="40" rx="14.5" ry="4"></ellipse>
+        <circle class="kettle-knob" cx="44" cy="29" r="2.8"></circle>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-kettle-c">
+      <svg class="charm-kettle" viewBox="0 0 100 88" focusable="false">
+        <path class="kettle-handle" d="M30 44c0-26 28-26 28 0 0-20-28-20-28 0z"></path>
+        <ellipse class="kettle-body" cx="44" cy="56" rx="24" ry="21"></ellipse>
+        <path class="kettle-spout" d="M63 52l5-2 1.5 4-5 3z"></path>
+        <ellipse class="kettle-lid-rim" cx="44" cy="40" rx="14.5" ry="4"></ellipse>
+        <circle class="kettle-knob" cx="44" cy="29" r="2.8"></circle>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-cup-a">
+      <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
+        <path class="steam-a" d="M12 38c1-8 0-13-1-20s1-10 2-16"></path>
+      </svg>
+      <svg class="charm-cup" viewBox="0 0 72 58" focusable="false">
+        <ellipse class="cup-saucer" cx="30" cy="50" rx="22" ry="5"></ellipse>
+        <path class="cup-body" d="M12 24h36c1 10-2 22-18 22S11 34 12 24z"></path>
+        <path class="cup-handle" d="M48 28c10 2 10 16 0 18"></path>
+        <ellipse class="cup-rim" cx="30" cy="24" rx="18" ry="3.4"></ellipse>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-cup-b">
+      <svg class="charm-cup" viewBox="0 0 72 58" focusable="false">
+        <ellipse class="cup-saucer" cx="30" cy="50" rx="22" ry="5"></ellipse>
+        <path class="cup-body" d="M12 24h36c1 10-2 22-18 22S11 34 12 24z"></path>
+        <path class="cup-handle" d="M48 28c10 2 10 16 0 18"></path>
+        <ellipse class="cup-rim" cx="30" cy="24" rx="18" ry="3.4"></ellipse>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-cup-c">
+      <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
+        <path class="steam-a" d="M12 38c1-8 0-13-1-20s1-10 2-16"></path>
+      </svg>
+      <svg class="charm-cup" viewBox="0 0 72 58" focusable="false">
+        <ellipse class="cup-saucer" cx="30" cy="50" rx="22" ry="5"></ellipse>
+        <path class="cup-body" d="M12 24h36c1 10-2 22-18 22S11 34 12 24z"></path>
+        <path class="cup-handle" d="M48 28c10 2 10 16 0 18"></path>
+        <ellipse class="cup-rim" cx="30" cy="24" rx="18" ry="3.4"></ellipse>
+      </svg>
+    </div>
+    <div class="decor-charm decor-charm-kettle-d">
+      <svg class="charm-kettle" viewBox="0 0 100 88" focusable="false">
+        <path class="kettle-handle" d="M30 44c0-26 28-26 28 0 0-20-28-20-28 0z"></path>
+        <ellipse class="kettle-body" cx="44" cy="56" rx="24" ry="21"></ellipse>
+        <path class="kettle-spout" d="M63 52l5-2 1.5 4-5 3z"></path>
+        <ellipse class="kettle-lid-rim" cx="44" cy="40" rx="14.5" ry="4"></ellipse>
+        <circle class="kettle-knob" cx="44" cy="29" r="2.8"></circle>
+      </svg>
+    </div>
   </div>
 </div>

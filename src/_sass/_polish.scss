@@ -1140,77 +1140,236 @@ html[data-theme="dark"] .decor-lamp {
   opacity: 0.34;
 }
 
-.decor-rings {
+.decor-records {
   position: absolute;
   inset: 0;
 }
 
-.decor-ring {
+.decor-record {
   position: absolute;
   overflow: visible;
-  animation: ring-spin 48s linear infinite;
-
-  circle {
-    fill: none;
-    stroke: var(--color-secondary);
-    stroke-width: 1.15;
-    stroke-linecap: round;
-    stroke-dasharray: 210 430;
-    opacity: 0.12;
-  }
+  animation: record-spin 64s linear infinite;
 }
 
-.decor-ring-2 circle,
-.decor-ring-4 circle {
+.record-fill {
+  fill: color-mix(in srgb, var(--color-text) 9%, transparent);
+  stroke: none;
+}
+
+.record-edge {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.8;
+  opacity: 0.42;
+}
+
+.record-groove {
+  fill: none;
+  stroke: var(--color-secondary);
+  stroke-width: 0.65;
+  opacity: 0.38;
+}
+
+.record-label {
+  fill: color-mix(in srgb, var(--color-accent) 38%, var(--color-bg));
+  stroke: color-mix(in srgb, var(--color-accent) 50%, var(--color-text));
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+.record-label-ring {
+  fill: none;
   stroke: var(--color-accent);
-  opacity: 0.11;
+  stroke-width: 0.7;
+  opacity: 0.4;
 }
 
-.decor-ring-1 {
-  width: 26rem;
-  height: 26rem;
-  top: -7rem;
-  left: -11rem;
+.record-hole {
+  fill: var(--color-bg);
+  stroke: var(--color-secondary);
+  stroke-width: 0.8;
+  opacity: 0.85;
 }
 
-.decor-ring-2 {
-  width: 20rem;
-  height: 20rem;
-  top: 4rem;
-  right: -8rem;
-  animation-duration: 56s;
-  animation-direction: reverse;
-}
-
-.decor-ring-3 {
-  width: 30rem;
-  height: 30rem;
-  bottom: -12rem;
-  left: -14rem;
-  animation-duration: 64s;
-}
-
-.decor-ring-4 {
+.decor-record-1 {
   width: 22rem;
   height: 22rem;
-  bottom: -6rem;
-  right: -9rem;
-  animation-duration: 52s;
+  top: -8rem;
+  left: -10rem;
+}
+
+.decor-record-2 {
+  width: 16.5rem;
+  height: 16.5rem;
+  top: 6rem;
+  right: -7.5rem;
+  animation-duration: 78s;
   animation-direction: reverse;
 }
 
-.decor-ring-5 {
-  width: 16rem;
-  height: 16rem;
-  top: 42%;
-  right: -7rem;
-  animation-duration: 48s;
+.decor-record-3 {
+  width: 26rem;
+  height: 26rem;
+  bottom: -12rem;
+  left: -13rem;
+  animation-duration: 88s;
 }
 
-@keyframes ring-spin {
+.decor-record-4 {
+  width: 14rem;
+  height: 14rem;
+  bottom: -4.5rem;
+  right: -6rem;
+  animation-duration: 54s;
+  animation-direction: reverse;
+}
+
+@keyframes record-spin {
   to {
     transform: rotate(360deg);
   }
+}
+
+.decor-charms {
+  position: absolute;
+  inset: 0;
+}
+
+.decor-charm {
+  position: absolute;
+  opacity: 0.2;
+}
+
+.charm-kettle,
+.charm-cup {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.charm-kettle .kettle-body,
+.charm-kettle .kettle-spout,
+.charm-kettle .kettle-handle,
+.charm-cup .cup-body,
+.charm-cup .cup-saucer {
+  fill: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  stroke: var(--color-secondary);
+  stroke-width: 1.35;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.charm-kettle .kettle-lid-rim,
+.charm-kettle .kettle-knob,
+.charm-cup .cup-rim {
+  fill: color-mix(in srgb, var(--color-text) 18%, transparent);
+  stroke: var(--color-secondary);
+  stroke-width: 1.15;
+}
+
+.charm-cup .cup-handle {
+  fill: none;
+  stroke: var(--color-secondary);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.charm-steam {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.7rem;
+  overflow: visible;
+  pointer-events: none;
+
+  path {
+    fill: none;
+    stroke: var(--color-secondary);
+    stroke-width: 1.1;
+    stroke-linecap: round;
+    opacity: 0.7;
+  }
+
+  .steam-a {
+    animation: steam-drift 4.6s ease-in-out infinite;
+  }
+
+  .steam-b {
+    animation: steam-drift 5.4s ease-in-out infinite 0.7s;
+  }
+}
+
+.decor-charm-kettle-a {
+  left: 0.6rem;
+  bottom: 16%;
+  width: 4.4rem;
+  transform: rotate(-16deg);
+
+  .charm-steam {
+    right: 0.15rem;
+    bottom: 2.55rem;
+  }
+}
+
+.decor-charm-kettle-b {
+  right: 1.1rem;
+  top: 20%;
+  width: 3.2rem;
+  transform: rotate(18deg);
+
+  .charm-steam {
+    right: 0;
+    bottom: 2.05rem;
+  }
+}
+
+.decor-charm-kettle-c {
+  right: 1.4rem;
+  bottom: 10%;
+  width: 2.6rem;
+  transform: rotate(-8deg);
+  opacity: 0.16;
+}
+
+.decor-charm-cup-a {
+  left: 2.2%;
+  top: 36%;
+  width: 2.7rem;
+  transform: rotate(-10deg);
+
+  .charm-steam {
+    left: 0.7rem;
+    bottom: 2.15rem;
+  }
+}
+
+.decor-charm-cup-b {
+  right: 3.5%;
+  top: 54%;
+  width: 2.45rem;
+  transform: rotate(12deg);
+  opacity: 0.16;
+}
+
+.decor-charm-cup-c {
+  left: 6%;
+  top: 12%;
+  width: 2.2rem;
+  transform: rotate(8deg);
+  opacity: 0.15;
+
+  .charm-steam {
+    left: 0.55rem;
+    bottom: 1.85rem;
+  }
+}
+
+.decor-charm-kettle-d {
+  left: 8%;
+  bottom: 4%;
+  width: 2.35rem;
+  transform: rotate(24deg);
+  opacity: 0.14;
 }
 
 .identity-moment {
@@ -1220,20 +1379,8 @@ html[data-theme="dark"] .decor-lamp {
   margin: 2rem 0 2.4rem;
 }
 
-.identity-still-life {
-  display: flex;
-  align-items: flex-end;
-  gap: 0.85rem;
-}
-
-.ritual-stage {
-  position: relative;
-  flex: 0 0 $ritual-w;
-  width: $ritual-w;
-  height: $ritual-h;
-}
-
 .ritual {
+  flex: 0 0 $ritual-w;
   width: $ritual-w;
   height: $ritual-h;
   background-image: var(--ritual-sheet);
@@ -1283,76 +1430,6 @@ html[data-theme="dark"] .decor-lamp {
 
   to {
     background-position: $ritual-w * -4 $ritual-h * -1;
-  }
-}
-
-.identity-kettle {
-  position: relative;
-  flex: 0 0 3.6rem;
-  width: 3.6rem;
-  padding-bottom: 0.08rem;
-}
-
-.identity-kettle-pot {
-  display: block;
-  width: 3.6rem;
-  height: auto;
-  overflow: visible;
-
-  .kettle-shadow {
-    fill: color-mix(in srgb, var(--color-text) 14%, transparent);
-  }
-
-  .kettle-body,
-  .kettle-spout,
-  .kettle-handle {
-    fill: color-mix(in srgb, var(--color-accent) 58%, #6a4032);
-    stroke: color-mix(in srgb, var(--color-accent) 28%, var(--color-text));
-    stroke-width: 1.4;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
-
-  .kettle-lid-rim,
-  .kettle-knob {
-    fill: color-mix(in srgb, var(--color-text) 55%, var(--color-accent));
-    stroke: color-mix(in srgb, var(--color-accent) 25%, var(--color-text));
-    stroke-width: 1.1;
-    stroke-linejoin: round;
-  }
-}
-
-html[data-theme="dark"] .identity-kettle-pot {
-  .kettle-body,
-  .kettle-spout,
-  .kettle-handle {
-    fill: color-mix(in srgb, var(--color-accent) 70%, #3a221c);
-  }
-}
-
-.identity-kettle-steam {
-  position: absolute;
-  right: -0.2rem;
-  bottom: 2.7rem;
-  width: 1.35rem;
-  height: 1.95rem;
-  overflow: visible;
-  pointer-events: none;
-
-  path {
-    fill: none;
-    stroke: var(--color-secondary);
-    stroke-width: 1.15;
-    stroke-linecap: round;
-    opacity: 0.42;
-  }
-
-  .steam-a {
-    animation: steam-drift 4.6s ease-in-out infinite;
-  }
-
-  .steam-b {
-    animation: steam-drift 5.4s ease-in-out infinite 0.7s;
   }
 }
 
@@ -1409,7 +1486,8 @@ html[data-theme="dark"] .identity-kettle-pot {
 }
 
 @media (max-width: 768px) {
-  .decor-rings {
+  .decor-records,
+  .decor-charms {
     display: none;
   }
 
@@ -1428,8 +1506,8 @@ html[data-theme="dark"] .identity-kettle-pot {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .decor-ring,
-  .identity-kettle-steam path,
+  .decor-record,
+  .charm-steam path,
   .ritual {
     animation: none !important;
   }
