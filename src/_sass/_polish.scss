@@ -1427,6 +1427,15 @@ html[data-theme="dark"] .record-label {
   vector-effect: non-scaling-stroke;
 }
 
+.decor-charm-watch .charm-fill,
+.decor-charm-watch .charm-line {
+  stroke-width: 1.1;
+}
+
+.decor-charm-watch .watch-hand {
+  stroke-width: 1.2;
+}
+
 .decor-charm-teapot .charm-spout {
   stroke-width: 4.4;
 }
