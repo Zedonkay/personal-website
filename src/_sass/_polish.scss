@@ -1105,7 +1105,6 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
  ******************************************************************************/
 
 $ritual-h: 4.5rem;
-$ritual-w: 4.1538rem; // 4.5rem * 192 / 208
 
 .decor-field {
   position: fixed;
@@ -1373,21 +1372,47 @@ html[data-theme="dark"] .decor-lamp {
 }
 
 .identity-moment {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.35rem;
-  margin: 2rem 0 2.4rem;
+  position: relative;
+  overflow: hidden;
+  min-height: $ritual-h;
+  margin: 2.1rem 0 2.6rem;
+  padding: 0.2rem 0 0.45rem;
 }
 
 .ritual {
-  flex: 0 0 $ritual-w;
-  width: $ritual-w;
-  height: $ritual-h;
+  --ritual-h: #{$ritual-h};
+  --ritual-w: calc(var(--ritual-h) * 192 / 208);
+  width: var(--ritual-w);
+  height: var(--ritual-h);
   background-image: var(--ritual-sheet);
   background-repeat: no-repeat;
-  background-size: $ritual-w * 6 $ritual-h * 3;
+  background-size: calc(var(--ritual-w) * 6) calc(var(--ritual-h) * 3);
   background-position: 0 0;
   filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
+}
+
+.ritual--reveal {
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ritual--reveal.is-idle,
+.ritual--reveal.is-waving,
+.ritual--reveal.is-glance,
+.ritual--reveal.is-still {
+  left: 0;
+}
+
+.ritual--companion {
+  --ritual-h: 3.2rem;
+}
+
+.ritual--wait {
+  --ritual-h: 5.1rem;
+  flex: 0 0 auto;
 }
 
 .ritual.is-waving {
@@ -1398,13 +1423,29 @@ html[data-theme="dark"] .decor-lamp {
   animation: ritual-idle 1.4s steps(6) infinite;
 }
 
+.ritual.is-running {
+  background-image: var(--ritual-run);
+  background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
+  animation:
+    ritual-run-frames 0.52s steps(8) infinite,
+    ritual-run-across 2.55s cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+}
+
+.ritual.is-waiting {
+  background-image: var(--ritual-wait);
+  background-size: calc(var(--ritual-w) * 6) var(--ritual-h);
+  animation: ritual-wait 1.85s steps(6) infinite;
+}
+
 .ritual.is-glance,
 .ritual.is-still {
   animation: none;
 }
 
 .ritual.is-glance {
-  background-position: 0 $ritual-h * -2;
+  background-image: var(--ritual-sheet);
+  background-size: calc(var(--ritual-w) * 6) calc(var(--ritual-h) * 3);
+  background-position: 0 calc(var(--ritual-h) * -2);
 }
 
 .ritual.is-still {
@@ -1413,23 +1454,79 @@ html[data-theme="dark"] .decor-lamp {
   background-position: 0 0;
 }
 
+.ritual-signoff {
+  margin-top: 2.6rem;
+  margin-bottom: 0.15rem;
+}
+
+.lost-page {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin: 0.35rem 0 0.5rem;
+
+  p {
+    margin: 0;
+  }
+}
+
 @keyframes ritual-idle {
   from {
     background-position: 0 0;
   }
 
   to {
-    background-position: $ritual-w * -6 0;
+    background-position: calc(var(--ritual-w) * -6) 0;
   }
 }
 
 @keyframes ritual-wave {
   from {
-    background-position: 0 $ritual-h * -1;
+    background-position: 0 calc(var(--ritual-h) * -1);
   }
 
   to {
-    background-position: $ritual-w * -4 $ritual-h * -1;
+    background-position: calc(var(--ritual-w) * -4) calc(var(--ritual-h) * -1);
+  }
+}
+
+@keyframes ritual-run-frames {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: calc(var(--ritual-w) * -8) 0;
+  }
+}
+
+@keyframes ritual-run-across {
+  from {
+    left: 100%;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@keyframes ritual-wait {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: calc(var(--ritual-w) * -6) 0;
+  }
+}
+
+@keyframes quote-wake {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -1447,9 +1544,16 @@ html[data-theme="dark"] .decor-lamp {
 }
 
 .quote-of-the-day {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: $ritual-h;
   margin: 0;
-  max-width: 34rem;
-  padding: 0;
+  max-width: none;
+  padding: 0.15rem 0.35rem 0.1rem calc(#{$ritual-h} * 192 / 208 + 0.5rem);
   border: 0;
   background: transparent;
   font-size: inherit;
@@ -1466,9 +1570,9 @@ html[data-theme="dark"] .decor-lamp {
     font-variation-settings:
       "WONK" 1,
       "SOFT" 50,
-      "opsz" 36;
-    font-size: 1.12rem;
-    line-height: 1.45;
+      "opsz" 40;
+    font-size: 1.18rem;
+    line-height: 1.42;
   }
 
   .quote-footer {
@@ -1485,6 +1589,18 @@ html[data-theme="dark"] .decor-lamp {
   }
 }
 
+.identity-moment:not(.is-settled) .quote-of-the-day.is-ready {
+  clip-path: inset(0 0 0 100%);
+}
+
+.identity-moment.is-revealing .quote-of-the-day.is-ready {
+  animation: quote-wake 2.55s cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+}
+
+.identity-moment.is-settled .quote-of-the-day {
+  clip-path: none;
+}
+
 @media (max-width: 768px) {
   .decor-records,
   .decor-charms {
@@ -1499,16 +1615,20 @@ html[data-theme="dark"] .decor-lamp {
   }
 
   .identity-moment {
+    min-height: $ritual-h;
+  }
+
+  .lost-page {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.85rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .decor-record,
   .charm-steam path,
-  .ritual {
+  .ritual,
+  .quote-of-the-day {
     animation: none !important;
   }
 
@@ -1516,5 +1636,13 @@ html[data-theme="dark"] .decor-lamp {
     background-image: var(--ritual-still);
     background-size: 100% 100%;
     background-position: 0 0;
+  }
+
+  .ritual--reveal {
+    left: 0;
+  }
+
+  .identity-moment .quote-of-the-day.is-ready {
+    clip-path: none;
   }
 }

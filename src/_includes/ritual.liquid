@@ -1,6 +1,8 @@
+{% assign ritual_pose = include.pose | default: 'companion' %}
 <div
-  class="ritual"
+  class="ritual ritual--{{ ritual_pose }}"
+  data-ritual="{{ ritual_pose }}"
   role="img"
   aria-label="Ritual, a small brass-and-walnut fox robot"
-  style="--ritual-sheet: url('{{ '/assets/img/ritual/ritual-idle-wave.webp' | relative_url }}'); --ritual-still: url('{{ '/assets/img/ritual/ritual-idle.png' | relative_url }}')"
+  style="--ritual-sheet: url('{{ '/assets/img/ritual/ritual-idle-wave.webp' | relative_url }}'); --ritual-still: url('{{ '/assets/img/ritual/ritual-idle.png' | relative_url }}'); --ritual-run: url('{{ '/assets/img/ritual/ritual-run-left.webp' | relative_url }}'); --ritual-wait: url('{{ '/assets/img/ritual/ritual-wait.webp' | relative_url }}')"
 ></div>

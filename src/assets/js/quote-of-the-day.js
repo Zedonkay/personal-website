@@ -48,4 +48,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   root.classList.add("is-ready");
+  root.dispatchEvent(new CustomEvent("quote:ready", { bubbles: true }));
 });
