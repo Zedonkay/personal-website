@@ -190,13 +190,14 @@ body.fixed-top-nav {
   }
 
   .clearfix > .about-lead {
-    margin: 0 2.15em;
+    margin: 0;
     padding: 0.85rem 0 0.95rem;
     border: 0;
     color: var(--global-title-color);
     font-size: 1.36em;
     line-height: 1.45;
     font-style: italic;
+    text-align: center;
     font-variation-settings:
       "WONK" 1,
       "SOFT" 40,
@@ -205,7 +206,7 @@ body.fixed-top-nav {
 
   @media (min-width: 576px) {
     .clearfix > .about-lead {
-      margin-right: calc(30% + 1rem + 2.15em);
+      margin-right: calc(30% + 1rem);
     }
   }
 
@@ -253,7 +254,7 @@ body.fixed-top-nav {
     }
 
     .clearfix > .about-lead {
-      margin: 0 calc(30% + 1rem + 2em) 0 2em;
+      margin: 0 calc(30% + 1rem) 0 0;
       padding: 0.65rem 0 0.7rem;
       font-size: 1.28em;
     }
@@ -1666,13 +1667,14 @@ footer.is-deferred {
   flex-direction: column;
   justify-content: center;
   width: auto;
+  max-width: 100%;
   min-height: $ritual-h;
-  margin: 0 2.15em;
-  max-width: none;
-  padding: 0.15rem 0.2rem 0.1rem 0.1rem;
+  margin: 0;
+  padding: 0.15rem 0 0.1rem;
   border: 0;
   background: transparent;
   font-size: inherit;
+  text-align: left;
 
   &:not(.is-ready) {
     display: none;

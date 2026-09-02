@@ -72,8 +72,10 @@ function setupRitual(ritual, reduceMotion) {
     ritual.classList.add("is-still");
     const moment = ritual.closest(".identity-moment");
     if (moment) {
-      parkReveal(ritual, moment, document.querySelector(".quote-of-the-day"));
+      const quote = document.querySelector(".quote-of-the-day");
+      parkReveal(ritual, moment, quote);
       moment.classList.add("is-settled");
+      watchQuoteLayout(ritual, moment, quote);
     }
     return;
   }
@@ -507,6 +509,39 @@ function pullLeftoverOntoNewLine(textEl, original, targetWidth, maxWidth) {
   return true;
 }
 
+function resetQuoteBox(quote) {
+  quote.style.paddingRight = "";
+  quote.style.width = "";
+  quote.style.maxWidth = "";
+  quote.style.marginLeft = "";
+  quote.style.marginRight = "";
+}
+
+function quoteContentWidth(quote) {
+  const textEl = quote.querySelector(".quote-text");
+  const footer = quote.querySelector(".quote-footer");
+  const boxes = [...(textEl ? quoteLineBoxes(textEl) : []), ...(footer && !footer.hidden ? quoteLineBoxes(footer) : [])];
+  if (!boxes.length) return 0;
+  return Math.ceil(Math.max(...boxes.map((box) => box.width)));
+}
+
+function centerQuoteWithRitual(ritual, moment, quote) {
+  const ritualW = ritual.offsetWidth || 48;
+  const reserve = ritualW + PARK_GAP;
+  const style = window.getComputedStyle(quote);
+  const padLeft = parseFloat(style.paddingLeft) || 0;
+  const padRight = parseFloat(style.paddingRight) || reserve;
+  const textW = quoteContentWidth(quote);
+  if (textW < 8) return;
+  const blockW = padLeft + textW + padRight;
+  const momentW = moment.getBoundingClientRect().width;
+  const offset = Math.max(0, (momentW - blockW) / 2);
+  quote.style.width = `${Math.round(blockW)}px`;
+  quote.style.maxWidth = "100%";
+  quote.style.marginLeft = `${Math.round(offset)}px`;
+  quote.style.marginRight = "auto";
+}
+
 function wrapQuoteForRitual(ritual, moment, quote) {
   if (!quote || !quote.classList.contains("is-ready")) return;
   const textEl = quote.querySelector(".quote-text");
@@ -515,30 +550,31 @@ function wrapQuoteForRitual(ritual, moment, quote) {
   const original = textEl.dataset.quoteOriginal ?? textEl.textContent;
   textEl.dataset.quoteOriginal = original;
   setQuoteText(textEl, original);
-  quote.style.paddingRight = "";
+  resetQuoteBox(quote);
   fitRevealHeight(ritual, moment, quote);
 
   const ritualW = ritual.offsetWidth || 48;
-  const quoteBox = quote.getBoundingClientRect();
-  const lines = quoteLineBoxes(textEl);
   const reserve = ritualW + PARK_GAP;
   quote.style.paddingRight = `${reserve}px`;
   fitRevealHeight(ritual, moment, quote);
-  if (!lines.length) return;
 
-  const last = lines[lines.length - 1];
-  const fullLines = lines.filter((line) => quoteBox.right - line.right < reserve).length;
-  // Leftover used to be "how far past the column edge," which is ~0 on two
-  // full lines. Measure from Ritual's parked left edge instead, then wrap that
-  // leftover once per full line (two full lines → double it onto the next).
-  const leftover = Math.max(0, last.right - (quoteBox.right - reserve));
-  const wrapPx = leftover * Math.max(1, fullLines);
-  if (wrapPx > leftover + 1) {
-    const width = contentWidth(quote);
-    const after = quoteLineBoxes(textEl);
-    const lastAfter = after[after.length - 1];
-    if (lastAfter && lastAfter.width < wrapPx - 1) {
-      pullLeftoverOntoNewLine(textEl, original, Math.min(width, wrapPx), width);
+  const quoteBox = quote.getBoundingClientRect();
+  const lines = quoteLineBoxes(textEl);
+  if (lines.length) {
+    const last = lines[lines.length - 1];
+    const fullLines = lines.filter((line) => quoteBox.right - line.right < reserve).length;
+    // Leftover used to be "how far past the column edge," which is ~0 on two
+    // full lines. Measure from Ritual's parked left edge instead, then wrap that
+    // leftover once per full line (two full lines → double it onto the next).
+    const leftover = Math.max(0, last.right - (quoteBox.right - reserve));
+    const wrapPx = leftover * Math.max(1, fullLines);
+    if (wrapPx > leftover + 1) {
+      const width = contentWidth(quote);
+      const after = quoteLineBoxes(textEl);
+      const lastAfter = after[after.length - 1];
+      if (lastAfter && lastAfter.width < wrapPx - 1) {
+        pullLeftoverOntoNewLine(textEl, original, Math.min(width, wrapPx), width);
+      }
     }
   }
 
@@ -549,6 +585,7 @@ function wrapQuoteForRitual(ritual, moment, quote) {
     quote.style.paddingRight = next;
   }
   fitRevealHeight(ritual, moment, quote);
+  centerQuoteWithRitual(ritual, moment, quote);
 }
 
 function clipQuoteToRitual(ritual, quote) {
@@ -579,6 +616,18 @@ function parkReveal(ritual, moment, quote) {
   return toPx;
 }
 
+function watchQuoteLayout(ritual, moment, quote) {
+  let timer = 0;
+  const relayout = () => {
+    if (ritual.classList.contains("is-running")) return;
+    parkReveal(ritual, moment, quote);
+  };
+  window.addEventListener("resize", () => {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(relayout, 120);
+  });
+}
+
 function setupReveal(ritual) {
   const moment = ritual.closest(".identity-moment");
   const quote = document.querySelector(".quote-of-the-day");
@@ -590,6 +639,8 @@ function setupReveal(ritual) {
     });
     return;
   }
+
+  watchQuoteLayout(ritual, moment, quote);
 
   let settled = false;
   const settle = () => {
