@@ -210,8 +210,12 @@ body.fixed-top-nav {
     }
   }
 
+  .identity-moment {
+    margin-bottom: 0.85rem;
+  }
+
   .social {
-    margin-top: 0.55rem;
+    margin-top: 0.2rem;
   }
 
   .social .contact-icons {
@@ -221,13 +225,13 @@ body.fixed-top-nav {
   .social .contact-icons a img {
     width: 2.8rem;
     height: 2.8rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.35rem;
   }
 
   .social .contact-icons a svg {
     width: 3.05rem;
     height: 3.35rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.2rem;
 
     image {
       width: 3.05rem;
@@ -236,7 +240,11 @@ body.fixed-top-nav {
   }
 
   .social .contact-note {
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
+  }
+
+  footer.sticky-bottom {
+    margin-top: 0.65rem;
   }
 
   // Keep name, bio, Ritual, and socials on one screen for typical laptops.
@@ -260,11 +268,11 @@ body.fixed-top-nav {
     }
 
     .identity-moment {
-      margin: 1.05rem 0 1.1rem;
+      margin: 1.05rem 0 0.7rem;
     }
 
     .social {
-      margin-top: 0.2rem;
+      margin-top: 0.1rem;
     }
 
     .social .contact-icons {
@@ -274,13 +282,13 @@ body.fixed-top-nav {
     .social .contact-icons a img {
       width: 2.45rem;
       height: 2.45rem;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.25rem;
     }
 
     .social .contact-icons a svg {
       width: 2.65rem;
       height: 2.9rem;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.15rem;
 
       image {
         width: 2.65rem;
