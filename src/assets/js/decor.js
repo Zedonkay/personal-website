@@ -23,25 +23,28 @@ const ASPECT = {
   bike: 76 / 58,
   pin: 120 / 28,
   clapper: 24 / 24,
-  masks: 88 / 52,
-  hammer: 1,
+  masks: 46 / 48,
+  razor: 56 / 88,
   record: 1,
+  watch: 1,
 };
 
 const CHARMS_LEFT = [
   { kind: "teapot", size: 62 },
   { kind: "cup", size: 37 },
   { kind: "bike", size: 67 },
+  { kind: "watch", size: 58 },
   { kind: "clapper", size: 41 },
   { kind: "bike", size: 50 },
   { kind: "coffee", size: 39 },
   { kind: "pin", size: 55 },
-  { kind: "hammer", size: 53 },
+  { kind: "razor", size: 40 },
+  { kind: "watch", size: 46 },
   { kind: "clapper", size: 52 },
   { kind: "masks", size: 44 },
   { kind: "cup", size: 35 },
   { kind: "coffee", size: 44 },
-  { kind: "hammer", size: 42 },
+  { kind: "razor", size: 32 },
   { kind: "pin", size: 46 },
   { kind: "masks", size: 39 },
   { kind: "teapot", size: 48 },
@@ -49,12 +52,14 @@ const CHARMS_LEFT = [
 
 const CHARMS_RIGHT = [
   { kind: "bike", size: 64 },
+  { kind: "watch", size: 54 },
   { kind: "coffee", size: 41 },
   { kind: "masks", size: 51 },
   { kind: "teapot", size: 57 },
   { kind: "pin", size: 60 },
   { kind: "teapot", size: 53 },
-  { kind: "hammer", size: 46 },
+  { kind: "razor", size: 36 },
+  { kind: "watch", size: 44 },
   { kind: "cup", size: 39 },
   { kind: "cup", size: 43 },
   { kind: "clapper", size: 46 },
@@ -62,11 +67,10 @@ const CHARMS_RIGHT = [
   { kind: "pin", size: 44 },
   { kind: "masks", size: 36 },
   { kind: "clapper", size: 37 },
-  { kind: "hammer", size: 58 },
+  { kind: "razor", size: 44 },
   { kind: "bike", size: 55 },
 ];
 
-const HAMMER_ANGLES = [-78, -54, -22, 16, 41, 68, -86, 82, -36, 57];
 const GAP = 22;
 const TOP = 72;
 
@@ -172,6 +176,13 @@ function stamp(layer, kind, box, rotate) {
     disc.style.animationDuration = `${80 + Math.abs(Math.round(rotate))}s`;
     if (rotate > 0) disc.style.animationDirection = "reverse";
   }
+  if (kind === "watch") {
+    node.style.setProperty("--watch-spin", `${26 + Math.abs(Math.round(rotate))}s`);
+    node.style.setProperty("--watch-tick", `${0.42 + Math.abs(rotate) / 180}s`);
+  }
+  if (kind === "masks") {
+    node.style.setProperty("--mood-delay", `${-((Math.round(box.cx) + Math.round(box.cy)) % 16)}s`);
+  }
   layer.appendChild(node);
 }
 
@@ -209,10 +220,6 @@ function sitAbove(cx, w, rotate, floorY, preferredCy) {
 }
 
 function charmTilt(charm, idx, region) {
-  if (charm.kind === "hammer") {
-    const pick = Math.floor(unit(idx * 17 + charm.size + region.x + region.y) * HAMMER_ANGLES.length);
-    return HAMMER_ANGLES[pick];
-  }
   return Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
 }
 
