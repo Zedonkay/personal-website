@@ -1448,10 +1448,10 @@ footer.is-deferred {
   height: var(--ritual-h);
   width: calc(#{$ritual-h} * 192 / 208);
   aspect-ratio: 192 / 208;
-  background-image: var(--ritual-sheet);
+  background-image: var(--ritual-still);
   background-repeat: no-repeat;
-  background-size: 600% 300%;
-  background-position: 0% 0%;
+  background-size: 100% 100%;
+  background-position: 0 0;
   filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
 }
 
@@ -1485,6 +1485,13 @@ footer.is-deferred {
 
 .ritual--wait {
   flex: 0 0 auto;
+}
+
+.ritual.is-waving,
+.ritual.is-idle,
+.ritual.is-glance {
+  background-image: var(--ritual-sheet);
+  background-size: 600% 300%;
 }
 
 .ritual.is-waving {
@@ -1535,8 +1542,6 @@ footer.is-deferred {
 }
 
 .ritual.is-glance {
-  background-image: var(--ritual-sheet);
-  background-size: 600% 300%;
   background-position: 0% 100%;
 }
 

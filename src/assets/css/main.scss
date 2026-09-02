@@ -6,9 +6,8 @@
 // Dimensions
 $max-content-width: {{ site.max_width }};
 
-// One Tabler face, swap so social icons aren't invisible while the font loads.
-// Importing all three Tabler sheets registered the same family three times (~1.7MB).
-$ti-font-display: swap;
+// Subset Tabler face with block so social icons stay empty instead of
+// flashing fallback CJK glyphs while the webfont arrives.
 $ti-font-family: "tabler-icons";
 
 @import
@@ -25,5 +24,5 @@ $ti-font-family: "tabler-icons";
   "font-awesome/brands",
   "font-awesome/solid",
   "font-awesome/regular",
-  "tabler-icons/tabler-icons-outline.scss"
+  "tabler-used"
 ;

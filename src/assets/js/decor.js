@@ -4,7 +4,11 @@ function bootDecor() {
   const pack = () => place(layer);
   pack();
   const quote = document.querySelector(".quote-of-the-day");
-  if (quote) quote.addEventListener("quote:ready", () => window.setTimeout(pack, 40));
+  if (quote) {
+    const relayout = () => window.setTimeout(pack, 40);
+    if (quote.classList.contains("is-ready")) relayout();
+    quote.addEventListener("quote:ready", relayout);
+  }
   let resizeTimer;
   window.addEventListener("resize", () => {
     window.clearTimeout(resizeTimer);

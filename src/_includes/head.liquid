@@ -6,8 +6,39 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   </script>
 {% endif %}
-<link rel="preload" as="image" href="{{ '/assets/img/ritual/ritual-idle-wave.webp' | relative_url }}" type="image/webp">
-<link rel="preload" as="image" href="{{ '/assets/img/ritual/ritual-run-left.webp' | relative_url }}" type="image/webp">
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="{{ '/assets/fonts/tabler-icons-used.woff2' | relative_url }}"
+  crossorigin
+>
+<link
+  rel="preload"
+  as="font"
+  type="font/ttf"
+  href="{{ '/assets/fonts/academicons.ttf' | relative_url }}"
+  crossorigin
+>
+<link
+  rel="preload"
+  as="image"
+  href="{{ '/assets/img/ritual/ritual-idle.png' | relative_url }}"
+  type="image/png"
+  fetchpriority="high"
+>
+<link
+  rel="preload"
+  as="image"
+  href="{{ '/assets/img/ritual/ritual-idle-wave.webp' | relative_url }}"
+  type="image/webp"
+>
+<link
+  rel="preload"
+  as="image"
+  href="{{ '/assets/img/ritual/ritual-run-left.webp' | relative_url }}"
+  type="image/webp"
+>
 
 <!-- Bootstrap & MDB -->
 <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | relative_url | bust_file_cache }}">
@@ -78,6 +109,20 @@
   >
 {% endif %}
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
+<script>
+  (function () {
+    var root = document.documentElement;
+    function mark() {
+      root.classList.add('icon-fonts-ready');
+    }
+    if (!document.fonts || !document.fonts.load) {
+      mark();
+      return;
+    }
+    document.fonts.load('1em "tabler-icons"').then(mark, mark);
+    window.setTimeout(mark, 2500);
+  })();
+</script>
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
 
 {% if site.enable_darkmode %}

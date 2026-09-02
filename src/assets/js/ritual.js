@@ -28,6 +28,42 @@ const REACT_FRAMES = {
   sleep: 6,
   explain: 7,
 };
+const DECODE_MS = 4000;
+
+function cssUrl(value) {
+  const match = String(value || "").match(/url\(\s*(['"]?)(.*?)\1\s*\)/);
+  return match ? match[2] : "";
+}
+
+function decodeImage(src) {
+  if (!src) return Promise.resolve();
+  const img = new Image();
+  img.src = src;
+  if (typeof img.decode === "function") {
+    return img.decode().catch(() => {});
+  }
+  return new Promise((resolve) => {
+    img.onload = resolve;
+    img.onerror = resolve;
+  });
+}
+
+function withTimeout(promise, ms) {
+  return Promise.race([promise, new Promise((resolve) => window.setTimeout(resolve, ms))]);
+}
+
+function decodeRitualArt(ritual, names) {
+  const urls = names.map((name) => cssUrl(ritual.style.getPropertyValue(name)));
+  return withTimeout(Promise.all(urls.map(decodeImage)), DECODE_MS);
+}
+
+function whenQuoteReady(quote) {
+  if (!quote || quote.classList.contains("is-ready")) return Promise.resolve();
+  return new Promise((resolve) => {
+    quote.addEventListener("quote:ready", resolve, { once: true });
+    window.setTimeout(resolve, 2000);
+  });
+}
 
 function setupRitual(ritual, reduceMotion) {
   const pose = ritual.getAttribute("data-ritual") || "companion";
@@ -43,8 +79,10 @@ function setupRitual(ritual, reduceMotion) {
   }
 
   if (pose === "wait") {
-    ritual.classList.add("is-waiting");
-    attachLiveMotion(ritual);
+    decodeRitualArt(ritual, ["--ritual-wait"]).then(() => {
+      ritual.classList.add("is-waiting");
+      attachLiveMotion(ritual);
+    });
     return;
   }
 
@@ -482,8 +520,10 @@ function setupReveal(ritual) {
   const quote = document.querySelector(".quote-of-the-day");
 
   if (!moment) {
-    restPose(ritual);
-    attachLiveMotion(ritual);
+    decodeRitualArt(ritual, ["--ritual-still", "--ritual-sheet"]).then(() => {
+      restPose(ritual);
+      attachLiveMotion(ritual);
+    });
     return;
   }
 
@@ -531,24 +571,14 @@ function setupReveal(ritual) {
     window.requestAnimationFrame(() => window.requestAnimationFrame(run));
   };
 
-  if (!quote) {
-    parkReveal(ritual, moment, null);
-    settle();
-    return;
-  }
-
-  if (quote.classList.contains("is-ready")) {
-    startRun();
-    return;
-  }
-
-  quote.addEventListener("quote:ready", startRun, { once: true });
-  window.setTimeout(() => {
-    if (!ritual.classList.contains("is-running") && !moment.classList.contains("is-settled")) {
+  Promise.all([decodeRitualArt(ritual, ["--ritual-still", "--ritual-sheet", "--ritual-run"]), whenQuoteReady(quote)]).then(() => {
+    if (!quote || !quote.classList.contains("is-ready")) {
       parkReveal(ritual, moment, quote);
       settle();
+      return;
     }
-  }, 2000);
+    startRun();
+  });
 }
 
 function setupCompanion(ritual) {
@@ -559,20 +589,23 @@ function setupCompanion(ritual) {
     });
   };
 
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          greet();
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.55 }
-    );
-    observer.observe(ritual);
-  } else {
-    greet();
-  }
+  decodeRitualArt(ritual, ["--ritual-run", "--ritual-wait", "--ritual-jump", "--ritual-react"]);
+  decodeRitualArt(ritual, ["--ritual-still", "--ritual-sheet"]).then(() => {
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            greet();
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.55 }
+      );
+      observer.observe(ritual);
+    } else {
+      greet();
+    }
+  });
 }
 
 if (document.readyState === "loading") {

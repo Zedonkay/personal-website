@@ -1,0 +1,59 @@
+// Subset of Tabler outline icons actually used on this site.
+// Regenerate the font with:
+//   pyftsubset src/assets/fonts/tabler-icons-outline.ttf \
+//     --unicodes=U+EAE5,U+EC1C,U+EC8C,U+FA24,U+EB19,U+EB1C,U+EAF8,U+EB30 \
+//     --flavor=woff2 --layout-features='' --drop-tables+=GSUB,GPOS,GDEF \
+//     --output-file=src/assets/fonts/tabler-icons-used.woff2
+$ti-font-family: "tabler-icons" !default;
+$ti-font-path: "../fonts" !default;
+
+@font-face {
+  font-family: $ti-font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("#{$ti-font-path}/tabler-icons-used.woff2") format("woff2");
+  unicode-range: U+EAE5, U+EC1C, U+EC8C, U+FA24, U+EB19, U+EB1C, U+EAF8, U+EB30;
+}
+
+.ti {
+  font-family: $ti-font-family !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ti-mail:before {
+  content: "\eae5";
+}
+.ti-brand-github:before {
+  content: "\ec1c";
+}
+.ti-brand-linkedin:before {
+  content: "\ec8c";
+}
+.ti-brand-letterboxd:before {
+  content: "\fa24";
+}
+.ti-rss:before {
+  content: "\eb19";
+}
+.ti-search:before {
+  content: "\eb1c";
+}
+.ti-moon:before {
+  content: "\eaf8";
+}
+.ti-sun:before {
+  content: "\eb30";
+}
+
+html:not(.icon-fonts-ready) .ti::before,
+html:not(.icon-fonts-ready) .ai::before {
+  visibility: hidden;
+}
