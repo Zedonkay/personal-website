@@ -130,20 +130,29 @@ function gutters() {
   const found = {};
   const leftW = postBox.left - 6;
   const rightW = pageW - postBox.right - 6;
+  const lowerStart = Math.min(splitY + 8, floorY - 360);
   const upperH = Math.max(36, splitY - TOP);
-  const lowerH = Math.max(36, floorY - splitY - 10);
+  const lowerH = Math.max(36, floorY - lowerStart - 10);
   if (leftW >= 40) {
-    found.leftUpper = { x: 0, y: TOP, w: leftW, h: upperH, side: "left" };
-    found.leftLower = { x: 0, y: splitY + 8, w: Math.max(leftW, innerLeft - 14), h: lowerH, side: "left" };
+    found.leftUpper = { x: 0, y: TOP, w: leftW, h: upperH, side: "left", band: "upper" };
+    found.leftLower = {
+      x: 0,
+      y: lowerStart,
+      w: Math.max(leftW, innerLeft - 14),
+      h: lowerH,
+      side: "left",
+      band: "lower",
+    };
   }
   if (rightW >= 40) {
-    found.rightUpper = { x: postBox.right + 4, y: TOP, w: rightW, h: upperH, side: "right" };
+    found.rightUpper = { x: postBox.right + 4, y: TOP, w: rightW, h: upperH, side: "right", band: "upper" };
     found.rightLower = {
       x: innerRight + 14,
-      y: splitY + 8,
+      y: lowerStart,
       w: Math.max(40, pageW - innerRight - 14),
       h: lowerH,
       side: "right",
+      band: "lower",
     };
   }
   return { found, floorY, pageW };
@@ -211,42 +220,38 @@ function shuffle(list, seed) {
   return out;
 }
 
-function sitAbove(cx, w, rotate, floorY, preferredCy) {
-  let cy = preferredCy;
-  const hit = rotBox(cx, cy, w, w, rotate);
-  const overflow = hit.y + hit.h - (floorY - 6);
-  if (overflow > 0) cy -= overflow;
-  return cy;
-}
-
 function charmTilt(charm, idx, region) {
   return Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
 }
 
-function placeVinyls(layer, placed, found, floorY, pageW) {
+function placeVinyls(layer, found, floorY, pageW) {
   const left = found.leftLower || found.leftUpper;
   if (left) {
     const w = Math.min(260, Math.max(170, Math.min(left.w, 220) * 1.15));
-    const pull = w * 0.07;
-    const cx = pull;
-    const cy = floorY - pull;
-    tryStamp(layer, placed, [], "record", cx, cy, w, w, -18, true);
+    const inset = w * 0.2;
+    stamp(layer, "record", { cx: inset, cy: floorY - inset, w, h: w }, -18);
   }
 
-  const right = found.rightUpper || found.rightLower;
+  const right = found.rightLower || found.rightUpper;
   if (right) {
-    const w = Math.min(220, Math.max(150, right.w * 1.35));
-    const hide = 0.52;
-    const cx = pageW + w * (hide - 0.5);
-    const mid = TOP + (floorY - TOP) * 0.44;
-    const cy = sitAbove(cx, w, 14, floorY, Math.min(mid, floorY - 6 - w / 2));
-    tryStamp(layer, placed, [], "record", cx, cy, w, w, 14, true);
+    const w = Math.min(240, Math.max(160, Math.min(right.w, 220) * 1.2));
+    const inset = w * 0.2;
+    stamp(layer, "record", { cx: pageW - inset, cy: floorY - inset, w, h: w }, 16);
   }
 }
 
 function shareByArea(regions, charms) {
   const live = regions.filter(Boolean);
   if (!live.length) return [];
+  const upper = live.find((region) => region.band === "upper");
+  const lower = live.find((region) => region.band === "lower");
+  if (upper && lower) {
+    const nLower = Math.min(charms.length - 3, Math.max(7, Math.round(charms.length * 0.45)));
+    return [
+      { region: upper, charms: charms.slice(0, charms.length - nLower) },
+      { region: lower, charms: charms.slice(charms.length - nLower) },
+    ];
+  }
   const areas = live.map((region) => Math.max(1, region.w * region.h));
   const total = areas.reduce((sum, area) => sum + area, 0);
   const bags = [];
@@ -259,59 +264,94 @@ function shareByArea(regions, charms) {
   return bags;
 }
 
+function pickSlots(cells, n) {
+  if (n >= cells.length) return cells.slice();
+  if (n <= 1) return cells.slice(0, n);
+  const slots = [];
+  for (let i = 0; i < n; i += 1) {
+    slots.push(cells[Math.round((i * (cells.length - 1)) / (n - 1))]);
+  }
+  return slots;
+}
+
+function cornerCells(region) {
+  const padX = 34;
+  const padY = 42;
+  const outerX = region.side === "left" ? region.x + padX : region.x + region.w - padX;
+  const innerX =
+    region.side === "left"
+      ? region.x + Math.min(region.w * 0.45, 108)
+      : region.x + region.w - Math.min(region.w * 0.45, 108);
+  const y0 = region.y + region.h - padY;
+  const y1 = y0 - 78;
+  const y2 = y0 - 148;
+  return [
+    { cx: outerX, cy: y0 },
+    { cx: innerX, cy: y1 },
+    { cx: outerX, cy: y2 },
+  ];
+}
+
 function placeCharms(layer, region, charms, placed, blocked) {
   if (!charms.length) return;
+  const lower = region.band === "lower";
   const aspect = region.w / Math.max(24, region.h);
   const minCols = region.w >= 64 ? 2 : 1;
   const cols = Math.max(minCols, Math.round(Math.sqrt(charms.length * aspect * 1.45)));
   const rows = Math.max(1, Math.ceil(charms.length / cols));
   const jitterScale = region.side === "right" ? 0.72 : 0.4;
-  const cells = [];
+  const cells = lower ? cornerCells(region) : [];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * jitterScale;
       const jitterY = (unit(row * 9 + col + 4 + region.x) - 0.5) * (region.side === "right" ? 0.5 : 0.36);
       const stagger = region.side === "right" && row % 2 ? 0.34 : 0;
-      const u = Math.min(0.94, Math.max(0.06, (col + 0.5 + jitterX + stagger) / cols));
-      const v = Math.min(0.94, Math.max(0.06, (row + 0.5 + jitterY) / rows));
+      const t = (row + 0.5 + jitterY) / rows;
+      const u = Math.min(0.97, Math.max(0.04, (col + 0.5 + jitterX + stagger) / cols));
+      const v = Math.min(0.97, Math.max(0.04, lower ? 1 - (1 - t) ** 1.35 : t));
       cells.push({
         cx: region.x + 8 + u * Math.max(12, region.w - 16),
-        cy: region.y + 10 + v * Math.max(24, region.h - 20),
+        cy: region.y + 8 + v * Math.max(24, region.h - 16),
       });
     }
   }
 
   const bag = shuffle(charms, region.side === "left" ? 2 + region.y : 19 + region.y);
-  const slots = cells.slice(0, bag.length);
+  const slots = pickSlots(cells, bag.length);
   const nudges =
     region.side === "right"
       ? [
           [0, 0],
           [18, -10],
           [-22, 12],
-          [10, 20],
+          [10, 24],
           [-16, -14],
           [26, 6],
-          [-8, 18],
+          [-8, 22],
+          [14, 32],
         ]
       : [
           [0, 0],
           [12, -8],
           [-14, 10],
-          [8, 16],
+          [8, 22],
           [-16, -6],
-          [0, -18],
+          [0, 28],
           [18, 4],
+          [-10, 18],
         ];
   bag.forEach((charm, idx) => {
     const w = charm.size;
     const h = w / (ASPECT[charm.kind] || 1);
     const rot = charmTilt(charm, idx, region);
-    const cell = slots[idx] || cells[idx % cells.length];
     const wanderX = region.side === "right" ? (unit(idx * 11 + region.y) - 0.5) * Math.min(38, region.w * 0.4) : 0;
-    for (let n = 0; n < nudges.length; n += 1) {
-      const [dx, dy] = nudges[n];
-      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false)) return;
+    const ordered = [slots[idx], ...cells].filter(Boolean);
+    for (let s = 0; s < ordered.length; s += 1) {
+      const cell = ordered[s];
+      for (let n = 0; n < nudges.length; n += 1) {
+        const [dx, dy] = nudges[n];
+        if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false)) return;
+      }
     }
   });
 }
@@ -327,7 +367,7 @@ function place(layer) {
   if (field) field.style.setProperty("--decor-h", `${Math.max(0, floorY)}px`);
   const blocked = avoidRects(floorY);
   const placed = [];
-  placeVinyls(layer, placed, found, floorY, pageW);
+  placeVinyls(layer, found, floorY, pageW);
   shareByArea([found.leftUpper, found.leftLower], CHARMS_LEFT).forEach((bag) => {
     placeCharms(layer, bag.region, bag.charms, placed, blocked);
   });
