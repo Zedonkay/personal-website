@@ -1131,12 +1131,12 @@ $ritual-h: 4.5rem;
     color-mix(in srgb, var(--color-bg) 55%, transparent) 46%,
     transparent 74%
   );
-  opacity: 0.72;
+  opacity: 0.55;
 }
 
 html[data-theme="dark"] .decor-lamp {
   background: radial-gradient(ellipse at 38% 38%, color-mix(in srgb, var(--color-accent) 30%, transparent) 0%, transparent 72%);
-  opacity: 0.34;
+  opacity: 0.26;
 }
 
 .decor-records {
@@ -1147,79 +1147,63 @@ html[data-theme="dark"] .decor-lamp {
 .decor-record {
   position: absolute;
   overflow: visible;
-  animation: record-spin 64s linear infinite;
+  opacity: 0.16;
+  animation: record-spin 88s linear infinite;
 }
 
 .record-fill {
-  fill: color-mix(in srgb, var(--color-text) 9%, transparent);
+  fill: color-mix(in srgb, var(--color-text) 6%, transparent);
   stroke: none;
 }
 
 .record-edge {
   fill: none;
   stroke: var(--color-text);
-  stroke-width: 1.8;
-  opacity: 0.42;
+  stroke-width: 1.6;
+  opacity: 0.35;
 }
 
 .record-groove {
   fill: none;
   stroke: var(--color-secondary);
-  stroke-width: 0.65;
-  opacity: 0.38;
+  stroke-width: 0.6;
+  opacity: 0.28;
 }
 
 .record-label {
-  fill: color-mix(in srgb, var(--color-accent) 38%, var(--color-bg));
-  stroke: color-mix(in srgb, var(--color-accent) 50%, var(--color-text));
+  fill: color-mix(in srgb, var(--color-accent) 28%, var(--color-bg));
+  stroke: color-mix(in srgb, var(--color-accent) 40%, var(--color-text));
   stroke-width: 1;
-  opacity: 0.7;
+  opacity: 0.42;
 }
 
 .record-label-ring {
   fill: none;
   stroke: var(--color-accent);
   stroke-width: 0.7;
-  opacity: 0.4;
+  opacity: 0.28;
 }
 
 .record-hole {
   fill: var(--color-bg);
   stroke: var(--color-secondary);
   stroke-width: 0.8;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
 .decor-record-1 {
-  width: 22rem;
-  height: 22rem;
-  top: -8rem;
-  left: -10rem;
+  width: 9.25rem;
+  height: 9.25rem;
+  top: -4.2rem;
+  left: -4.4rem;
 }
 
 .decor-record-2 {
-  width: 16.5rem;
-  height: 16.5rem;
-  top: 6rem;
-  right: -7.5rem;
-  animation-duration: 78s;
-  animation-direction: reverse;
-}
-
-.decor-record-3 {
-  width: 26rem;
-  height: 26rem;
-  bottom: -12rem;
-  left: -13rem;
-  animation-duration: 88s;
-}
-
-.decor-record-4 {
-  width: 14rem;
-  height: 14rem;
-  bottom: -4.5rem;
-  right: -6rem;
-  animation-duration: 54s;
+  width: 7.4rem;
+  height: 7.4rem;
+  bottom: -4.3rem;
+  right: -4.6rem;
+  animation-duration: 104s;
   animation-direction: reverse;
 }
 
@@ -1236,42 +1220,36 @@ html[data-theme="dark"] .decor-lamp {
 
 .decor-charm {
   position: absolute;
-  opacity: 0.2;
+  opacity: 0.11;
 }
 
-.charm-kettle,
-.charm-cup {
+.charm-svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.charm-kettle .kettle-body,
-.charm-kettle .kettle-spout,
-.charm-kettle .kettle-handle,
-.charm-cup .cup-body,
-.charm-cup .cup-saucer {
-  fill: color-mix(in srgb, var(--color-accent) 22%, transparent);
+.charm-fill {
+  fill: color-mix(in srgb, var(--color-accent) 14%, transparent);
   stroke: var(--color-secondary);
-  stroke-width: 1.35;
+  stroke-width: 1.25;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
-.charm-kettle .kettle-lid-rim,
-.charm-kettle .kettle-knob,
-.charm-cup .cup-rim {
-  fill: color-mix(in srgb, var(--color-text) 18%, transparent);
-  stroke: var(--color-secondary);
-  stroke-width: 1.15;
-}
-
-.charm-cup .cup-handle {
+.charm-line {
   fill: none;
   stroke: var(--color-secondary);
-  stroke-width: 1.6;
+  stroke-width: 1.3;
+  stroke-linejoin: round;
   stroke-linecap: round;
+}
+
+.charm-hole {
+  fill: var(--color-bg);
+  stroke: var(--color-secondary);
+  stroke-width: 0.85;
 }
 
 .charm-steam {
@@ -1298,77 +1276,98 @@ html[data-theme="dark"] .decor-lamp {
   }
 }
 
-.decor-charm-kettle-a {
-  left: 0.6rem;
-  bottom: 16%;
-  width: 4.4rem;
+.decor-charm-book {
+  top: 11%;
+  left: 0.45rem;
+  width: 2.05rem;
   transform: rotate(-16deg);
+  opacity: 0.1;
+}
+
+.decor-charm-kettle {
+  top: 27%;
+  left: 0.3rem;
+  width: 3rem;
+  transform: rotate(-14deg);
 
   .charm-steam {
-    right: 0.15rem;
-    bottom: 2.55rem;
+    right: 0.1rem;
+    bottom: 2.35rem;
   }
 }
 
-.decor-charm-kettle-b {
-  right: 1.1rem;
-  top: 20%;
-  width: 3.2rem;
+.decor-charm-whisk {
+  top: 46%;
+  left: 0.7rem;
+  width: 1.55rem;
   transform: rotate(18deg);
-
-  .charm-steam {
-    right: 0;
-    bottom: 2.05rem;
-  }
+  opacity: 0.1;
 }
 
-.decor-charm-kettle-c {
-  right: 1.4rem;
-  bottom: 10%;
-  width: 2.6rem;
+.decor-charm-bike {
+  top: 64%;
+  left: 0.2rem;
+  width: 3.45rem;
   transform: rotate(-8deg);
-  opacity: 0.16;
 }
 
-.decor-charm-cup-a {
-  left: 2.2%;
-  top: 36%;
-  width: 2.7rem;
-  transform: rotate(-10deg);
-
-  .charm-steam {
-    left: 0.7rem;
-    bottom: 2.15rem;
-  }
+.decor-charm-mortar {
+  top: 79%;
+  left: 0.55rem;
+  width: 2.15rem;
+  transform: rotate(14deg);
+  opacity: 0.09;
 }
 
-.decor-charm-cup-b {
-  right: 3.5%;
-  top: 54%;
-  width: 2.45rem;
+.decor-charm-pin {
+  bottom: 5.4rem;
+  left: 0.35rem;
+  width: 3.1rem;
+  transform: rotate(-28deg);
+  opacity: 0.1;
+}
+
+.decor-charm-film {
+  top: 10%;
+  right: 0.35rem;
+  width: 1.55rem;
   transform: rotate(12deg);
-  opacity: 0.16;
+  opacity: 0.1;
 }
 
-.decor-charm-cup-c {
-  left: 6%;
-  top: 12%;
-  width: 2.2rem;
-  transform: rotate(8deg);
-  opacity: 0.15;
+.decor-charm-cup {
+  top: 28%;
+  right: 0.3rem;
+  width: 2.35rem;
+  transform: rotate(10deg);
 
   .charm-steam {
     left: 0.55rem;
-    bottom: 1.85rem;
+    bottom: 1.95rem;
   }
 }
 
-.decor-charm-kettle-d {
-  left: 8%;
-  bottom: 4%;
-  width: 2.35rem;
-  transform: rotate(24deg);
-  opacity: 0.14;
+.decor-charm-camera {
+  top: 46%;
+  right: 0.45rem;
+  width: 2.45rem;
+  transform: rotate(-10deg);
+  opacity: 0.1;
+}
+
+.decor-charm-drone {
+  top: 64%;
+  right: 0.25rem;
+  width: 2.55rem;
+  transform: rotate(14deg);
+}
+
+.decor-charm-car {
+  top: 81%;
+  right: 0.3rem;
+  width: 3.05rem;
+  transform: rotate(-6deg);
+  opacity: 0.1;
 }
 
 .identity-moment {
@@ -1601,17 +1600,19 @@ html[data-theme="dark"] .decor-lamp {
   clip-path: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .decor-records,
   .decor-charms {
     display: none;
   }
+}
 
+@media (max-width: 768px) {
   .decor-lamp {
     left: 0;
     width: 100%;
     height: 28vh;
-    opacity: 0.45;
+    opacity: 0.38;
   }
 
   .identity-moment {

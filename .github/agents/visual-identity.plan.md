@@ -12,7 +12,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. Lamp glow + slow-spinning tea-ring / vinyl-groove SVG in the margins. Faint steam near Ritual. Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. Soft lamp glow plus a faint scatter of small SVGs in the **viewport margins**, drawn from Ishayu’s interests (tea, cooking, records, film, books, bikes, quadrotor, race car). Vinyl appears **1–2 times**, peeking off a corner, never as the main motif. Charms stay small, ~0.09–0.12 opacity, and must not overlap each other or the content column (hide the field below ~1200px). Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -24,7 +24,7 @@ Ritual is a compact brass-and-walnut fox-like robot (Codex pet, `3d-toy`): orang
 
 The site already has cream/sage light (`#efe3d5` / `#556b5d` / accent `#b58a80`) and charcoal/copper dark (`#262624` / `#d97757`). Brass/copper on Ritual matches both.
 
-Playfulness comes from **motion and character** (wave, glance, slow rings), not from a collage of hobbies. Work stays in the bio. The identity layer is craft, tea, records, friction, hospitality.
+Playfulness comes from **motion and character** (Ritual’s run, wave, glance) plus a quiet margin field. Work stays in the bio; the field is not a robotics brand.
 
 ## Font
 
@@ -108,9 +108,9 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **Lamp:** large soft radial behind the about header (paper-lantern, not a spotlight). Light: warm mix of `--color-bg` and `--color-accent`. Dark: ember/copper, low opacity. Must not reduce text contrast.
-- **Rings:** 3–5 incomplete circles in the **viewport margins** (cup stain + vinyl groove). Stroke from `--color-secondary` / `--color-accent`, opacity ~0.10–0.14. Slow rotate **48s** linear infinite (her globe-spin energy, his records). Color is not Ritual’s fur orange.
-- **Steam:** 1–2 faint SVG wisps near Ritual, optional drift. Kill under reduced motion.
-- **Mobile (≲768px):** hide rings (no margin). Keep a softer lamp. Never overlap body copy.
+- **Charms:** many kinds, one of most. Left/right gutters only, staggered so they cannot sit on top of each other. Vinyl: two small discs, mostly off-canvas, opacity ~0.10.
+- **Steam:** optional wisps on the kettle and cup only. Kill under reduced motion.
+- **Narrow viewports (≲1200px):** hide charms and vinyls (gutters are gone). Keep a softer lamp. Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.
 
 ### Quote of the day (infra only)
