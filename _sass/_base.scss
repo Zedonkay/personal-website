@@ -1050,7 +1050,7 @@ figure.highlight {
 pre {
   color: var(--global-theme-color);
   background-color: var(--global-code-bg-color);
-  border-radius: $radius-media;
+  border-radius: $radius-control;
   padding: 6px 12px;
 
   // Responsive behavior for code blocks
@@ -1182,7 +1182,7 @@ progress::-moz-progress-bar {
   .copy {
     background: var(--global-card-bg-color);
     border-color: var(--global-bg-color);
-    border-radius: $radius-media;
+    border-radius: $radius-control;
     border-style: none;
     color: var(--global-text-color);
     font-size: medium;
@@ -1447,7 +1447,7 @@ ninja-keys::part(ninja-input-wrapper) {
   min-width: 100px;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
-  border-radius: $radius-media;
+  border-radius: $radius-control;
   padding: 8px 12px;
 }
 
@@ -1467,7 +1467,7 @@ ninja-keys::part(ninja-input-wrapper) {
   flex-direction: row;
   padding: 9px 17px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
-  border-radius: $radius-media;
+  border-radius: $radius-control;
   text-align: center;
   font-style: normal;
   font-weight: 500;
@@ -1488,7 +1488,7 @@ ninja-keys::part(ninja-input-wrapper) {
   flex-direction: row;
   padding: 9px 17px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
-  border-radius: $radius-media;
+  border-radius: $radius-control;
   text-align: center;
   font-style: normal;
   font-weight: 500;

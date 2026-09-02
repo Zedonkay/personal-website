@@ -35,9 +35,9 @@
   --global-newsletter-bg-color: var(--color-bg);
   --global-newsletter-text-color: var(--color-text);
 
-  /* Nested rounded rects: inner media radius; shells add inset + 1px. */
+  /* One large corner radius for thumbs, figures, and card shells. */
   --radius-media: #{$radius-media};
-  --radius-card: calc(#{$radius-media} + 1px + #{$radius-shell-inset});
+  --radius-card: #{$radius-media};
 
   --project-link-color: var(--color-secondary);
   --project-link-border: color-mix(in srgb, var(--color-secondary) 55%, var(--color-bg));

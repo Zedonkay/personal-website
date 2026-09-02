@@ -51,7 +51,8 @@ $back-to-top-diameter: 40px;
 $back-to-top-height: $back-to-top-diameter;
 $back-to-top-width: $back-to-top-diameter;
 
-// Shared rounding. Media/thumbs use $radius-media; nested shells add inset + 1px
-// in a literal calc() (jekyll-minifier splits `--` inside calc(var(--…))).
-$radius-media: 6px;
+// Shared corner radius for thumbs, figures, and card shells.
+// Controls (inputs, code, small buttons) stay tighter so they don't turn into pills.
+$radius-media: 1.75rem;
+$radius-control: 6px;
 $radius-shell-inset: 0.8rem;
