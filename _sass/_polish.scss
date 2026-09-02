@@ -22,7 +22,7 @@ body {
 }
 
 .card {
-  border-radius: var(--radius-media);
+  border-radius: var(--radius-card);
 }
 
 figure img:not(.rounded-circle),
@@ -349,12 +349,9 @@ body.fixed-top-nav {
   align-self: center;
   margin: var(--library-thumb-inset) 0 var(--library-thumb-inset) var(--library-thumb-inset);
   overflow: hidden;
-  padding: $radius-thumb-pad;
   border-radius: var(--library-thumb-radius);
-  background-color: color-mix(in srgb, var(--global-text-color) 6%, var(--global-card-bg-color));
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--global-text-color) 10%, transparent),
-    0 3px 10px color-mix(in srgb, var(--global-text-color) 9%, transparent);
+  background-color: transparent;
+  box-shadow: none;
 
   &::after {
     content: "";
@@ -382,7 +379,7 @@ body.fixed-top-nav {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 0;
+    border-radius: inherit;
   }
 
   &:hover {
@@ -391,9 +388,9 @@ body.fixed-top-nav {
 }
 
 .library-card-thumb--contain {
-  padding: $radius-thumb-pad;
-  background-color: color-mix(in srgb, var(--global-text-color) 3%, var(--global-card-bg-color));
-  box-shadow: 0 0 0 1px var(--global-divider-color);
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
 
   &::after {
     content: none;
@@ -403,7 +400,7 @@ body.fixed-top-nav {
   .library-card-image {
     object-fit: contain;
     object-position: center;
-    border-radius: 0;
+    border-radius: inherit;
   }
 }
 
@@ -553,7 +550,6 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
     height: auto;
     display: block;
     border-radius: var(--radius-media);
-    border: 1px solid var(--global-divider-color);
   }
 
   figcaption {
@@ -658,6 +654,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 .projects ul.bibliography li .abbr figure picture,
 .projects ul.bibliography li .abbr figure img {
   display: block;
+  border-radius: inherit;
 }
 
 .projects ul.bibliography li .abbr figure {
@@ -665,10 +662,9 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   display: block;
   width: 100%;
   height: auto;
-  padding: $radius-thumb-pad;
   overflow: hidden;
-  background-color: var(--global-card-bg-color);
-  border: 1px solid var(--global-divider-color);
+  background: none;
+  border: none;
   border-radius: var(--nested-radius);
 }
 
@@ -678,10 +674,9 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   width: 100%;
   max-width: 100%;
   height: auto;
-  padding: $radius-thumb-pad;
   overflow: hidden;
-  background-color: var(--global-card-bg-color);
-  border: 1px solid var(--global-divider-color);
+  background: none;
+  border: none;
   border-radius: var(--nested-radius);
 }
 
@@ -702,9 +697,8 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .publications ol.bibliography li .publication-media--preview {
   overflow: hidden;
-  padding: $radius-thumb-pad;
-  background-color: var(--global-card-bg-color);
-  border: 1px solid var(--global-divider-color);
+  background: none;
+  border: none;
   border-radius: var(--nested-radius);
 
   > abbr {
@@ -732,7 +726,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
     display: block;
     width: 100%;
     border: none !important;
-    border-radius: 0 !important;
+    border-radius: inherit;
   }
 
   .publication-preview-link {
@@ -758,19 +752,19 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   width: 100%;
   aspect-ratio: 3 / 2;
   border: none !important;
-  border-radius: 0 !important;
-  object-fit: contain;
+  border-radius: var(--nested-radius) !important;
+  object-fit: cover;
   object-position: center;
   box-shadow: none !important;
 }
 
 .publications ol.bibliography li .preview-video-embed {
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--global-divider-color);
+  border: none !important;
   border-radius: var(--nested-radius) !important;
   overflow: hidden;
   box-shadow: none !important;
-  background-color: var(--global-card-bg-color);
+  background: none;
 }
 
 .publications ol.bibliography li .preview-video-embed figure {
@@ -796,8 +790,8 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   object-fit: contain;
   object-position: center;
   border: none !important;
-  border-radius: 0 !important;
-  background-color: transparent;
+  border-radius: inherit;
+  background: none;
   box-shadow: none !important;
 }
 

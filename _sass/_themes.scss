@@ -35,9 +35,9 @@
   --global-newsletter-bg-color: var(--color-bg);
   --global-newsletter-text-color: var(--color-text);
 
-  /* One large corner radius for thumbs, figures, and card shells. */
+  /* Cards use the large shell radius; thumbs and figures stay tighter. */
   --radius-media: #{$radius-media};
-  --radius-card: #{$radius-media};
+  --radius-card: #{$radius-card};
 
   --project-link-color: var(--color-secondary);
   --project-link-border: color-mix(in srgb, var(--color-secondary) 55%, var(--color-bg));

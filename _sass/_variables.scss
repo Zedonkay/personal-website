@@ -51,10 +51,8 @@ $back-to-top-diameter: 40px;
 $back-to-top-height: $back-to-top-diameter;
 $back-to-top-width: $back-to-top-diameter;
 
-// Shared corner radius for thumbs, figures, and card shells.
-// Controls (inputs, code, small buttons) stay tighter so they don't turn into pills.
-$radius-media: 1.75rem;
+// Cards stay generously rounded; thumbs/figures use a tighter clip.
+$radius-media: 6px;
+$radius-card: 1.75rem;
 $radius-control: 6px;
 $radius-shell-inset: 0.8rem;
-// Keep media inside the rounded shell so corners clip the matte, not the figure.
-$radius-thumb-pad: 0.55rem;
