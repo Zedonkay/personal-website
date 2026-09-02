@@ -7,7 +7,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 ## Decisions (locked)
 
 - Keep al-folio. Layer onto `src/_layouts/`, `src/_includes/`, `src/_sass/_polish.scss`, `src/_data/`, `src/_config.yml`. Do not rebuild as handwritten HTML.
-- **Motif B:** On about, the quote is a full-width band. Ritual runs left-to-right at a constant speed (duration follows distance), quote clipped in his wake, and parks just to the right of the last glyph. Then he waves and idles. Hover poses only last while the pointer is on him; leave snaps back to idle. He also waves on his own now and then. `prefers-reduced-motion: reduce` → static idle frame at the park point, quote fully visible, no sprite loop, no vinyl spin.
+- **Motif B:** On about, the quote is a full-width band. Ritual runs left-to-right at a constant speed; the quote is clipped to his leading edge so it only appears as he reaches it. He parks just to the right of the last glyph, then waves and idles. Hover poses only last while the pointer is on him; leave snaps back to idle. He also waves on his own now and then. `prefers-reduced-motion: reduce` → static idle frame at the park point, quote fully visible, no sprite loop, no vinyl spin.
 - **No field tags** (not now).
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
@@ -81,7 +81,7 @@ Do not commit the full 2 MB sheet. Leave running-right/jump/fail/other look fram
 ### About (`src/_layouts/about.liquid`)
 
 1. **Keep** the sloth `<img class="title-favicon">` in the H1. Do not put Ritual there.
-2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts on the left, runs right across the quote (z-index above, quote visible behind the sprite), and parks just past the last glyph. Quote reveal is a clip-path wake synced to the run.
+2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts on the left, runs right across the quote (z-index above, quote visible behind the sprite), and parks just past the rightmost glyph. The quote is clipped to his leading edge so it only appears as he reaches it.
 3. If the quote bank is empty or `quotes.enabled` is false: still show Ritual (wave + idle on the left). Omit the quote markup entirely (no empty italic, no “add quotes” placeholder).
 4. Include the decorative field here only (`permalink: /`).
 
@@ -92,7 +92,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Ritual companion (`src/_includes/ritual.liquid` + `src/assets/js/ritual.js`)
 
 - Markup: one element, `role="img"`, `aria-label="Ritual, a small brass-and-walnut fox robot"`. `data-ritual` / `pose`: `reveal` (about), `companion` (inner pages), `wait` (404).
-- **reveal:** `is-running` goes left-to-right and stops just to the right of the quote (constant speed, duration follows distance and matches the quote wake). Ritual’s height covers the full quote block, including multi-line quotes. Then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
+- **reveal:** `is-running` goes left-to-right and stops just to the right of the quote (constant speed, duration follows distance). Quote clip-path is driven by his leading edge each frame. Ritual’s height covers the full quote block, including multi-line quotes. Then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
 - **companion:** same height as about (~4.5rem). Wave once when scrolled into view, then hover + occasional idle waves. One hover pose is a dash across the sign-off band; it keeps going after the pointer leaves and parks on the other side.
 - **wait:** waiting strip loop, same hover + idle waves.
 - Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already parked at the quote’s end.

@@ -288,12 +288,11 @@ function beginDash(ritual) {
 }
 
 function quoteEndX(quote) {
-  const text = quote.querySelector(".quote-text") || quote;
   const range = document.createRange();
-  range.selectNodeContents(text);
+  range.selectNodeContents(quote);
   const rects = [...range.getClientRects()].filter((rect) => rect.width > 1 && rect.height > 1);
   if (!rects.length) return quote.getBoundingClientRect().right;
-  return rects[rects.length - 1].right;
+  return Math.max(...rects.map((rect) => rect.right));
 }
 
 function fitRevealHeight(ritual, moment, quote) {
@@ -302,6 +301,16 @@ function fitRevealHeight(ritual, moment, quote) {
   if (height < 8) return;
   ritual.style.setProperty("--ritual-h", `${height}px`);
   moment.style.minHeight = `${height}px`;
+}
+
+function clipQuoteToRitual(ritual, quote) {
+  if (!quote) return;
+  const quoteBox = quote.getBoundingClientRect();
+  const ritualBox = ritual.getBoundingClientRect();
+  const width = quoteBox.width || 1;
+  const lead = Math.max(0, ritualBox.right - quoteBox.left);
+  const remain = Math.max(0, Math.min(100, 100 - (lead / width) * 100));
+  quote.style.clipPath = `inset(0 ${remain}% 0 0)`;
 }
 
 function parkReveal(ritual, moment, quote) {
@@ -338,6 +347,7 @@ function setupReveal(ritual) {
     ritual.classList.remove("is-running");
     moment.classList.remove("is-revealing");
     moment.classList.add("is-settled");
+    if (quote) quote.style.removeProperty("clip-path");
     playAct(ritual, "wave", () => {
       restPose(ritual);
       attachLiveMotion(ritual);
@@ -354,6 +364,13 @@ function setupReveal(ritual) {
     moment.style.setProperty("--ritual-run-ms", `${duration}ms`);
     moment.classList.add("is-revealing");
     ritual.classList.add("is-running");
+    clipQuoteToRitual(ritual, quote);
+    const tick = () => {
+      if (!ritual.classList.contains("is-running")) return;
+      clipQuoteToRitual(ritual, quote);
+      window.requestAnimationFrame(tick);
+    };
+    window.requestAnimationFrame(tick);
     ritual.addEventListener("animationend", (event) => {
       if (event.animationName !== "ritual-run-across") return;
       settle();

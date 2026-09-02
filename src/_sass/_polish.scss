@@ -1529,16 +1529,6 @@ footer.is-deferred {
   }
 }
 
-@keyframes quote-wake {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
 @keyframes steam-drift {
   0%,
   100% {
@@ -1600,10 +1590,6 @@ footer.is-deferred {
 
 .identity-moment:not(.is-settled) .quote-of-the-day.is-ready {
   clip-path: inset(0 100% 0 0);
-}
-
-.identity-moment.is-revealing .quote-of-the-day.is-ready {
-  animation: quote-wake var(--ritual-run-ms, 4s) linear forwards;
 }
 
 .identity-moment.is-settled .quote-of-the-day {
