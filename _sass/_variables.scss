@@ -56,3 +56,5 @@ $back-to-top-width: $back-to-top-diameter;
 $radius-media: 1.75rem;
 $radius-control: 6px;
 $radius-shell-inset: 0.8rem;
+// Keep media inside the rounded shell so corners clip the matte, not the figure.
+$radius-thumb-pad: 0.55rem;

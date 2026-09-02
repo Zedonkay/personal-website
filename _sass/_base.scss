@@ -750,6 +750,7 @@ footer.sticky-bottom {
       grid-row: 1;
       min-height: 0;
       margin: 0;
+      padding: $radius-thumb-pad;
       overflow: hidden;
       display: flex;
       align-items: center;
