@@ -226,7 +226,8 @@ function attachLiveMotion(ritual, options = {}) {
     window.clearTimeout(idleTimer);
     cancelAct = playAct(ritual, nextHoverAct(), () => {
       cancelAct = null;
-      if (hovering) restPose(ritual);
+      restPose(ritual);
+      if (!hovering) scheduleIdleWave();
     });
   };
 
