@@ -773,7 +773,8 @@ footer.sticky-bottom {
         object-position: center;
       }
 
-      &:has(img[src*="CMR"]) {
+      &:has(img[src*="CMR"]),
+      &:has(img[src*="teaser-fig"]) {
         picture {
           width: 100%;
           height: 100%;
@@ -782,7 +783,8 @@ footer.sticky-bottom {
           justify-content: center;
         }
 
-        img[src*="CMR"] {
+        img[src*="CMR"],
+        img[src*="teaser-fig"] {
           width: 100%;
           height: auto;
           max-height: 100%;

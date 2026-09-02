@@ -664,7 +664,8 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 
 .projects ul.bibliography li .abbr figure:has(img[src*="CMR"]),
 .projects ul.bibliography li .abbr figure:has(img[src*="systems_figure"]),
-.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]) {
+.projects ul.bibliography li .abbr figure:has(img[src*="Robodsl"]),
+.projects ul.bibliography li .abbr figure:has(img[src*="teaser-fig"]) {
   margin: 0;
   display: block;
   width: 100%;
@@ -808,7 +809,8 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
 .projects ul.bibliography li .preview[src*="CMR"],
 .projects ul.bibliography li .preview[src*="systems_figure"],
 .projects ul.bibliography li .preview[src*="Robodsl"],
-.projects ul.bibliography li .preview[src*="midpoint_demo"] {
+.projects ul.bibliography li .preview[src*="midpoint_demo"],
+.projects ul.bibliography li .preview[src*="teaser-fig"] {
   width: 100%;
   max-width: 100%;
   height: auto;
