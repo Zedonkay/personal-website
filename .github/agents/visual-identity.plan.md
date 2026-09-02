@@ -54,7 +54,7 @@ Two serifs, no webfont mono. Fraunces is the voice; Newsreader is the quieter ma
   Point every current `$font-mono` chrome rule (nav, `.abbr`, `.periodical`, `.links a.btn`, publication years) at `$font-secondary`. Leave real code blocks on `$font-mono`.
 
 - Fraunces body: quieter (`WONK` 0, modest `SOFT`, `opsz` ~18). Headings and the quote: slightly wonkier (`WONK` 1, `opsz` display). Quotes stay italic.
-- Newsreader in the nav: `opsz` around 16–18, not display size. Do not uppercase-track it like a mono badge unless the existing badge styles already do.
+- Newsreader in the nav: `opsz` around 16–18, ~1.05rem, bar ~4.25rem. Not the oversized 1.25rem / 5.5rem strip. Do not uppercase-track it like a mono badge unless the existing badge styles already do.
 - Do not load Instrument Serif, Gloock, Playfair, or JetBrains Mono.
 
 ## Ritual assets
@@ -107,7 +107,8 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Decorative field (`src/_includes/decor_field.liquid`)
 
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
-- **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash).
+- **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
+- Footer sits in document flow (not `fixed-bottom`) and stays `display: none` until the visitor scrolls to the bottom of the page.
 - **Charms:** many kinds, one of most. Sit in the left/right column gutters (`(100vw - 1040px) / 2`), staggered so they cannot sit on top of each other. Opacity ~0.28–0.34, stroked with `--color-text`. Vinyl: two small discs, mostly off-canvas, opacity ~0.16.
 - **Steam:** optional wisps on the kettle and cup only. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.

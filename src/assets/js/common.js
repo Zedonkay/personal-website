@@ -58,3 +58,27 @@ $(document).ready(function () {
     trigger: "hover",
   });
 });
+
+(function () {
+  const footer = document.querySelector("footer[role='contentinfo']");
+  if (!footer || !footer.classList.contains("is-deferred")) {
+    return;
+  }
+
+  const reveal = () => {
+    footer.classList.remove("is-deferred");
+    window.removeEventListener("scroll", onScroll);
+  };
+
+  const onScroll = () => {
+    if (window.scrollY < 8) {
+      return;
+    }
+    const bottom = window.innerHeight + window.scrollY;
+    if (bottom >= document.documentElement.scrollHeight - 24) {
+      reveal();
+    }
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+})();

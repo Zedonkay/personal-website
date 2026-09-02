@@ -18,7 +18,7 @@
     </div>
   </footer>
 {% else %}
-  <footer class="sticky-bottom mt-5" role="contentinfo">
+  <footer class="sticky-bottom is-deferred" role="contentinfo">
     {% if site.newsletter.enabled %}
       {% include newsletter.liquid %}
     {% endif %}
@@ -31,3 +31,10 @@
     </div>
   </footer>
 {% endif %}
+<noscript>
+  <style>
+    footer.is-deferred {
+      display: block !important;
+    }
+  </style>
+</noscript>
