@@ -1,11 +1,5 @@
 function determineGiscusTheme() {
   
-    let theme =
-      localStorage.getItem("theme") ||
-      document.documentElement.getAttribute("data-theme") ||
-      "light";
-
-    if (theme === "dark") return "dark";
     return "light";
   
 }
