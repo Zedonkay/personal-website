@@ -303,8 +303,10 @@ function glyphRects(el) {
 }
 
 function quoteEndX(quote) {
-  const text = quote.querySelector(".quote-text") || quote;
-  const rects = glyphRects(text);
+  const targets = [".quote-text", ".quote-cite"]
+    .map((selector) => quote.querySelector(selector))
+    .filter(Boolean);
+  const rects = (targets.length ? targets : [quote]).flatMap(glyphRects);
   if (!rects.length) return quote.getBoundingClientRect().right;
   return Math.max(...rects.map((rect) => rect.right));
 }
