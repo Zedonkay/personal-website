@@ -92,9 +92,9 @@ h6,
 }
 
 .navbar .nav-link {
-  font-size: 0.85rem !important;
-  letter-spacing: 0.02em;
-  font-variation-settings: "opsz" 17;
+  font-size: 1.25rem;
+  letter-spacing: 0.01em;
+  font-variation-settings: "opsz" 22;
 }
 
 code,
@@ -104,13 +104,24 @@ pre code {
 }
 
 body.fixed-top-nav {
-  padding-top: 72px;
+  padding-top: 6.5rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 6.25rem;
+  }
 }
 
 .navbar,
 .navbar.navbar-light,
 .navbar.fixed-top {
-  min-height: 60px;
+  min-height: 5.5rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
   border-bottom: none;
   background-color: var(--global-bg-color);
   backdrop-filter: none;
@@ -120,13 +131,17 @@ body.fixed-top-nav {
 
 .navbar .navbar-brand,
 .navbar.navbar-light .navbar-nav .nav-item .nav-link {
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   font-weight: 500;
+}
+
+.navbar.navbar-light .navbar-brand .navbar-favicon {
+  height: 2rem;
 }
 
 .navbar.navbar-light .navbar-nav .nav-item .nav-link {
   border-radius: 999px;
-  padding: 0.35rem 0.75rem;
+  padding: 0.6rem 1.05rem;
 }
 
 .navbar.navbar-light .navbar-nav .nav-item.active > .nav-link {
@@ -1055,7 +1070,7 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 
 @media (max-width: 767.98px) {
   body.fixed-top-nav {
-    padding-top: 62px;
+    padding-top: 5.35rem;
   }
 
   .post-header .post-title {
