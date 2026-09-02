@@ -9,8 +9,8 @@
   "description": "Formatting and git-hook tooling for the personal website",
   "main": "purgecss.config.js",
   "scripts": {
-    "format": "cd .. && prettier --config config/.prettierrc --ignore-path config/.prettierignore . --write",
-    "format:check": "cd .. && prettier --config config/.prettierrc --ignore-path config/.prettierignore . --check",
+    "format": "prettier --config .prettierrc --ignore-path .prettierignore .. --write",
+    "format:check": "prettier --config .prettierrc --ignore-path .prettierignore .. --check",
     "prepare": "cd .. && husky",
     "serve": "docker compose -f ../docker/compose.yml up",
     "build": "cd .. && BUNDLE_GEMFILE=src/Gemfile bundle exec jekyll build --config src/_config.yml"
