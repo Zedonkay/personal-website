@@ -1399,8 +1399,21 @@ $ritual-h: 4.5rem;
 .ritual--reveal.is-idle,
 .ritual--reveal.is-waving,
 .ritual--reveal.is-glance,
-.ritual--reveal.is-still {
+.ritual--reveal.is-still,
+.ritual--reveal.is-jumping,
+.ritual--reveal.is-waiting-once,
+.ritual--reveal.is-react {
   left: 0;
+}
+
+.identity-moment.is-settled .ritual--reveal {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.ritual--companion,
+.ritual--wait {
+  cursor: pointer;
 }
 
 .ritual--companion {
@@ -1413,30 +1426,50 @@ $ritual-h: 4.5rem;
 }
 
 .ritual.is-waving {
-  animation: ritual-wave 0.52s steps(4) forwards;
+  animation: ritual-wave 1.05s steps(4) forwards;
 }
 
 .ritual.is-idle {
-  animation: ritual-idle 1.4s steps(6) infinite;
+  animation: ritual-idle 2.4s steps(6) infinite;
 }
 
 .ritual.is-running {
   background-image: var(--ritual-run);
   background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
   animation:
-    ritual-run-frames 0.52s steps(8) infinite,
-    ritual-run-across 2.55s cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+    ritual-run-frames 1.05s steps(8) infinite,
+    ritual-run-across 5.6s cubic-bezier(0.37, 0, 0.63, 1) forwards;
 }
 
 .ritual.is-waiting {
   background-image: var(--ritual-wait);
   background-size: calc(var(--ritual-w) * 6) var(--ritual-h);
-  animation: ritual-wait 1.85s steps(6) infinite;
+  animation: ritual-wait 2.8s steps(6) infinite;
+}
+
+.ritual.is-waiting-once {
+  background-image: var(--ritual-wait);
+  background-size: calc(var(--ritual-w) * 6) var(--ritual-h);
+  animation: ritual-wait 2.8s steps(6);
+}
+
+.ritual.is-jumping {
+  background-image: var(--ritual-jump);
+  background-size: calc(var(--ritual-w) * 5) var(--ritual-h);
+  animation: ritual-jump 1.4s steps(5);
 }
 
 .ritual.is-glance,
-.ritual.is-still {
+.ritual.is-still,
+.ritual.is-react {
   animation: none;
+}
+
+.ritual.is-react {
+  --ritual-frame: 0;
+  background-image: var(--ritual-react);
+  background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
+  background-position: calc(var(--ritual-w) * -1 * var(--ritual-frame)) 0;
 }
 
 .ritual.is-glance {
@@ -1504,6 +1537,16 @@ $ritual-h: 4.5rem;
 
   to {
     left: 0;
+  }
+}
+
+@keyframes ritual-jump {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: calc(var(--ritual-w) * -5) 0;
   }
 }
 
@@ -1591,7 +1634,7 @@ $ritual-h: 4.5rem;
 }
 
 .identity-moment.is-revealing .quote-of-the-day.is-ready {
-  animation: quote-wake 2.55s cubic-bezier(0.42, 0.02, 0.18, 1) forwards;
+  animation: quote-wake 5.6s cubic-bezier(0.37, 0, 0.63, 1) forwards;
 }
 
 .identity-moment.is-settled .quote-of-the-day {

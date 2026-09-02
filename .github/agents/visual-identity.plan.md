@@ -7,7 +7,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 ## Decisions (locked)
 
 - Keep al-folio. Layer onto `src/_layouts/`, `src/_includes/`, `src/_sass/_polish.scss`, `src/_data/`, `src/_config.yml`. Do not rebuild as handwritten HTML.
-- **Motif B:** On about, the quote is a full-width band. Ritual runs right-to-left across it (quote clipped in his wake, text behind the sprite), parks on the left, waves once, then idles. Hovering the band after that makes him glance. Inner pages get a quieter companion at the bottom of the content; 404 uses the waiting loop. `prefers-reduced-motion: reduce` → static idle frame on the left, quote fully visible, no sprite loop, no ring spin.
+- **Motif B:** On about, the quote is a full-width band. Ritual runs right-to-left across it (~5.6s, even stride), quote clipped in his wake, parks on the left, waves, then idles. Hovering Ritual cycles a shuffled set of his poses (wave, jump, wait, looks, facepalm, sleep, and review beats) — a different one each time. Inner pages and 404 use the same hover cycle. `prefers-reduced-motion: reduce` → static idle frame on the left, quote fully visible, no sprite loop, no ring spin.
 - **No field tags** (not now).
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
@@ -92,9 +92,9 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Ritual companion (`src/_includes/ritual.liquid` + `src/assets/js/ritual.js`)
 
 - Markup: one element, `role="img"`, `aria-label="Ritual, a small brass-and-walnut fox robot"`. `data-ritual` / `pose`: `reveal` (about), `companion` (inner pages), `wait` (404).
-- **reveal:** `is-running` (run-left strip + left 100%→0) with quote `quote-wake` clip, then `is-waving` → `is-idle`. After settle, hovering the identity moment → `is-glance`.
-- **companion:** smaller (~3.2rem). Wave once when scrolled into view, again on hover, then idle.
-- **wait:** waiting strip loop.
+- **reveal:** `is-running` (run-left strip + left 100%→0 over ~5.6s, even ease) with quote `quote-wake` clip, then `is-waving` → `is-idle`. After settle, hovering Ritual plays the next unused pose from a shuffled set (wave, jump, wait, glance, extra looks/review/fail/work holds).
+- **companion:** smaller (~3.2rem). Wave once when scrolled into view, then the same hover cycle.
+- **wait:** waiting strip loop, same hover cycle.
 - Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already on the left.
 - Tiny JS is justified; do **not** port the Codex pet controller, drag, or look-at-cursor.
 - Load `ritual.js` on every page. Keep `quote-of-the-day.js` about-only.
