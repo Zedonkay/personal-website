@@ -107,11 +107,14 @@ body.fixed-top-nav {
   padding-top: 72px;
 }
 
-.navbar {
+.navbar,
+.navbar.navbar-light,
+.navbar.fixed-top {
   min-height: 60px;
   border-bottom: none;
-  background-color: color-mix(in srgb, var(--global-bg-color) 88%, transparent);
-  backdrop-filter: blur(18px);
+  background-color: var(--global-bg-color);
+  backdrop-filter: none;
+  box-shadow: none;
   opacity: 1;
 }
 
@@ -1101,7 +1104,7 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 }
 
 /*******************************************************************************
- * Ritual identity — companion, quote, lamp, rings
+ * Ritual identity — companion, quote, margin charms
  ******************************************************************************/
 
 $ritual-h: 4.5rem;
@@ -1117,26 +1120,6 @@ $ritual-h: 4.5rem;
 .decor-field + .post {
   position: relative;
   z-index: 1;
-}
-
-.decor-lamp {
-  position: absolute;
-  top: -8vh;
-  left: 8%;
-  width: min(46rem, 72vw);
-  height: 42vh;
-  background: radial-gradient(
-    ellipse at 38% 38%,
-    color-mix(in srgb, var(--color-accent) 24%, var(--color-bg)) 0%,
-    color-mix(in srgb, var(--color-bg) 55%, transparent) 46%,
-    transparent 74%
-  );
-  opacity: 0.55;
-}
-
-html[data-theme="dark"] .decor-lamp {
-  background: radial-gradient(ellipse at 38% 38%, color-mix(in srgb, var(--color-accent) 30%, transparent) 0%, transparent 72%);
-  opacity: 0.26;
 }
 
 .decor-records {
@@ -1608,13 +1591,6 @@ html[data-theme="dark"] .decor-lamp {
 }
 
 @media (max-width: 768px) {
-  .decor-lamp {
-    left: 0;
-    width: 100%;
-    height: 28vh;
-    opacity: 0.38;
-  }
-
   .identity-moment {
     min-height: $ritual-h;
   }

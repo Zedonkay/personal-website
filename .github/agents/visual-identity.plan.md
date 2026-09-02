@@ -12,7 +12,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. Soft lamp glow plus a faint scatter of small SVGs in the **viewport margins**, drawn from Ishayu’s interests (tea, cooking, records, film, books, bikes, quadrotor, race car). Vinyl appears **1–2 times**, peeking off a corner, never as the main motif. Charms stay small, ~0.09–0.12 opacity, and must not overlap each other or the content column (hide the field below ~1200px). Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. A faint scatter of small SVGs in the **viewport margins**, drawn from Ishayu’s interests (tea, cooking, records, film, books, bikes, quadrotor, race car). Vinyl appears **1–2 times**, peeking off a corner, never as the main motif. Charms stay small, ~0.09–0.12 opacity, and must not overlap each other or the content column (hide the field below ~1200px). No header lamp or tinted nav band — the page top is the same `--color-bg` as the body. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -107,10 +107,10 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Decorative field (`src/_includes/decor_field.liquid`)
 
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
-- **Lamp:** large soft radial behind the about header (paper-lantern, not a spotlight). Light: warm mix of `--color-bg` and `--color-accent`. Dark: ember/copper, low opacity. Must not reduce text contrast.
+- **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash).
 - **Charms:** many kinds, one of most. Left/right gutters only, staggered so they cannot sit on top of each other. Vinyl: two small discs, mostly off-canvas, opacity ~0.10.
 - **Steam:** optional wisps on the kettle and cup only. Kill under reduced motion.
-- **Narrow viewports (≲1200px):** hide charms and vinyls (gutters are gone). Keep a softer lamp. Never overlap body copy.
+- **Narrow viewports (≲1200px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.
 
 ### Quote of the day (infra only)
