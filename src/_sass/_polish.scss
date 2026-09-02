@@ -1209,7 +1209,7 @@ $ritual-h: 4.5rem;
 }
 
 .record-fill {
-  fill: color-mix(in srgb, var(--color-text) 9%, transparent);
+  fill: color-mix(in srgb, var(--color-text) 2.2%, transparent);
   stroke: none;
 }
 
@@ -1228,17 +1228,21 @@ $ritual-h: 4.5rem;
 }
 
 .record-label {
-  fill: color-mix(in srgb, var(--color-accent) 28%, var(--color-bg));
-  stroke: color-mix(in srgb, var(--color-accent) 40%, var(--color-text));
+  fill: var(--color-accent);
+  stroke: color-mix(in srgb, var(--color-accent) 55%, var(--color-text));
   stroke-width: 1;
-  opacity: 0.42;
+  opacity: 0.92;
+}
+
+html[data-theme="dark"] .record-label {
+  fill: hsl(from var(--color-accent) h calc(s * 1.28) l);
 }
 
 .record-label-ring {
   fill: none;
-  stroke: var(--color-accent);
+  stroke: color-mix(in srgb, var(--color-bg) 55%, var(--color-accent));
   stroke-width: 0.7;
-  opacity: 0.28;
+  opacity: 0.55;
 }
 
 .record-hole {
