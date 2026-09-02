@@ -16,6 +16,7 @@ const ANIM_FALLBACK_MS = {
 const PLAY_CLASSES = ["is-idle", "is-waving", "is-glance", "is-running", "is-jumping", "is-waiting", "is-waiting-once", "is-react"];
 
 const HOVER_ACTS = ["wave", "jump", "wait", "glance", "look", "peek", "cross", "rest", "parade", "facepalm", "sleep", "explain"];
+const HOVER_ACTS_DASH = HOVER_ACTS.concat("dash");
 
 const REACT_FRAMES = {
   look: 0,
@@ -88,7 +89,7 @@ function playAct(ritual, act, done) {
     done();
   };
 
-  const afterAnimation = (name) => {
+  const afterAnimation = (name, fallbackMs) => {
     onEnd = (event) => {
       if (event.animationName && event.animationName !== name) return;
       ritual.removeEventListener("animationend", onEnd);
@@ -97,11 +98,14 @@ function playAct(ritual, act, done) {
     };
     ritual.addEventListener("animationend", onEnd);
     timers.push(
-      window.setTimeout(() => {
-        if (onEnd) ritual.removeEventListener("animationend", onEnd);
-        onEnd = null;
-        finish();
-      }, ANIM_FALLBACK_MS[name] || 3100)
+      window.setTimeout(
+        () => {
+          if (onEnd) ritual.removeEventListener("animationend", onEnd);
+          onEnd = null;
+          finish();
+        },
+        fallbackMs || ANIM_FALLBACK_MS[name] || 3100
+      )
     );
   };
 
@@ -117,6 +121,14 @@ function playAct(ritual, act, done) {
   } else if (act === "wait") {
     ritual.classList.add("is-waiting-once");
     afterAnimation("ritual-wait");
+  } else if (act === "dash") {
+    const duration = beginDash(ritual);
+    if (duration == null) {
+      finish();
+    } else {
+      ritual.classList.add("is-running");
+      afterAnimation("ritual-run-across", duration + 120);
+    }
   } else if (act === "glance") {
     ritual.classList.add("is-glance");
     timers.push(window.setTimeout(finish, HOLD_MS));
@@ -155,8 +167,8 @@ function pointerOnRitual(ritual, x, y) {
   return stack.includes(ritual);
 }
 
-function attachLiveMotion(ritual) {
-  let queue = shuffle(HOVER_ACTS);
+function attachLiveMotion(ritual, options = {}) {
+  let queue = shuffle(options.canDash ? HOVER_ACTS_DASH : HOVER_ACTS);
   let index = 0;
   let hovering = false;
   let cancelAct = null;
@@ -173,7 +185,7 @@ function attachLiveMotion(ritual) {
     const act = queue[index];
     index += 1;
     if (index >= queue.length) {
-      queue = shuffle(HOVER_ACTS);
+      queue = shuffle(options.canDash ? HOVER_ACTS_DASH : HOVER_ACTS);
       if (queue[0] === act && queue.length > 1) {
         const swapWith = 1 + Math.floor(Math.random() * (queue.length - 1));
         const swap = queue[0];
@@ -221,10 +233,12 @@ function attachLiveMotion(ritual) {
   const onLeave = () => {
     if (!hovering) return;
     hovering = false;
-    stopAct();
-    if (!ritual.classList.contains("is-running")) {
-      restPose(ritual);
+    if (ritual.classList.contains("is-running")) {
+      scheduleIdleWave();
+      return;
     }
+    stopAct();
+    restPose(ritual);
     scheduleIdleWave();
   };
 
@@ -255,6 +269,24 @@ function attachLiveMotion(ritual) {
   scheduleIdleWave();
 }
 
+function beginDash(ritual) {
+  const track = ritual.closest(".ritual-signoff");
+  if (!track) return null;
+  const box = track.getBoundingClientRect();
+  const width = ritual.offsetWidth || 48;
+  const goingRight = ritual.dataset.side !== "right";
+  const from = goingRight ? 0 : Math.max(0, box.width - width);
+  const to = goingRight ? Math.max(0, box.width - width) : 0;
+  const duration = Math.max(1100, Math.round(Math.abs(to - from) / RUN_PX_PER_MS));
+  ritual.style.setProperty("--ritual-from", `${from}px`);
+  ritual.style.setProperty("--ritual-to", `${to}px`);
+  ritual.style.setProperty("--ritual-x", `${to}px`);
+  ritual.style.setProperty("--ritual-run-ms", `${duration}ms`);
+  ritual.style.setProperty("--ritual-face", goingRight ? "-1" : "1");
+  ritual.dataset.side = goingRight ? "right" : "left";
+  return duration;
+}
+
 function quoteEndX(quote) {
   const text = quote.querySelector(".quote-text") || quote;
   const range = document.createRange();
@@ -274,6 +306,7 @@ function parkReveal(ritual, moment, quote) {
   toPx = Math.min(Math.max(0, toPx), Math.max(0, momentBox.width - ritualW));
   ritual.style.setProperty("--ritual-from", "0px");
   ritual.style.setProperty("--ritual-to", `${toPx}px`);
+  ritual.style.setProperty("--ritual-face", "-1");
   moment.style.setProperty("--ritual-from", "0px");
   moment.style.setProperty("--ritual-to", `${toPx}px`);
   return toPx;
@@ -345,7 +378,7 @@ function setupCompanion(ritual) {
   const greet = () => {
     playAct(ritual, "wave", () => {
       restPose(ritual);
-      attachLiveMotion(ritual);
+      attachLiveMotion(ritual, { canDash: true });
     });
   };
 

@@ -12,7 +12,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. Charms are a composed scatter in the left/right gutters (mixed sizes, rotated, duplicates allowed). Motifs: teapot/cup, coffee, rolling pin, bike, film reel, whittling block, theater masks, wrench/screwdriver/bolt, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. Charms are a small composed scatter in the gutters and around the socials (mixed sizes, rotated). Motifs: teapot/cup, coffee, rolling pin, bike, film reel, whittling, theater masks, hammer/screwdriver, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -93,7 +93,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 
 - Markup: one element, `role="img"`, `aria-label="Ritual, a small brass-and-walnut fox robot"`. `data-ritual` / `pose`: `reveal` (about), `companion` (inner pages), `wait` (404).
 - **reveal:** `is-running` goes left-to-right and stops just to the right of the quote (constant speed, duration follows distance), quote `quote-wake` clip, then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
-- **companion:** smaller (~3.2rem). Wave once when scrolled into view, then hover + occasional idle waves.
+- **companion:** same height as about (~4.5rem). Wave once when scrolled into view, then hover + occasional idle waves. One hover pose is a dash across the sign-off band; it keeps going after the pointer leaves and parks on the other side.
 - **wait:** waiting strip loop, same hover + idle waves.
 - Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already parked at the quote’s end.
 - Tiny JS is justified; do **not** port the Codex pet controller, drag, or look-at-cursor.
@@ -109,7 +109,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
 - Footer sits in document flow (not `fixed-bottom`) and stays `display: none` until the visitor scrolls to the bottom of the page.
-- **Charms:** composed scatter in the left/right gutters, mixed sizes, rotated. Motifs: teapot/cup, coffee mug, rolling pin, bike, film reel, whittling block, theater masks, wrench/screwdriver/bolt, vinyl discs. Vinyl fill is very light; grooves/edge/label stay darker. No whisk/trident, frying pan, drone, camera, notebook, perfume, or razor.
+- **Charms:** small composed scatter in the gutters and beside/below the socials, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, film reel, whittling, theater masks, hammer, screwdriver, vinyl discs. Vinyl fill is very light; grooves/edge/label stay darker. No whisk, nuts, wrench, frying pan, drone, camera, notebook, perfume, or razor.
 - **Steam:** optional wisps on the teapot, cup, and coffee mug. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.

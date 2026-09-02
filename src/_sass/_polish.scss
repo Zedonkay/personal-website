@@ -1250,7 +1250,7 @@ $ritual-h: 4.5rem;
 }
 
 .decor-charm {
-  opacity: 0.32;
+  opacity: 0.26;
 }
 
 .charm-svg {
@@ -1379,12 +1379,7 @@ footer.is-deferred {
   cursor: pointer;
 }
 
-.ritual--companion {
-  --ritual-h: 3.2rem;
-}
-
 .ritual--wait {
-  --ritual-h: 5.1rem;
   flex: 0 0 auto;
 }
 
@@ -1399,7 +1394,7 @@ footer.is-deferred {
 .ritual.is-running {
   background-image: var(--ritual-run);
   background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
-  transform: scaleX(-1);
+  transform: scaleX(var(--ritual-face, -1));
   animation:
     ritual-run-frames 1.05s steps(8) infinite,
     ritual-run-across var(--ritual-run-ms, 4s) linear forwards;
@@ -1449,8 +1444,18 @@ footer.is-deferred {
 }
 
 .ritual-signoff {
+  position: relative;
+  width: 100%;
+  min-height: $ritual-h;
   margin-top: 2.6rem;
   margin-bottom: 0.15rem;
+  overflow: hidden;
+}
+
+.ritual--companion {
+  position: absolute;
+  left: var(--ritual-x, 0px);
+  bottom: 0;
 }
 
 .lost-page {
