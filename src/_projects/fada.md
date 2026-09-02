@@ -8,7 +8,6 @@ category: research
 published: true
 website: https://lecar-lab.github.io/FADA-humanoid/
 pdf: https://arxiv.org/pdf/2606.28476
-note: In submission to CoRL 2026; accepted at RSS 2026 Sim2Real Workshop
 related_publications: true
 ---
 
