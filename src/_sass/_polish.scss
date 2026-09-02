@@ -2,13 +2,18 @@
  * Personal site polish
  ******************************************************************************/
 
-$font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+$font-serif: "Fraunces", Georgia, "Times New Roman", serif;
 $font-display: $font-serif;
-$font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-secondary: "Newsreader", Georgia, "Times New Roman", serif;
+$font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
 body {
   font-family: $font-serif;
   font-optical-sizing: auto;
+  font-variation-settings:
+    "WONK" 0,
+    "SOFT" 30,
+    "opsz" 18;
   font-feature-settings:
     "kern",
     "liga",
@@ -45,6 +50,10 @@ h6,
 .profile + article > .clearfix h2,
 .profile + article > .clearfix h3 {
   font-family: $font-display;
+  font-variation-settings:
+    "WONK" 1,
+    "SOFT" 40,
+    "opsz" 72;
   letter-spacing: -0.02em;
   font-weight: 600;
 }
@@ -57,7 +66,8 @@ h6,
 .projects .periodical,
 .projects .links a.btn,
 .navbar .nav-link {
-  font-family: $font-mono;
+  font-family: $font-secondary;
+  font-variation-settings: "opsz" 18;
 }
 
 .publications .abbr abbr,
@@ -84,6 +94,13 @@ h6,
 .navbar .nav-link {
   font-size: 0.85rem !important;
   letter-spacing: 0.02em;
+  font-variation-settings: "opsz" 17;
+}
+
+code,
+pre,
+pre code {
+  font-family: $font-mono;
 }
 
 body.fixed-top-nav {
