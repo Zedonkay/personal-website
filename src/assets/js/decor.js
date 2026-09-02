@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function bootDecor() {
   const layer = document.getElementById("decor-layer");
   if (!layer) return;
   const pack = () => place(layer);
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(pack, 180);
   });
-});
+}
 
 const ASPECT = {
   teapot: 120 / 82,
@@ -317,4 +317,10 @@ function place(layer) {
   shareByArea([found.rightUpper, found.rightLower], CHARMS_RIGHT).forEach((bag) => {
     placeCharms(layer, bag.region, bag.charms, placed, blocked);
   });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootDecor);
+} else {
+  bootDecor();
 }

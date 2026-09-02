@@ -182,23 +182,30 @@ body.fixed-top-nav {
   position: relative;
 
   .post-header {
-    margin-bottom: 1.15rem;
-  }
-
-  .post-header .desc {
-    margin: 0.4rem 0 0;
-    color: var(--global-text-color);
-    font-size: clamp(1.02rem, 1.2vw, 1.18rem);
-    line-height: 1.35;
-    font-style: italic;
-    font-variation-settings:
-      "WONK" 1,
-      "SOFT" 40,
-      "opsz" 28;
+    margin-bottom: 1.55rem;
   }
 
   .post article p {
     margin-bottom: 0.95rem;
+  }
+
+  .clearfix > .about-lead {
+    margin: 0.35rem 0 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--global-divider-color);
+    border-bottom: 1px solid var(--global-divider-color);
+    color: var(--global-title-color);
+    font-style: italic;
+    font-variation-settings:
+      "WONK" 1,
+      "SOFT" 36,
+      "opsz" 22;
+  }
+
+  @media (min-width: 576px) {
+    .clearfix > .about-lead {
+      margin-right: calc(30% + 1rem);
+    }
   }
 
   .social {
@@ -242,6 +249,11 @@ body.fixed-top-nav {
 
     .post article p {
       margin-bottom: 0.72rem;
+    }
+
+    .clearfix > .about-lead {
+      margin: 0.2rem calc(30% + 1rem) 0.75rem 0;
+      padding: 0.4rem 0;
     }
 
     .identity-moment {
@@ -1420,12 +1432,12 @@ footer.is-deferred {
 
 .ritual {
   --ritual-h: #{$ritual-h};
-  --ritual-w: calc(var(--ritual-h) * 192 / 208);
-  width: var(--ritual-w);
   height: var(--ritual-h);
+  aspect-ratio: 192 / 208;
+  width: auto;
   background-image: var(--ritual-sheet);
   background-repeat: no-repeat;
-  background-size: calc(var(--ritual-w) * 6) calc(var(--ritual-h) * 3);
+  background-size: 600% 300%;
   background-position: 0 0;
   filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
 }
@@ -1472,7 +1484,7 @@ footer.is-deferred {
 
 .ritual.is-running {
   background-image: var(--ritual-run);
-  background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
+  background-size: 800% 100%;
   transform: scaleX(var(--ritual-face, -1));
   animation:
     ritual-run-frames 1.05s steps(8) infinite,
@@ -1481,19 +1493,19 @@ footer.is-deferred {
 
 .ritual.is-waiting {
   background-image: var(--ritual-wait);
-  background-size: calc(var(--ritual-w) * 6) var(--ritual-h);
+  background-size: 600% 100%;
   animation: ritual-wait 2.8s steps(6) infinite;
 }
 
 .ritual.is-waiting-once {
   background-image: var(--ritual-wait);
-  background-size: calc(var(--ritual-w) * 6) var(--ritual-h);
+  background-size: 600% 100%;
   animation: ritual-wait 2.8s steps(6);
 }
 
 .ritual.is-jumping {
   background-image: var(--ritual-jump);
-  background-size: calc(var(--ritual-w) * 5) var(--ritual-h);
+  background-size: 500% 100%;
   animation: ritual-jump 1.4s steps(5);
 }
 
@@ -1504,16 +1516,15 @@ footer.is-deferred {
 }
 
 .ritual.is-react {
-  --ritual-frame: 0;
   background-image: var(--ritual-react);
-  background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
-  background-position: calc(var(--ritual-w) * -1 * var(--ritual-frame)) 0;
+  background-size: 800% 100%;
+  background-position: var(--ritual-react-pos, 0 0);
 }
 
 .ritual.is-glance {
   background-image: var(--ritual-sheet);
-  background-size: calc(var(--ritual-w) * 6) calc(var(--ritual-h) * 3);
-  background-position: 0 calc(var(--ritual-h) * -2);
+  background-size: 600% 300%;
+  background-position: 0 -200%;
 }
 
 .ritual.is-still {
@@ -1554,17 +1565,17 @@ footer.is-deferred {
   }
 
   to {
-    background-position: calc(var(--ritual-w) * -6) 0;
+    background-position: -600% 0;
   }
 }
 
 @keyframes ritual-wave {
   from {
-    background-position: 0 calc(var(--ritual-h) * -1);
+    background-position: 0 -100%;
   }
 
   to {
-    background-position: calc(var(--ritual-w) * -4) calc(var(--ritual-h) * -1);
+    background-position: -400% -100%;
   }
 }
 
@@ -1574,7 +1585,7 @@ footer.is-deferred {
   }
 
   to {
-    background-position: calc(var(--ritual-w) * -8) 0;
+    background-position: -800% 0;
   }
 }
 
@@ -1594,7 +1605,7 @@ footer.is-deferred {
   }
 
   to {
-    background-position: calc(var(--ritual-w) * -5) 0;
+    background-position: -500% 0;
   }
 }
 
@@ -1604,7 +1615,7 @@ footer.is-deferred {
   }
 
   to {
-    background-position: calc(var(--ritual-w) * -6) 0;
+    background-position: -600% 0;
   }
 }
 

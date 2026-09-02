@@ -93,6 +93,12 @@ jobs:
         run: |
           npm install -g purgecss
           purgecss -c config/purgecss.config.js
+      - name: Guard purged CSS variables 🛡️
+        run: |
+          if grep -F 'var( -' _site/assets/css/*.css; then
+            echo "PurgeCSS rewrote calc(var(--token)) into invalid CSS."
+            exit 1
+          fi
       - name: Add .nojekyll file 📄
         run: |
           touch _site/.nojekyll

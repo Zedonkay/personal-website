@@ -1,10 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
+function bootRitual() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-
   document.querySelectorAll(".ritual").forEach((ritual) => {
     setupRitual(ritual, reduce.matches);
   });
-});
+}
 
 const RUN_PX_PER_MS = 0.34;
 const PARK_GAP = 8;
@@ -59,7 +58,7 @@ function setupRitual(ritual, reduceMotion) {
 
 function clearPlay(ritual) {
   ritual.classList.remove(...PLAY_CLASSES);
-  ritual.style.removeProperty("--ritual-frame");
+  ritual.style.removeProperty("--ritual-react-pos");
 }
 
 function restartIdle(ritual) {
@@ -138,7 +137,7 @@ function playAct(ritual, act, done) {
     if (frame == null) {
       finish();
     } else {
-      ritual.style.setProperty("--ritual-frame", String(frame));
+      ritual.style.setProperty("--ritual-react-pos", `${-frame * 100}% 0`);
       ritual.classList.add("is-react");
       timers.push(window.setTimeout(finish, HOLD_MS));
     }
@@ -519,16 +518,7 @@ function setupReveal(ritual) {
   };
 
   const startRun = () => {
-    const go = () => window.requestAnimationFrame(() => window.requestAnimationFrame(run));
-    if (document.fonts && document.fonts.status !== "loaded") {
-      const fallback = window.setTimeout(go, 700);
-      document.fonts.ready.then(() => {
-        window.clearTimeout(fallback);
-        go();
-      });
-      return;
-    }
-    go();
+    window.requestAnimationFrame(() => window.requestAnimationFrame(run));
   };
 
   if (!quote) {
@@ -573,4 +563,10 @@ function setupCompanion(ritual) {
   } else {
     greet();
   }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootRitual);
+} else {
+  bootRitual();
 }

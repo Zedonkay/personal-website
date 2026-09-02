@@ -13,7 +13,7 @@
   crossorigin="anonymous"
 ></script>
 
-{% if site.enable_masonry %}
+{% if site.enable_masonry and page.permalink != '/' %}
   <!-- Masonry & imagesLoaded -->
   <script
     defer
@@ -199,17 +199,17 @@
 <script defer src="{{ '/assets/js/jupyter_new_tab.js' | relative_url | bust_file_cache }}"></script>
 
 <!-- Badges -->
-{% if site.enable_publication_badges.altmetric %}
+{% if page.permalink != '/' and site.enable_publication_badges.altmetric %}
   <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
 {% endif %}
-{% if site.enable_publication_badges.dimensions %}
+{% if page.permalink != '/' and site.enable_publication_badges.dimensions %}
   <script async src="https://badge.dimensions.ai/badge.js"></script>
 {% endif %}
 
-{% if site.enable_math %}
+{% if site.enable_math and page.permalink != '/' %}
   <!-- MathJax -->
   <script
-    defer
+    async
     type="text/javascript"
     id="MathJax-script"
     src="{{ site.third_party_libraries.mathjax.url.js }}"
@@ -219,7 +219,7 @@
   {% unless page.pseudocode %}
     <script src="{{ '/assets/js/mathjax-setup.js' | relative_url | bust_file_cache }}"></script>
     <script
-      defer
+      async
       src="{{ site.third_party_libraries.polyfill.url.js }}"
       crossorigin="anonymous"
     ></script>

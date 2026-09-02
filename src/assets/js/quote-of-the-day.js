@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function revealQuote() {
   const root = document.querySelector(".quote-of-the-day");
   const bankEl = document.getElementById("quote-bank");
   if (!root || !bankEl) return;
@@ -68,4 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   root.classList.add("is-ready");
   root.dispatchEvent(new CustomEvent("quote:ready", { bubbles: true }));
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", revealQuote);
+} else {
+  revealQuote();
+}
