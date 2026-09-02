@@ -1282,6 +1282,11 @@ $ritual-h: 4.5rem;
   stroke-width: 0.85;
 }
 
+.charm-clipart .charm-fill,
+.charm-clipart .charm-line {
+  vector-effect: non-scaling-stroke;
+}
+
 .charm-steam {
   position: absolute;
   width: 1.2rem;
@@ -1307,8 +1312,8 @@ $ritual-h: 4.5rem;
 }
 
 .decor-charm-teapot .charm-steam {
-  left: 0.45rem;
-  bottom: 2.45rem;
+  left: 1.05rem;
+  bottom: 2.85rem;
 }
 
 .decor-charm-cup .charm-steam {

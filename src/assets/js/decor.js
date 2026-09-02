@@ -13,65 +13,50 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const ASPECT = {
-  teapot: 110 / 76,
+  teapot: 120 / 82,
   cup: 70 / 56,
   coffee: 70 / 52,
-  bike: 96 / 58,
+  bike: 653 / 379,
   pin: 120 / 28,
-  clapper: 80 / 72,
-  whittle: 90 / 44,
+  clapper: 24 / 24,
   masks: 88 / 52,
-  hammer: 92 / 40,
-  driver: 24 / 96,
+  hammer: 156 / 166,
   record: 1,
 };
 
 const CHARMS_LEFT = [
-  { kind: "teapot", size: 54 },
-  { kind: "cup", size: 32 },
-  { kind: "bike", size: 58 },
-  { kind: "clapper", size: 36 },
-  { kind: "coffee", size: 34 },
-  { kind: "pin", size: 48 },
-  { kind: "whittle", size: 42 },
-  { kind: "hammer", size: 46 },
-  { kind: "masks", size: 38 },
-  { kind: "cup", size: 30 },
-  { kind: "driver", size: 16 },
-  { kind: "pin", size: 40 },
-  { kind: "coffee", size: 38 },
-  { kind: "bike", size: 50 },
-  { kind: "clapper", size: 34 },
-  { kind: "whittle", size: 36 },
-  { kind: "hammer", size: 40 },
-  { kind: "masks", size: 34 },
-  { kind: "teapot", size: 42 },
-  { kind: "cup", size: 28 },
+  { kind: "teapot", size: 62 },
+  { kind: "cup", size: 37 },
+  { kind: "bike", size: 67 },
+  { kind: "clapper", size: 41 },
+  { kind: "coffee", size: 39 },
+  { kind: "pin", size: 55 },
+  { kind: "hammer", size: 53 },
+  { kind: "masks", size: 44 },
+  { kind: "cup", size: 35 },
+  { kind: "coffee", size: 44 },
+  { kind: "pin", size: 46 },
+  { kind: "masks", size: 39 },
+  { kind: "teapot", size: 48 },
 ];
 
 const CHARMS_RIGHT = [
-  { kind: "bike", size: 56 },
-  { kind: "coffee", size: 36 },
-  { kind: "masks", size: 44 },
-  { kind: "pin", size: 52 },
-  { kind: "teapot", size: 46 },
-  { kind: "hammer", size: 40 },
-  { kind: "cup", size: 34 },
-  { kind: "clapper", size: 40 },
-  { kind: "driver", size: 18 },
-  { kind: "whittle", size: 40 },
-  { kind: "cup", size: 30 },
-  { kind: "pin", size: 38 },
-  { kind: "coffee", size: 32 },
-  { kind: "clapper", size: 32 },
-  { kind: "teapot", size: 40 },
-  { kind: "masks", size: 36 },
-  { kind: "hammer", size: 50 },
-  { kind: "whittle", size: 34 },
-  { kind: "bike", size: 48 },
+  { kind: "bike", size: 64 },
+  { kind: "coffee", size: 41 },
+  { kind: "masks", size: 51 },
+  { kind: "pin", size: 60 },
+  { kind: "teapot", size: 53 },
+  { kind: "hammer", size: 46 },
+  { kind: "cup", size: 39 },
+  { kind: "clapper", size: 46 },
+  { kind: "coffee", size: 37 },
+  { kind: "pin", size: 44 },
+  { kind: "clapper", size: 37 },
+  { kind: "hammer", size: 58 },
+  { kind: "bike", size: 55 },
 ];
 
-const GAP = 14;
+const GAP = 22;
 const TOP = 72;
 
 function rotBox(cx, cy, w, h, deg) {
@@ -198,8 +183,8 @@ function placeVinyls(layer, placed, found, floorY) {
   if (left) {
     const w = Math.min(260, Math.max(170, Math.min(left.w, 220) * 1.15));
     const hide = 0.64;
-    const cx = w * (0.5 - hide);
-    const cy = sitAbove(cx, w, -18, floorY, floorY - 6 - w / 2);
+    const cx = w * (0.5 - hide) + 15;
+    const cy = sitAbove(cx, w, -18, floorY, floorY - 6 - w / 2) + 120;
     tryStamp(layer, placed, [], "record", cx, cy, w, w, -18, true);
   }
 
@@ -214,16 +199,33 @@ function placeVinyls(layer, placed, found, floorY) {
   }
 }
 
+function shareByArea(regions, charms) {
+  const live = regions.filter(Boolean);
+  if (!live.length) return [];
+  const areas = live.map((region) => Math.max(1, region.w * region.h));
+  const total = areas.reduce((sum, area) => sum + area, 0);
+  const bags = [];
+  let used = 0;
+  live.forEach((region, i) => {
+    const n = i === live.length - 1 ? charms.length - used : Math.round((areas[i] / total) * charms.length);
+    bags.push({ region, charms: charms.slice(used, used + n) });
+    used += n;
+  });
+  return bags;
+}
+
 function placeCharms(layer, region, charms, placed, blocked) {
-  const cols = Math.max(2, Math.round(region.w / 54));
-  const rows = Math.max(2, Math.round(region.h / 52));
+  if (!charms.length) return;
+  const aspect = region.w / Math.max(24, region.h);
+  const cols = Math.max(1, Math.round(Math.sqrt(charms.length * aspect * 1.2)));
+  const rows = Math.max(1, Math.ceil(charms.length / cols));
   const cells = [];
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
-      const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * 0.55;
-      const jitterY = (unit(row * 9 + col + 4 + region.x) - 0.5) * 0.45;
-      const u = Math.min(0.96, Math.max(0.04, (col + 0.5 + jitterX) / cols));
-      const v = Math.min(0.97, Math.max(0.03, (row + 0.5 + jitterY) / rows));
+      const jitterX = (unit(row * 13 + col + (region.side === "left" ? 1 : 8) + region.y) - 0.5) * 0.4;
+      const jitterY = (unit(row * 9 + col + 4 + region.x) - 0.5) * 0.36;
+      const u = Math.min(0.92, Math.max(0.08, (col + 0.5 + jitterX) / cols));
+      const v = Math.min(0.92, Math.max(0.08, (row + 0.5 + jitterY) / rows));
       cells.push({
         cx: region.x + 8 + u * Math.max(12, region.w - 16),
         cy: region.y + 10 + v * Math.max(24, region.h - 20),
@@ -232,16 +234,24 @@ function placeCharms(layer, region, charms, placed, blocked) {
   }
 
   const bag = shuffle(charms, region.side === "left" ? 2 + region.y : 19 + region.y);
-  const slots = shuffle(cells, region.side === "left" ? 5 + region.x : 23 + region.x);
-  let slot = 0;
-  bag.forEach((charm) => {
+  const slots = cells.slice(0, bag.length);
+  const nudges = [
+    [0, 0],
+    [12, -8],
+    [-14, 10],
+    [8, 16],
+    [-16, -6],
+    [0, -18],
+    [18, 4],
+  ];
+  bag.forEach((charm, idx) => {
     const w = charm.size;
     const h = w / (ASPECT[charm.kind] || 1);
-    const rot = Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + slot) - 0.5) * 42);
-    while (slot < slots.length) {
-      const cell = slots[slot];
-      slot += 1;
-      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx, cell.cy, w, h, rot, false)) return;
+    const rot = Math.round((unit(charm.size + (region.side === "left" ? 3 : 11) + idx) - 0.5) * 46);
+    const cell = slots[idx] || cells[idx % cells.length];
+    for (let n = 0; n < nudges.length; n += 1) {
+      const [dx, dy] = nudges[n];
+      if (tryStamp(layer, placed, blocked, charm.kind, cell.cx + dx, cell.cy + dy, w, h, rot, false)) return;
     }
   });
 }
@@ -253,8 +263,10 @@ function place(layer) {
   const blocked = avoidRects(floorY);
   const placed = [];
   placeVinyls(layer, placed, found, floorY);
-  if (found.leftUpper) placeCharms(layer, found.leftUpper, CHARMS_LEFT.slice(0, 11), placed, blocked);
-  if (found.leftLower) placeCharms(layer, found.leftLower, CHARMS_LEFT.slice(11), placed, blocked);
-  if (found.rightUpper) placeCharms(layer, found.rightUpper, CHARMS_RIGHT.slice(0, 10), placed, blocked);
-  if (found.rightLower) placeCharms(layer, found.rightLower, CHARMS_RIGHT.slice(10), placed, blocked);
+  shareByArea([found.leftUpper, found.leftLower], CHARMS_LEFT).forEach((bag) => {
+    placeCharms(layer, bag.region, bag.charms, placed, blocked);
+  });
+  shareByArea([found.rightUpper, found.rightLower], CHARMS_RIGHT).forEach((bag) => {
+    placeCharms(layer, bag.region, bag.charms, placed, blocked);
+  });
 }
