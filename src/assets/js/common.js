@@ -81,8 +81,15 @@ $(document).ready(function () {
     }
   };
 
+  const fits = () => document.documentElement.scrollHeight <= window.innerHeight + 4;
+
   const maybeReveal = () => {
-    if (document.documentElement.scrollHeight <= window.innerHeight + 4) {
+    if (footer.classList.contains("is-deferred") && fits()) {
+      footer.classList.remove("is-deferred");
+      if (!fits()) {
+        footer.classList.add("is-deferred");
+        return;
+      }
       reveal();
       return;
     }
@@ -90,5 +97,9 @@ $(document).ready(function () {
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("load", maybeReveal);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(maybeReveal);
+  }
   maybeReveal();
 })();
