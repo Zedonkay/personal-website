@@ -1,3 +1,25 @@
+function quoteLines(text) {
+  return String(text)
+    .split(/\s+\/\s+|\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
+function renderQuoteText(el, text) {
+  const lines = quoteLines(text);
+  el.dataset.quoteOriginal = lines.join("\n");
+  if (lines.length <= 1) {
+    el.textContent = lines[0] || "";
+    return;
+  }
+  const nodes = [];
+  lines.forEach((line, i) => {
+    if (i > 0) nodes.push(document.createElement("br"));
+    nodes.push(document.createTextNode(line));
+  });
+  el.replaceChildren(...nodes);
+}
+
 function revealQuote() {
   const root = document.querySelector(".quote-of-the-day");
   const bankEl = document.getElementById("quote-bank");
@@ -43,7 +65,7 @@ function revealQuote() {
   const cite = root.querySelector(".quote-cite");
   if (!textEl) return;
 
-  textEl.textContent = quote.text;
+  renderQuoteText(textEl, quote.text);
 
   const attribution = quote.attribution || "";
   const source = quote.source || "";

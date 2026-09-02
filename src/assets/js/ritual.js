@@ -342,15 +342,21 @@ function quoteLineBoxes(el) {
 }
 
 function setQuoteText(textEl, original, breakAt) {
-  if (breakAt == null || breakAt <= 0 || breakAt >= original.length) {
-    textEl.replaceChildren(document.createTextNode(original));
+  let text = original;
+  if (breakAt != null && breakAt > 0 && breakAt < original.length) {
+    text = original.slice(0, breakAt).replace(/\s+$/, "") + "\n" + original.slice(breakAt).replace(/^\s+/, "");
+  }
+  const lines = text.split("\n");
+  if (lines.length === 1) {
+    textEl.replaceChildren(document.createTextNode(lines[0]));
     return;
   }
-  textEl.replaceChildren(
-    document.createTextNode(original.slice(0, breakAt).replace(/\s+$/, "")),
-    document.createElement("br"),
-    document.createTextNode(original.slice(breakAt).replace(/^\s+/, ""))
-  );
+  const nodes = [];
+  lines.forEach((line, i) => {
+    if (i > 0) nodes.push(document.createElement("br"));
+    if (line) nodes.push(document.createTextNode(line));
+  });
+  textEl.replaceChildren(...nodes);
 }
 
 function wordBreaks(text) {

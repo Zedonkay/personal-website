@@ -1,5 +1,6 @@
 # Local quote bank. Client-side pick on the about page.
 # text is required; attribution, source, url are optional.
+# Join dialogue turns with " / " to show each speaker on its own line.
 #
 # items:
 #   - text: "..."
