@@ -35,7 +35,7 @@ const CHARMS_LEFT = [
   { kind: "bike", size: 67 },
   { kind: "watch", size: 58 },
   { kind: "clapper", size: 41 },
-  { kind: "bike", size: 50 },
+  { kind: "masks", size: 50 },
   { kind: "coffee", size: 39 },
   { kind: "pin", size: 55 },
   { kind: "razor", size: 40 },
