@@ -1,0 +1,9 @@
+# Local quote bank. Client-side pick on the about page.
+# text is required; attribution, source, url are optional.
+#
+# items:
+#   - text: "..."
+#     attribution: "Name"
+#     source: "Work"
+#     url: https://example.com
+items: []

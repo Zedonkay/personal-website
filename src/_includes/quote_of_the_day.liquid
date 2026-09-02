@@ -1,0 +1,9 @@
+{% if site.quotes.enabled and site.data.quotes.items and site.data.quotes.items.size > 0 %}
+  <blockquote class="quote-of-the-day" data-selection="{{ site.quotes.selection | default: 'daily' }}">
+    <p class="quote-text"></p>
+    <footer class="quote-footer" hidden>
+      <cite class="quote-cite"></cite>
+    </footer>
+  </blockquote>
+  <script type="application/json" id="quote-bank">{{ site.data.quotes.items | jsonify }}</script>
+{% endif %}
