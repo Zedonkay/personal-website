@@ -1,0 +1,17 @@
+---
+description: Run Prettier before every git push
+alwaysApply: true
+---
+
+# Prettier before push
+
+Before any `git push`, run `npx prettier . --check` (or `npm run format:check`).
+
+If it fails:
+
+1. Run `npx prettier . --write`
+2. Commit the formatting changes
+3. Re-run `npx prettier . --check`
+4. Only then push
+
+Do not skip this for "push everything" or similar. The GitHub `prettier.yml` workflow runs the same check on `main`.
