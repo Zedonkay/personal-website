@@ -186,6 +186,10 @@
 {% if page.permalink == '/library/' %}
   <script defer src="{{ '/assets/js/library.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
+{% if page.permalink == '/' %}
+  <script defer src="{{ '/assets/js/ritual.js' | relative_url | bust_file_cache }}"></script>
+  <script defer src="{{ '/assets/js/quote-of-the-day.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}
 {% if page.permalink == '/blog/' %}
   <script defer src="{{ '/assets/js/blog.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}

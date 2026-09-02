@@ -1099,3 +1099,294 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
     padding-right: 15px;
   }
 }
+
+/*******************************************************************************
+ * Ritual identity — companion, quote, lamp, rings
+ ******************************************************************************/
+
+$ritual-h: 4.5rem;
+$ritual-w: 4.1538rem; // 4.5rem * 192 / 208
+
+.decor-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.decor-field + .post {
+  position: relative;
+  z-index: 1;
+}
+
+.decor-lamp {
+  position: absolute;
+  top: -8vh;
+  left: 8%;
+  width: min(46rem, 72vw);
+  height: 42vh;
+  background: radial-gradient(
+    ellipse at 38% 38%,
+    color-mix(in srgb, var(--color-accent) 24%, var(--color-bg)) 0%,
+    color-mix(in srgb, var(--color-bg) 55%, transparent) 46%,
+    transparent 74%
+  );
+  opacity: 0.72;
+}
+
+html[data-theme="dark"] .decor-lamp {
+  background: radial-gradient(ellipse at 38% 38%, color-mix(in srgb, var(--color-accent) 30%, transparent) 0%, transparent 72%);
+  opacity: 0.34;
+}
+
+.decor-rings {
+  position: absolute;
+  inset: 0;
+}
+
+.decor-ring {
+  position: absolute;
+  overflow: visible;
+  animation: ring-spin 48s linear infinite;
+
+  circle {
+    fill: none;
+    stroke: var(--color-secondary);
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    stroke-dasharray: 210 430;
+    opacity: 0.12;
+  }
+}
+
+.decor-ring-2 circle,
+.decor-ring-4 circle {
+  stroke: var(--color-accent);
+  opacity: 0.11;
+}
+
+.decor-ring-1 {
+  width: 26rem;
+  height: 26rem;
+  top: -7rem;
+  left: -11rem;
+}
+
+.decor-ring-2 {
+  width: 20rem;
+  height: 20rem;
+  top: 4rem;
+  right: -8rem;
+  animation-duration: 56s;
+  animation-direction: reverse;
+}
+
+.decor-ring-3 {
+  width: 30rem;
+  height: 30rem;
+  bottom: -12rem;
+  left: -14rem;
+  animation-duration: 64s;
+}
+
+.decor-ring-4 {
+  width: 22rem;
+  height: 22rem;
+  bottom: -6rem;
+  right: -9rem;
+  animation-duration: 52s;
+  animation-direction: reverse;
+}
+
+.decor-ring-5 {
+  width: 16rem;
+  height: 16rem;
+  top: 42%;
+  right: -7rem;
+  animation-duration: 48s;
+}
+
+@keyframes ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.identity-moment {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.35rem;
+  margin: 2rem 0 2.4rem;
+}
+
+.ritual-stage {
+  position: relative;
+  flex: 0 0 $ritual-w;
+  width: $ritual-w;
+  height: $ritual-h;
+}
+
+.ritual {
+  width: $ritual-w;
+  height: $ritual-h;
+  background-image: var(--ritual-sheet);
+  background-repeat: no-repeat;
+  background-size: $ritual-w * 6 $ritual-h * 3;
+  background-position: 0 0;
+  filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
+}
+
+.ritual.is-waving {
+  animation: ritual-wave 0.52s steps(4) forwards;
+}
+
+.ritual.is-idle {
+  animation: ritual-idle 1.4s steps(6) infinite;
+}
+
+.ritual.is-glance,
+.ritual.is-still {
+  animation: none;
+}
+
+.ritual.is-glance {
+  background-position: 0 $ritual-h * -2;
+}
+
+.ritual.is-still {
+  background-image: var(--ritual-still);
+  background-size: 100% 100%;
+  background-position: 0 0;
+}
+
+@keyframes ritual-idle {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: $ritual-w * -6 0;
+  }
+}
+
+@keyframes ritual-wave {
+  from {
+    background-position: 0 $ritual-h * -1;
+  }
+
+  to {
+    background-position: $ritual-w * -4 $ritual-h * -1;
+  }
+}
+
+.ritual-steam {
+  position: absolute;
+  top: -0.55rem;
+  left: 62%;
+  width: 2.15rem;
+  height: 3.1rem;
+  overflow: visible;
+  pointer-events: none;
+
+  path {
+    fill: none;
+    stroke: var(--color-secondary);
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    opacity: 0.45;
+  }
+
+  .steam-a {
+    animation: steam-drift 4.6s ease-in-out infinite;
+  }
+
+  .steam-b {
+    animation: steam-drift 5.4s ease-in-out infinite 0.7s;
+  }
+}
+
+@keyframes steam-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translate(0.12rem, -0.4rem);
+    opacity: 0.55;
+  }
+}
+
+.quote-of-the-day {
+  margin: 0;
+  max-width: 34rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+
+  &:not(.is-ready) {
+    display: none;
+  }
+
+  .quote-text {
+    margin: 0;
+    color: var(--color-text);
+    font-family: $font-serif;
+    font-style: italic;
+    font-variation-settings:
+      "WONK" 1,
+      "SOFT" 50,
+      "opsz" 36;
+    font-size: 1.12rem;
+    line-height: 1.45;
+  }
+
+  .quote-footer {
+    margin-top: 0.4rem;
+    color: var(--color-secondary);
+    font-family: $font-secondary;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-variation-settings: "opsz" 14;
+  }
+
+  .quote-cite {
+    font-style: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .decor-rings {
+    display: none;
+  }
+
+  .decor-lamp {
+    left: 0;
+    width: 100%;
+    height: 28vh;
+    opacity: 0.45;
+  }
+
+  .identity-moment {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decor-ring,
+  .ritual-steam path,
+  .ritual {
+    animation: none !important;
+  }
+
+  .ritual {
+    background-image: var(--ritual-still);
+    background-size: 100% 100%;
+    background-position: 0 0;
+  }
+}
