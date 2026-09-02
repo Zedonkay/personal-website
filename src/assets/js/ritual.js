@@ -287,10 +287,24 @@ function beginDash(ritual) {
   return duration;
 }
 
+function glyphRects(el) {
+  const rects = [];
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (!/\S/.test(node.nodeValue || "")) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    for (const rect of range.getClientRects()) {
+      if (rect.width > 1 && rect.height > 1) rects.push(rect);
+    }
+  }
+  return rects;
+}
+
 function quoteEndX(quote) {
-  const range = document.createRange();
-  range.selectNodeContents(quote);
-  const rects = [...range.getClientRects()].filter((rect) => rect.width > 1 && rect.height > 1);
+  const text = quote.querySelector(".quote-text") || quote;
+  const rects = glyphRects(text);
   if (!rects.length) return quote.getBoundingClientRect().right;
   return Math.max(...rects.map((rect) => rect.right));
 }
@@ -380,6 +394,19 @@ function setupReveal(ritual) {
     }, duration + 80);
   };
 
+  const startRun = () => {
+    const go = () => window.requestAnimationFrame(() => window.requestAnimationFrame(run));
+    if (document.fonts && document.fonts.status !== "loaded") {
+      const fallback = window.setTimeout(go, 700);
+      document.fonts.ready.then(() => {
+        window.clearTimeout(fallback);
+        go();
+      });
+      return;
+    }
+    go();
+  };
+
   if (!quote) {
     parkReveal(ritual, moment, null);
     settle();
@@ -387,17 +414,17 @@ function setupReveal(ritual) {
   }
 
   if (quote.classList.contains("is-ready")) {
-    run();
+    startRun();
     return;
   }
 
-  quote.addEventListener("quote:ready", run, { once: true });
+  quote.addEventListener("quote:ready", startRun, { once: true });
   window.setTimeout(() => {
     if (!ritual.classList.contains("is-running") && !moment.classList.contains("is-settled")) {
       parkReveal(ritual, moment, quote);
       settle();
     }
-  }, 450);
+  }, 2000);
 }
 
 function setupCompanion(ritual) {
