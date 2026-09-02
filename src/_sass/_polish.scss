@@ -185,6 +185,10 @@ body.fixed-top-nav {
     margin-bottom: 1.55rem;
   }
 
+  .post-header .post-title {
+    font-size: clamp(2.15rem, 5.4vw, 3.7rem);
+  }
+
   .post article p {
     margin-bottom: 0.95rem;
   }
@@ -211,7 +215,7 @@ body.fixed-top-nav {
   }
 
   .identity-moment {
-    margin-bottom: 0.85rem;
+    margin: 1.2rem 0 0.85rem;
   }
 
   .social {
@@ -254,7 +258,7 @@ body.fixed-top-nav {
     }
 
     .post-header .post-title {
-      font-size: clamp(2.05rem, 4.6vw, 3.45rem);
+      font-size: clamp(1.95rem, 4.3vw, 3.2rem);
     }
 
     .post article p {
@@ -268,7 +272,7 @@ body.fixed-top-nav {
     }
 
     .identity-moment {
-      margin: 1.05rem 0 0.7rem;
+      margin: 0.75rem 0 0.7rem;
     }
 
     .social {
@@ -1210,6 +1214,10 @@ html[data-theme="dark"] .social .contact-icons a:hover i::before {
 
   .post-header .post-title {
     font-size: 2.45rem;
+  }
+
+  .page-about .post-header .post-title {
+    font-size: 2.25rem;
   }
 
   .food-gallery {
