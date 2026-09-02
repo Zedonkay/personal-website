@@ -2,7 +2,7 @@
  * Personal site polish
  ******************************************************************************/
 
-$font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
 $font-display: $font-serif;
 $font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -45,8 +45,7 @@ h6,
 .profile + article > .clearfix h2,
 .profile + article > .clearfix h3 {
   font-family: $font-display;
-  font-optical-sizing: auto;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.02em;
   font-weight: 600;
 }
 
