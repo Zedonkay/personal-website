@@ -1280,7 +1280,7 @@ $ritual-h: 4.5rem;
 
 .decor-record-wrap {
   overflow: visible;
-  opacity: 0.18;
+  opacity: 0.144;
 }
 
 .decor-record {
@@ -1301,7 +1301,7 @@ $ritual-h: 4.5rem;
   fill: none;
   stroke: var(--color-text);
   stroke-width: 1.6;
-  opacity: 0.42;
+  opacity: 0.336;
 }
 
 .record-groove {
@@ -1310,20 +1310,20 @@ $ritual-h: 4.5rem;
   stroke-width: 0.9;
   stroke-linejoin: round;
   stroke-linecap: round;
-  opacity: 0.34;
+  opacity: 0.272;
 }
 
 .record-label {
   fill: var(--color-accent);
   stroke: color-mix(in srgb, var(--color-accent) 55%, var(--color-text));
   stroke-width: 1;
-  opacity: 0.92;
+  opacity: 0.736;
 }
 
 .record-label-mark {
   fill: color-mix(in srgb, var(--color-bg) 28%, var(--color-accent));
   stroke: none;
-  opacity: 0.7;
+  opacity: 0.56;
 }
 
 html[data-theme="dark"] .record-label {
@@ -1334,14 +1334,14 @@ html[data-theme="dark"] .record-label {
   fill: none;
   stroke: color-mix(in srgb, var(--color-bg) 55%, var(--color-accent));
   stroke-width: 0.7;
-  opacity: 0.55;
+  opacity: 0.44;
 }
 
 .record-hole {
   fill: var(--color-bg);
   stroke: var(--color-secondary);
   stroke-width: 0.8;
-  opacity: 0.7;
+  opacity: 0.56;
 }
 
 @keyframes record-spin {
@@ -1355,11 +1355,11 @@ html[data-theme="dark"] .record-label {
 }
 
 .decor-charm .charm-svg {
-  opacity: 0.13;
+  opacity: 0.104;
 }
 
 .decor-charm-watch .charm-svg {
-  opacity: 0.13;
+  opacity: 0.104;
 }
 
 .watch-gear,
@@ -1472,7 +1472,7 @@ html[data-theme="dark"] .record-label {
     stroke: var(--color-secondary);
     stroke-width: 1.15;
     stroke-linecap: round;
-    opacity: 0.12;
+    opacity: 0.096;
   }
 
   .steam-a {
@@ -1730,12 +1730,12 @@ footer.is-deferred {
   0%,
   100% {
     transform: translate(0, 0);
-    opacity: 0.12;
+    opacity: 0.096;
   }
 
   50% {
     transform: translate(0.12rem, -0.4rem);
-    opacity: 0.22;
+    opacity: 0.176;
   }
 }
 
