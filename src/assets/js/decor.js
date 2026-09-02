@@ -310,10 +310,7 @@ function cornerCells(region) {
   const padX = 34;
   const padY = 42;
   const outerX = region.side === "left" ? region.x + padX : region.x + region.w - padX;
-  const innerX =
-    region.side === "left"
-      ? region.x + Math.min(region.w * 0.45, 108)
-      : region.x + region.w - Math.min(region.w * 0.45, 108);
+  const innerX = region.side === "left" ? region.x + Math.min(region.w * 0.45, 108) : region.x + region.w - Math.min(region.w * 0.45, 108);
   const y0 = region.y + region.h - padY;
   const y1 = y0 - 78;
   const y2 = y0 - 148;
@@ -402,8 +399,7 @@ function placeCharms(layer, region, charms, placed, blocked, discs, floorY) {
       const cell = ordered[s];
       for (let n = 0; n < nudges.length; n += 1) {
         const [dx, dy] = nudges[n];
-        if (tryStamp(layer, placed, blocked, discs, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false))
-          return;
+        if (tryStamp(layer, placed, blocked, discs, charm.kind, cell.cx + dx + wanderX, cell.cy + dy, w, h, rot, false)) return;
       }
     }
   });
