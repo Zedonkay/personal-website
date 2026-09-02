@@ -1,6 +1,6 @@
 # Ritual visual identity — implementation spec
 
-Durable spec for Ishayu Shikhare’s al-folio site. Steal the *spirit* of [Anushka Rajasekhar’s site](https://anushkarv.github.io/my-website/) (recurring mark, light decorative background, personality on the homepage) — not her globe, stars, planets, sun icon, or CSS.
+Durable spec for Ishayu Shikhare’s al-folio site. Steal the _spirit_ of [Anushka Rajasekhar’s site](https://anushkarv.github.io/my-website/) (recurring mark, light decorative background, personality on the homepage) — not her globe, stars, planets, sun icon, or CSS.
 
 This document stays after implementation. Do not treat it as optional flavor.
 
@@ -30,11 +30,11 @@ Playfulness comes from **motion and character** (wave, glance, slow rings), not 
 
 Two serifs, no webfont mono. Fraunces is the voice; Newsreader is the quieter magazine face for chrome (same spirit as Anushka using Playfair in the nav, without making the whole page one font).
 
-| Face | Role |
-| --- | --- |
-| **Fraunces** | Body, headings, quote text |
-| **Newsreader** | Navbar links, publication/project badges and periodical lines, year labels, link buttons, quote attribution |
-| **System UI mono** | `code`, `pre`, syntax highlighting only. Do not load JetBrains Mono. |
+| Face               | Role                                                                                                        |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **Fraunces**       | Body, headings, quote text                                                                                  |
+| **Newsreader**     | Navbar links, publication/project badges and periodical lines, year labels, link buttons, quote attribution |
+| **System UI mono** | `code`, `pre`, syntax highlighting only. Do not load JetBrains Mono.                                        |
 
 **Wiring**
 
@@ -67,10 +67,10 @@ Source (local only, never a repo dependency): `/Users/ishayu/.codex/pets/Ritual/
 
 **Copy into the site (trimmed):**
 
-| Path | Contents | Budget |
-| --- | --- | --- |
+| Path                                          | Contents                                                                                                    | Budget   |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | -------- |
 | `src/assets/img/ritual/ritual-idle-wave.webp` | 6×3 strip, cell 192×208. Row 0 = idle 0–5. Row 1 = wave 0–3 (cols 4–5 transparent). Row 2 col 0 = look-090. | ≲ 200 KB |
-| `src/assets/img/ritual/ritual-idle.png` | Idle frame 0, full body, transparent | ≲ 50 KB |
+| `src/assets/img/ritual/ritual-idle.png`       | Idle frame 0, full body, transparent                                                                        | ≲ 50 KB  |
 
 Do not commit the full 2 MB sheet. Leave running/jump/fail/wait/other look frames in `~/.codex`. Do not write `src/assets/favicon/ritual.png`. Leave `site.icon` pointing at `assets/favicon/sloth.png`.
 
