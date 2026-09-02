@@ -2,7 +2,7 @@
 layout: page
 title: FADA
 description: Few-shot domain adaptation for humanoid control via dynamics alignment
-img: assets/img/fada/teaser-fig.jpg
+img: assets/img/fada/teaser-fig.png
 importance: 1
 category: research
 published: true
@@ -25,7 +25,7 @@ related_publications: true
 </div>
 
 <div class="text-center mb-4 project-demo-video">
-  <video class="preview" controls playsinline preload="metadata" width="100%" poster="{{ '/assets/img/fada/teaser-fig.jpg' | relative_url }}">
+  <video class="preview" controls playsinline preload="metadata" width="100%" poster="{{ '/assets/img/fada/teaser-fig.png' | relative_url }}">
     <source src="https://lecar-lab.github.io/FADA-humanoid/videos/fada-overview.mp4" type="video/mp4">
   </video>
 </div>
