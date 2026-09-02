@@ -18,7 +18,7 @@ You are an implementation agent for Ishayu Shikhare’s personal site (al-folio 
 
 - Source of truth for files and behavior: the plan. Paths are under `src/` unless noted. Config is `src/_config.yml`.
 - Ritual source: `/Users/ishayu/.codex/pets/Ritual/` — copy trimmed frames only. Never git-link `~/.codex`.
-- Font: **Fraunces** + existing JetBrains Mono + Material Icons, unless the user named Instrument Serif, Newsreader, or Gloock in the same thread. Gloock is headings-only.
+- Font: **Fraunces** (body, headings, quote) + **Newsreader** (nav, badges, attribution) + Material Icons. System UI mono for `code`/`pre` only. Do not load JetBrains Mono, Playfair, Instrument Serif, or Gloock.
 - Quotes: empty `items: []`. You may add a quote locally to test, then revert before commit.
 - Keep al-folio. Do not disable dark mode or search. Do not copy Anushka’s CSS, sun, or globe.
 - Honor `prefers-reduced-motion`. Ritual `aria-label`: `Ritual, a small brass-and-walnut fox robot`. Decor `aria-hidden`.
@@ -28,5 +28,5 @@ You are an implementation agent for Ishayu Shikhare’s personal site (al-folio 
 
 - About shows Ritual (wave → idle), no sloth in the H1, no quote chrome with an empty bank, margin rings + lamp that do not cover copy.
 - Favicon/navbar use Ritual. `sloth.png` remains on disk, unreferenced.
-- Fraunces is live. Quote infra is wired and idle.
+- Fraunces + Newsreader are live. Quote infra is wired and idle.
 - This handoff file is gone. The plan file remains.

@@ -14,7 +14,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **Sloth:** Ritual replaces it in favicon, navbar (`site.icon`), and the about H1. Keep `src/assets/favicon/sloth.png` in the tree; stop referencing it.
 - **Decor:** about/homepage only. Lamp glow + slow-spinning tea-ring / vinyl-groove SVG in the margins. Faint steam near Ritual. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** out of scope for this pass.
-- **Type:** replace Playfair Display with **Fraunces** (see Font). Keep JetBrains Mono for nav, badges, code.
+- **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
 - Do not git-link or submodule `~/.codex`. Copy only trimmed assets into `src/assets/`.
 
@@ -28,26 +28,34 @@ Playfulness comes from **motion and character** (wave, glance, slow rings), not 
 
 ## Font
 
-Playfair is already wired. Swap the *serif* to something wonkier; leave JetBrains Mono.
+Two serifs, no webfont mono. Fraunces is the voice; Newsreader is the quieter magazine face for chrome (same spirit as Anushka using Playfair in the nav, without making the whole page one font).
 
-**Implement Fraunces** unless a later note in this repo names a different option from this list.
+| Face | Role |
+| --- | --- |
+| **Fraunces** | Body, headings, quote text |
+| **Newsreader** | Navbar links, publication/project badges and periodical lines, year labels, link buttons, quote attribution |
+| **System UI mono** | `code`, `pre`, syntax highlighting only. Do not load JetBrains Mono. |
 
-| Option | Role | Why |
-| --- | --- | --- |
-| **Fraunces (default)** | Body + headings | Editorial serif with `WONK` / `SOFT` / `opsz` axes. Same job as Playfair, more playful. Variable font on Google Fonts. |
-| Instrument Serif | Headings, or body if it holds at ~16px | Sharp, contemporary, a bit mischievous. No wonk axis. |
-| Newsreader | Body + headings | Optical-size magazine serif. Quieter than Fraunces; still warmer than Playfair. |
-| Gloock | Headings only | Ball-terminal display. Too costume for body; pair with Newsreader or keep a text serif. |
+**Wiring**
 
-**Fraunces wiring**
+- `src/_config.yml` → `third_party_libraries.google_fonts.url.fonts` keep **Material Icons**. Replace Playfair and JetBrains Mono with Fraunces + Newsreader (italics + variable weight/optical size), e.g.
 
-- `src/_config.yml` → `third_party_libraries.google_fonts.url.fonts` must keep **JetBrains Mono** and **Material Icons**. Replace Playfair with Fraunces italic + variable weight/optical size, e.g.
+  `family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Material+Icons&display=swap`
 
-  `family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Icons&display=swap`
+- `src/_sass/_polish.scss`:
 
-- `src/_sass/_polish.scss`: `$font-serif: "Fraunces", Georgia, "Times New Roman", serif;` (keep `$font-display: $font-serif`, `$font-mono` unchanged).
-- Body: quieter (`WONK` 0, modest `SOFT`, `opsz` ~18). Headings and the quote: slightly wonkier (`WONK` 1, `opsz` display). Quotes stay italic.
-- Do not load an extra novelty font.
+  ```scss
+  $font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  $font-display: $font-serif;
+  $font-secondary: "Newsreader", Georgia, "Times New Roman", serif;
+  $font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  ```
+
+  Point every current `$font-mono` chrome rule (nav, `.abbr`, `.periodical`, `.links a.btn`, publication years) at `$font-secondary`. Leave real code blocks on `$font-mono`.
+
+- Fraunces body: quieter (`WONK` 0, modest `SOFT`, `opsz` ~18). Headings and the quote: slightly wonkier (`WONK` 1, `opsz` display). Quotes stay italic.
+- Newsreader in the nav: `opsz` around 16–18, not display size. Do not uppercase-track it like a mono badge unless the existing badge styles already do.
+- Do not load Instrument Serif, Gloock, Playfair, or JetBrains Mono.
 
 ## Ritual assets
 
@@ -127,7 +135,7 @@ items: []
 **Include** (`src/_includes/quote_of_the_day.liquid`):
 
 - Render nothing if `quotes.enabled` is false or `items` is missing/empty.
-- Otherwise render a `blockquote` (Playfair/Fraunces italic) + attribution/source as a `footer`/`cite` in JetBrains Mono ~0.75rem. If `url` is set, the cite is a link.
+- Otherwise render a `blockquote` (Fraunces italic) + attribution/source as a `footer`/`cite` in Newsreader ~0.75rem. If `url` is set, the cite is a link.
 - Embed the bank as `<script type="application/json" id="quote-bank">` via `jsonify`. Hide quote text until JS fills it to avoid a flash of the wrong line; if JS fails, show nothing (empty bank is the common case at ship).
 - `src/assets/js/quote-of-the-day.js` (about only):
   - `daily`: `dayOfYear(local Date) % n`
@@ -153,7 +161,7 @@ Empty/small bank: 0 → omit block. 1 → that line every day.
 6. `src/_includes/decor_field.liquid`
 7. `src/_layouts/about.liquid` — identity moment, drop sloth, include decor.
 8. `src/_includes/scripts.liquid` — about-only script tags.
-9. `src/_sass/_polish.scss` — Fraunces, companion, quote, rings, lamp, reduced-motion, light/dark.
+9. `src/_sass/_polish.scss` — Fraunces + Newsreader, companion, quote, rings, lamp, reduced-motion, light/dark.
 
 Do not edit `src/_sass/_themes.scss` unless a lamp/shadow genuinely cannot be done with existing tokens.
 
@@ -169,9 +177,9 @@ Do not edit `src/_sass/_themes.scss` unless a lamp/shadow genuinely cannot be do
 
 ## Verify before calling it done
 
-About (`/`): Ritual present; waves then idles if motion is allowed; no sloth in the H1; no quote UI while the bank is empty; lamp + rings (desktop) stay out of the text; Fraunces loaded.
+About (`/`): Ritual present; waves then idles if motion is allowed; no sloth in the H1; no quote UI while the bank is empty; lamp + rings (desktop) stay out of the text; Fraunces on the bio, Newsreader on nav.
 
-Inner page (e.g. `/projects/`): Ritual favicon in the navbar; no rings; library/projects/publications unchanged.
+Inner page (e.g. `/projects/`): Ritual favicon in the navbar; Newsreader on nav/badges; no rings; library/projects/publications layout unchanged.
 
 Light and dark. `prefers-reduced-motion`: static Ritual, frozen rings.
 
