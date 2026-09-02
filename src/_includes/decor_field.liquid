@@ -1,73 +1,24 @@
 <div class="decor-field" aria-hidden="true">
-  <div class="decor-records">
-    {% include decor_record.liquid class="decor-record-1" %}
-    {% include decor_record.liquid class="decor-record-2" %}
-  </div>
+  <div class="decor-layer" id="decor-layer"></div>
 
-  <div class="decor-charms">
-    <div class="decor-charm decor-charm-kettle">
+  <template id="charm-teapot">
+    <div class="decor-placed decor-charm decor-charm-teapot">
       <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
         <path class="steam-a" d="M10 38c1-7-1-12-2-18s1-10 3-16"></path>
         <path class="steam-b" d="M18 36c2-7 0-12-1-18s2-10 3-15"></path>
       </svg>
-      <svg class="charm-svg" viewBox="0 0 100 88" focusable="false">
-        <path class="charm-line" d="M30 44c0-26 28-26 28 0 0-20-28-20-28 0z"></path>
-        <ellipse class="charm-fill" cx="44" cy="56" rx="24" ry="21"></ellipse>
-        <path class="charm-fill" d="M63 52l5-2 1.5 4-5 3z"></path>
-        <ellipse class="charm-fill" cx="44" cy="40" rx="14.5" ry="4"></ellipse>
-        <circle class="charm-fill" cx="44" cy="29" r="2.8"></circle>
+      <svg class="charm-svg" viewBox="0 0 108 78" focusable="false">
+        <path class="charm-line" d="M78 34c16 1 18 26 1 30"></path>
+        <ellipse class="charm-fill" cx="50" cy="48" rx="30" ry="22"></ellipse>
+        <path class="charm-fill" d="M22 40c-14 4-20 12-18 20 10-4 16-8 24-12z"></path>
+        <ellipse class="charm-fill" cx="50" cy="28" rx="16" ry="4.2"></ellipse>
+        <circle class="charm-fill" cx="50" cy="20" r="2.6"></circle>
       </svg>
     </div>
+  </template>
 
-    <div class="decor-charm decor-charm-razor">
-      <svg class="charm-svg" viewBox="0 0 56 88" focusable="false">
-        <rect class="charm-fill" x="6" y="8" width="44" height="12" rx="3"></rect>
-        <rect class="charm-fill" x="10" y="18" width="36" height="6" rx="1.5"></rect>
-        <rect class="charm-fill" x="23" y="24" width="10" height="48" rx="3"></rect>
-        <ellipse class="charm-fill" cx="28" cy="78" rx="7" ry="5"></ellipse>
-      </svg>
-    </div>
-
-    <div class="decor-charm decor-charm-whisk">
-      <svg class="charm-svg" viewBox="0 0 36 72" focusable="false">
-        <path class="charm-line" d="M18 4v28"></path>
-        <path class="charm-line" d="M18 32c-10 6-12 20-8 32M18 32c10 6 12 20 8 32M10 40c8 4 8 20 0 24M26 40c-8 4-8 20 0 24M18 34c-6 14-4 26 0 34M18 34c6 14 4 26 0 34"></path>
-      </svg>
-    </div>
-
-    <div class="decor-charm decor-charm-bike">
-      <svg class="charm-svg" viewBox="0 0 92 54" focusable="false">
-        <circle class="charm-line" cx="18" cy="36" r="14"></circle>
-        <circle class="charm-line" cx="74" cy="36" r="14"></circle>
-        <path class="charm-line" d="M18 36l24-20 22 2 10 18-32 0-24 0M42 16l10-8M64 18l8-10 8 0M38 16h14"></path>
-      </svg>
-    </div>
-
-    <div class="decor-charm decor-charm-pin">
-      <svg class="charm-svg" viewBox="0 0 100 28" focusable="false">
-        <rect class="charm-fill" x="20" y="8" width="60" height="12" rx="6"></rect>
-        <rect class="charm-fill" x="2" y="11" width="18" height="6" rx="2"></rect>
-        <rect class="charm-fill" x="80" y="11" width="18" height="6" rx="2"></rect>
-      </svg>
-    </div>
-
-    <div class="decor-charm decor-charm-reel">
-      <svg class="charm-svg" viewBox="0 0 92 112" focusable="false">
-        <circle class="charm-fill" cx="38" cy="38" r="34"></circle>
-        <circle class="charm-line" cx="38" cy="38" r="27"></circle>
-        <circle class="charm-hole" cx="38" cy="38" r="8"></circle>
-        <circle class="charm-hole" cx="38" cy="16" r="5"></circle>
-        <circle class="charm-hole" cx="57" cy="27" r="5"></circle>
-        <circle class="charm-hole" cx="57" cy="49" r="5"></circle>
-        <circle class="charm-hole" cx="38" cy="60" r="5"></circle>
-        <circle class="charm-hole" cx="19" cy="49" r="5"></circle>
-        <circle class="charm-hole" cx="19" cy="27" r="5"></circle>
-        <rect class="charm-fill" x="62" y="50" width="18" height="56" rx="1.5"></rect>
-        <path class="charm-line" d="M67 54v48M75 54v48"></path>
-      </svg>
-    </div>
-
-    <div class="decor-charm decor-charm-cup">
+  <template id="charm-cup">
+    <div class="decor-placed decor-charm decor-charm-cup">
       <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
         <path class="steam-a" d="M12 38c1-8 0-13-1-20s1-10 2-16"></path>
       </svg>
@@ -78,24 +29,116 @@
         <ellipse class="charm-fill" cx="30" cy="24" rx="18" ry="3.4"></ellipse>
       </svg>
     </div>
+  </template>
 
-    <div class="decor-charm decor-charm-perfume">
-      <svg class="charm-svg" viewBox="0 0 64 88" focusable="false">
-        <rect class="charm-fill" x="16" y="32" width="28" height="48" rx="4"></rect>
-        <rect class="charm-fill" x="25" y="20" width="10" height="13" rx="1.5"></rect>
-        <rect class="charm-fill" x="22" y="10" width="16" height="11" rx="3"></rect>
-        <path class="charm-line" d="M38 16h14"></path>
-        <circle class="charm-fill" cx="55" cy="16" r="6"></circle>
+  <template id="charm-coffee">
+    <div class="decor-placed decor-charm decor-charm-coffee">
+      <svg class="charm-steam" viewBox="0 0 28 40" focusable="false">
+        <path class="steam-a" d="M10 38c2-8 0-14-1-20s2-10 3-16"></path>
+        <path class="steam-b" d="M18 36c1-7 1-12 0-18s1-9 2-14"></path>
+      </svg>
+      <svg class="charm-svg" viewBox="0 0 72 56" focusable="false">
+        <path class="charm-fill" d="M12 14h36c1 12-1 28-18 28S11 26 12 14z"></path>
+        <path class="charm-line" d="M48 18c12 2 12 18 0 20"></path>
+        <ellipse class="charm-fill" cx="30" cy="14" rx="18" ry="3.2"></ellipse>
       </svg>
     </div>
+  </template>
 
-    <div class="decor-charm decor-charm-car">
-      <svg class="charm-svg" viewBox="0 0 96 36" focusable="false">
-        <circle class="charm-line" cx="24" cy="26" r="8"></circle>
-        <circle class="charm-line" cx="72" cy="26" r="8"></circle>
-        <path class="charm-fill" d="M10 24l8-12h20l10-6h16l8 6h14v12H10z"></path>
-        <path class="charm-line" d="M82 8h10M82 8v8"></path>
+  <template id="charm-bike">
+    <div class="decor-placed decor-charm decor-charm-bike">
+      <svg class="charm-svg" viewBox="0 0 96 58" focusable="false">
+        <circle class="charm-line" cx="20" cy="38" r="16"></circle>
+        <circle class="charm-line" cx="76" cy="38" r="16"></circle>
+        <circle class="charm-hole" cx="20" cy="38" r="3"></circle>
+        <circle class="charm-hole" cx="76" cy="38" r="3"></circle>
+        <path class="charm-line" d="M20 38l26-22 18 4 12 18H50L20 38M46 16l8-10M68 20l10-12h8M42 16h18"></path>
       </svg>
     </div>
-  </div>
+  </template>
+
+  <template id="charm-reel">
+    <div class="decor-placed decor-charm decor-charm-reel">
+      <svg class="charm-svg" viewBox="0 0 80 80" focusable="false">
+        <circle class="charm-fill" cx="40" cy="40" r="36"></circle>
+        <circle class="charm-line" cx="40" cy="40" r="28"></circle>
+        <circle class="charm-hole" cx="40" cy="40" r="8"></circle>
+        <circle class="charm-hole" cx="40" cy="18" r="5"></circle>
+        <circle class="charm-hole" cx="59" cy="29" r="5"></circle>
+        <circle class="charm-hole" cx="59" cy="51" r="5"></circle>
+        <circle class="charm-hole" cx="40" cy="62" r="5"></circle>
+        <circle class="charm-hole" cx="21" cy="51" r="5"></circle>
+        <circle class="charm-hole" cx="21" cy="29" r="5"></circle>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-pin">
+    <div class="decor-placed decor-charm decor-charm-pin">
+      <svg class="charm-svg" viewBox="0 0 120 32" focusable="false">
+        <rect class="charm-fill" x="22" y="10" width="76" height="12" rx="6"></rect>
+        <rect class="charm-fill" x="2" y="12" width="20" height="8" rx="3"></rect>
+        <rect class="charm-fill" x="98" y="12" width="20" height="8" rx="3"></rect>
+        <circle class="charm-hole" cx="12" cy="16" r="2"></circle>
+        <circle class="charm-hole" cx="108" cy="16" r="2"></circle>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-whittle">
+    <div class="decor-placed decor-charm decor-charm-whittle">
+      <svg class="charm-svg" viewBox="0 0 92 70" focusable="false">
+        <rect class="charm-fill" x="8" y="36" width="50" height="24" rx="3"></rect>
+        <path class="charm-line" d="M14 44h38M14 52h30"></path>
+        <rect class="charm-fill" x="58" y="10" width="10" height="22" rx="2.5"></rect>
+        <path class="charm-fill" d="M60 30h6l18 24-8 4z"></path>
+        <path class="charm-line" d="M76 14c6-6 12 0 8 8"></path>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-masks">
+    <div class="decor-placed decor-charm decor-charm-masks">
+      <svg class="charm-svg" viewBox="0 0 88 52" focusable="false">
+        <path class="charm-fill" d="M8 10c10-8 26-8 32 2 2 14-6 28-16 30C14 40 4 28 8 10z"></path>
+        <path class="charm-line" d="M18 22h4M30 22h4M18 32c6 6 12 6 18 0"></path>
+        <path class="charm-fill" d="M48 10c10-8 26-8 32 2 2 14-6 28-16 30C54 40 44 28 48 10z"></path>
+        <path class="charm-line" d="M58 22h4M70 22h4M58 34c6-6 12-6 18 0"></path>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-wrench">
+    <div class="decor-placed decor-charm decor-charm-wrench">
+      <svg class="charm-svg" viewBox="0 0 100 40" focusable="false">
+        <path class="charm-line" d="M10 8c-6 0-9 8-4 12 3 3 9 1 11-4h54c1 6 8 9 14 5 5-4 4-12-2-14-3-1-7 0-9 4H19c-1-3-5-3-9-3z"></path>
+        <path class="charm-line" d="M16 10v12M88 10v12"></path>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-driver">
+    <div class="decor-placed decor-charm decor-charm-driver">
+      <svg class="charm-svg" viewBox="0 0 28 96" focusable="false">
+        <rect class="charm-fill" x="8" y="4" width="12" height="36" rx="4"></rect>
+        <rect class="charm-fill" x="12" y="38" width="4" height="46" rx="1"></rect>
+        <path class="charm-fill" d="M10 84h8l-4 10z"></path>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-bolt">
+    <div class="decor-placed decor-charm decor-charm-bolt">
+      <svg class="charm-svg" viewBox="0 0 56 56" focusable="false">
+        <path class="charm-fill" d="M28 4l18 10v18L28 52 10 32V14z"></path>
+        <circle class="charm-hole" cx="28" cy="28" r="8"></circle>
+      </svg>
+    </div>
+  </template>
+
+  <template id="charm-record">
+    <div class="decor-placed decor-record-wrap">
+      {% include decor_record.liquid class="decor-record" %}
+    </div>
+  </template>
 </div>

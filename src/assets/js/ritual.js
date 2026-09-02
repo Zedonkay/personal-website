@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const RUN_MS = 5800;
+const RUN_PX_PER_MS = 0.22;
 const HOLD_MS = 1800;
 const ANIM_FALLBACK_MS = {
   "ritual-wave": 1200,
@@ -34,13 +34,16 @@ function setupRitual(ritual, reduceMotion) {
   if (reduceMotion) {
     ritual.classList.add("is-still");
     const moment = ritual.closest(".identity-moment");
-    if (moment) moment.classList.add("is-settled");
+    if (moment) {
+      parkReveal(ritual, moment, document.querySelector(".quote-of-the-day"));
+      moment.classList.add("is-settled");
+    }
     return;
   }
 
   if (pose === "wait") {
     ritual.classList.add("is-waiting");
-    attachHover(ritual);
+    attachLiveMotion(ritual);
     return;
   }
 
@@ -57,8 +60,15 @@ function clearPlay(ritual) {
   ritual.style.removeProperty("--ritual-frame");
 }
 
+function restartIdle(ritual) {
+  ritual.style.animation = "none";
+  void ritual.offsetWidth;
+  ritual.style.removeProperty("animation");
+}
+
 function restPose(ritual) {
   clearPlay(ritual);
+  restartIdle(ritual);
   if (ritual.getAttribute("data-ritual") === "wait") {
     ritual.classList.add("is-waiting");
     return;
@@ -66,57 +76,67 @@ function restPose(ritual) {
   ritual.classList.add("is-idle");
 }
 
-function afterAnimation(ritual, name, done) {
-  let finished = false;
+function playAct(ritual, act, done) {
+  let cancelled = false;
+  const timers = [];
+  let onEnd = null;
+
   const finish = () => {
-    if (finished) return;
-    finished = true;
-    ritual.removeEventListener("animationend", onEnd);
+    if (cancelled) return;
+    cancelled = true;
+    if (onEnd) ritual.removeEventListener("animationend", onEnd);
     done();
   };
-  const onEnd = (event) => {
-    if (event.animationName && event.animationName !== name) return;
-    finish();
-  };
-  ritual.addEventListener("animationend", onEnd);
-  window.setTimeout(finish, ANIM_FALLBACK_MS[name] || 3100);
-}
 
-function playAct(ritual, act, done) {
+  const afterAnimation = (name) => {
+    onEnd = (event) => {
+      if (event.animationName && event.animationName !== name) return;
+      ritual.removeEventListener("animationend", onEnd);
+      onEnd = null;
+      finish();
+    };
+    ritual.addEventListener("animationend", onEnd);
+    timers.push(
+      window.setTimeout(() => {
+        if (onEnd) ritual.removeEventListener("animationend", onEnd);
+        onEnd = null;
+        finish();
+      }, ANIM_FALLBACK_MS[name] || 3100)
+    );
+  };
+
   clearPlay(ritual);
+  restartIdle(ritual);
 
   if (act === "wave") {
     ritual.classList.add("is-waving");
-    afterAnimation(ritual, "ritual-wave", done);
-    return;
-  }
-
-  if (act === "jump") {
+    afterAnimation("ritual-wave");
+  } else if (act === "jump") {
     ritual.classList.add("is-jumping");
-    afterAnimation(ritual, "ritual-jump", done);
-    return;
-  }
-
-  if (act === "wait") {
+    afterAnimation("ritual-jump");
+  } else if (act === "wait") {
     ritual.classList.add("is-waiting-once");
-    afterAnimation(ritual, "ritual-wait", done);
-    return;
-  }
-
-  if (act === "glance") {
+    afterAnimation("ritual-wait");
+  } else if (act === "glance") {
     ritual.classList.add("is-glance");
-    window.setTimeout(done, HOLD_MS);
-    return;
+    timers.push(window.setTimeout(finish, HOLD_MS));
+  } else {
+    const frame = REACT_FRAMES[act];
+    if (frame == null) {
+      finish();
+    } else {
+      ritual.style.setProperty("--ritual-frame", String(frame));
+      ritual.classList.add("is-react");
+      timers.push(window.setTimeout(finish, HOLD_MS));
+    }
   }
 
-  const frame = REACT_FRAMES[act];
-  if (frame == null) {
-    done();
-    return;
-  }
-  ritual.style.setProperty("--ritual-frame", String(frame));
-  ritual.classList.add("is-react");
-  window.setTimeout(done, HOLD_MS);
+  return () => {
+    if (cancelled) return;
+    cancelled = true;
+    timers.forEach((id) => window.clearTimeout(id));
+    if (onEnd) ritual.removeEventListener("animationend", onEnd);
+  };
 }
 
 function shuffle(list) {
@@ -130,16 +150,26 @@ function shuffle(list) {
   return items;
 }
 
-function attachHover(ritual) {
+function pointerOnRitual(ritual, x, y) {
+  const stack = document.elementsFromPoint(x, y);
+  return stack.includes(ritual);
+}
+
+function attachLiveMotion(ritual) {
   let queue = shuffle(HOVER_ACTS);
   let index = 0;
-  let busy = false;
+  let hovering = false;
+  let cancelAct = null;
+  let idleTimer = 0;
 
-  ritual.addEventListener("mouseenter", () => {
-    if (busy || ritual.classList.contains("is-running") || ritual.classList.contains("is-still")) {
-      return;
+  const stopAct = () => {
+    if (cancelAct) {
+      cancelAct();
+      cancelAct = null;
     }
-    busy = true;
+  };
+
+  const nextHoverAct = () => {
     const act = queue[index];
     index += 1;
     if (index >= queue.length) {
@@ -152,37 +182,135 @@ function attachHover(ritual) {
       }
       index = 0;
     }
-    playAct(ritual, act, () => {
-      restPose(ritual);
-      busy = false;
+    return act;
+  };
+
+  const scheduleIdleWave = () => {
+    window.clearTimeout(idleTimer);
+    idleTimer = window.setTimeout(
+      () => {
+        if (hovering || ritual.classList.contains("is-running") || ritual.classList.contains("is-still")) {
+          scheduleIdleWave();
+          return;
+        }
+        stopAct();
+        cancelAct = playAct(ritual, "wave", () => {
+          if (!hovering) restPose(ritual);
+          cancelAct = null;
+          scheduleIdleWave();
+        });
+      },
+      7000 + Math.random() * 9000
+    );
+  };
+
+  const onEnter = () => {
+    if (hovering) return;
+    hovering = true;
+    if (ritual.classList.contains("is-running") || ritual.classList.contains("is-still")) {
+      return;
+    }
+    stopAct();
+    window.clearTimeout(idleTimer);
+    cancelAct = playAct(ritual, nextHoverAct(), () => {
+      cancelAct = null;
+      if (hovering) restPose(ritual);
     });
-  });
+  };
+
+  const onLeave = () => {
+    if (!hovering) return;
+    hovering = false;
+    stopAct();
+    if (!ritual.classList.contains("is-running")) {
+      restPose(ritual);
+    }
+    scheduleIdleWave();
+  };
+
+  const onPointerMove = (event) => {
+    if (pointerOnRitual(ritual, event.clientX, event.clientY)) onEnter();
+    else onLeave();
+  };
+
+  ritual.addEventListener("pointerenter", onEnter);
+  ritual.addEventListener("pointerleave", onLeave);
+  document.addEventListener("pointermove", onPointerMove, { capture: true, passive: true });
+  document.addEventListener(
+    "pointerover",
+    (event) => {
+      if (event.target === ritual || ritual.contains(event.target)) onEnter();
+    },
+    true
+  );
+  document.addEventListener(
+    "pointerout",
+    (event) => {
+      if (event.target === ritual || ritual.contains(event.target)) {
+        if (!ritual.contains(event.relatedTarget)) onLeave();
+      }
+    },
+    true
+  );
+  scheduleIdleWave();
+}
+
+function quoteEndX(quote) {
+  const text = quote.querySelector(".quote-text") || quote;
+  const range = document.createRange();
+  range.selectNodeContents(text);
+  const rects = [...range.getClientRects()].filter((rect) => rect.width > 1 && rect.height > 1);
+  if (!rects.length) return quote.getBoundingClientRect().right;
+  return rects[rects.length - 1].right;
+}
+
+function parkReveal(ritual, moment, quote) {
+  const momentBox = moment.getBoundingClientRect();
+  const ritualW = ritual.offsetWidth || 48;
+  let toPx = 0;
+  if (quote && quote.classList.contains("is-ready")) {
+    toPx = quoteEndX(quote) - momentBox.left + 8;
+  }
+  toPx = Math.min(Math.max(0, toPx), Math.max(0, momentBox.width - ritualW));
+  ritual.style.setProperty("--ritual-from", "0px");
+  ritual.style.setProperty("--ritual-to", `${toPx}px`);
+  moment.style.setProperty("--ritual-from", "0px");
+  moment.style.setProperty("--ritual-to", `${toPx}px`);
+  return toPx;
 }
 
 function setupReveal(ritual) {
   const moment = ritual.closest(".identity-moment");
   const quote = document.querySelector(".quote-of-the-day");
 
+  if (!moment) {
+    restPose(ritual);
+    attachLiveMotion(ritual);
+    return;
+  }
+
   let settled = false;
   const settle = () => {
     if (settled) return;
     settled = true;
     ritual.classList.remove("is-running");
-    if (moment) {
-      moment.classList.remove("is-revealing");
-      moment.classList.add("is-settled");
-    }
+    moment.classList.remove("is-revealing");
+    moment.classList.add("is-settled");
     playAct(ritual, "wave", () => {
       restPose(ritual);
-      attachHover(ritual);
+      attachLiveMotion(ritual);
     });
   };
 
   const run = () => {
-    if (ritual.classList.contains("is-running") || (moment && moment.classList.contains("is-settled"))) {
+    if (ritual.classList.contains("is-running") || moment.classList.contains("is-settled")) {
       return;
     }
-    if (moment) moment.classList.add("is-revealing");
+    const toPx = parkReveal(ritual, moment, quote);
+    const duration = Math.max(900, Math.round(toPx / RUN_PX_PER_MS));
+    ritual.style.setProperty("--ritual-run-ms", `${duration}ms`);
+    moment.style.setProperty("--ritual-run-ms", `${duration}ms`);
+    moment.classList.add("is-revealing");
     ritual.classList.add("is-running");
     ritual.addEventListener("animationend", (event) => {
       if (event.animationName !== "ritual-run-across") return;
@@ -190,10 +318,11 @@ function setupReveal(ritual) {
     });
     window.setTimeout(() => {
       if (ritual.classList.contains("is-running")) settle();
-    }, RUN_MS);
+    }, duration + 80);
   };
 
   if (!quote) {
+    parkReveal(ritual, moment, null);
     settle();
     return;
   }
@@ -205,7 +334,8 @@ function setupReveal(ritual) {
 
   quote.addEventListener("quote:ready", run, { once: true });
   window.setTimeout(() => {
-    if (!ritual.classList.contains("is-running") && !(moment && moment.classList.contains("is-settled"))) {
+    if (!ritual.classList.contains("is-running") && !moment.classList.contains("is-settled")) {
+      parkReveal(ritual, moment, quote);
       settle();
     }
   }, 450);
@@ -215,7 +345,7 @@ function setupCompanion(ritual) {
   const greet = () => {
     playAct(ritual, "wave", () => {
       restPose(ritual);
-      attachHover(ritual);
+      attachLiveMotion(ritual);
     });
   };
 

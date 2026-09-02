@@ -7,12 +7,12 @@ This document stays after implementation. Do not treat it as optional flavor.
 ## Decisions (locked)
 
 - Keep al-folio. Layer onto `src/_layouts/`, `src/_includes/`, `src/_sass/_polish.scss`, `src/_data/`, `src/_config.yml`. Do not rebuild as handwritten HTML.
-- **Motif B:** On about, the quote is a full-width band. Ritual runs right-to-left across it (~5.6s, even stride), quote clipped in his wake, parks on the left, waves, then idles. Hovering Ritual cycles a shuffled set of his poses (wave, jump, wait, looks, facepalm, sleep, and review beats) — a different one each time. Inner pages and 404 use the same hover cycle. `prefers-reduced-motion: reduce` → static idle frame on the left, quote fully visible, no sprite loop, no ring spin.
+- **Motif B:** On about, the quote is a full-width band. Ritual runs left-to-right at a constant speed (duration follows distance), quote clipped in his wake, and parks just to the right of the last glyph. Then he waves and idles. Hover poses only last while the pointer is on him; leave snaps back to idle. He also waves on his own now and then. `prefers-reduced-motion: reduce` → static idle frame at the park point, quote fully visible, no sprite loop, no vinyl spin.
 - **No field tags** (not now).
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. A faint scatter of small SVGs in the **open viewport margins**, drawn from Ishayu’s interests (tea, cooking, records, film reels, bike, race car, safety razor, perfume). Vinyl appears **twice**, one peeking from a corner and one sitting in the field. Charms zigzag through the gutters instead of hugging the text column. Opacity ~0.30–0.32. Hide the field below ~992px. No header lamp or tinted nav band — the page top is the same `--color-bg` as the body. Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. Charms are a composed scatter in the left/right gutters (mixed sizes, rotated, duplicates allowed). Motifs: teapot/cup, coffee, rolling pin, bike, film reel, whittling block, theater masks, wrench/screwdriver/bolt, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -81,7 +81,7 @@ Do not commit the full 2 MB sheet. Leave running-right/jump/fail/other look fram
 ### About (`src/_layouts/about.liquid`)
 
 1. **Keep** the sloth `<img class="title-favicon">` in the H1. Do not put Ritual there.
-2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts off the right, runs left across the quote (z-index above, quote visible behind the sprite), and parks on the left. Quote reveal is a clip-path wake synced to the run (~2.5s).
+2. After the bio (`clearfix` content), before socials: an **identity moment** — a full-width quote band (~4.5rem min-height). Ritual is absolutely positioned, starts on the left, runs right across the quote (z-index above, quote visible behind the sprite), and parks just past the last glyph. Quote reveal is a clip-path wake synced to the run.
 3. If the quote bank is empty or `quotes.enabled` is false: still show Ritual (wave + idle on the left). Omit the quote markup entirely (no empty italic, no “add quotes” placeholder).
 4. Include the decorative field here only (`permalink: /`).
 
@@ -92,12 +92,12 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 ### Ritual companion (`src/_includes/ritual.liquid` + `src/assets/js/ritual.js`)
 
 - Markup: one element, `role="img"`, `aria-label="Ritual, a small brass-and-walnut fox robot"`. `data-ritual` / `pose`: `reveal` (about), `companion` (inner pages), `wait` (404).
-- **reveal:** `is-running` (run-left strip + left 100%→0 over ~5.6s, even ease) with quote `quote-wake` clip, then `is-waving` → `is-idle`. After settle, hovering Ritual plays the next unused pose from a shuffled set (wave, jump, wait, glance, extra looks/review/fail/work holds).
-- **companion:** smaller (~3.2rem). Wave once when scrolled into view, then the same hover cycle.
-- **wait:** waiting strip loop, same hover cycle.
-- Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already on the left.
+- **reveal:** `is-running` goes left-to-right and stops just to the right of the quote (constant speed, duration follows distance), quote `quote-wake` clip, then `is-waving` → `is-idle`. Hover plays a pose only while the pointer is on Ritual and snaps back to idle on leave. He also waves on his own every ~7–16s.
+- **companion:** smaller (~3.2rem). Wave once when scrolled into view, then hover + occasional idle waves.
+- **wait:** waiting strip loop, same hover + idle waves.
+- Reduced motion: no animation classes; show idle frame 0 only (`ritual-idle.png`), quote fully visible, Ritual already parked at the quote’s end.
 - Tiny JS is justified; do **not** port the Codex pet controller, drag, or look-at-cursor.
-- Load `ritual.js` on every page. Keep `quote-of-the-day.js` about-only.
+- Load `ritual.js` on every page. Keep `quote-of-the-day.js` and `decor.js` about-only.
 
 ### Inner pages and 404
 
@@ -109,8 +109,8 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
 - Footer sits in document flow (not `fixed-bottom`) and stays `display: none` until the visitor scrolls to the bottom of the page.
-- **Charms:** tea kettle, cup, whisk, rolling pin, bike, film reel, race car, safety razor, perfume. Zigzag through the left/right open margins (mix of near-edge and mid-gutter), not a tight column against the text. Opacity ~0.30–0.32, stroked with `--color-text`. Vinyl: two discs — one peeks from the top-left, one sits in the lower-right field, opacity ~0.22. No notebook, camera, drone, film-strip, mortar, or molecule.
-- **Steam:** optional wisps on the kettle and cup only. Kill under reduced motion.
+- **Charms:** composed scatter in the left/right gutters, mixed sizes, rotated. Motifs: teapot/cup, coffee mug, rolling pin, bike, film reel, whittling block, theater masks, wrench/screwdriver/bolt, vinyl discs. Vinyl fill is very light; grooves/edge/label stay darker. No whisk/trident, frying pan, drone, camera, notebook, perfume, or razor.
+- **Steam:** optional wisps on the teapot, cup, and coffee mug. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.
 
@@ -184,7 +184,7 @@ Do not edit `src/_sass/_themes.scss` unless a lamp/shadow genuinely cannot be do
 
 ## Verify before calling it done
 
-About (`/`): sloth still next to the name; quote is a full-width band; Ritual runs across it then parks left (waves then idles if motion is allowed); lamp + rings (desktop) stay out of the text; Fraunces on the bio, Newsreader on nav. Empty bank → Ritual only, no quote UI.
+About (`/`): sloth still next to the name; quote is a full-width band; Ritual runs left-to-right then parks just past the last glyph (waves then idles if motion is allowed); gutter charms stay out of the text; Fraunces on the bio, Newsreader on nav. Empty bank → Ritual only, no quote UI.
 
 Inner page (e.g. `/projects/`): sloth favicon in the tab and navbar; Newsreader on nav/badges; no rings; a small Ritual sign-off at the bottom of the content; library/projects/publications cards unchanged.
 

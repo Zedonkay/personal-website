@@ -188,6 +188,7 @@
 {% endif %}
 <script defer src="{{ '/assets/js/ritual.js' | relative_url | bust_file_cache }}"></script>
 {% if page.permalink == '/' %}
+  <script defer src="{{ '/assets/js/decor.js' | relative_url | bust_file_cache }}"></script>
   <script defer src="{{ '/assets/js/quote-of-the-day.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
 {% if page.permalink == '/blog/' %}

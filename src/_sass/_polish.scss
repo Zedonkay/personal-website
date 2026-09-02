@@ -1180,20 +1180,31 @@ $ritual-h: 4.5rem;
   z-index: 1;
 }
 
-.decor-records {
+.decor-layer {
   position: absolute;
   inset: 0;
 }
 
-.decor-record {
+.decor-placed {
   position: absolute;
+  transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
+  transform-origin: center center;
+}
+
+.decor-record-wrap {
   overflow: visible;
-  opacity: 0.22;
+}
+
+.decor-record {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
   animation: record-spin 88s linear infinite;
 }
 
 .record-fill {
-  fill: color-mix(in srgb, var(--color-text) 6%, transparent);
+  fill: color-mix(in srgb, var(--color-text) 2%, transparent);
   stroke: none;
 }
 
@@ -1201,14 +1212,14 @@ $ritual-h: 4.5rem;
   fill: none;
   stroke: var(--color-text);
   stroke-width: 1.6;
-  opacity: 0.35;
+  opacity: 0.42;
 }
 
 .record-groove {
   fill: none;
-  stroke: var(--color-secondary);
-  stroke-width: 0.6;
-  opacity: 0.28;
+  stroke: var(--color-text);
+  stroke-width: 0.9;
+  opacity: 0.34;
 }
 
 .record-label {
@@ -1232,36 +1243,13 @@ $ritual-h: 4.5rem;
   opacity: 0.7;
 }
 
-.decor-record-1 {
-  width: 8.75rem;
-  height: 8.75rem;
-  top: -1.55rem;
-  left: -1.7rem;
-}
-
-.decor-record-2 {
-  width: 6.6rem;
-  height: 6.6rem;
-  top: 72%;
-  right: 2.1%;
-  bottom: auto;
-  animation-duration: 104s;
-  animation-direction: reverse;
-}
-
 @keyframes record-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-.decor-charms {
-  position: absolute;
-  inset: 0;
-}
-
 .decor-charm {
-  position: absolute;
   opacity: 0.32;
 }
 
@@ -1318,83 +1306,19 @@ $ritual-h: 4.5rem;
   }
 }
 
-.decor-charm-kettle {
-  top: 17%;
-  left: 2.1%;
-  width: 3.1rem;
-  transform: rotate(-14deg);
-
-  .charm-steam {
-    right: 0.1rem;
-    bottom: 2.35rem;
-  }
+.decor-charm-teapot .charm-steam {
+  left: 0.45rem;
+  bottom: 2.45rem;
 }
 
-.decor-charm-razor {
-  top: 35%;
-  left: 6.4%;
-  width: 1.85rem;
-  transform: rotate(16deg);
-  opacity: 0.3;
+.decor-charm-cup .charm-steam {
+  left: 0.55rem;
+  bottom: 1.95rem;
 }
 
-.decor-charm-whisk {
-  top: 51%;
-  left: 1.6%;
-  width: 1.7rem;
-  transform: rotate(18deg);
-  opacity: 0.3;
-}
-
-.decor-charm-bike {
-  top: 68%;
-  left: 5.2%;
-  width: 3.45rem;
-  transform: rotate(-8deg);
-}
-
-.decor-charm-pin {
-  bottom: 5.2rem;
-  left: 2.4%;
-  width: 3.1rem;
-  transform: rotate(-28deg);
-  opacity: 0.3;
-}
-
-.decor-charm-reel {
-  top: 8%;
-  right: 3.4%;
-  width: 3.35rem;
-  transform: rotate(-8deg);
-  opacity: 0.3;
-}
-
-.decor-charm-cup {
-  top: 26%;
-  right: 7.4%;
-  width: 2.45rem;
-  transform: rotate(10deg);
-
-  .charm-steam {
-    left: 0.55rem;
-    bottom: 1.95rem;
-  }
-}
-
-.decor-charm-perfume {
-  top: 44%;
-  right: 2.3%;
-  width: 2.05rem;
-  transform: rotate(-8deg);
-  opacity: 0.3;
-}
-
-.decor-charm-car {
-  top: 61%;
-  right: 6.1%;
-  width: 3.15rem;
-  transform: rotate(-6deg);
-  opacity: 0.3;
+.decor-charm-coffee .charm-steam {
+  left: 0.4rem;
+  bottom: 2.05rem;
 }
 
 footer.sticky-bottom {
@@ -1429,7 +1353,7 @@ footer.is-deferred {
 
 .ritual--reveal {
   position: absolute;
-  left: 100%;
+  left: var(--ritual-from, 0px);
   bottom: 0;
   z-index: 2;
   pointer-events: none;
@@ -1442,7 +1366,7 @@ footer.is-deferred {
 .ritual--reveal.is-jumping,
 .ritual--reveal.is-waiting-once,
 .ritual--reveal.is-react {
-  left: 0;
+  left: var(--ritual-to, 0px);
 }
 
 .identity-moment.is-settled .ritual--reveal {
@@ -1475,9 +1399,10 @@ footer.is-deferred {
 .ritual.is-running {
   background-image: var(--ritual-run);
   background-size: calc(var(--ritual-w) * 8) var(--ritual-h);
+  transform: scaleX(-1);
   animation:
     ritual-run-frames 1.05s steps(8) infinite,
-    ritual-run-across 5.6s cubic-bezier(0.37, 0, 0.63, 1) forwards;
+    ritual-run-across var(--ritual-run-ms, 4s) linear forwards;
 }
 
 .ritual.is-waiting {
@@ -1571,11 +1496,11 @@ footer.is-deferred {
 
 @keyframes ritual-run-across {
   from {
-    left: 100%;
+    left: var(--ritual-from, 0px);
   }
 
   to {
-    left: 0;
+    left: var(--ritual-to, 0px);
   }
 }
 
@@ -1601,7 +1526,7 @@ footer.is-deferred {
 
 @keyframes quote-wake {
   from {
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(0 100% 0 0);
   }
 
   to {
@@ -1632,7 +1557,7 @@ footer.is-deferred {
   min-height: $ritual-h;
   margin: 0;
   max-width: none;
-  padding: 0.15rem 0.35rem 0.1rem calc(#{$ritual-h} * 192 / 208 + 0.5rem);
+  padding: 0.15rem 0.2rem 0.1rem 0.1rem;
   border: 0;
   background: transparent;
   font-size: inherit;
@@ -1669,11 +1594,11 @@ footer.is-deferred {
 }
 
 .identity-moment:not(.is-settled) .quote-of-the-day.is-ready {
-  clip-path: inset(0 0 0 100%);
+  clip-path: inset(0 100% 0 0);
 }
 
 .identity-moment.is-revealing .quote-of-the-day.is-ready {
-  animation: quote-wake 5.6s cubic-bezier(0.37, 0, 0.63, 1) forwards;
+  animation: quote-wake var(--ritual-run-ms, 4s) linear forwards;
 }
 
 .identity-moment.is-settled .quote-of-the-day {
@@ -1681,8 +1606,7 @@ footer.is-deferred {
 }
 
 @media (max-width: 991.98px) {
-  .decor-records,
-  .decor-charms {
+  .decor-layer {
     display: none;
   }
 }
@@ -1713,7 +1637,8 @@ footer.is-deferred {
   }
 
   .ritual--reveal {
-    left: 0;
+    left: var(--ritual-to, 0px);
+    transform: none;
   }
 
   .identity-moment .quote-of-the-day.is-ready {
