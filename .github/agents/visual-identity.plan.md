@@ -12,7 +12,7 @@ This document stays after implementation. Do not treat it as optional flavor.
 - **Quotes:** infra only. Empty bank. Ishayu populates `src/_data/quotes.yml` himself. Do not seed quotes.
 - **Selection:** calendar-day by default (`daily`), with `random` supported in config. Must be **client-side** — GitHub Pages is static; build-time `date: '%j'` would freeze until the next deploy.
 - **Two animals, different jobs.** The sloth stays as the site mark: favicon, inner-page navbar (`site.icon: assets/favicon/sloth.png`), and the about H1 next to the name. Ritual is the living companion — identity moment on about, a small sign-off on inner pages, waiting pose on 404. Do not replace, unreference, or delete `sloth.png`. Do not add a Ritual favicon. Do not put Ritual in the navbar.
-- **Decor:** about/homepage only. Charms are a small composed scatter in the gutters and around the socials (mixed sizes, rotated). Motifs: teapot/cup, coffee, rolling pin, bike, film reel, whittling, theater masks, hammer/screwdriver, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
+- **Decor:** about/homepage only. Charms are a small composed scatter in the gutters and around the socials (mixed sizes, rotated). Motifs: teapot/cup, coffee, rolling pin, bike, clapper, whittling, theater masks, hammer/screwdriver, and vinyl. Vinyl discs have a very light fill with darker grooves. Hide the field below ~992px. No header lamp or tinted nav band. Never on project cards, publications, or the library.
 - **404 waiting-Ritual:** in scope. Waiting loop beside the “page not found” copy. Still no Ritual favicon.
 - **Type:** **Fraunces** for body, headings, and quote text. **Newsreader** for nav, badges, buttons, year labels, and quote attribution. System UI mono for actual `code` / `pre` only — do not load JetBrains Mono.
 - Do not disable dark mode or search.
@@ -109,7 +109,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
 - Footer sits in document flow (not `fixed-bottom`). If the page cannot scroll, show it; otherwise keep it hidden until the visitor reaches the bottom.
-- **Charms:** small composed scatter in the gutters and below the quote, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, whittling, theater masks, hammer, screwdriver, vinyl discs. No film-reel/wheel. Vinyls are large and sit in the gutters (slight peek). Grooves/edge/label stay darker than the disc fill.
+- **Charms:** small composed scatter in the gutters and below the quote, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, clapper, whittling, theater masks, hammer, screwdriver, vinyl discs. No film-reel/wheel. Vinyls are large and sit in the gutters (slight peek). Grooves/edge/label stay darker than the disc fill.
 - **Steam:** optional wisps on the teapot, cup, and coffee mug. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.
