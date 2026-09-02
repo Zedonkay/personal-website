@@ -109,7 +109,7 @@ Already renders `site.icon` (the sloth) on inner pages. Leave it. Homepage navba
 - Inline SVG + CSS. `aria-hidden="true"`, `pointer-events: none`, z-index behind text.
 - **No lamp.** The navbar and page top use the same `--color-bg` as the body (solid, no blur, no wash). Keep a small gap under the bar (body padding ≈ bar height + ~0.25rem; do not stack Bootstrap `mt-5` on the main column).
 - Footer sits in document flow (not `fixed-bottom`). If the page cannot scroll, show it; otherwise keep it hidden until the visitor reaches the bottom.
-- **Charms:** small composed scatter in the gutters and beside/below the socials, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, film reel, whittling, theater masks, hammer, screwdriver, vinyl discs. Vinyl fill is very light; grooves/edge/label stay darker. No whisk, nuts, wrench, frying pan, drone, camera, notebook, perfume, or razor.
+- **Charms:** small composed scatter in the gutters and below the quote, mixed sizes, rotated, no collisions. Motifs: teapot/cup, coffee mug, rolling pin, bike, whittling, theater masks, hammer, screwdriver, vinyl discs. No film-reel/wheel. Vinyls are large and sit in the gutters (slight peek). Grooves/edge/label stay darker than the disc fill.
 - **Steam:** optional wisps on the teapot, cup, and coffee mug. Kill under reduced motion.
 - **Narrow viewports (≲992px):** hide charms and vinyls (gutters are gone). Never overlap body copy.
 - Honor `prefers-reduced-motion`: freeze rings and steam.

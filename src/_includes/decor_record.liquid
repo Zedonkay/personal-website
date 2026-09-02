@@ -1,7 +1,7 @@
 <svg class="decor-record {{ include.class }}" viewBox="0 0 200 200" focusable="false">
   <circle class="record-fill" cx="100" cy="100" r="96"></circle>
   <circle class="record-edge" cx="100" cy="100" r="96"></circle>
-  {% assign grooves = "88,76,64,52,40" | split: "," %}
+  {% assign grooves = "90,80,70,60,50,40" | split: "," %}
   {% for r in grooves %}
     <circle class="record-groove" cx="100" cy="100" r="{{ r }}"></circle>
   {% endfor %}
