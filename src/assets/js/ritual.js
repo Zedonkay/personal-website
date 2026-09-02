@@ -137,7 +137,7 @@ function playAct(ritual, act, done) {
     if (frame == null) {
       finish();
     } else {
-      ritual.style.setProperty("--ritual-react-pos", `${-frame * 100}% 0`);
+      ritual.style.setProperty("--ritual-react-pos", `${(frame / 7) * 100}% 0`);
       ritual.classList.add("is-react");
       timers.push(window.setTimeout(finish, HOLD_MS));
     }
@@ -314,6 +314,7 @@ function fitRevealHeight(ritual, moment, quote) {
   const height = Math.ceil(quote.getBoundingClientRect().height);
   if (height < 8) return;
   ritual.style.setProperty("--ritual-h", `${height}px`);
+  ritual.style.width = `${Math.round((height * 192) / 208)}px`;
   moment.style.minHeight = `${height}px`;
 }
 

@@ -190,21 +190,22 @@ body.fixed-top-nav {
   }
 
   .clearfix > .about-lead {
-    margin: 0.35rem 0 1rem;
-    padding: 0.5rem 0;
-    border-top: 1px solid color-mix(in srgb, var(--global-title-color) 32%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, var(--global-title-color) 32%, transparent);
+    margin: 1.05rem 1.7em 1.2rem;
+    padding: 0;
+    border: 0;
     color: var(--global-title-color);
+    font-size: 1.14em;
+    line-height: 1.45;
     font-style: italic;
     font-variation-settings:
       "WONK" 1,
-      "SOFT" 36,
-      "opsz" 22;
+      "SOFT" 40,
+      "opsz" 28;
   }
 
   @media (min-width: 576px) {
     .clearfix > .about-lead {
-      margin-right: calc(30% + 1rem);
+      margin-right: calc(30% + 1rem + 1.7em);
     }
   }
 
@@ -252,8 +253,9 @@ body.fixed-top-nav {
     }
 
     .clearfix > .about-lead {
-      margin: 0.2rem calc(30% + 1rem) 0.75rem 0;
-      padding: 0.4rem 0;
+      margin: 0.7rem calc(30% + 1rem + 1.5em) 0.8rem 1.5em;
+      padding: 0;
+      font-size: 1.1em;
     }
 
     .identity-moment {
@@ -1433,12 +1435,12 @@ footer.is-deferred {
 .ritual {
   --ritual-h: #{$ritual-h};
   height: var(--ritual-h);
+  width: calc(#{$ritual-h} * 192 / 208);
   aspect-ratio: 192 / 208;
-  width: auto;
   background-image: var(--ritual-sheet);
   background-repeat: no-repeat;
   background-size: 600% 300%;
-  background-position: 0 0;
+  background-position: 0% 0%;
   filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
 }
 
@@ -1524,7 +1526,7 @@ footer.is-deferred {
 .ritual.is-glance {
   background-image: var(--ritual-sheet);
   background-size: 600% 300%;
-  background-position: 0 -200%;
+  background-position: 0% 100%;
 }
 
 .ritual.is-still {
@@ -1561,31 +1563,31 @@ footer.is-deferred {
 
 @keyframes ritual-idle {
   from {
-    background-position: 0 0;
+    background-position: 0% 0%;
   }
 
   to {
-    background-position: -600% 0;
+    background-position: calc(100% * 6 / 5) 0%;
   }
 }
 
 @keyframes ritual-wave {
   from {
-    background-position: 0 -100%;
+    background-position: 0% 50%;
   }
 
   to {
-    background-position: -400% -100%;
+    background-position: 80% 50%;
   }
 }
 
 @keyframes ritual-run-frames {
   from {
-    background-position: 0 0;
+    background-position: 0% 0%;
   }
 
   to {
-    background-position: -800% 0;
+    background-position: calc(100% * 8 / 7) 0%;
   }
 }
 
@@ -1601,21 +1603,21 @@ footer.is-deferred {
 
 @keyframes ritual-jump {
   from {
-    background-position: 0 0;
+    background-position: 0% 0%;
   }
 
   to {
-    background-position: -500% 0;
+    background-position: calc(100% * 5 / 4) 0%;
   }
 }
 
 @keyframes ritual-wait {
   from {
-    background-position: 0 0;
+    background-position: 0% 0%;
   }
 
   to {
-    background-position: -600% 0;
+    background-position: calc(100% * 6 / 5) 0%;
   }
 }
 
