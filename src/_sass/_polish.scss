@@ -1303,7 +1303,8 @@ $ritual-h: 4.5rem;
   height: 100%;
   overflow: visible;
   transform: rotate(var(--record-from, 0deg));
-  animation: record-spin 88s linear infinite;
+  // 33 1/3 RPM = one revolution every 1.8 seconds.
+  animation: record-spin 1.8s linear infinite;
 }
 
 .record-fill {
