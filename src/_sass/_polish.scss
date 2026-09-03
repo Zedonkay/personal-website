@@ -1533,7 +1533,8 @@ footer.is-deferred {
 
 .identity-moment {
   position: relative;
-  overflow: hidden;
+  // Animated poses are allowed to extend beyond the resting sprite bounds.
+  overflow: visible;
   min-height: $ritual-h;
   margin: 1.7rem 0 2rem;
   padding: 0.2rem 0 0.4rem;
@@ -1548,6 +1549,9 @@ footer.is-deferred {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: 0 0;
+  // A pose may paint beyond its resting sprite frame; never clip it locally.
+  overflow: visible;
+  max-width: none;
   filter: drop-shadow(0 8px 10px color-mix(in srgb, var(--color-accent) 38%, transparent));
 }
 
@@ -1662,7 +1666,8 @@ footer.is-deferred {
   min-height: $ritual-h;
   margin-top: 2.6rem;
   margin-bottom: 0.15rem;
-  overflow: hidden;
+  // Animated poses are allowed to extend beyond the runner's resting bounds.
+  overflow: visible;
 }
 
 .ritual--companion {

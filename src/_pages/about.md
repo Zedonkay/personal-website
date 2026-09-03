@@ -24,7 +24,7 @@ latest_posts:
 
 I'm **Ishayu Shikhare**, an undergraduate studying Electrical and Computer Engineering at Carnegie Mellon University.
 
-I'm curious how we can enable robots to operate reliably in environments with difficult dynamics. I believe adaptation is a promising path towards that goal.
+I’m curious about how we can enable robots to operate reliably in environments with complex dynamics. I believe adaptation is a promising approach.
 {: .about-lead}
 
 Currently, I'm at the **[LeCAR Lab](https://lecar-lab.github.io/index.html)**, advised by [Prof. Guanya Shi](https://www.gshi.me), where I work on sim-to-real adaptation for world models. My previous project at LeCAR was **[FADA](https://lecar-lab.github.io/FADA-humanoid/)**, where I helped develop few-shot domain adaptation for humanoid locomotion and whole-body tracking. Before joining LeCAR, I was at **[The AirLab](https://theairlab.org)** under [Prof. Sebastian Scherer](https://www.ri.cmu.edu/ri-faculty/sebastian-scherer/) working on uncertainty and semantics-aware navigation for quadrotors in wildfire environments.
