@@ -3,8 +3,6 @@ layout: post
 title: A new style of blog post
 date: 2026-09-05 12:00:00
 description: Handwritten posts, a fountain pen, and writing without over-editing.
-categories: musings
-series: writing
 ---
 
 I recently sought to bring life to this blog. Unfortunately, I found that I too easily fell into the trap of over-editing, to the point that my posts lost my voice.

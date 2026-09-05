@@ -1,11 +1,8 @@
-# Musing series (subcategories under the musings category).
-# On a post, set `categories: musings` and `series: <slug>`.
+# Series are optional groupings inside a top-level category (today: musings).
+# On a post, set `categories: musings` and optionally `series: <slug>`.
 # Add a series here to control its label and the order of the blog filters.
 # Avoid YAML booleans as slugs or labels (`on`, `On`, `off`, `yes`, `no`).
 series:
-  - slug: on-essays
-    label: "On"
-    parent: musings
-  - slug: writing
-    label: writing
+  - slug: a-curious-life
+    label: A curious life
     parent: musings

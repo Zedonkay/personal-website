@@ -4,7 +4,7 @@ title: On knowledge
 date: 2026-09-05 10:00:00
 description: Curiosity, the company of the curious, and what a PhD actually is.
 categories: musings
-series: on-essays
+series: a-curious-life
 ---
 
 I have always loved learning. If I had to summarize what I am most passionate about in one word, that word would be learning.

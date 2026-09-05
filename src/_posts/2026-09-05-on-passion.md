@@ -4,7 +4,7 @@ title: On passion
 date: 2026-09-05 11:00:00
 description: A paper store, a school motto, and being in love with your work.
 categories: musings
-series: on-essays
+series: a-curious-life
 ---
 
 I've spent much of my free time this past week at a paper store learning about paper. What a joy it must be to run a store for something you love so much.

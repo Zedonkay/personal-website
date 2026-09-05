@@ -4,7 +4,7 @@ title: On leisure
 date: 2026-09-05 09:00:00
 description: Scholē, education, and a world where artists, craftsmen, and scientists are free to practice.
 categories: musings
-series: on-essays
+series: a-curious-life
 ---
 
 Aristotle believed leisure to be the ultimate goal of human life. To our modern sensibilities this may seem odd. I believe here it is important to perhaps think deeper.
