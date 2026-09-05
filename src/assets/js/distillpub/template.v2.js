@@ -2692,9 +2692,18 @@ d-citation-list .references .title {
         },
 
         tokenize: function (text, grammar) {
+          if (!grammar || grammar === Object.prototype || grammar === Function.prototype) {
+            return [];
+          }
           var rest = grammar.rest;
-          if (rest) {
+          if (rest && rest !== Object.prototype) {
             for (var token in rest) {
+              if (token === "__proto__" || token === "constructor" || token === "prototype") {
+                continue;
+              }
+              if (!Object.prototype.hasOwnProperty.call(rest, token)) {
+                continue;
+              }
               grammar[token] = rest[token];
             }
 
