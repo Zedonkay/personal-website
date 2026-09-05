@@ -88,6 +88,16 @@ items:
     note: >
       Like what the author has to say.
 
+  - title: "This Is Water"
+    creator: David Foster Wallace
+    source: Kenyon College
+    url: https://www.kenyon.edu/news/archive/this-is-water/
+    type: article
+    date: 2005-05-21
+    image: /assets/img/library/this-is-water.jpg
+    note: >
+      On paying attention instead of running on default settings.
+
   - title: "Still Standing"
     source: Business Insider
     url: https://www.businessinsider.com/show/still-standing
