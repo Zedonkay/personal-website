@@ -105,7 +105,7 @@ ninja.data = [{
         },
       },{id: "library-slaughterhouse-five",
         title: "Slaughterhouse-Five",
-        description: "Intriguing.",
+        description: "I don&#39;t want to get in the way of this one.",
         section: "Library",
         handler: () => {
           window.open("https://en.wikipedia.org/wiki/Slaughterhouse-Five", "_blank");
