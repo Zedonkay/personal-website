@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/library/";
           },
-        },{id: "post-a-new-style-of-blog-post",
+        },{id: "post-in-defense-of-bad-coffee",
+        
+          title: "In defense of bad coffee",
+        
+        description: "Goodness, greatness, and staying open to cups we do not enjoy.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/in-defense-of-bad-coffee/";
+          
+        },
+      },{id: "post-a-new-style-of-blog-post",
         
           title: "A new style of blog post",
         
@@ -74,7 +85,7 @@ ninja.data = [{
         
           title: "On leisure",
         
-        description: "Schole, education, and a world where artists, craftsmen, and scientists are free to practice.",
+        description: "Scholē, education, and a world where artists, craftsmen, and scientists are free to practice.",
         section: "Posts",
         handler: () => {
           
