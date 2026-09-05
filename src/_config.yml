@@ -261,7 +261,7 @@ jekyll-archives:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
 display_tags: ["food", "hobbies", "cinema"] # subject tags shown on the blog index (only if a published post uses them)
-display_categories: ["life", "research", "musings"] # top-level post categories; empty ones stay hidden until used
+display_categories: ["musings", "life", "research"] # top-level post categories; empty ones stay hidden until used
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

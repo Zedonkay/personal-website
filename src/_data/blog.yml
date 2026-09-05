@@ -1,5 +1,5 @@
-# Series are optional groupings inside a top-level category (today: musings).
-# On a post, set `categories: musings` and optionally `series: <slug>`.
+# Series are optional groupings inside a top-level category.
+# On a post, set `categories: musings` or `categories: life` and optionally `series: <slug>`.
 # Add a series here to control its label and the order of the blog filters.
 # Avoid YAML booleans as slugs or labels (`on`, `On`, `off`, `yes`, `no`).
 series:
