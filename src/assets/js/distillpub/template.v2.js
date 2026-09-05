@@ -4243,8 +4243,11 @@ ${css}
       const codeTag = this.shadowRoot.querySelector("#code-container");
 
       if (this.hasAttribute("block")) {
-        // normalize the tab indents
-        content = content.replace(/\n/, "");
+        // normalize the tab indents (strip only the first newline)
+        const firstNewline = content.indexOf("\n");
+        if (firstNewline !== -1) {
+          content = content.slice(0, firstNewline) + content.slice(firstNewline + 1);
+        }
         const tabs = content.match(/\s*/);
         content = content.replace(new RegExp("\n" + tabs, "g"), "\n");
         content = content.trim();
@@ -4655,7 +4658,7 @@ d-references {
   }
 
   function renderTOC(element, headings) {
-    let ToC = `
+    element.innerHTML = `
   <style>
 
   d-toc {
@@ -4679,7 +4682,12 @@ d-references {
   </style>
   <nav role="navigation" class="table-of-contents"></nav>
   <h2>Table of contents</h2>
-  <ul>`;
+  <ul></ul>`;
+
+    const list = element.querySelector("ul");
+    if (!list) {
+      return;
+    }
 
     for (const el of headings) {
       // should element be included in TOC?
@@ -4687,20 +4695,23 @@ d-references {
       const isException = el.getAttribute("no-toc");
       if (isInTitle || isException) continue;
       // create TOC entry
-      const title = el.textContent;
-      const link = "#" + el.getAttribute("id");
-
-      let newLine = "<li>" + '<a href="' + link + '">' + title + "</a>" + "</li>";
-      if (el.tagName == "H3") {
-        newLine = "<ul>" + newLine + "</ul>";
-      } else {
-        newLine += "<br>";
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      const headingId = el.getAttribute("id");
+      if (headingId) {
+        link.setAttribute("href", "#" + headingId);
       }
-      ToC += newLine;
+      link.textContent = el.textContent;
+      item.appendChild(link);
+      if (el.tagName == "H3") {
+        const nested = document.createElement("ul");
+        nested.appendChild(item);
+        list.appendChild(nested);
+      } else {
+        list.appendChild(item);
+        list.appendChild(document.createElement("br"));
+      }
     }
-
-    ToC += "</ul></nav>";
-    element.innerHTML = ToC;
   }
 
   // Copyright 2018 The Distill Template Authors
