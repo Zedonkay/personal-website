@@ -37,7 +37,51 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/library/";
           },
-        },{id: "library-slaughterhouse-five",
+        },{id: "post-a-new-style-of-blog-post",
+        
+          title: "A new style of blog post",
+        
+        description: "Handwritten posts, a fountain pen, and writing without over-editing.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/a-new-style-of-blog-post/";
+          
+        },
+      },{id: "post-on-passion",
+        
+          title: "On passion",
+        
+        description: "A paper store, a school motto, and being in love with your work.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/on-passion/";
+          
+        },
+      },{id: "post-on-knowledge",
+        
+          title: "On knowledge",
+        
+        description: "Curiosity, the company of the curious, and what a PhD actually is.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/on-knowledge/";
+          
+        },
+      },{id: "post-on-leisure",
+        
+          title: "On leisure",
+        
+        description: "Schole, education, and a world where artists, craftsmen, and scientists are free to practice.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/on-leisure/";
+          
+        },
+      },{id: "library-slaughterhouse-five",
         title: "Slaughterhouse-Five",
         description: "Intriguing.",
         section: "Library",
