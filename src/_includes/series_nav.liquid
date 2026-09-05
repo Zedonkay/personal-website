@@ -1,0 +1,20 @@
+{% if page.series %}
+  {% assign series_posts = site.posts | where: 'series', page.series | sort: 'date' %}
+  {% if series_posts.size > 1 %}
+    {% capture series_title %}{% include series_label.liquid slug=page.series %}{% endcapture %}
+    <nav class="series-nav" aria-label="{{ series_title | strip }} series">
+      <p class="series-nav-label">{{ series_title | strip }}</p>
+      <ol>
+        {% for post in series_posts %}
+          {% if post.url == page.url %}
+            <li class="is-current" aria-current="page">{{ post.title }}</li>
+          {% else %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ol>
+    </nav>
+  {% endif %}
+{% endif %}

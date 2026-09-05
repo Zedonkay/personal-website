@@ -98,7 +98,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Ishayu's Blog # blog_name will be displayed in your blog page
-blog_description: Writing about life, and sometimes research.
+blog_description: Short musings, notes on life, and sometimes research.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -261,7 +261,7 @@ jekyll-archives:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
 display_tags: ["food", "hobbies", "cinema"] # subject tags shown on the blog index (only if a published post uses them)
-display_categories: ["life", "research"] # the two buckets: personal writing vs research/work
+display_categories: ["life", "research", "musings"] # longer personal writing, research, and short musings
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

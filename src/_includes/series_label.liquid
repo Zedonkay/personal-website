@@ -1,0 +1,7 @@
+{%- assign series_label = include.slug -%}
+{%- for series_item in site.data.blog.series -%}
+  {%- if series_item.slug == include.slug -%}
+    {%- assign series_label = series_item.label -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- series_label -}}

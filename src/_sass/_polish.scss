@@ -662,6 +662,15 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   }
 }
 
+.blog-filters .blog-series-filters {
+  p,
+  li {
+    padding-top: 0.15rem;
+    padding-bottom: 0.85rem;
+    font-size: 0.92rem;
+  }
+}
+
 .library-filters,
 .project-filters {
   margin-bottom: 0.25rem;
@@ -695,10 +704,57 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   }
 }
 
+.blog-index .post-list > li.post-musing {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .blog-filter-empty {
   color: var(--global-text-color-light);
   text-align: center;
   padding: 2rem 0.5rem;
+}
+
+.series-nav {
+  margin: 2.25rem 0 0.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--global-divider-color);
+
+  .series-nav-label {
+    margin: 0 0 0.65rem;
+    color: var(--global-text-color-light);
+    font-size: 0.82rem;
+    font-weight: 650;
+    letter-spacing: 0.03em;
+  }
+
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    color: var(--global-text-color-light);
+    font-size: 0.95rem;
+  }
+
+  a {
+    color: var(--global-text-color);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+
+  li.is-current {
+    color: var(--global-title-color);
+    font-weight: 650;
+  }
 }
 
 .library-empty {

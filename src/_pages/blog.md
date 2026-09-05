@@ -29,7 +29,13 @@ pagination:
   </div>
   {% endif %}
 
+{% assign blog_series = site.data.blog.series %}
+{% if blog_series == nil %}
+{% assign blog_series = "" | split: "" %}
+{% endif %}
+
 {% assign shown_filters = 0 %}
+{% assign shown_series = 0 %}
 {% for tag in site.display_tags %}
 {% if site.tags[tag] and site.tags[tag].size > 0 %}
 {% assign shown_filters = shown_filters | plus: 1 %}
@@ -40,11 +46,18 @@ pagination:
 {% assign shown_filters = shown_filters | plus: 1 %}
 {% endif %}
 {% endfor %}
+{% for series_item in blog_series %}
+{% assign series_posts = site.posts | where: "series", series_item.slug %}
+{% if series_posts.size > 0 %}
+{% assign shown_filters = shown_filters | plus: 1 %}
+{% assign shown_series = shown_series | plus: 1 %}
+{% endif %}
+{% endfor %}
 
 {% if shown_filters > 0 %}
 
   <div class="tag-category-list blog-filters">
-    <ul class="p-0 m-0">
+    <ul class="p-0 m-0 blog-primary-filters">
       {% assign filter_index = 0 %}
       {% for tag in site.display_tags %}
         {% if site.tags[tag] and site.tags[tag].size > 0 %}
@@ -73,6 +86,25 @@ pagination:
         {% endif %}
       {% endfor %}
     </ul>
+    {% if shown_series > 0 %}
+    <ul class="p-0 m-0 blog-series-filters">
+      {% assign series_index = 0 %}
+      {% for series_item in blog_series %}
+        {% assign series_posts = site.posts | where: "series", series_item.slug %}
+        {% if series_posts.size > 0 %}
+        {% if series_index > 0 %}
+          <p>&bull;</p>
+        {% endif %}
+        <li>
+          <a href="#series-{{ series_item.slug | slugify }}" data-blog-filter="series-{{ series_item.slug | slugify }}">
+            <i class="fa-solid fa-bookmark fa-sm"></i> {{ series_item.label }}
+          </a>
+        </li>
+        {% assign series_index = series_index | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
   </div>
   {% endif %}
 
@@ -136,8 +168,10 @@ pagination:
     {% assign categories = post.categories | join: "" %}
 
     <li
+      {% if post.categories contains 'musings' %}class="post-musing"{% endif %}
       data-blog-tags="{% for tag in post.tags %}{{ tag | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
       data-blog-categories="{% for category in post.categories %}{{ category | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
+      data-blog-series="{{ post.series | slugify }}"
       data-blog-year="{{ year }}"
     >
 
@@ -190,6 +224,12 @@ pagination:
                 &nbsp;
               {% endunless %}
               {% endfor %}
+          {% endif %}
+
+          {% if post.series %}
+          &nbsp; &middot; &nbsp;
+            <a href="#series-{{ post.series | slugify }}" data-blog-filter="series-{{ post.series | slugify }}">
+              <i class="fa-solid fa-bookmark fa-sm"></i> {% include series_label.liquid slug=post.series %}</a>
           {% endif %}
     </p>
 

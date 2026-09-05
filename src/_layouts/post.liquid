@@ -55,6 +55,16 @@ layout: default
           {% endunless %}
         {% endfor %}
       {% endif %}
+      {% if page.series %}
+        &nbsp; &middot; &nbsp;
+        {% if url_beginning == '/blog/' %}
+          <a href="{{ '/blog/' | relative_url }}#series-{{ page.series | slugify }}">
+            <i class="fa-solid fa-bookmark fa-sm"></i> {% include series_label.liquid slug=page.series -%}
+          </a>
+        {% else %}
+          <i class="fa-solid fa-bookmark fa-sm"></i> {% include series_label.liquid slug=page.series %}
+        {% endif %}
+      {% endif %}
     </p>
   </header>
 
@@ -70,6 +80,8 @@ layout: default
     </div>
   </article>
 
+  {% include series_nav.liquid %}
+
   {% if page.citation %}
     {% include citation.liquid %}
   {% endif %}
@@ -83,7 +95,10 @@ layout: default
 
   {% if site.related_blog_posts and site.related_blog_posts.enabled %}
     {% if page.related_posts == null or page.related_posts %}
-      {% include related_posts.liquid %}
+      {% assign series_posts = site.posts | where: 'series', page.series %}
+      {% if page.series == null or series_posts.size <= 1 %}
+        {% include related_posts.liquid %}
+      {% endif %}
     {% endif %}
   {% endif %}
 
