@@ -141,13 +141,6 @@ ninja.data = [{
         handler: () => {
           window.open("https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1", "_blank");
         },
-      },{id: "library-gen-z-feels-weird-talking-about-drinking-and-it-39-s-forcing-bars-to-change",
-        title: "Gen Z feels weird talking about drinking — and it&#39;s forcing bars to...",
-        description: "I&#39;ve gotten into making drinks but don&#39;t drink, so the rise of craft zero-proof cocktails is something I appreciate.",
-        section: "Library",
-        handler: () => {
-          window.open("https://www.businessinsider.com/gen-z-unusual-approach-alcohol-forcing-bars-change-menu-strategy-2025-12", "_blank");
-        },
       },{id: "library-still-standing-so-expensive",
         title: "Still Standing / So Expensive",
         description: "Gives incredible people, artists, craftsmen, and artisans a platform in a world that so often shuns or neglects creative pursuits. So Expensive is a companion, though that applies more to the handmade expensive things.",
