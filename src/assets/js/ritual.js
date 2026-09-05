@@ -220,12 +220,6 @@ function pointerOnRitual(ritual, x, y) {
   return stack.includes(ritual);
 }
 
-function hoverPool(ritual, canDash) {
-  const pool = HOVER_ACTS.slice();
-  if (canDash && dashPlan(ritual)) pool.push("dash");
-  return pool;
-}
-
 function attachLiveMotion(ritual, options = {}) {
   let lastAct = null;
   let hovering = false;
@@ -240,7 +234,7 @@ function attachLiveMotion(ritual, options = {}) {
   };
 
   const nextHoverAct = () => {
-    const act = pickExcept(hoverPool(ritual, options.canDash), lastAct);
+    const act = pickExcept(HOVER_ACTS, lastAct);
     lastAct = act;
     return act;
   };
