@@ -1,6 +1,6 @@
 # Two orthogonal axes besides series:
 #   categories: musings | life | research
-#   form: postcard | essay | commentary
+#   form: postcard | letter | commentary
 # Series are optional groupings inside a category.
 # On a post, set `categories`, optionally `form: <slug>`, and optionally `series: <slug>`.
 # Add a form or series here to control its label and the order of the blog filters.
@@ -8,8 +8,8 @@
 forms:
   - slug: postcard
     label: postcard
-  - slug: essay
-    label: essay
+  - slug: letter
+    label: letter
   - slug: commentary
     label: commentary
 series:
