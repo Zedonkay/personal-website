@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/library/";
           },
-        },{id: "post-in-defense-of-bad-coffee",
+        },{id: "post-on-language",
+        
+          title: "On Language",
+        
+        description: "Writing to be defensible rather than honest, and resolving to live authentically.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/on-language/";
+          
+        },
+      },{id: "post-in-defense-of-bad-coffee",
         
           title: "In defense of bad coffee",
         
