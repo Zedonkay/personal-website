@@ -37,40 +37,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/library/";
           },
-        },{id: "post-hobbies",
-        
-          title: "Hobbies",
-        
-        description: "Slowing down and smelling the roses",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/intentionality/";
-          
-        },
-      },{id: "post-food",
-        
-          title: "Food",
-        
-        description: "My journey through cooking",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/food/";
-          
-        },
-      },{id: "post-launching-my-personal-website",
-        
-          title: "Launching My Personal Website",
-        
-        description: "Building a digital home for research and hobbies",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/personal-website/";
-          
-        },
-      },{id: "library-slaughterhouse-five",
+        },{id: "library-slaughterhouse-five",
         title: "Slaughterhouse-Five",
         description: "Intriguing.",
         section: "Library",
