@@ -37,7 +37,7 @@ At the **[LeCAR Lab](https://lecar-lab.github.io/)**, advised by [Prof. Guanya S
 
 After that update, a Unitree G1 can track a line up a narrow slope, dance with a 3.2 kg front load, and run Kung Fu on soft mats; a Booster T1 can pull a 6 kg laundry basket and circle-walk with an asymmetric arm payload. Zero-shot transfer fails at these tasks.
 
-This is joint work with [Angchen Xie](https://angchenxie.github.io/), [Nikhil Sobanbabu](https://nike353.github.io/), [Alan Wang](https://www.linkedin.com/in/alanwang137825/), [Max Simchowitz](https://msimchowitz.github.io/), and [Guanya Shi](https://www.gshi.me/). The paper is in submission to CoRL 2026 and was accepted at the RSS 2026 Sim2Real Workshop.
+This is joint work with [Angchen Xie](https://angchenxie.github.io/), [Nikhil Sobanbabu](https://nike353.github.io/), [Alan Wang](https://www.linkedin.com/in/alanwang137825/), [Max Simchowitz](https://msimchowitz.github.io/), and [Guanya Shi](https://www.gshi.me/). The paper was accepted to CoRL 2026 and the RSS 2026 Sim2Real Workshop.
 {% nocite fada2026 %}
 
 ---

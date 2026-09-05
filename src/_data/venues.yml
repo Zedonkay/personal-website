@@ -2,6 +2,10 @@
   url: https://www.ieee-ras.org/conferences-workshops/fully-sponsored/icra
   color: "#B58A80"
 
+"CoRL":
+  url: https://www.corl.org/
+  color: "#6E7F78"
+
 "AJP":
   url: https://aapt.scitation.org/journal/ajp
   color: "#556B5D"
