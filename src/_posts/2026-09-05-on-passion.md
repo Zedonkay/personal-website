@@ -4,6 +4,7 @@ title: On passion
 date: 2026-09-05 11:00:00
 description: A paper store, a school motto, and being in love with your work.
 categories: musings
+form: postcard
 series: a-curious-life
 ---
 

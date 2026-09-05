@@ -1,7 +1,17 @@
-# Series are optional groupings inside a top-level category.
-# On a post, set `categories: musings` or `categories: life` and optionally `series: <slug>`.
-# Add a series here to control its label and the order of the blog filters.
+# Two orthogonal axes besides series:
+#   categories: musings | life | research
+#   form: postcard | essay | commentary
+# Series are optional groupings inside a category.
+# On a post, set `categories`, optionally `form: <slug>`, and optionally `series: <slug>`.
+# Add a form or series here to control its label and the order of the blog filters.
 # Avoid YAML booleans as slugs or labels (`on`, `On`, `off`, `yes`, `no`).
+forms:
+  - slug: postcard
+    label: postcard
+  - slug: essay
+    label: essay
+  - slug: commentary
+    label: commentary
 series:
   - slug: a-curious-life
     label: A curious life

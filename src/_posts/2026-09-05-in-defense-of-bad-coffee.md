@@ -4,6 +4,7 @@ title: In defense of bad coffee
 date: 2026-09-05 13:00:00
 description: Goodness, greatness, and staying open to cups we do not enjoy.
 categories: musings
+form: essay
 ---
 
 Coffee is one of the wonderful indulgences of life. I don't think it's hard to see that I deeply appreciate taking something raw and unrefined and seeking to perfect it. I often find however that I encounter cups of coffee I do not enjoy precisely at those shops that others rave about. I think that the simple explanation is that taste and the "goodness" of things is subjective. However, I believe this to be a far more interesting question than what that reading gives it credit for.

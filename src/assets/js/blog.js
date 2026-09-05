@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const value = id.slice(sep + 1);
     if (kind === "tag") return tokenList(item.getAttribute("data-blog-tags")).includes(value);
     if (kind === "category") return tokenList(item.getAttribute("data-blog-categories")).includes(value);
+    if (kind === "form") return item.getAttribute("data-blog-form") === value;
     if (kind === "series") return item.getAttribute("data-blog-series") === value;
     if (kind === "year") return item.getAttribute("data-blog-year") === value;
     return false;

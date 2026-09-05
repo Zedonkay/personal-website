@@ -55,6 +55,16 @@ layout: default
           {% endunless %}
         {% endfor %}
       {% endif %}
+      {% if page.form %}
+        &nbsp; &middot; &nbsp;
+        {% if url_beginning == '/blog/' %}
+          <a href="{{ '/blog/' | relative_url }}#form-{{ page.form | slugify }}">
+            <i class="fa-solid fa-feather fa-sm"></i> {% include form_label.liquid slug=page.form -%}
+          </a>
+        {% else %}
+          <i class="fa-solid fa-feather fa-sm"></i> {% include form_label.liquid slug=page.form %}
+        {% endif %}
+      {% endif %}
       {% if page.series %}
         &nbsp; &middot; &nbsp;
         {% if url_beginning == '/blog/' %}

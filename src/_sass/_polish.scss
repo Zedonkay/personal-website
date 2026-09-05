@@ -662,6 +662,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   }
 }
 
+.blog-filters .blog-form-filters,
 .blog-filters .blog-series-filters {
   p,
   li {
@@ -704,7 +705,7 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   }
 }
 
-.blog-index .post-list > li.post-musing {
+.blog-index .post-list > li.post-compact {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }

@@ -4,6 +4,7 @@ title: On leisure
 date: 2026-09-05 09:00:00
 description: Scholē, education, and a world where artists, craftsmen, and scientists are free to practice.
 categories: musings
+form: postcard
 series: a-curious-life
 ---
 

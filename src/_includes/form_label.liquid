@@ -1,0 +1,7 @@
+{%- assign form_label = include.slug -%}
+{%- for form_item in site.data.blog.forms -%}
+  {%- if form_item.slug == include.slug -%}
+    {%- assign form_label = form_item.label -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- form_label -}}

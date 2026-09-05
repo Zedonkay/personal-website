@@ -33,9 +33,14 @@ pagination:
 {% if blog_series == nil %}
 {% assign blog_series = "" | split: "" %}
 {% endif %}
+{% assign blog_forms = site.data.blog.forms %}
+{% if blog_forms == nil %}
+{% assign blog_forms = "" | split: "" %}
+{% endif %}
 
 {% assign shown_filters = 0 %}
 {% assign shown_series = 0 %}
+{% assign shown_forms = 0 %}
 {% for tag in site.display_tags %}
 {% if site.tags[tag] and site.tags[tag].size > 0 %}
 {% assign shown_filters = shown_filters | plus: 1 %}
@@ -44,6 +49,13 @@ pagination:
 {% for category in site.display_categories %}
 {% if site.categories[category] and site.categories[category].size > 0 %}
 {% assign shown_filters = shown_filters | plus: 1 %}
+{% endif %}
+{% endfor %}
+{% for form_item in blog_forms %}
+{% assign form_posts = site.posts | where: "form", form_item.slug %}
+{% if form_posts.size > 0 %}
+{% assign shown_filters = shown_filters | plus: 1 %}
+{% assign shown_forms = shown_forms | plus: 1 %}
 {% endif %}
 {% endfor %}
 {% for series_item in blog_series %}
@@ -86,6 +98,25 @@ pagination:
         {% endif %}
       {% endfor %}
     </ul>
+    {% if shown_forms > 0 %}
+    <ul class="p-0 m-0 blog-form-filters">
+      {% assign form_index = 0 %}
+      {% for form_item in blog_forms %}
+        {% assign form_posts = site.posts | where: "form", form_item.slug %}
+        {% if form_posts.size > 0 %}
+        {% if form_index > 0 %}
+          <p>&bull;</p>
+        {% endif %}
+        <li>
+          <a href="#form-{{ form_item.slug | slugify }}" data-blog-filter="form-{{ form_item.slug | slugify }}">
+            <i class="fa-solid fa-feather fa-sm"></i> {{ form_item.label }}
+          </a>
+        </li>
+        {% assign form_index = form_index | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
     {% if shown_series > 0 %}
     <ul class="p-0 m-0 blog-series-filters">
       {% assign series_index = 0 %}
@@ -166,9 +197,10 @@ pagination:
     {% assign categories = post.categories | join: "" %}
 
     <li
-      {% if post.categories contains 'musings' %}class="post-musing"{% endif %}
+      {% if post.form == 'postcard' or post.form == 'commentary' %}class="post-compact"{% endif %}
       data-blog-tags="{% for tag in post.tags %}{{ tag | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
       data-blog-categories="{% for category in post.categories %}{{ category | slugify }}{% unless forloop.last %} {% endunless %}{% endfor %}"
+      data-blog-form="{{ post.form | slugify }}"
       data-blog-series="{{ post.series | slugify }}"
       data-blog-year="{{ year }}"
     >
@@ -221,6 +253,12 @@ pagination:
                 &nbsp;
               {% endunless %}
               {% endfor %}
+          {% endif %}
+
+          {% if post.form %}
+          &nbsp; &middot; &nbsp;
+            <a href="#form-{{ post.form | slugify }}" data-blog-filter="form-{{ post.form | slugify }}">
+              <i class="fa-solid fa-feather fa-sm"></i> {% include form_label.liquid slug=post.form %}</a>
           {% endif %}
 
           {% if post.series %}

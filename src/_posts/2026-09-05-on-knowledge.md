@@ -4,6 +4,7 @@ title: On knowledge
 date: 2026-09-05 10:00:00
 description: Curiosity, the company of the curious, and what a PhD actually is.
 categories: musings
+form: postcard
 series: a-curious-life
 ---
 

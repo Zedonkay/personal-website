@@ -4,6 +4,7 @@ title: Hobbies
 date: 2026-07-06 14:30:00
 description: Slowing down and smelling the roses
 categories: life
+form: essay
 tags: [hobbies]
 published: false
 ---
