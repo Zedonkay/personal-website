@@ -11,7 +11,7 @@ Language has always been the academic subjects that causes me the most difficult
 
 I believe this cowardice to run fairly deeply. Due to my fear, I often find my writing seeks to be defensible rather than honest/
 
-I tend to think in quotes and anecdotes to illustrate my point, so here's one: I asked an actor friend about his craft. He explained that acting was incredibly simple. It was to live truthfully. If you are portraying a lion in a play, then for the duration of that play, you *are* a lion.
+I tend to think in quotes and anecdotes to illustrate my point, so here's one: I asked an actor friend about his craft. He explained that acting was incredibly simple. It was to live truthfully. If you are portraying a lion in a play, then for the duration of that play, you _are_ a lion.
 
 I believe a lot of my struggles with writing, and honestly with life as a whole stem from my inability to just be a lion.
 
