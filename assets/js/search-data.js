@@ -141,6 +141,13 @@ ninja.data = [{
         handler: () => {
           window.open("https://archive.nytimes.com/opinionator.blogs.nytimes.com/2012/06/30/the-busy-trap/?_r=1", "_blank");
         },
+      },{id: "library-this-is-water",
+        title: "This Is Water",
+        description: "On paying attention instead of running on default settings.",
+        section: "Library",
+        handler: () => {
+          window.open("https://www.kenyon.edu/news/archive/this-is-water/", "_blank");
+        },
       },{id: "library-still-standing-so-expensive",
         title: "Still Standing / So Expensive",
         description: "Gives incredible people, artists, craftsmen, and artisans a platform in a world that so often shuns or neglects creative pursuits. So Expensive is a companion, though that applies more to the handmade expensive things.",
