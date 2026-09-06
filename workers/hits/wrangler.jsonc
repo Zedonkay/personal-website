@@ -9,6 +9,12 @@
     "enabled": true,
     "head_sampling_rate": 1,
   },
+  "triggers": {
+    "crons": ["*/30 * * * *"],
+  },
+  "vars": {
+    "SMALLCOUNTER_ID": "1783365753",
+  },
   "routes": [
     {
       "pattern": "hits.ishayushikhare.com",

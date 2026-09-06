@@ -1,146 +1,188 @@
-const PIXEL = Uint8Array.from(atob("R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"), (c) => c.charCodeAt(0));
-
-const HOSTING_ASN =
-  /amazon|aws|google llc|google cloud|microsoft|azure|digitalocean|hetzner|ovh|linode|akamai|tencent|alibaba|huawei cloud|choopa|m247|datacamp|psychz|quadranet|leaseweb|contabo|vultr|oracle cloud|cloudflare|tier\.net|tier-net|colocrossing|serverius|hivelocity/i;
-
-const UA_BOT =
-  /bot|crawler|spider|crawl|slurp|wget|curl|python-requests|httpclient|go-http|scrapy|headless|preview|monitor|uptimerobot|pingdom|statuscake/i;
+const COUNTER_ID = "1783365753";
+const MONTH_ABBR = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+const MONTH_NAME = {
+  January: 1,
+  February: 2,
+  March: 3,
+  April: 4,
+  May: 5,
+  June: 6,
+  July: 7,
+  August: 8,
+  September: 9,
+  October: 10,
+  November: 11,
+  December: 12,
+};
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const url = new URL(request.url);
-
-    if (request.method === "OPTIONS") {
-      return new Response(null, { headers: corsHeaders(request) });
-    }
-
-    if (url.pathname === "/stats") {
-      return handleStats(request, url, env);
-    }
-
-    if (url.pathname === "/i.gif" && (request.method === "GET" || request.method === "HEAD")) {
-      if (request.method === "GET") {
-        ctx.waitUntil(persistHit(request, url, env));
+    if (url.pathname === "/stats") return handleStats(request, url, env);
+    if (url.pathname === "/sync" && (request.method === "GET" || request.method === "POST")) {
+      if (!(await tokenOk(request, url, env))) {
+        return new Response("Unauthorized", { status: 401, headers: { "WWW-Authenticate": "Bearer" } });
       }
-      return pixelResponse();
+      const result = await backupSmallCounter(env);
+      return Response.json(result);
     }
-
     return new Response("Not found", { status: 404 });
+  },
+
+  async scheduled(_controller, env) {
+    await backupSmallCounter(env);
   },
 };
 
-function corsHeaders(request) {
-  const origin = request.headers.get("Origin") || "*";
-  return {
-    "Access-Control-Allow-Origin": origin,
-    "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-    "Access-Control-Max-Age": "86400",
-    Vary: "Origin",
+async function backupSmallCounter(env) {
+  const id = env.SMALLCOUNTER_ID || COUNTER_ID;
+  const fetchedAt = new Date().toISOString();
+  const pages = {
+    recent: await fetchPage(`https://smallcounter.com/rc_stats/${id}/`),
+    top: await fetchPage(`https://smallcounter.com/cc_stats/${id}/`),
+    daily: await fetchPage(`https://smallcounter.com/hc_stats/${id}/`),
   };
-}
 
-function pixelResponse() {
-  return new Response(PIXEL, {
-    headers: {
-      "Content-Type": "image/gif",
-      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
-      Pragma: "no-cache",
-    },
-  });
-}
+  const recent = parseRecent(pages.recent);
+  const top = parseTop(pages.top);
+  const { daily, monthly, year } = parseDailyPage(pages.daily);
+  const parsed = { fetchedAt, recent, top, daily, monthly, year };
 
-function hintsFor(hit) {
-  const hints = [];
-  const ua = (hit.ua || "").toLowerCase();
-  const org = hit.as_org || "";
-  if (!hit.ua) hints.push("empty_ua");
-  if (hit.ua && UA_BOT.test(ua)) hints.push("ua_bot");
-  if (org && HOSTING_ASN.test(org)) hints.push("hosting_asn");
-  return hints;
-}
-
-function hitFromRequest(request, url) {
-  const cf = request.cf || {};
-  const hit = {
-    id: crypto.randomUUID(),
-    ts: new Date().toISOString(),
-    ip: request.headers.get("CF-Connecting-IP") || request.headers.get("X-Real-IP") || "",
-    path: clip(url.searchParams.get("p") || url.searchParams.get("path") || "", 512),
-    referrer: clip(request.headers.get("Referer") || url.searchParams.get("r") || "", 1024),
-    ua: clip(request.headers.get("User-Agent") || "", 1024),
-    accept_language: clip(request.headers.get("Accept-Language") || "", 256),
-    country: cf.country || "",
-    city: cf.city || "",
-    region: cf.region || "",
-    region_code: cf.regionCode || "",
-    postal_code: cf.postalCode || "",
-    timezone: cf.timezone || "",
-    continent: cf.continent || "",
-    latitude: cf.latitude != null ? String(cf.latitude) : "",
-    longitude: cf.longitude != null ? String(cf.longitude) : "",
-    colo: cf.colo || "",
-    asn: typeof cf.asn === "number" ? cf.asn : null,
-    as_org: cf.asOrganization || "",
-    http_protocol: cf.httpProtocol || "",
-    tls_version: cf.tlsVersion || "",
-    tls_cipher: cf.tlsCipher || "",
-  };
-  hit.hints = JSON.stringify(hintsFor(hit));
-  return hit;
-}
-
-function clip(value, max) {
-  return value.length > max ? value.slice(0, max) : value;
-}
-
-async function persistHit(request, url, env) {
-  const hit = hitFromRequest(request, url);
-  const date = hit.ts.slice(0, 10);
-  const key = `raw/${date}/${hit.id}.json`;
-
-  const writes = [];
+  const stamp = fetchedAt.replace(/[:.]/g, "-");
   if (env.LOGS) {
-    writes.push(env.LOGS.put(key, JSON.stringify(hit), { httpMetadata: { contentType: "application/json" } }));
+    const puts = [
+      env.LOGS.put(`smallcounter/${stamp}/parsed.json`, JSON.stringify(parsed, null, 2), {
+        httpMetadata: { contentType: "application/json" },
+      }),
+      env.LOGS.put(`smallcounter/${stamp}/rc.html`, pages.recent, { httpMetadata: { contentType: "text/html" } }),
+      env.LOGS.put(`smallcounter/${stamp}/cc.html`, pages.top, { httpMetadata: { contentType: "text/html" } }),
+      env.LOGS.put(`smallcounter/${stamp}/hc.html`, pages.daily, { httpMetadata: { contentType: "text/html" } }),
+    ];
+    await Promise.all(puts);
   }
+
   if (env.DB) {
-    writes.push(
-      env.DB.prepare(
-        `INSERT INTO hits (
-          id, ts, ip, path, referrer, ua, accept_language,
-          country, city, region, region_code, postal_code, timezone,
-          continent, latitude, longitude, colo, asn, as_org,
-          http_protocol, tls_version, tls_cipher, hints
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    const stmts = [];
+    for (const v of recent) {
+      stmts.push(
+        env.DB.prepare(
+          `INSERT OR IGNORE INTO sc_events (ip, seen_at, location, country, region, city, postal)
+           VALUES (?, ?, ?, ?, ?, ?, ?)`
+        ).bind(v.ip, v.seen_at, v.location, v.country, v.region, v.city, v.postal)
+      );
+    }
+    for (const d of daily) {
+      stmts.push(env.DB.prepare(`INSERT OR REPLACE INTO sc_daily (day, hits, updated_at) VALUES (?, ?, ?)`).bind(d.day, d.hits, fetchedAt));
+    }
+    for (const m of monthly) {
+      stmts.push(
+        env.DB.prepare(`INSERT OR REPLACE INTO sc_monthly (year_month, hits, updated_at) VALUES (?, ?, ?)`).bind(m.year_month, m.hits, fetchedAt)
+      );
+    }
+    stmts.push(
+      env.DB.prepare(`INSERT INTO sc_syncs (ts, recent_count, daily_count, monthly_total) VALUES (?, ?, ?, ?)`).bind(
+        fetchedAt,
+        recent.length,
+        daily.filter((d) => d.hits > 0).length,
+        monthly.reduce((n, m) => n + m.hits, 0)
       )
-        .bind(
-          hit.id,
-          hit.ts,
-          hit.ip,
-          hit.path,
-          hit.referrer,
-          hit.ua,
-          hit.accept_language,
-          hit.country,
-          hit.city,
-          hit.region,
-          hit.region_code,
-          hit.postal_code,
-          hit.timezone,
-          hit.continent,
-          hit.latitude,
-          hit.longitude,
-          hit.colo,
-          hit.asn,
-          hit.as_org,
-          hit.http_protocol,
-          hit.tls_version,
-          hit.tls_cipher,
-          hit.hints
-        )
-        .run()
     );
+    if (stmts.length) await env.DB.batch(stmts);
   }
-  await Promise.all(writes);
+
+  return {
+    fetchedAt,
+    stored_events: recent.length,
+    daily_days: daily.filter((d) => d.hits > 0).length,
+    monthly_total: monthly.reduce((n, m) => n + m.hits, 0),
+  };
+}
+
+async function fetchPage(url) {
+  const res = await fetch(url, { headers: { "User-Agent": "site-hits-backup/1.0 (+https://ishayushikhare.com)" } });
+  if (!res.ok) throw new Error(`fetch ${url} failed: ${res.status}`);
+  return res.text();
+}
+
+function parseRecent(html) {
+  const out = [];
+  const re =
+    /href="\/single_visitor\/(\d+\.\d+\.\d+\.\d+)\/">[\s\S]*?<\/td>\s*<td[^>]*>[\s\S]*?(?:<img[^>]*>)?\s*([^<]*?)\s*at (\d{2}:\d{2}:\d{2}) ([A-Z][a-z]{2})\/(\d{2})\/(\d{4})/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const seen_at = toIso(m[4], m[5], m[6], m[3]);
+    if (!seen_at) continue;
+    const loc = parseLocation(m[2]);
+    out.push({ ip: m[1], seen_at, ...loc });
+  }
+  return out;
+}
+
+function parseTop(html) {
+  const out = [];
+  const re = /href="\/single_visitor\/(\d+\.\d+\.\d+\.\d+)\/">[\s\S]*?<\/td>\s*<td[^>]*>\s*(\d+)\s*<\/td>\s*<td[^>]*>\s*(?:<img[^>]*>)?\s*([^<]+)/g;
+  let m;
+  while ((m = re.exec(html))) {
+    out.push({ ip: m[1], hits: Number(m[2]), ...parseLocation(m[3]) });
+  }
+  return out;
+}
+
+function parseDailyPage(html) {
+  const yearMatch = html.match(/Monthly Stats \((\d{4})\)/);
+  const year = yearMatch ? Number(yearMatch[1]) : new Date().getUTCFullYear();
+  const monthMatch = html.match(/Daily Stats \(([A-Za-z]+)\)/);
+  const month = MONTH_NAME[monthMatch?.[1]] || new Date().getUTCMonth() + 1;
+
+  const dailySec = sliceBetween(html, "Daily Stats (", "Monthly Stats");
+  const monthlySec = sliceBetween(html, "Monthly Stats (", "Page views stats");
+  const dailyHits = [...dailySec.matchAll(/title="(\d*)"/g)].map((x) => Number(x[1] || 0));
+  const monthlyHits = [...monthlySec.matchAll(/title="(\d*)"/g)].map((x) => Number(x[1] || 0));
+
+  const daily = dailyHits.map((hits, i) => ({
+    day: `${year}-${pad(month)}-${pad(i + 1)}`,
+    hits,
+  }));
+  const monthly = monthlyHits.map((hits, i) => ({
+    year_month: `${year}-${pad(i + 1)}`,
+    hits,
+  }));
+  return { daily, monthly, year };
+}
+
+function sliceBetween(html, start, end) {
+  const i = html.indexOf(start);
+  const j = html.indexOf(end, i + 1);
+  if (i < 0) return "";
+  return html.slice(i, j < 0 ? html.length : j);
+}
+
+function parseLocation(raw) {
+  const location = raw.replace(/\s+/g, " ").trim();
+  const parts = location
+    .split(" , ")
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const last = parts[parts.length - 1] || "";
+  const postal = /^\d{4,6}$/.test(last) ? parts.pop() : "";
+  return {
+    location,
+    country: parts[0] || "",
+    region: parts[1] || "",
+    city: parts[2] || "",
+    postal: postal || "",
+  };
+}
+
+function toIso(mon, day, year, time) {
+  const mi = MONTH_ABBR[mon];
+  if (mi == null) return "";
+  const [hh, mm, ss] = time.split(":").map(Number);
+  return new Date(Date.UTC(Number(year), mi, Number(day), hh, mm, ss)).toISOString();
+}
+
+function pad(n) {
+  return String(n).padStart(2, "0");
 }
 
 async function tokenOk(request, url, env) {
@@ -163,33 +205,27 @@ async function handleStats(request, url, env) {
   if (!(await tokenOk(request, url, env))) {
     return new Response("Unauthorized", { status: 401, headers: { "WWW-Authenticate": "Bearer" } });
   }
-  if (!env.DB) {
-    return Response.json({ error: "D1 not bound" }, { status: 503 });
-  }
+  if (!env.DB) return Response.json({ error: "D1 not bound" }, { status: 503 });
 
   const limit = Math.min(Math.max(Number(url.searchParams.get("limit") || 100), 1), 500);
-  const bots = url.searchParams.get("bots"); // include | only | exclude
-  let where = "";
-  if (bots === "exclude") where = "WHERE hints = '[]'";
-  else if (bots === "only") where = "WHERE hints != '[]'";
-
-  const [total, humans, flagged, rows] = await env.DB.batch([
-    env.DB.prepare("SELECT COUNT(*) AS n FROM hits"),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM hits WHERE hints = '[]'"),
-    env.DB.prepare("SELECT COUNT(*) AS n FROM hits WHERE hints != '[]'"),
-    env.DB.prepare(`SELECT * FROM hits ${where} ORDER BY ts DESC LIMIT ?`).bind(limit),
+  const [total, lastSync, dailySum, events, daily] = await env.DB.batch([
+    env.DB.prepare("SELECT COUNT(*) AS n FROM sc_events"),
+    env.DB.prepare("SELECT ts, recent_count, monthly_total FROM sc_syncs ORDER BY ts DESC LIMIT 1"),
+    env.DB.prepare("SELECT COALESCE(SUM(hits), 0) AS n FROM sc_monthly"),
+    env.DB.prepare("SELECT * FROM sc_events ORDER BY seen_at DESC LIMIT ?").bind(limit),
+    env.DB.prepare("SELECT * FROM sc_daily WHERE hits > 0 ORDER BY day DESC LIMIT 60"),
   ]);
 
   const payload = {
-    total: total.results[0]?.n ?? 0,
-    likely_human: humans.results[0]?.n ?? 0,
-    likely_bot: flagged.results[0]?.n ?? 0,
-    hits: rows.results,
+    source: "smallcounter",
+    stored_events: total.results[0]?.n ?? 0,
+    monthly_total: dailySum.results[0]?.n ?? lastSync.results[0]?.monthly_total ?? 0,
+    last_sync: lastSync.results[0] || null,
+    events: events.results,
+    daily: daily.results,
   };
 
-  if ((url.searchParams.get("format") || "html") === "json") {
-    return Response.json(payload);
-  }
+  if ((url.searchParams.get("format") || "html") === "json") return Response.json(payload);
   return new Response(statsHtml(payload), { headers: { "Content-Type": "text/html; charset=utf-8" } });
 }
 
@@ -202,47 +238,44 @@ function escapeHtml(value) {
 }
 
 function statsHtml(payload) {
-  const rows = payload.hits
-    .map((h) => {
-      const hints = h.hints && h.hints !== "[]" ? escapeHtml(h.hints) : "";
-      return `<tr>
-        <td>${escapeHtml(h.ts)}</td>
+  const rows = (payload.events || [])
+    .map(
+      (h) => `<tr>
+        <td>${escapeHtml(h.seen_at)}</td>
         <td>${escapeHtml(h.ip)}</td>
-        <td>${escapeHtml(h.country)} ${escapeHtml(h.region)} ${escapeHtml(h.city)}</td>
-        <td>${escapeHtml(h.as_org)} (${escapeHtml(h.asn)})</td>
-        <td>${escapeHtml(h.path)}</td>
-        <td title="${escapeHtml(h.ua)}">${escapeHtml((h.ua || "").slice(0, 80))}</td>
-        <td>${hints}</td>
-      </tr>`;
-    })
+        <td>${escapeHtml(h.location)}</td>
+      </tr>`
+    )
     .join("");
+  const days = (payload.daily || []).map((d) => `<tr><td>${escapeHtml(d.day)}</td><td>${escapeHtml(d.hits)}</td></tr>`).join("");
+  const sync = payload.last_sync?.ts || "never";
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Site hits</title>
+  <title>SmallCounter backup</title>
   <style>
     body { font: 14px/1.4 system-ui, sans-serif; margin: 24px; color: #111; }
     .nums { display: flex; gap: 16px; margin-bottom: 16px; }
     .nums div { background: #f4f4f5; padding: 12px 16px; border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { text-align: left; border-bottom: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 24px; }
+    th, td { text-align: left; border-bottom: 1px solid #ddd; padding: 6px 8px; }
     th { font-size: 12px; text-transform: uppercase; color: #555; }
-    .muted { color: #666; margin-bottom: 12px; }
+    .muted { color: #666; }
   </style>
 </head>
 <body>
-  <h1>Site hits</h1>
+  <h1>SmallCounter backup</h1>
   <div class="nums">
-    <div><strong>${payload.total}</strong><br>total</div>
-    <div><strong>${payload.likely_human}</strong><br>no bot hints</div>
-    <div><strong>${payload.likely_bot}</strong><br>bot hints</div>
+    <div><strong>${payload.monthly_total}</strong><br>SmallCounter year total</div>
+    <div><strong>${payload.stored_events}</strong><br>saved visitor rows</div>
   </div>
-  <p class="muted">Hints are heuristic (hosting ASN / crawler UA), not ground truth. Append <code>&amp;format=json</code>, <code>&amp;bots=exclude</code>, or <code>&amp;bots=only</code>.</p>
+  <p class="muted">Copied from SmallCounter (last ~1 day of IPs, plus daily totals). Last sync: ${escapeHtml(sync)}. Add <code>&amp;format=json</code>.</p>
+  <h2>Daily totals</h2>
+  <table><thead><tr><th>Day</th><th>Hits</th></tr></thead><tbody>${days}</tbody></table>
+  <h2>Visitors</h2>
   <table>
-    <thead>
-      <tr><th>Time (UTC)</th><th>IP</th><th>Geo</th><th>ASN</th><th>Path</th><th>User-Agent</th><th>Hints</th></tr>
-    </thead>
+    <thead><tr><th>Seen (UTC)</th><th>IP</th><th>Location</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>
 </body>
