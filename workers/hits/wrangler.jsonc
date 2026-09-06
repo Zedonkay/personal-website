@@ -10,7 +10,7 @@
     "head_sampling_rate": 1,
   },
   "triggers": {
-    "crons": ["*/30 * * * *"],
+    "crons": ["0 8 * * *"],
   },
   "vars": {
     "SMALLCOUNTER_ID": "1783365753",

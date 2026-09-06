@@ -2,7 +2,7 @@
 
 The live site only uses SmallCounter’s public counter pixel. A Cloudflare Worker copies those logs into storage you control, because SmallCounter itself only keeps about a day of visitor IPs.
 
-Every 30 minutes the Worker fetches:
+Once a day (08:00 UTC) the Worker fetches:
 
 - recent visitors (`rc_stats`)
 - top visitors (`cc_stats`)
