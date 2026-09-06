@@ -3,7 +3,7 @@ layout: post
 title: On Language
 date: 2026-09-05 16:36:00
 description: Writing to be defensible rather than honest, and resolving to live authentically.
-categories: life
+categories: musings
 form: commentary
 ---
 
