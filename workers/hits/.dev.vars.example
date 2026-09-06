@@ -1,0 +1,3 @@
+# Copy to .dev.vars (gitignored) and set the same value with:
+#   npx wrangler secret put STATS_TOKEN
+STATS_TOKEN=replace-me

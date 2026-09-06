@@ -13,3 +13,6 @@ node_modules/
 vendor
 .idea
 .venv
+.wrangler
+workers/hits/.dev.vars
+workers/hits/.wrangler

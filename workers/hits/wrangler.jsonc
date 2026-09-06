@@ -1,0 +1,32 @@
+{
+  "$schema": "https://www.unpkg.com/wrangler@4.129.0/config-schema.json",
+  "name": "site-hits",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-05",
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+  },
+  "routes": [
+    {
+      "pattern": "hits.ishayushikhare.com",
+      "custom_domain": true,
+    },
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "site-hits",
+      "database_id": "5ba51e2f-1eeb-42c4-a40a-002080033ebe",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "LOGS",
+      "bucket_name": "site-hits-logs",
+    },
+  ],
+}

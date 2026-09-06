@@ -7,6 +7,7 @@ Repo for [my personal website](https://ishayushikhare.com), based on [al-folio](
 | Path              | What it is                                                     |
 | ----------------- | -------------------------------------------------------------- |
 | `src/`            | Jekyll site: config, gems, pages, posts, templates, assets     |
+| `workers/hits/`   | Cloudflare Worker: persistent visitor log (D1 + R2)            |
 | `docs/setup/`     | How this site is deployed (GitHub Pages, Cloudflare, branches) |
 | `docs/theme/`     | al-folio install / customize / FAQ guides                      |
 | `docker/`         | Local Docker environment                                       |
@@ -30,6 +31,7 @@ Other setup docs:
 - [Quick start](docs/setup/quick-start.md) — daily branch workflow
 - [Deployment workflow](docs/setup/deployment.md) — branch-based deployment
 - [Cloudflare DNS](docs/setup/cloudflare-dns.md) — custom domain DNS
+- [Hit log](docs/setup/hits-log.md) — persistent IP/geo logging (D1 + R2)
 - [Code scanning](docs/setup/code-scanning.md) — CodeQL
 
 Theme documentation (al-folio):

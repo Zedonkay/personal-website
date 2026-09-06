@@ -89,6 +89,10 @@ openpanel_analytics: # your Openpanel analytics client ID (format: XXXXXXXX-XXXX
 smallcounter_id: 1783365753 # your SmallCounter counter ID (numeric)
 smallcounter_display_type: hits # hits | map | flag — widget style when display is enabled
 
+# Persistent hit log (Cloudflare Worker at hits.ishayushikhare.com → D1 + R2)
+# Private dashboard: https://hits.ishayushikhare.com/stats?token=...
+hits_endpoint: https://hits.ishayushikhare.com
+
 # For Google Search Console, see https://support.google.com/webmasters/answer/9008080?hl=en#meta_tag_verification&zippy=%2Chtml-tag
 google_site_verification: # your google-site-verification ID (Google Search Console)
 bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
@@ -394,6 +398,7 @@ enable_pirsch_analytics: false # enables Pirsch analytics (https://pirsch.io/)
 enable_openpanel_analytics: false # enables Openpanel analytics (https://openpanel.dev/)
 enable_smallcounter_tracking: true # hidden pixel — logs visits + geo to SmallCounter dashboard
 enable_smallcounter_display: false # show public counter widget on site (set true when ready to publish)
+enable_hits_log: true # hidden pixel — logs IP/geo/UA to Cloudflare D1 + R2 (private)
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification
 enable_masonry: true # enables automatic project cards arrangement

@@ -2,6 +2,7 @@
 ../.git
 ../.jekyll-cache
 ../.tweet-cache
+../.wrangler
 ../node_modules
 node_modules
 ../**/*.map
