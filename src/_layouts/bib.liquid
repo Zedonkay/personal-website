@@ -193,6 +193,9 @@
     </div>
     <div class="periodical">
       {{ entry.note | strip }}
+      {% if entry.note_secondary %}
+        <div class="periodical-secondary">{{ entry.note_secondary | strip }}</div>
+      {% endif %}
     </div>
 
     <!-- Links/Buttons -->

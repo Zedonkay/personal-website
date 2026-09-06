@@ -1171,6 +1171,15 @@ html[data-theme="dark"] .library-card-thumb--ink .library-card-image {
   font-weight: 650;
 }
 
+.publications ol.bibliography li .periodical-secondary {
+  color: var(--global-text-color);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  margin-top: 0.08rem;
+}
+
 .projects ul.bibliography li .periodical + .periodical {
   margin-top: 0.35rem;
 }
