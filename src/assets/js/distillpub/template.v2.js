@@ -2613,6 +2613,9 @@ d-citation-list .references .title {
         highlightElement: function (element, async, callback) {
           // Find language
           var language = _.util.getLanguage(element);
+          if (language === "__proto__" || language === "constructor" || language === "prototype") {
+            language = "none";
+          }
           var grammar = _.languages[language];
 
           // Set language on the element, if not present
@@ -3027,6 +3030,13 @@ d-citation-list .references .title {
                 lang = message.language,
                 code = message.code,
                 immediateClose = message.immediateClose;
+
+              if (lang === "__proto__" || lang === "constructor" || lang === "prototype") {
+                if (immediateClose) {
+                  _self.close();
+                }
+                return;
+              }
 
               _self.postMessage(_.highlight(code, _.languages[lang], lang));
               if (immediateClose) {
@@ -4150,6 +4160,10 @@ d-citation-list .references .title {
         }
       }
 
+      if (codeLang === "__proto__" || codeLang === "constructor" || codeLang === "prototype") {
+        codeLang = "";
+      }
+
       var grammar = Prism.languages[codeLang];
 
       if (!grammar) {
@@ -4231,6 +4245,14 @@ ${css}
         console.warn(
           'You need to provide a language attribute to your <d-code> block to let us know how to highlight your code; e.g.:\n <d-code language="python">zeros = np.zeros(shape)</d-code>.'
         );
+        return;
+      }
+      if (
+        this.languageName === "__proto__" ||
+        this.languageName === "constructor" ||
+        this.languageName === "prototype"
+      ) {
+        console.warn(`Distill does not yet support highlighting your code block in "${this.languageName}'.`);
         return;
       }
       const language = prism.languages[this.languageName];
