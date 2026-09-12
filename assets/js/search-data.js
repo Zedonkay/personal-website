@@ -37,73 +37,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/library/";
           },
-        },{id: "post-on-language",
-        
-          title: "On Language",
-        
-        description: "Writing to be defensible rather than honest, and resolving to live authentically.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/on-language/";
-          
-        },
-      },{id: "post-in-defense-of-bad-coffee",
-        
-          title: "In defense of bad coffee",
-        
-        description: "Goodness, greatness, and staying open to cups we do not enjoy.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/in-defense-of-bad-coffee/";
-          
-        },
-      },{id: "post-a-new-style-of-blog-post",
-        
-          title: "A new style of blog post",
-        
-        description: "Handwritten posts, a fountain pen, and writing without over-editing.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/a-new-style-of-blog-post/";
-          
-        },
-      },{id: "post-on-passion",
-        
-          title: "On passion",
-        
-        description: "A paper store, a school motto, and being in love with your work.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/on-passion/";
-          
-        },
-      },{id: "post-on-knowledge",
-        
-          title: "On knowledge",
-        
-        description: "Curiosity, the company of the curious, and what a PhD actually is.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/on-knowledge/";
-          
-        },
-      },{id: "post-on-leisure",
-        
-          title: "On leisure",
-        
-        description: "Scholē, education, and a world where artists, craftsmen, and scientists are free to practice.",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/blog/2026/on-leisure/";
-          
-        },
-      },{id: "library-slaughterhouse-five",
+        },{id: "library-slaughterhouse-five",
         title: "Slaughterhouse-Five",
         description: "I don&#39;t want to get in the way of this one.",
         section: "Library",
