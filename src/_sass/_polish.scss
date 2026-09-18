@@ -1754,6 +1754,46 @@ footer.is-deferred {
   }
 }
 
+.page-offline {
+  > .container[role="main"] {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 8rem);
+    margin-top: 0 !important;
+  }
+}
+
+.offline-page {
+  width: 100%;
+
+  .offline-page__title {
+    margin-bottom: 1.55rem;
+    font-size: clamp(1.9rem, 4.32vw, 2.96rem);
+  }
+
+  .offline-page__body {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+  }
+
+  .offline-page__lead {
+    margin: 0 0 0.35rem;
+    color: var(--global-title-color);
+    font-size: 1.21em;
+    line-height: 1.45;
+    font-style: italic;
+    font-variation-settings:
+      "WONK" 1,
+      "SOFT" 40,
+      "opsz" 28;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
 @keyframes ritual-idle {
   from {
     background-position: 0% 0%;
@@ -1906,6 +1946,11 @@ footer.is-deferred {
   }
 
   .lost-page {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .offline-page__body {
     flex-direction: column;
     align-items: flex-start;
   }

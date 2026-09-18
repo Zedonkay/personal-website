@@ -1,6 +1,8 @@
-{% if page.permalink == '/' %}
-  <script defer src="{{ '/assets/js/quote-of-the-day.js' | relative_url | bust_file_cache }}"></script>
-{% endif %}
+{% unless site.offline %}
+  {% if page.permalink == '/' %}
+    <script defer src="{{ '/assets/js/quote-of-the-day.js' | relative_url | bust_file_cache }}"></script>
+  {% endif %}
+{% endunless %}
 <script defer src="{{ '/assets/js/ritual.js' | relative_url | bust_file_cache }}"></script>
 
 <!-- jQuery -->
@@ -18,7 +20,7 @@
   crossorigin="anonymous"
 ></script>
 
-{% if site.enable_masonry and page.permalink != '/' %}
+{% if site.enable_masonry and page.permalink != '/' and site.offline != true %}
   <!-- Masonry & imagesLoaded -->
   <script
     defer
@@ -212,7 +214,7 @@
   <script async src="https://badge.dimensions.ai/badge.js"></script>
 {% endif %}
 
-{% if site.enable_math and page.permalink != '/' %}
+{% if site.enable_math and page.permalink != '/' and site.offline != true %}
   <!-- MathJax -->
   <script
     async
@@ -267,7 +269,7 @@
 
 {% include smallcounter.liquid tracking_only=true %}
 
-{% if site.enable_progressbar %}
+{% if site.enable_progressbar and site.offline != true %}
   <!-- Scrolling Progress Bar -->
   <script defer src="{{ '/assets/js/progress-bar.js' | relative_url | bust_file_cache }}" type="text/javascript"></script>
 {% endif %}
@@ -324,7 +326,7 @@
   <script src="{{ '/assets/js/tabs.min.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
 
-{% if site.back_to_top %}
+{% if site.back_to_top and site.offline != true %}
   <!-- Back to Top -->
   <script src="{{ '/assets/js/vanilla-back-to-top.min.js' | relative_url | bust_file_cache }}"></script>
   <script>
@@ -332,7 +334,7 @@
   </script>
 {% endif %}
 
-{% if site.search_enabled %}
+{% if site.search_enabled and site.offline != true %}
   <!-- Search -->
   <script type="module" src="{{ '/assets/js/search/ninja-keys.min.js' | relative_url | bust_file_cache }}"></script>
   <ninja-keys hideBreadcrumbs noAutoLoadMdIcons placeholder="Type to start searching"></ninja-keys>

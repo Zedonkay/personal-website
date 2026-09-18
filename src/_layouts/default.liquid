@@ -2,7 +2,7 @@
 <html lang="{{ site.lang }}">
   <!-- Head -->
   <head>
-    {% if page.redirect %}
+    {% if page.redirect and site.offline != true %}
       {% if page.redirect == true %}
         {% assign redirect = site.baseurl | append: '/' %}
       {% elsif page.redirect contains '://' %}
@@ -16,38 +16,44 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}{% if page.permalink == '/' %} page-about{% endif %}">
-    <!-- Header -->
-    {% include header.liquid %}
+  <body class="{% if site.offline %}page-offline sticky-bottom-footer{% else %}{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}{% if page.permalink == '/' %} page-about{% endif %}{% endif %}">
+    {% unless site.offline %}
+      <!-- Header -->
+      {% include header.liquid %}
+    {% endunless %}
 
     <!-- Content -->
     <div class="container mt-5" role="main">
-      {% if page.toc and page.toc.sidebar %}
-        {% if page.toc.sidebar == 'right' %}
-          <div class="row">
-            <!-- main content area -->
-            <div class="col-sm-9">{{ content }}</div>
-            <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
-            </div>
-          </div>
-        {% else %}
-          <div class="row">
-            <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
-            </div>
-            <!-- main content area -->
-            <div class="col-sm-9">{{ content }}</div>
-          </div>
-        {% endif %}
+      {% if site.offline %}
+        {% include offline.liquid %}
       {% else %}
-        {{ content }}
+        {% if page.toc and page.toc.sidebar %}
+          {% if page.toc.sidebar == 'right' %}
+            <div class="row">
+              <!-- main content area -->
+              <div class="col-sm-9">{{ content }}</div>
+              <!-- sidebar, which will move to the top on a small screen -->
+              <div class="col-sm-3">
+                <nav id="toc-sidebar" class="sticky-top"></nav>
+              </div>
+            </div>
+          {% else %}
+            <div class="row">
+              <!-- sidebar, which will move to the top on a small screen -->
+              <div class="col-sm-3">
+                <nav id="toc-sidebar" class="sticky-top"></nav>
+              </div>
+              <!-- main content area -->
+              <div class="col-sm-9">{{ content }}</div>
+            </div>
+          {% endif %}
+        {% else %}
+          {{ content }}
+        {% endif %}
+        {% unless page.permalink == '/' or page.permalink == '/404.html' %}
+          <div class="ritual-signoff">{% include ritual.liquid pose="companion" %}</div>
+        {% endunless %}
       {% endif %}
-      {% unless page.permalink == '/' or page.permalink == '/404.html' %}
-        <div class="ritual-signoff">{% include ritual.liquid pose="companion" %}</div>
-      {% endunless %}
     </div>
 
     <!-- Footer -->

@@ -123,7 +123,11 @@
     window.setTimeout(mark, 2500);
   })();
 </script>
-<link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+{% if site.offline %}
+  <link rel="canonical" href="{{ '/' | absolute_url }}">
+{% else %}
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+{% endif %}
 
 {% if site.enable_darkmode %}
   <!-- Dark Mode -->

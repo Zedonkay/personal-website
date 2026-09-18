@@ -1,0 +1,18 @@
+<div class="offline-page">
+  <h1 class="post-title offline-page__title">
+    {% if site.title == 'blank' %}
+      <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+      {{ site.last_name }}
+      <img src="{{ '/assets/favicon/sloth.png' | relative_url }}" alt="" class="title-favicon" aria-hidden="true">
+    {% else %}
+      {{ site.title }}
+    {% endif %}
+  </h1>
+  <div class="offline-page__body">
+    {% include ritual.liquid pose="wait" %}
+    <div>
+      <p class="offline-page__lead">This site is offline for now.</p>
+      <p>I'll put it back up when it's ready.</p>
+    </div>
+  </div>
+</div>

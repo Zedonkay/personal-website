@@ -2,6 +2,10 @@
 permalink: /robots.txt
 ---
 User-agent: *
+{% if site.offline %}
+Disallow: /
+{% else %}
 Disallow:
 
 Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml
+{% endif %}

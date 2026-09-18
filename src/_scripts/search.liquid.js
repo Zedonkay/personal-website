@@ -1,6 +1,7 @@
 ---
 permalink: /assets/js/search-data.js
 ---
+{% unless site.offline %}
 // get the ninja-keys element
 const ninja = document.querySelector('ninja-keys');
 
@@ -347,3 +348,4 @@ ninja.data = [
     },
   {%- endif -%}
 ];
+{% endunless %}
