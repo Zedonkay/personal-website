@@ -5,7 +5,7 @@ description: Few-shot domain adaptation for humanoid control via dynamics alignm
 img: assets/img/fada/teaser-fig.png
 importance: 1
 category: research
-published: true
+published: false
 website: https://lecar-lab.github.io/FADA-humanoid/
 pdf: https://arxiv.org/pdf/2606.28476
 related_publications: true
